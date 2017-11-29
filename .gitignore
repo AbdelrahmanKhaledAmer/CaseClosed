@@ -1,0 +1,5 @@
+[Dd]ebug*/
+*.sdf
+*.log
+.vs*/
+.DS_Store
