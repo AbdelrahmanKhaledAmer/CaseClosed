@@ -1,209 +1,43 @@
+#ifndef CAMERA_H
+#define CAMERA_H
+
 #include <Eigen/Dense>
+#include <glut.h>
+
+using namespace Eigen;
 
 class Camera
 {
-private:
-    Eigen::Vector3f eye;
-    Eigen::Vector3f lookAt;
-    Eigen::Vector3f orientation;
-    float translationStep = 0.1;
-    float rotationAngle = 0.0174532925199433;
 public:
-    // Constructor for camera object
-    Camera(Eigen::Vector3f eye, Eigen::Vector3f lookAt, Eigen::Vector3f orientation)
-    {
-        this->eye = eye;
-        this->lookAt = lookAt;
-        this->orientation = orientation;
-    }
-    // Destructor for camera object
-    ~Camera() { }
-    
-    // Function to set up all camera variables
-    void setup()
-    {
-        glMatrixMode(GL_PROJECTION);
-        glLoadIdentity();
-        gluPerspective(60, 16 / 9.0, 0.001, 200);
-
-        glMatrixMode(GL_MODELVIEW);
-        glLoadIdentity();
-        gluLookAt(eye.x(), eye.y(), eye.z(), lookAt.x(), lookAt.y(), lookAt.z(), orientation.x(), orientation.y(), orientation.z());
-    }
+    // Main Functions
+    Camera(Vector3f eye, Vector3f lookAt, Vector3f orientation); // Constructor
+    ~Camera();                                                   // Destructor
+    void setup();                                                // Setup
 
     // Rotation Functions
-    void rotateRight(float scale = 1)
-    {
-        float theta = rotationAngle * scale / 2;
-        Eigen::Quaternionf rotAxis(theta, orientation.x(), orientation.y(), orientation.z());
-        rotAxis.normalize();
-        Eigen::Quaternionf VectorToRotate;
-        VectorToRotate.w() = 0;
-        VectorToRotate.vec() = eye - lookAt;
-        lookAt = eye + (rotAxis * VectorToRotate * rotAxis.inverse()).vec();
-        Eigen::Quaternionf rotAxis2(theta, orientation.x(), orientation.y(), orientation.z());
-        rotAxis2.normalize();
-        Eigen::Quaternionf VectorToRotate2;
-        VectorToRotate2.w() = 0;
-        VectorToRotate2.vec() = eye - lookAt;
-        lookAt = eye + (rotAxis2 * VectorToRotate2 * rotAxis2.inverse()).vec();
-    }
-
-    void rotateLeft(float scale = 1)
-    {
-        float theta = - rotationAngle * scale / 2;
-        Eigen::Quaternionf rotAxis(theta, orientation.x(), orientation.y(), orientation.z());
-        rotAxis.normalize();
-        Eigen::Quaternionf VectorToRotate;
-        VectorToRotate.w() = 0;
-        VectorToRotate.vec() = eye - lookAt;
-        lookAt = eye + (rotAxis * VectorToRotate * rotAxis.inverse()).vec();
-        Eigen::Quaternionf rotAxis2(theta, orientation.x(), orientation.y(), orientation.z());
-        rotAxis2.normalize();
-        Eigen::Quaternionf VectorToRotate2;
-        VectorToRotate2.w() = 0;
-        VectorToRotate2.vec() = eye - lookAt;
-        lookAt = eye + (rotAxis2 * VectorToRotate2 * rotAxis2.inverse()).vec();
-    }
-
-    void rotateUp(float scale = 1)
-    {
-        float theta = -rotationAngle * scale / 2;
-        Eigen::Vector3f newX = orientation.cross(eye - lookAt);
-        Eigen::Quaternionf rotAxis(theta, newX.x(), newX.y(), newX.z());
-        rotAxis.normalize();
-        Eigen::Quaternionf VectorToRotate;
-        VectorToRotate.w() = 0;
-        VectorToRotate.vec() = eye - lookAt;
-        lookAt = eye + (rotAxis * VectorToRotate * rotAxis.inverse()).vec();
-        Eigen::Quaternionf rotAxis2(theta, newX.x(), newX.y(), newX.z());
-        rotAxis2.normalize();
-        Eigen::Quaternionf VectorToRotate2;
-        VectorToRotate2.w() = 0;
-        VectorToRotate2.vec() = eye - lookAt;
-        lookAt = eye + (rotAxis2 * VectorToRotate2 * rotAxis2.inverse()).vec();
-    }
-
-    void rotateDown(float scale = 1)
-    {
-        float theta = rotationAngle * scale / 2;
-        Eigen::Vector3f newX = orientation.cross(eye - lookAt);
-        Eigen::Quaternionf rotAxis(theta, newX.x(), newX.y(), newX.z());
-        rotAxis.normalize();
-        Eigen::Quaternionf VectorToRotate;
-        VectorToRotate.w() = 0;
-        VectorToRotate.vec() = eye - lookAt;
-        lookAt = eye + (rotAxis * VectorToRotate * rotAxis.inverse()).vec();
-        Eigen::Quaternionf rotAxis2(theta, newX.x(), newX.y(), newX.z());
-        rotAxis2.normalize();
-        Eigen::Quaternionf VectorToRotate2;
-        VectorToRotate2.w() = 0;
-        VectorToRotate2.vec() = eye - lookAt;
-        lookAt = eye + (rotAxis2 * VectorToRotate2 * rotAxis2.inverse()).vec();
-    }
-
-    void tiltRight(float scale = 1)
-    {
-        float theta = rotationAngle * scale / 2;
-        Eigen::Vector3f newZ = eye - lookAt;
-        Eigen::Quaternionf rotAxis(theta, newZ.x(), newZ.y(), newZ.z());
-        rotAxis.normalize();
-        Eigen::Quaternionf VectorToRotate;
-        VectorToRotate.w() = 0;
-        VectorToRotate.vec() = orientation;
-        orientation = (rotAxis * VectorToRotate * rotAxis.inverse()).vec();
-        Eigen::Quaternionf rotAxis2(theta, newZ.x(), newZ.y(), newZ.z());
-        rotAxis2.normalize();
-        Eigen::Quaternionf VectorToRotate2;
-        VectorToRotate2.w() = 0;
-        VectorToRotate2.vec() = orientation;
-        orientation = (rotAxis2 * VectorToRotate2 * rotAxis2.inverse()).vec();
-    }
-
-    void tiltLeft(float scale = 1)
-    {
-        float theta = -rotationAngle * scale / 2;
-        Eigen::Vector3f newZ = eye - lookAt;
-        Eigen::Quaternionf rotAxis(theta, newZ.x(), newZ.y(), newZ.z());
-        rotAxis.normalize();
-        Eigen::Quaternionf VectorToRotate;
-        VectorToRotate.w() = 0;
-        VectorToRotate.vec() = orientation;
-        orientation = (rotAxis * VectorToRotate * rotAxis.inverse()).vec();
-        Eigen::Quaternionf rotAxis2(theta, newZ.x(), newZ.y(), newZ.z());
-        rotAxis2.normalize();
-        Eigen::Quaternionf VectorToRotate2;
-        VectorToRotate2.w() = 0;
-        VectorToRotate2.vec() = orientation;
-        orientation = (rotAxis2 * VectorToRotate2 * rotAxis2.inverse()).vec();
-    }
+    void rotateRight(float scale = 1);  // Horizontal rotation
+    void rotateLeft(float scale = 1);   // Horizontal rotation
+    void rotateUp(float scale = 1);     // Vertical rotation
+    void rotateDown(float scale = 1);   // Vertical rotation
+    void tiltRight(float scale = 1);    // Sideways rotation
+    void tiltLeft(float scale = 1);     // Sideways rotation
 
     // Translation Functions
-    void translateForward(float scale = 1)
-    {
-        float step = translationStep * scale;
-        Eigen::Vector3f direction = (lookAt - eye).normalized();
-        direction *= step;
-        direction.y() = 0;
-        eye += direction;
-        lookAt += direction;
-    }
+    void translateForward(float scale = 1); // Translate to the front
+    void translateBackward(float scale = 1);// Translate to the back
+    void translateLeft(float scale = 1);    // Translate to the left
+    void translateRight(float scale = 1);   // Translate to the right
+    void translateUp(float scale = 1);      // Translate to the top
+    void translateDown(float scale = 1);    // Translate to the bottom
 
-    void translateBackward(float scale = 1)
-    {
-        float step = translationStep * scale;
-        Eigen::Vector3f direction = (lookAt - eye).normalized();
-        direction *= step;
-        direction.y() = 0;
-        eye -= direction;
-        lookAt -= direction;
-    }
-
-    void translateLeft(float scale = 1)
-    {
-        float step = translationStep * scale;
-        Eigen::Vector3f direction = (orientation.cross(lookAt - eye)).normalized();
-        direction *= step;
-        direction.y() = 0;
-        eye += direction;
-        lookAt += direction;
-    }
-
-    void translateRight(float scale = 1)
-    {
-        float step = translationStep * scale;
-        Eigen::Vector3f direction = (orientation.cross(lookAt - eye)).normalized();
-        direction *= step;
-        direction.y() = 0;
-        eye -= direction;
-        lookAt -= direction;
-    }
-
-    void translateUp(float scale = 1)
-    {
-        float step = translationStep * scale;
-        Eigen::Vector3f direction = (orientation).normalized();
-        direction *= step;
-        direction.x() = 0;
-        direction.z() = 0;
-        eye += direction;
-        lookAt += direction;
-    }
-
-    void translateDown(float scale = 1)
-    {
-        float step = translationStep * scale;
-        Eigen::Vector3f direction = (orientation).normalized();
-        direction *= step;
-        direction.x() = 0;
-        direction.z() = 0;
-        eye -= direction;
-        lookAt -= direction;
-    }
-
-    // Reset all variables to base values if needed
-    void reset()
-    {
-
-    }
+    // Other Functions
+    void reset();
+private:
+    Vector3f eye_;                              // Current camera loaction
+    Vector3f lookAt_;                           // Current Camera target
+    Vector3f orientation_;                      // Current camera upwards direction
+    float translationStep_ = 0.1;               // How much to move in any direction
+    float rotationAngle_ = 0.0174532925199433;  // How much to rotate on any axis
 };
+
+#endif
