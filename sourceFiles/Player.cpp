@@ -68,7 +68,7 @@ void Player::moveRight(float scale)
 
     @param (scale) a variable to determine the magnitude of the motion (default is 1)
 */
-void Player::moveForward(float scale)
+void Player::moveLeft(float scale)
 {
     head_.translateLeft(scale);
     location_ = head_.location();
