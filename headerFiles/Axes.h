@@ -1,4 +1,4 @@
-#include <glut.h>
+#include <headerFiles/GL/glut.h>
 
 class Axes
 {

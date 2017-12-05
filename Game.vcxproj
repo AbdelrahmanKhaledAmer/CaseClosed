@@ -82,16 +82,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <None Include="ReadMe.txt" />
+    <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="GLTexture.cpp" />
-    <ClCompile Include="Model_3DS.cpp" />
-    <ClCompile Include="main.cpp" />
+    <ClCompile Include="sourceFiles/GLTexture.cpp" />
+    <ClCompile Include="sourceFiles/Model_3DS.cpp" />
+    <ClCompile Include="sourceFiles/Camera.cpp" />
+    <ClCompile Include="sourceFiles/Main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GLTexture.h" />
-    <ClInclude Include="Model_3DS.h" />
+    <ClInclude Include="headerFiles/GL/glaux.h" />
+    <ClInclude Include="headerFiles/GL/glew.h" />
+    <ClInclude Include="headerFiles/GL/glut.h" />
+    <ClInclude Include="headerFiles/GLTexture.h" />
+    <ClInclude Include="headerFiles/Model_3DS.h" />
+    <ClInclude Include="headerFiles/Camera.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

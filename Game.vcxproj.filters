@@ -15,27 +15,38 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="GLTexture.cpp">
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="sourceFiles/GLTexture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Model_3DS.cpp">
+    <ClCompile Include="sourceFiles/Model_3DS.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="main.cpp">
+    <ClCompile Include="sourceFiles/Camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Camera.cpp">
+    <ClCompile Include="sourceFiles/main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GLTexture.h">
+    <ClInclude Include="headerFiles/GL/glaux.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Model_3DS.h">
+    <ClInclude Include="headerFiles/GL/glew.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Camera.h">
+    <ClInclude Include="headerFiles/GL/glut.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="headerFiles/GLTexture.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="headerFiles/Model_3DS.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="headerFiles/Camera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

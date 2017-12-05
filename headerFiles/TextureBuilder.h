@@ -1,6 +1,6 @@
 #include <stdio.h>
-#include "glew.h"
-#include "glaux.h"
+#include "headerFiles/GL/glew.h"
+#include "headerFiles/GL/glaux.h"
 
 #pragma comment(lib, "glew32.lib")
 #pragma comment(lib, "glaux.lib")

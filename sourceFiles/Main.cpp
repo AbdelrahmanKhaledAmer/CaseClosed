@@ -7,7 +7,7 @@
 #include <math.h>
 #include <iostream>
 #include <Eigen/Dense>
-#include <glut.h>
+#include <headerFiles/GL/glut.h>
 #include "headerFiles/Axes.h"
 #include "headerFiles/Camera.h"
 #include "headerFiles/Lights.h"

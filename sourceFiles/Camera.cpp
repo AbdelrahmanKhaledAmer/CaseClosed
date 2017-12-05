@@ -44,8 +44,10 @@ void Camera::setup()
 /**
     Rotation Function.
     Rotates the Camera object by the preset angular step along the Camera's y axis. This is done by changing the lookAt_ variable.
+
+    @param (scale) a variable to determine the magnitude of the motion (default is 1)
 */
-void Camera::rotateRight(float scale = 1)
+void Camera::rotateRight(float scale)
 {
     float theta = rotationAngle_ * scale / 2;
     Quaternionf rotAxis(theta, orientation_.x(), orientation_.y(), orientation_.z());
@@ -65,8 +67,10 @@ void Camera::rotateRight(float scale = 1)
 /**
     Rotation Function.
     Rotates the Camera object by the preset angular step along the Camera's y axis. This is done by changing the lookAt_ variable.
+
+    @param (scale) a variable to determine the magnitude of the motion (default is 1)
 */
-void Camera::rotateLeft(float scale = 1)
+void Camera::rotateLeft(float scale)
 {
     float theta = - rotationAngle_ * scale / 2;
     Quaternionf rotAxis(theta, orientation_.x(), orientation_.y(), orientation_.z());
@@ -86,8 +90,10 @@ void Camera::rotateLeft(float scale = 1)
 /**
     Rotation Function.
     Rotates the Camera object by the preset angular step along the Camera's x axis. This is done by changing the lookAt_ variable.
+
+    @param (scale) a variable to determine the magnitude of the motion (default is 1)
 */
-void Camera::rotateUp(float scale = 1)
+void Camera::rotateUp(float scale)
 {
     float theta = -rotationAngle_ * scale / 2;
     Vector3f newX = orientation_.cross(eye_ - lookAt_);
@@ -108,8 +114,10 @@ void Camera::rotateUp(float scale = 1)
 /**
     Rotation Function.
     Rotates the Camera object by the preset angular step along the Camera's x axis. This is done by changing the lookAt_ variable.
+
+    @param (scale) a variable to determine the magnitude of the motion (default is 1)
 */
-void Camera::rotateDown(float scale = 1)
+void Camera::rotateDown(float scale)
 {
     float theta = rotationAngle_ * scale / 2;
     Vector3f newX = orientation_.cross(eye_ - lookAt_);
@@ -130,8 +138,10 @@ void Camera::rotateDown(float scale = 1)
 /**
     Rotation Function.
     Rotates the Camera object by the preset angular step along the Camera's z axis. This is done by changing the orientation_ variable.
+
+    @param (scale) a variable to determine the magnitude of the motion (default is 1)
 */
-void Camera::tiltRight(float scale = 1)
+void Camera::tiltRight(float scale)
 {
     float theta = rotationAngle_ * scale / 2;
     Vector3f newZ = eye_ - lookAt_;
@@ -152,8 +162,10 @@ void Camera::tiltRight(float scale = 1)
 /**
     Rotation Function.
     Rotates the Camera object by the preset angular step along the Camera's z axis. This is done by changing the orientation_ variable.
+
+    @param (scale) a variable to determine the magnitude of the motion (default is 1)
 */
-void Camera::tiltLeft(float scale = 1)
+void Camera::tiltLeft(float scale)
 {
     float theta = -rotationAngle_ * scale / 2;
     Vector3f newZ = eye_ - lookAt_;
@@ -174,8 +186,10 @@ void Camera::tiltLeft(float scale = 1)
 /**
     Translation Function.
     Transaltes the Camera object by the translation step along the Camera's z axis. This is done by changing the eye_ and lookAt_ variables.
+
+    @param (scale) a variable to determine the magnitude of the motion (default is 1)
 */
-void Camera::translateForward(float scale = 1)
+void Camera::translateForward(float scale)
 {
     float step = translationStep_ * scale;
     Vector3f direction = (lookAt_ - eye_).normalized();
@@ -188,8 +202,10 @@ void Camera::translateForward(float scale = 1)
 /**
     Translation Function.
     Transaltes the Camera object by the translation step along the Camera's z axis. This is done by changing the eye_ and lookAt_ variables.
+
+    @param (scale) a variable to determine the magnitude of the motion (default is 1)
 */
-void Camera::translateBackward(float scale = 1)
+void Camera::translateBackward(float scale)
 {
     float step = translationStep_ * scale;
     Vector3f direction = (lookAt_ - eye_).normalized();
@@ -202,8 +218,10 @@ void Camera::translateBackward(float scale = 1)
 /**
     Translation Function.
     Transaltes the Camera object by the translation step along the Camera's x axis. This is done by changing the eye_ and lookAt_ variables.
+
+    @param (scale) a variable to determine the magnitude of the motion (default is 1)
 */
-void Camera::translateLeft(float scale = 1)
+void Camera::translateLeft(float scale)
 {
     float step = translationStep_ * scale;
     Vector3f direction = (orientation_.cross(lookAt_ - eye_)).normalized();
@@ -216,8 +234,10 @@ void Camera::translateLeft(float scale = 1)
 /**
     Translation Function.
     Transaltes the Camera object by the translation step along the Camera's x axis. This is done by changing the eye_ and lookAt_ variables.
+
+    @param (scale) a variable to determine the magnitude of the motion (default is 1)
 */
-void Camera::translateRight(float scale = 1)
+void Camera::translateRight(float scale)
 {
     float step = translationStep_ * scale;
     Vector3f direction = (orientation_.cross(lookAt_ - eye_)).normalized();
@@ -230,8 +250,10 @@ void Camera::translateRight(float scale = 1)
 /**
     Translation Function.
     Transaltes the Camera object by the translation step along the Camera's y axis. This is done by changing the eye_ and lookAt_ variables.
+
+    @param (scale) a variable to determine the magnitude of the motion (default is 1)
 */
-void Camera::translateUp(float scale = 1)
+void Camera::translateUp(float scale)
 {
     float step = translationStep_ * scale;
     Vector3f direction = (orientation_).normalized();
@@ -245,8 +267,10 @@ void Camera::translateUp(float scale = 1)
 /**
     Translation Function.
     Transaltes the Camera object by the translation step along the Camera's y axis. This is done by changing the eye_ and lookAt_ variables.
+
+    @param (scale) a variable to determine the magnitude of the motion (default is 1)
 */
-void Camera::translateDown(float scale = 1)
+void Camera::translateDown(float scale)
 {
     float step = translationStep_ * scale;
     Vector3f direction = (orientation_).normalized();
@@ -255,4 +279,13 @@ void Camera::translateDown(float scale = 1)
     direction.z() = 0;
     eye_ -= direction;
     lookAt_ -= direction;
+}
+
+/**
+    Getter Function.
+    Returns the current location of the Camera object.
+*/
+Vector3f Camera::location()
+{
+    return this->eye_;
 }

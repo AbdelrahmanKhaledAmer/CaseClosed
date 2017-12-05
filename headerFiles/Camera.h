@@ -2,7 +2,7 @@
 #define CAMERA_H
 
 #include <Eigen/Dense>
-#include <glut.h>
+#include <headerFiles/GL/glut.h>
 
 using namespace Eigen;
 
@@ -29,6 +29,9 @@ public:
     void translateRight(float scale = 1);   // Translate to the right
     void translateUp(float scale = 1);      // Translate to the top
     void translateDown(float scale = 1);    // Translate to the bottom
+
+    // Getters and Setters
+    Vector3f location();
 
     // Other Functions
     void reset();
