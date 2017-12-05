@@ -10,6 +10,7 @@ class Camera
 {
 public:
     // Main Functions
+    Camera();                                                     // Default Constructor
     Camera(Vector3f eye, Vector3f lookAt, Vector3f orientation); // Constructor
     ~Camera();                                                   // Destructor
     void setup();                                                // Setup

@@ -18,10 +18,10 @@ public:
     Vector3f scale();       // Get Scale
     Vector3f dimensions();  // Get Dimensions
 
-    // // Game logic functions
+    // Game logic functions
     bool intersects(Object object); // Check overlapping objects
     void draw();                    // Draw Objects
-private:
+protected:
     Vector3f location_;     // Current Object location
     Vector3f orientation_;  // Current object rotation (angle rotated along every axis)
     Vector3f scale_;        // Current object size (scale factor along every axis)

@@ -1,6 +1,19 @@
 #include <headerFiles/Camera.h>
 
 /**
+    Default Constructor for the Camera object.
+    Return a pointer for a camera.
+
+    @return: Pointer to camera object
+*/
+Camera::Camera()
+{
+    this->eye_ = *(new Vector3f(0,0,0));
+    this->lookAt_ = *(new Vector3f(0,0,0));
+    this->orientation_ = *(new Vector3f(0,0,0));
+}
+
+/**
     Constructor for the Camera object.
     Returns a pointer for a camera.
 

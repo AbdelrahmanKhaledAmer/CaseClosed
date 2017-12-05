@@ -89,6 +89,7 @@
     <ClCompile Include="sourceFiles/Model_3DS.cpp" />
     <ClCompile Include="sourceFiles/Camera.cpp" />
     <ClCompile Include="sourceFiles/Object.cpp" />
+    <ClCompile Include="sourceFiles/Player.cpp" />
     <ClCompile Include="sourceFiles/Main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -99,6 +100,7 @@
     <ClInclude Include="headerFiles/Model_3DS.h" />
     <ClInclude Include="headerFiles/Camera.h" />
     <ClInclude Include="headerFiles/Object.h" />
+    <ClInclude Include="headerFiles/Player.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

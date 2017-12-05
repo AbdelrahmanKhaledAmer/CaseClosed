@@ -19,6 +19,10 @@ Object::Object(Vector3f location, Vector3f orientation, Vector3f scale, Vector3f
     this->dimensions_ = Vector3f(dimensions.x() * scale.x(), dimensions.y() * scale.y(), dimensions.z() * scale.z());
 }
 
+/**
+    Destructor for the Object object.
+    Deletes the pointer for the Object object.
+*/
 Object::~Object()
 {
 
