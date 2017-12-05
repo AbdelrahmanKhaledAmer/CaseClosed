@@ -23,7 +23,7 @@ Camera::Camera(Vector3f eye, Vector3f lookAt, Vector3f orientation)
 */
 Camera::~Camera()
 {
-
+    
 }
 
 /**
@@ -39,6 +39,15 @@ void Camera::setup()
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
     gluLookAt(eye_.x(), eye_.y(), eye_.z(), lookAt_.x(), lookAt_.y(), lookAt_.z(), orientation_.x(), orientation_.y(), orientation_.z());
+}
+
+/**
+    Getter Function.
+    Returns the current location of the Camera object.
+*/
+Vector3f Camera::location()
+{
+    return this->eye_;
 }
 
 /**
@@ -279,13 +288,4 @@ void Camera::translateDown(float scale)
     direction.z() = 0;
     eye_ -= direction;
     lookAt_ -= direction;
-}
-
-/**
-    Getter Function.
-    Returns the current location of the Camera object.
-*/
-Vector3f Camera::location()
-{
-    return this->eye_;
 }

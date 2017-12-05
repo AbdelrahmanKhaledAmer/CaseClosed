@@ -14,6 +14,9 @@ public:
     ~Camera();                                                   // Destructor
     void setup();                                                // Setup
 
+    // Getters and Setters
+    Vector3f location();    // Get Location
+
     // Rotation Functions
     void rotateRight(float scale = 1);  // Horizontal rotation
     void rotateLeft(float scale = 1);   // Horizontal rotation
@@ -29,9 +32,6 @@ public:
     void translateRight(float scale = 1);   // Translate to the right
     void translateUp(float scale = 1);      // Translate to the top
     void translateDown(float scale = 1);    // Translate to the bottom
-
-    // Getters and Setters
-    Vector3f location();
 
     // Other Functions
     void reset();
