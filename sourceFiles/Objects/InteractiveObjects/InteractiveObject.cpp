@@ -1,4 +1,4 @@
-#include "headerFiles\InteractiveObject.h"
+#include "headerFiles\Objects\InteractiveObjects\InteractiveObject.h"
 #include <iostream>
 
 /*

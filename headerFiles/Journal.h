@@ -2,7 +2,7 @@
 #define JOURNAL_H
 
 #include <Eigen/Dense>
-#include "headerFiles/Object.h"
+#include "headerFiles/Objects/Object.h"
 #include <stdarg.h>
 
 

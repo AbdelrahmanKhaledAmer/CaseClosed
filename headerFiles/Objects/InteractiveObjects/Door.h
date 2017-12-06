@@ -2,7 +2,7 @@
 #define DOOR_H
 
 #include <Eigen/Dense>
-#include "headerFiles/InteractiveObject.h"
+#include "headerFiles\Objects\InteractiveObjects\InteractiveObject.h"
 
 
 using namespace Eigen;

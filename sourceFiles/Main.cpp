@@ -11,7 +11,7 @@
 #include "headerFiles/Axes.h"
 #include "headerFiles/Camera.h"
 #include "headerFiles/Lights.h"
-#include "headerFiles/Object.h"
+#include "headerFiles/Objects/Object.h"
 
 // Screen Constants
 const int scale = 70;

@@ -3,7 +3,7 @@
 
 #include <Eigen/Dense>
 #include "headerFiles/Camera.h"
-#include "headerFiles/Object.h"
+#include "headerFiles/Objects/Object.h"
 
 using namespace Eigen;
 

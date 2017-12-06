@@ -2,7 +2,7 @@
 #define INTERACTIVEOBJECT_H
 
 #include <Eigen/Dense>
-#include "headerFiles/Object.h"
+#include "headerFiles/Objects/Object.h"
 
 
 using namespace Eigen;
