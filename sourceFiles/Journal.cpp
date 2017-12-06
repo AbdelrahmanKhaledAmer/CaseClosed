@@ -30,5 +30,5 @@ Journal::~Journal()
 
 void write(std::string words)
 {
-	std::cout << words;
+	words += this->notes_;
 }
