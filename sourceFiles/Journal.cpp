@@ -27,8 +27,3 @@ Journal::~Journal()
 {
 
 }
-
-void write(std::string words)
-{
-	words += this->notes_;
-}

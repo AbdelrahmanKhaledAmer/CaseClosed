@@ -85,32 +85,32 @@
     <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Clue.cpp" />
-    <ClCompile Include="Door.cpp" />
-    <ClCompile Include="InteractiveObject.cpp" />
-    <ClCompile Include="Journal.cpp" />
-    <ClCompile Include="NonInteractiveObject.cpp" />
     <ClCompile Include="sourceFiles/GLTexture.cpp" />
     <ClCompile Include="sourceFiles/Model_3DS.cpp" />
     <ClCompile Include="sourceFiles/Camera.cpp" />
     <ClCompile Include="sourceFiles/Object.cpp" />
     <ClCompile Include="sourceFiles/Player.cpp" />
+    <ClCompile Include="sourceFiles/Clue.cpp" />
+    <ClCompile Include="sourceFiles/Door.cpp" />
+    <ClCompile Include="sourceFiles/Journal.cpp" />
+    <ClCompile Include="sourceFiles/InteractiveObject.cpp" />
+    <ClCompile Include="sourceFiles/NonInteractiveObject.cpp" />
     <ClCompile Include="sourceFiles/Main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Clue.h" />
-    <ClInclude Include="Door.h" />
-    <ClInclude Include="headerFiles\Camera.h" />
-    <ClInclude Include="headerFiles\GLTexture.h" />
-    <ClInclude Include="headerFiles\GL\glaux.h" />
-    <ClInclude Include="headerFiles\GL\glew.h" />
-    <ClInclude Include="headerFiles\GL\glut.h" />
-    <ClInclude Include="headerFiles\Model_3DS.h" />
-    <ClInclude Include="headerFiles\Object.h" />
-    <ClInclude Include="headerFiles\Player.h" />
-    <ClInclude Include="InteractiveObject.h" />
-    <ClInclude Include="Journal.h" />
-    <ClInclude Include="NonInteractiveObject.h" />
+    <ClInclude Include="headerFiles/Camera.h" />
+    <ClInclude Include="headerFiles/GLTexture.h" />
+    <ClInclude Include="headerFiles/GL/glaux.h" />
+    <ClInclude Include="headerFiles/GL/glew.h" />
+    <ClInclude Include="headerFiles/GL/glut.h" />
+    <ClInclude Include="headerFiles/Model_3DS.h" />
+    <ClInclude Include="headerFiles/Object.h" />
+    <ClInclude Include="headerFiles/Player.h" />
+    <ClInclude Include="headerFiles/Clue.h" />
+    <ClInclude Include="headerFiles/Door.h" />
+    <ClInclude Include="headerFiles/InteractiveObject.h" />
+    <ClInclude Include="headerFiles/Journal.h" />
+    <ClInclude Include="headerFiles/NonInteractiveObject.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
