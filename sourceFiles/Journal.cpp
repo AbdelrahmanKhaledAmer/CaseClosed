@@ -28,10 +28,6 @@ Journal::~Journal()
 
 }
 
-int lineHight = 25; // the hight of each line
-int lineMargin = 10; // the left margin for your text
-int currentHight = 25; // the y position of the cursor.
-
 void write(std::string words)
 {
 	std::cout << words;
