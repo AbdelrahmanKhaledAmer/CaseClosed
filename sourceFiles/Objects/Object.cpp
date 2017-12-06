@@ -70,7 +70,7 @@ Vector3f Object::dimensions()
 */
 void Object::draw()
 {
-
+    model_.Draw();
 }
 
 /**

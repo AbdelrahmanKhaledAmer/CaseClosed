@@ -1,6 +1,7 @@
 #ifndef OBJECT_H
 #define OBJECT_H
 
+#include "headerFiles/Model_3DS.h"
 #include <Eigen/Dense>
 
 using namespace Eigen;
@@ -22,6 +23,7 @@ public:
     bool intersects(Object object); // Check overlapping objects
     void draw();                    // Draw Objects
 protected:
+    Model_3DS model_;
     Vector3f location_;     // Current Object location
     Vector3f orientation_;  // Current object rotation (angle rotated along every axis)
     Vector3f scale_;        // Current object size (scale factor along every axis)
