@@ -15,6 +15,10 @@
 #include "headerFiles/Objects/InteractiveObjects/Door.h"
 #include "headerFiles/Objects/NonInteractiveObjects/DiningSet.h"
 #include "headerFiles/Objects/NonInteractiveObjects/Sofa.h"
+#include "headerFiles/Objects/NonInteractiveObjects/Toilet.h"
+#include "headerFiles/Objects/NonInteractiveObjects/Kitchen.h"
+#include "headerFiles/Objects/NonInteractiveObjects/Tv.h"
+#include "headerFiles/Objects/NonInteractiveObjects/CoffeeTables.h"
 #include "headerFiles/Loader.h"
 
 // Screen Constants
@@ -27,6 +31,13 @@ Eigen::Vector3f lookAt(0,0,0);
 Eigen::Vector3f orientation(0,1,0);
 
 Camera camera(eye, lookAt, orientation);
+
+Eigen::Vector3f doorLocation(0,0,0);
+Eigen::Vector3f doorOrientation(0,0,0);
+Eigen::Vector3f doorScale(1,1,1);
+Eigen::Vector3f doorDimensions(1,1,1);
+
+Sofa toilet(doorLocation, doorOrientation, doorScale, doorDimensions);
 
 void display(void)
 {
@@ -42,9 +53,25 @@ void display(void)
 
 	// Reset color and flush buffer
 	glColor3f(1.0, 1.0, 1.0);
+
+	glPushMatrix();
+	glScaled(0.15, 0.15, 0.15);
+	// glScaled(0.0003, 0.0003, 0.0003);
+	// glScaled(0.001, 0.001, 0.001);
+	//glRotatef(90.f, 1, 0, 0);
+	toilet.draw();
+	glPopMatrix();
+
 	glFlush();
 
 	glutSwapBuffers();
+}
+
+void LoadAssets()
+{
+	// loadKitchenModel(toilet);
+	// Loading texture files
+	// Starting music
 }
 
 void key(unsigned char k, int x, int y)
@@ -133,7 +160,7 @@ void main(int argc, char** argv)
 
 	glClearColor(1, 1, 1, 0);
 
-	loadAssets();
+	LoadAssets();
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT0);

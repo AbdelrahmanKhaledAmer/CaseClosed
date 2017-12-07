@@ -21,8 +21,30 @@ void loadSofaModel(Sofa &sofa){
 	sofa.setModel(sofaModel);
 }
 
-void loadAssets()
-{
-	// Loading texture files
-	// Starting music
+void loadToiletModel(Toilet &toilet){
+	char* toiletPath = "assets/models/furniture/Toilet/Lavatory pan N200317.3DS";
+	Model_3DS toiletModel;
+	toiletModel.Load(toiletPath);
+	toilet.setModel(toiletModel);
+}
+
+void loadTvModel(Tv &tv){
+	char* tvPath = "assets/models/furniture/Tv/TV set samsung N160913.3DS";
+	Model_3DS tvModel;
+	tvModel.Load(tvPath);
+	tv.setModel(tvModel);
+}
+
+void loadKitchenModel(Kitchen &kitchen){
+	char* kitchenPath = "assets/models/furniture/Kitchen/Kitchen N100714.3DS";
+	Model_3DS kitchenModel;
+	kitchenModel.Load(kitchenPath);
+	kitchen.setModel(kitchenModel);
+}
+
+void loadCoffeeTable(CoffeeTable &coffeeTable){
+	char* coffeeTablePath = "assets/models/furniture/CoffeeTable/Table N280817.3DS";
+	Model_3DS coffeeTableModel;
+	coffeeTableModel.Load(coffeeTablePath);
+	coffeeTable.setModel(coffeeTableModel);
 }
