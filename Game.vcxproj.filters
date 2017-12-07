@@ -51,6 +51,9 @@
     <ClInclude Include="headerFiles\Objects\Journal.h">
       <Filter>headerFiles</Filter>
     </ClInclude>
+    <ClInclude Include="headerFiles\Objects\NonInteractiveObjects\DiningSet.h">
+      <Filter>headerFiles</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sourceFiles/GLTexture.cpp">
@@ -84,6 +87,9 @@
       <Filter>sourceFiles</Filter>
     </ClCompile>
     <ClCompile Include="sourceFiles\Objects\Player.cpp">
+      <Filter>sourceFiles</Filter>
+    </ClCompile>
+    <ClCompile Include="sourceFiles\Objects\NonInteractiveObjects\DiningSet.cpp">
       <Filter>sourceFiles</Filter>
     </ClCompile>
   </ItemGroup>
