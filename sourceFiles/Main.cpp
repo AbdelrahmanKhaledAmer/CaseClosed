@@ -12,6 +12,9 @@
 #include "headerFiles/Camera.h"
 #include "headerFiles/Lights.h"
 #include "headerFiles/Objects/Object.h"
+#include "headerFiles/Objects/InteractiveObjects/Door.h"
+#include "headerFiles/Objects/NonInteractiveObjects/DiningSet.h"
+#include "headerFiles/Objects/NonInteractiveObjects/Sofa.h"
 
 // Screen Constants
 const int scale = 70;
@@ -41,6 +44,27 @@ void display(void)
 	glFlush();
 
 	glutSwapBuffers();
+}
+
+void loadDoorModel(Door &door){
+	char* door_path = "assets/models/furniture/Door/Door.3DS";
+	Model_3DS door_model;
+	door_model.Load(door_path);	
+	door.setModel(door_model);
+}
+
+void loadDiningSetModel(DiningSet &diningSet){
+	char* diningSetPath = "assets/models/furniture/DiningSet/4 Chair 2 Tone.3ds";
+	Model_3DS diningSetModel;
+	diningSetModel.Load(diningSetPath);
+	diningSet.setModel(diningSetModel);
+}
+
+void loadSofaModel(Sofa &sofa){
+	char* sofaPath = "assets/models/furniture/Sofa/Sofa 1.3DS";
+	Model_3DS sofaModel;
+	sofaModel.Load(sofaPath);
+	sofa.setModel(sofaModel);
 }
 
 void LoadAssets()
