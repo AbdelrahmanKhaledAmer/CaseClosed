@@ -1,4 +1,4 @@
-#include "headerFiles/Player.h"
+#include "headerFiles/Objects/Player.h"
 
 /*
     Constructor for the Player object.

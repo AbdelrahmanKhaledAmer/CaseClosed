@@ -88,14 +88,14 @@
     <ClCompile Include="sourceFiles/GLTexture.cpp" />
     <ClCompile Include="sourceFiles/Model_3DS.cpp" />
     <ClCompile Include="sourceFiles/Camera.cpp" />
-    <ClCompile Include="sourceFiles/Player.cpp" />
-    <ClCompile Include="sourceFiles/Journal.cpp" />
     <ClCompile Include="sourceFiles/Main.cpp" />
     <ClCompile Include="sourceFiles\Objects\InteractiveObjects\Clues\Clue.cpp" />
     <ClCompile Include="sourceFiles\Objects\InteractiveObjects\Door.cpp" />
     <ClCompile Include="sourceFiles\Objects\InteractiveObjects\InteractiveObject.cpp" />
+    <ClCompile Include="sourceFiles\Objects\Journal.cpp" />
     <ClCompile Include="sourceFiles\Objects\NonInteractiveObjects\NonInteractiveObject.cpp" />
     <ClCompile Include="sourceFiles\Objects\Object.cpp" />
+    <ClCompile Include="sourceFiles\Objects\Player.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="headerFiles/Camera.h" />
@@ -104,13 +104,13 @@
     <ClInclude Include="headerFiles/GL/glew.h" />
     <ClInclude Include="headerFiles/GL/glut.h" />
     <ClInclude Include="headerFiles/Model_3DS.h" />
-    <ClInclude Include="headerFiles/Player.h" />
-    <ClInclude Include="headerFiles/Journal.h" />
     <ClInclude Include="headerFiles\Objects\InteractiveObjects\Clues\Clue.h" />
     <ClInclude Include="headerFiles\Objects\InteractiveObjects\Door.h" />
     <ClInclude Include="headerFiles\Objects\InteractiveObjects\InteractiveObject.h" />
+    <ClInclude Include="headerFiles\Objects\Journal.h" />
     <ClInclude Include="headerFiles\Objects\NonInteractiveObjects\NonInteractiveObject.h" />
     <ClInclude Include="headerFiles\Objects\Object.h" />
+    <ClInclude Include="headerFiles\Objects\Player.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,4 +1,4 @@
-#include "headerFiles\Journal.h"
+#include "headerFiles\Objects\Journal.h"
 #include <iostream>
 
 /*

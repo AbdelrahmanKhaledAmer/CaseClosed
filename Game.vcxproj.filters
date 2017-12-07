@@ -30,12 +30,6 @@
     <ClInclude Include="headerFiles/Camera.h">
       <Filter>headerFiles</Filter>
     </ClInclude>
-    <ClInclude Include="headerFiles/Player.h">
-      <Filter>headerFiles</Filter>
-    </ClInclude>
-    <ClInclude Include="headerFiles/Journal.h">
-      <Filter>headerFiles</Filter>
-    </ClInclude>
     <ClInclude Include="headerFiles\Objects\InteractiveObjects\InteractiveObject.h">
       <Filter>headerFiles</Filter>
     </ClInclude>
@@ -51,6 +45,12 @@
     <ClInclude Include="headerFiles\Objects\NonInteractiveObjects\NonInteractiveObject.h">
       <Filter>headerFiles</Filter>
     </ClInclude>
+    <ClInclude Include="headerFiles\Objects\Player.h">
+      <Filter>headerFiles</Filter>
+    </ClInclude>
+    <ClInclude Include="headerFiles\Objects\Journal.h">
+      <Filter>headerFiles</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sourceFiles/GLTexture.cpp">
@@ -60,12 +60,6 @@
       <Filter>sourceFiles</Filter>
     </ClCompile>
     <ClCompile Include="sourceFiles/Camera.cpp">
-      <Filter>sourceFiles</Filter>
-    </ClCompile>
-    <ClCompile Include="sourceFiles/Player.cpp">
-      <Filter>sourceFiles</Filter>
-    </ClCompile>
-    <ClCompile Include="sourceFiles/Journal.cpp">
       <Filter>sourceFiles</Filter>
     </ClCompile>
     <ClCompile Include="sourceFiles/main.cpp">
@@ -84,6 +78,12 @@
       <Filter>sourceFiles</Filter>
     </ClCompile>
     <ClCompile Include="sourceFiles\Objects\NonInteractiveObjects\NonInteractiveObject.cpp">
+      <Filter>sourceFiles</Filter>
+    </ClCompile>
+    <ClCompile Include="sourceFiles\Objects\Journal.cpp">
+      <Filter>sourceFiles</Filter>
+    </ClCompile>
+    <ClCompile Include="sourceFiles\Objects\Player.cpp">
       <Filter>sourceFiles</Filter>
     </ClCompile>
   </ItemGroup>
