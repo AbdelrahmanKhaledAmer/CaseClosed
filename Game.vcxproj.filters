@@ -12,78 +12,96 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="headerFiles/GL/glaux.h">
+    <ClInclude Include="headerFiles\GL\glaux.h">
       <Filter>headerFiles</Filter>
     </ClInclude>
-    <ClInclude Include="headerFiles/GL/glew.h">
+    <ClInclude Include="headerFiles\GL\glew.h">
       <Filter>headerFiles</Filter>
     </ClInclude>
-    <ClInclude Include="headerFiles/GL/glut.h">
+    <ClInclude Include="headerFiles\GL\glut.h">
       <Filter>headerFiles</Filter>
     </ClInclude>
-    <ClInclude Include="headerFiles/GLTexture.h">
+    <ClInclude Include="headerFiles\GLTexture.h">
       <Filter>headerFiles</Filter>
     </ClInclude>
-    <ClInclude Include="headerFiles/Model_3DS.h">
+    <ClInclude Include="headerFiles\Model_3DS.h">
       <Filter>headerFiles</Filter>
     </ClInclude>
-    <ClInclude Include="headerFiles/Camera.h">
+    <ClInclude Include="headerFiles\Camera.h">
       <Filter>headerFiles</Filter>
     </ClInclude>
-    <ClInclude Include="headerFiles/Object.h">
+    <ClInclude Include="headerFiles\Loader.h">
       <Filter>headerFiles</Filter>
     </ClInclude>
-    <ClInclude Include="headerFiles/Player.h">
+    <ClInclude Include="headerFiles\Objects\InteractiveObjects\InteractiveObject.h">
       <Filter>headerFiles</Filter>
     </ClInclude>
-    <ClInclude Include="headerFiles/Clue.h">
+    <ClInclude Include="headerFiles\Objects\InteractiveObjects\Door.h">
       <Filter>headerFiles</Filter>
     </ClInclude>
-    <ClInclude Include="headerFiles/Door.h">
+    <ClInclude Include="headerFiles\Objects\InteractiveObjects\Clues\Clue.h">
       <Filter>headerFiles</Filter>
     </ClInclude>
-    <ClInclude Include="headerFiles/InteractiveObject.h">
+    <ClInclude Include="headerFiles\Objects\Object.h">
       <Filter>headerFiles</Filter>
     </ClInclude>
-    <ClInclude Include="headerFiles/Journal.h">
+    <ClInclude Include="headerFiles\Objects\NonInteractiveObjects\NonInteractiveObject.h">
       <Filter>headerFiles</Filter>
     </ClInclude>
-    <ClInclude Include="headerFiles/NonInteractiveObject.h">
+    <ClInclude Include="headerFiles\Objects\Player.h">
+      <Filter>headerFiles</Filter>
+    </ClInclude>
+    <ClInclude Include="headerFiles\Objects\Journal.h">
+      <Filter>headerFiles</Filter>
+    </ClInclude>
+    <ClInclude Include="headerFiles\Objects\NonInteractiveObjects\DiningSet.h">
+      <Filter>headerFiles</Filter>
+    </ClInclude>
+    <ClInclude Include="headerFiles\Objects\NonInteractiveObjects\Sofa.h">
       <Filter>headerFiles</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="sourceFiles/GLTexture.cpp">
+    <ClCompile Include="sourceFiles\GLTexture.cpp">
       <Filter>sourceFiles</Filter>
     </ClCompile>
-    <ClCompile Include="sourceFiles/Model_3DS.cpp">
+    <ClCompile Include="sourceFiles\Model_3DS.cpp">
       <Filter>sourceFiles</Filter>
     </ClCompile>
-    <ClCompile Include="sourceFiles/Camera.cpp">
+    <ClCompile Include="sourceFiles\Camera.cpp">
       <Filter>sourceFiles</Filter>
     </ClCompile>
-    <ClCompile Include="sourceFiles/Object.cpp">
+    <ClCompile Include="sourceFiles\Loader.cpp">
       <Filter>sourceFiles</Filter>
     </ClCompile>
-    <ClCompile Include="sourceFiles/Player.cpp">
+    <ClCompile Include="sourceFiles\main.cpp">
       <Filter>sourceFiles</Filter>
     </ClCompile>
-    <ClCompile Include="sourceFiles/Clue.cpp">
+    <ClCompile Include="sourceFiles\Objects\InteractiveObjects\InteractiveObject.cpp">
       <Filter>sourceFiles</Filter>
     </ClCompile>
-    <ClCompile Include="sourceFiles/Door.cpp">
+    <ClCompile Include="sourceFiles\Objects\InteractiveObjects\Door.cpp">
       <Filter>sourceFiles</Filter>
     </ClCompile>
-    <ClCompile Include="sourceFiles/InteractiveObject.cpp">
+    <ClCompile Include="sourceFiles\Objects\InteractiveObjects\Clues\Clue.cpp">
       <Filter>sourceFiles</Filter>
     </ClCompile>
-    <ClCompile Include="sourceFiles/NonInteractiveObject.cpp">
+    <ClCompile Include="sourceFiles\Objects\Object.cpp">
       <Filter>sourceFiles</Filter>
     </ClCompile>
-    <ClCompile Include="sourceFiles/Journal.cpp">
+    <ClCompile Include="sourceFiles\Objects\NonInteractiveObjects\NonInteractiveObject.cpp">
       <Filter>sourceFiles</Filter>
     </ClCompile>
-    <ClCompile Include="sourceFiles/main.cpp">
+    <ClCompile Include="sourceFiles\Objects\Journal.cpp">
+      <Filter>sourceFiles</Filter>
+    </ClCompile>
+    <ClCompile Include="sourceFiles\Objects\Player.cpp">
+      <Filter>sourceFiles</Filter>
+    </ClCompile>
+    <ClCompile Include="sourceFiles\Objects\NonInteractiveObjects\DiningSet.cpp">
+      <Filter>sourceFiles</Filter>
+    </ClCompile>
+    <ClCompile Include="sourceFiles\Objects\NonInteractiveObjects\Sofa.cpp">
       <Filter>sourceFiles</Filter>
     </ClCompile>
   </ItemGroup>
