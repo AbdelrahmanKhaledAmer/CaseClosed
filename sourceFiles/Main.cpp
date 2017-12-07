@@ -18,7 +18,8 @@
 #include "headerFiles/Objects/NonInteractiveObjects/Toilet.h"
 #include "headerFiles/Objects/NonInteractiveObjects/Kitchen.h"
 #include "headerFiles/Objects/NonInteractiveObjects/Tv.h"
-#include "headerFiles/Objects/NonInteractiveObjects/CoffeeTables.h"
+#include "headerFiles/Objects/NonInteractiveObjects/CoffeeTable.h"
+#include "headerFiles/Objects/NonInteractiveObjects/Sink.h"
 #include "headerFiles/Loader.h"
 
 // Screen Constants
@@ -37,7 +38,7 @@ Eigen::Vector3f doorOrientation(0,0,0);
 Eigen::Vector3f doorScale(1,1,1);
 Eigen::Vector3f doorDimensions(1,1,1);
 
-Sofa toilet(doorLocation, doorOrientation, doorScale, doorDimensions);
+Sink toilet(doorLocation, doorOrientation, doorScale, doorDimensions);
 
 void display(void)
 {
@@ -55,9 +56,9 @@ void display(void)
 	glColor3f(1.0, 1.0, 1.0);
 
 	glPushMatrix();
-	glScaled(0.15, 0.15, 0.15);
+	// glScaled(0.15, 0.15, 0.15);
 	// glScaled(0.0003, 0.0003, 0.0003);
-	// glScaled(0.001, 0.001, 0.001);
+	glScaled(0.001, 0.001, 0.001);
 	//glRotatef(90.f, 1, 0, 0);
 	toilet.draw();
 	glPopMatrix();
@@ -69,7 +70,7 @@ void display(void)
 
 void LoadAssets()
 {
-	// loadKitchenModel(toilet);
+	loadSinkModel(toilet);
 	// Loading texture files
 	// Starting music
 }

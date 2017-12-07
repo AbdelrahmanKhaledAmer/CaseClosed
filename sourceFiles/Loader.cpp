@@ -42,9 +42,16 @@ void loadKitchenModel(Kitchen &kitchen){
 	kitchen.setModel(kitchenModel);
 }
 
-void loadCoffeeTable(CoffeeTable &coffeeTable){
+void loadCoffeeTableModel(CoffeeTable &coffeeTable){
 	char* coffeeTablePath = "assets/models/furniture/CoffeeTable/Table N280817.3DS";
 	Model_3DS coffeeTableModel;
 	coffeeTableModel.Load(coffeeTablePath);
 	coffeeTable.setModel(coffeeTableModel);
+}
+
+void loadSinkModel(Sink &sink){
+	char* sinkPath = "assets/models/furniture/Sink/Wash-basin Ravak SDZU praktik S N080317.3DS";
+	Model_3DS sinkModel;
+	sinkModel.Load(sinkPath);
+	sink.setModel(sinkModel);
 }
