@@ -93,6 +93,32 @@ void key(unsigned char k, int x, int y)
 	glutPostRedisplay();
 }
 
+//=======================================================================
+// Motion Function
+const int height_center = height / 2, width_center = width / 2;
+//=======================================================================
+void mouseMovement(int x, int y)
+{
+	if(y > height_center)
+			camera.rotateDown(0.4);
+	if(y < height_center)
+			camera.rotateUp(0.4);
+	if(x > width_center)
+			camera.rotateRight(0.4);
+	if(x < width_center)
+			camera.rotateLeft(0.4);
+
+	y = height - y;
+
+	//pins mouse in screen center
+	if(abs(x - width / 2) > 1)
+		glutWarpPointer(width / 2, y);
+		 
+	if(abs(y - height / 2) > 1)
+          glutWarpPointer(width / 2, height / 2);
+    glutPostRedisplay();
+}
+
 void main(int argc, char** argv)
 {
 	glutInit(&argc, argv);
@@ -104,6 +130,8 @@ void main(int argc, char** argv)
 
 	glutDisplayFunc(display);
 	glutKeyboardFunc(key);
+	glutPassiveMotionFunc(mouseMovement);
+	glutSetCursor(GLUT_CURSOR_NONE);
 
 	glClearColor(1, 1, 1, 0);
 
