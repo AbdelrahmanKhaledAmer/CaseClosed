@@ -12,13 +12,10 @@ Returns a pointer for a Door.
 
 @return: Pointer to InteractiveObject interactiveObject
 */
-
-Door::Door(Vector3f location, Vector3f orientation, Vector3f scale, Vector3f dimensions) :InteractiveObject(location, orientation, scale, dimensions)
+Door::Door(Vector3f location, Vector3f orientation, Vector3f scale, Vector3f dimensions) 
+    :InteractiveObject(location, orientation, scale, dimensions)
 {
-	this->location_ = location;
-	this->orientation_ = orientation;
-	this->scale_ = scale;
-	this->dimensions_ = Vector3f(dimensions.x() * scale.x(), dimensions.y() * scale.y(), dimensions.z() * scale.z());
+
 }
 
 /**
