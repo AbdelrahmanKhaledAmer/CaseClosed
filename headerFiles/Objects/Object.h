@@ -2,6 +2,8 @@
 #define OBJECT_H
 
 #include "headerFiles/Model_3DS.h"
+#include "headerFiles/GLTexture.h"
+#include <headerFiles/GL/glut.h>
 #include <Eigen/Dense>
 
 using namespace Eigen;
@@ -18,6 +20,7 @@ public:
     Vector3f orientation(); // Get Orientation
     Vector3f scale();       // Get Scale
     Vector3f dimensions();  // Get Dimensions
+    void setModel(Model_3DS model);     // Get Model
 
     // Game logic functions
     bool intersects(Object object); // Check overlapping objects

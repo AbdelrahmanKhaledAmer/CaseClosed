@@ -65,6 +65,14 @@ Vector3f Object::dimensions()
 }
 
 /**
+    Setter Function.
+    Sets the current model of the Object object.
+*/
+void Object::setModel(Model_3DS model){
+    this->model_ = model;
+}
+
+/**
     OpenGL drawing function.
     Draws an Object on the screen. To be Overridden by the subclasses.
 */

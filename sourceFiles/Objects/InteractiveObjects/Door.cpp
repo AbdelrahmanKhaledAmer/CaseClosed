@@ -19,7 +19,6 @@ Door::Door(Vector3f location, Vector3f orientation, Vector3f scale, Vector3f dim
 	this->orientation_ = orientation;
 	this->scale_ = scale;
 	this->dimensions_ = Vector3f(dimensions.x() * scale.x(), dimensions.y() * scale.y(), dimensions.z() * scale.z());
-	this->model_.Load("assets/models/furniture/Door/Door.3DS");
 }
 
 /**
