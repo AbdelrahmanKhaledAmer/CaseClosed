@@ -120,6 +120,9 @@
     <ClInclude Include="headerFiles\Objects\NonInteractiveObjects\CellingLight.h">
       <Filter>headerFiles\Objects\NonInteractiveObjects</Filter>
     </ClInclude>
+    <ClInclude Include="headerFiles\Objects\NonInteractiveObjects\Fan.h">
+      <Filter>headerFiles\Objects\NonInteractiveObjects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sourceFiles\Camera.cpp">
@@ -192,6 +195,9 @@
       <Filter>sourceFiles\Objects\InteractiveObjects\Clues</Filter>
     </ClCompile>
     <ClCompile Include="sourceFiles\Objects\NonInteractiveObjects\CellingLight.cpp">
+      <Filter>sourceFiles\Objects\NonInteractiveObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="sourceFiles\Objects\NonInteractiveObjects\Fan.cpp">
       <Filter>sourceFiles\Objects\NonInteractiveObjects</Filter>
     </ClCompile>
   </ItemGroup>

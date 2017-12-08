@@ -90,3 +90,10 @@ void loadCellingLightModel(CellingLight &cellingLight){
 	cellingLightModel.Load(cellingLightPath);
 	cellingLight.setModel(cellingLightModel);
 }
+
+void loadFanModel(Fan &fan){
+	char* fanPath = "assets/models/furniture/Fan/Artemis Fan Collection designed by George Kovacs.3ds";
+	Model_3DS fanModel;
+	fanModel.Load(fanPath);
+	fan.setModel(fanModel);
+}
