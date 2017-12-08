@@ -28,23 +28,14 @@
     <Filter Include="headerFiles\Objects\NonInteractiveObjects">
       <UniqueIdentifier>{e64c79dc-29b5-419f-bb46-6d20d7f391eb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="headerFiles\GL">
+      <UniqueIdentifier>{bc0e155b-6064-4095-b635-b9ca8646e91e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sourceFiles\GL">
+      <UniqueIdentifier>{c2efa3c7-b013-401c-bf83-915a0dbe42e2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="headerFiles\GL\glaux.h">
-      <Filter>headerFiles</Filter>
-    </ClInclude>
-    <ClInclude Include="headerFiles\GL\glew.h">
-      <Filter>headerFiles</Filter>
-    </ClInclude>
-    <ClInclude Include="headerFiles\GL\glut.h">
-      <Filter>headerFiles</Filter>
-    </ClInclude>
-    <ClInclude Include="headerFiles\GLTexture.h">
-      <Filter>headerFiles</Filter>
-    </ClInclude>
-    <ClInclude Include="headerFiles\Model_3DS.h">
-      <Filter>headerFiles</Filter>
-    </ClInclude>
     <ClInclude Include="headerFiles\Camera.h">
       <Filter>headerFiles</Filter>
     </ClInclude>
@@ -96,14 +87,26 @@
     <ClInclude Include="headerFiles\Objects\NonInteractiveObjects\Bed.h">
       <Filter>headerFiles\Objects\NonInteractiveObjects</Filter>
     </ClInclude>
+    <ClInclude Include="headerFiles\Objects\NonInteractiveObjects\Wardrobe.h">
+      <Filter>headerFiles\Objects\NonInteractiveObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="headerFiles\GL\glaux.h">
+      <Filter>headerFiles\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="headerFiles\GL\glew.h">
+      <Filter>headerFiles\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="headerFiles\GLTexture.h">
+      <Filter>headerFiles\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="headerFiles\Model_3DS.h">
+      <Filter>headerFiles\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="headerFiles\GL\glut.h">
+      <Filter>headerFiles\GL</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="sourceFiles\GLTexture.cpp">
-      <Filter>sourceFiles</Filter>
-    </ClCompile>
-    <ClCompile Include="sourceFiles\Model_3DS.cpp">
-      <Filter>sourceFiles</Filter>
-    </ClCompile>
     <ClCompile Include="sourceFiles\Camera.cpp">
       <Filter>sourceFiles</Filter>
     </ClCompile>
@@ -157,6 +160,15 @@
     </ClCompile>
     <ClCompile Include="sourceFiles\Objects\NonInteractiveObjects\Bed.cpp">
       <Filter>sourceFiles\Objects\NonInteractiveObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="sourceFiles\Objects\NonInteractiveObjects\Wardrobe.cpp">
+      <Filter>sourceFiles\Objects\NonInteractiveObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="sourceFiles\Model_3DS.cpp">
+      <Filter>sourceFiles\GL</Filter>
+    </ClCompile>
+    <ClCompile Include="sourceFiles\GLTexture.cpp">
+      <Filter>sourceFiles\GL</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

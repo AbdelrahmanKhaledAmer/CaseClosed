@@ -69,3 +69,10 @@ void loadBookcaseModel(Bed &bookcase){
 	bookcaseModel.Load(bookcasePath);
 	bookcase.setModel(bookcaseModel);
 }
+
+void loadWardrobeModel(Wardrobe &wardrobe){
+	char* wardrobePath = "assets/models/furniture/Wardrobe/Wardrobe.3DS";
+	Model_3DS wardrobeModel;
+	wardrobeModel.Load(wardrobePath);
+	wardrobe.setModel(wardrobeModel);
+}
