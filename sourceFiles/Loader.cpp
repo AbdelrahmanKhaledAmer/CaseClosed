@@ -97,3 +97,10 @@ void loadFanModel(Fan &fan){
 	fanModel.Load(fanPath);
 	fan.setModel(fanModel);
 }
+
+void loadNightstandModel(Nightstand &nightstand){
+	char* nightstandPath = "assets/models/furniture/Nightstand/Nightstand.3DS";
+	Model_3DS nightstandModel;
+	nightstandModel.Load(nightstandPath);
+	nightstand.setModel(nightstandModel);
+}
