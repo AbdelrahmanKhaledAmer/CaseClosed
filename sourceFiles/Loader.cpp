@@ -70,11 +70,11 @@ void loadBookcaseModel(Bookcase &bookcase){
 	bookcase.setModel(bookcaseModel);
 }
 
-void loadWardrobeModel(Wardrobe &knife){
-	char* knifePath = "assets/models/furniture/Wardrobe/Wardrobe.3DS";
-	Model_3DS knifeModel;
-	knifeModel.Load(knifePath);
-	knife.setModel(knifeModel);
+void loadWardrobeModel(Wardrobe &wardrobe){
+	char* wardrobePath = "assets/models/furniture/Wardrobe/Wardrobe.3DS";
+	Model_3DS wardrobeModel;
+	wardrobeModel.Load(wardrobePath);
+	wardrobe.setModel(wardrobeModel);
 }
 
 void loadKnifeModel(Knife &knife){
@@ -82,4 +82,11 @@ void loadKnifeModel(Knife &knife){
 	Model_3DS knifeModel;
 	knifeModel.Load(knifePath);
 	knife.setModel(knifeModel);
+}
+
+void loadCellingLightModel(CellingLight &cellingLight){
+	char* cellingLightPath = "assets/models/furniture/CellingLight/Luster Donolux S111000-3 white N010917.3DS";
+	Model_3DS cellingLightModel;
+	cellingLightModel.Load(cellingLightPath);
+	cellingLight.setModel(cellingLightModel);
 }

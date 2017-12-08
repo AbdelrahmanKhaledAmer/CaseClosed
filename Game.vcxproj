@@ -105,6 +105,7 @@
     <ClCompile Include="sourceFiles\Objects\NonInteractiveObjects\Bed.cpp" />
     <ClCompile Include="sourceFiles\Objects\NonInteractiveObjects\Wardrobe.cpp" />
     <ClCompile Include="sourceFiles\Objects\NonInteractiveObjects\Bookcase.cpp" />
+    <ClCompile Include="sourceFiles\Objects\NonInteractiveObjects\CellingLight.cpp" />
     <ClCompile Include="sourceFiles\Objects\Journal.cpp" />
     <ClCompile Include="sourceFiles\Objects\Object.cpp" />
     <ClCompile Include="sourceFiles\Objects\Player.cpp" />
@@ -132,6 +133,7 @@
     <ClInclude Include="headerFiles\Objects\NonInteractiveObjects\Bed.h" />
     <ClInclude Include="headerFiles\Objects\NonInteractiveObjects\Bookcase.h" />
     <ClInclude Include="headerFiles\Objects\NonInteractiveObjects\Wardrobe.h" />
+    <ClInclude Include="headerFiles\Objects\NonInteractiveObjects\CellingLight.h" />
     <ClInclude Include="headerFiles\Objects\Journal.h" />
     <ClInclude Include="headerFiles\Objects\Object.h" />
     <ClInclude Include="headerFiles\Objects\Player.h" />

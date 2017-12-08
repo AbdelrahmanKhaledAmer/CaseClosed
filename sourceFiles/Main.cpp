@@ -23,6 +23,7 @@
 #include "headerFiles/Objects/NonInteractiveObjects/Bed.h"
 #include "headerFiles/Objects/NonInteractiveObjects/Wardrobe.h"
 #include "headerFiles/Objects/NonInteractiveObjects/Bookcase.h"
+#include "headerFiles/Objects/NonInteractiveObjects/CellingLight.h"
 #include "headerFiles/Objects/InteractiveObjects/Clues/Knife.h"
 #include "headerFiles/Loader.h"
 

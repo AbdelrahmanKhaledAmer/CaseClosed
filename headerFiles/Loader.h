@@ -12,6 +12,7 @@
 #include "headerFiles/Objects/NonInteractiveObjects/Bed.h"
 #include "headerFiles/Objects/NonInteractiveObjects/Wardrobe.h"
 #include "headerFiles/Objects/NonInteractiveObjects/Bookcase.h"
+#include "headerFiles/Objects/NonInteractiveObjects/CellingLight.h"
 #include "headerFiles/Objects/InteractiveObjects/Clues/Knife.h"
 
 void loadDoorModel(Door &door);
@@ -26,4 +27,5 @@ void loadBedModel(Bed &bed);
 void loadBookcaseModel(Bookcase &bookcase);
 void loadWardrobeModel(Wardrobe &wardrobe);
 void loadKnifeModel(Knife &knife);
+void loadCellingLightModel(CellingLight &cellingLight);
 #endif
