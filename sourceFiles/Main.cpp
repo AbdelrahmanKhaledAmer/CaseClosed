@@ -42,7 +42,7 @@ Eigen::Vector3f doorOrientation(0,0,0);
 Eigen::Vector3f doorScale(1,1,1);
 Eigen::Vector3f doorDimensions(1,1,1);
 
-Knife toilet(doorLocation, doorOrientation, doorScale, doorDimensions);
+Door toilet(doorLocation, doorOrientation, doorScale, doorDimensions);
 
 void display(void)
 {
@@ -60,9 +60,9 @@ void display(void)
 	glColor3f(1.0, 1.0, 1.0);
 
 	glPushMatrix();
-	glScaled(0.15, 0.15, 0.15);
+	// glScaled(0.15, 0.15, 0.15);
 	// glScaled(0.0003, 0.0003, 0.0003);
-	// glScaled(0.001, 0.001, 0.001);
+	glScaled(0.001, 0.001, 0.001);
 	//glRotatef(90.f, 1, 0, 0);
 	toilet.draw();
 	glPopMatrix();
@@ -74,7 +74,7 @@ void display(void)
 
 void LoadAssets()
 {
-	loadKnifeModel(toilet);
+	loadDoorModel(toilet);
 	// Loading texture files
 	// Starting music
 }

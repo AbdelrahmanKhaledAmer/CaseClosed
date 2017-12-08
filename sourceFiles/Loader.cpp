@@ -1,7 +1,7 @@
 #include "headerFiles/Loader.h"
 
 void loadDoorModel(Door &door){
-	char* door_path = "assets/models/furniture/Door/Door.3DS";
+	char* door_path = "assets/models/furniture/Door/Door Endless Boiserie Sliding Door Longhi N291216.3DS";
 	Model_3DS door_model;
 	door_model.Load(door_path);	
 	door.setModel(door_model);
@@ -78,7 +78,6 @@ void loadWardrobeModel(Wardrobe &knife){
 }
 
 void loadKnifeModel(Knife &knife){
-	// char* knifePath = "assets/models/furniture/Knife/Knife.3DS";
 	char* knifePath = "assets/models/furniture/Knife/Knife_3ds.3DS";
 	Model_3DS knifeModel;
 	knifeModel.Load(knifePath);
