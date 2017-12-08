@@ -22,6 +22,7 @@
 #include "headerFiles/Objects/NonInteractiveObjects/Sink.h"
 #include "headerFiles/Objects/NonInteractiveObjects/Bed.h"
 #include "headerFiles/Objects/NonInteractiveObjects/Wardrobe.h"
+#include "headerFiles/Objects/NonInteractiveObjects/Bookcase.h"
 #include "headerFiles/Loader.h"
 
 // Screen Constants
@@ -40,7 +41,7 @@ Eigen::Vector3f doorOrientation(0,0,0);
 Eigen::Vector3f doorScale(1,1,1);
 Eigen::Vector3f doorDimensions(1,1,1);
 
-Wardrobe toilet(doorLocation, doorOrientation, doorScale, doorDimensions);
+Bookcase toilet(doorLocation, doorOrientation, doorScale, doorDimensions);
 
 void display(void)
 {
@@ -72,7 +73,7 @@ void display(void)
 
 void LoadAssets()
 {
-	loadWardrobeModel(toilet);
+	loadBookcaseModel(toilet);
 	// Loading texture files
 	// Starting music
 }

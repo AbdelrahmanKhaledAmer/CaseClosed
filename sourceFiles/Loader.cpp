@@ -63,8 +63,8 @@ void loadBedModel(Bed &bed){
 	bed.setModel(bedModel);
 }
 
-void loadBookcaseModel(Bed &bookcase){
-	char* bookcasePath = "assets/models/furniture/Bookcase/Bookcase N160810.3DS";
+void loadBookcaseModel(Bookcase &bookcase){
+	char* bookcasePath = "assets/models/furniture/Bookcase/Bookcase.3DS";
 	Model_3DS bookcaseModel;
 	bookcaseModel.Load(bookcasePath);
 	bookcase.setModel(bookcaseModel);

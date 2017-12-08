@@ -105,6 +105,9 @@
     <ClInclude Include="headerFiles\GL\glut.h">
       <Filter>headerFiles\GL</Filter>
     </ClInclude>
+    <ClInclude Include="headerFiles\Objects\NonInteractiveObjects\Bookcase.h">
+      <Filter>headerFiles\Objects\NonInteractiveObjects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sourceFiles\Camera.cpp">
@@ -169,6 +172,9 @@
     </ClCompile>
     <ClCompile Include="sourceFiles\GLTexture.cpp">
       <Filter>sourceFiles\GL</Filter>
+    </ClCompile>
+    <ClCompile Include="sourceFiles\Objects\NonInteractiveObjects\Bookcase.cpp">
+      <Filter>sourceFiles\Objects\NonInteractiveObjects</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
