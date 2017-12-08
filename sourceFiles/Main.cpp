@@ -23,6 +23,7 @@
 #include "headerFiles/Objects/NonInteractiveObjects/Bed.h"
 #include "headerFiles/Objects/NonInteractiveObjects/Wardrobe.h"
 #include "headerFiles/Objects/NonInteractiveObjects/Bookcase.h"
+#include "headerFiles/Objects/InteractiveObjects/Clues/Knife.h"
 #include "headerFiles/Loader.h"
 
 // Screen Constants
@@ -41,7 +42,7 @@ Eigen::Vector3f doorOrientation(0,0,0);
 Eigen::Vector3f doorScale(1,1,1);
 Eigen::Vector3f doorDimensions(1,1,1);
 
-Bookcase toilet(doorLocation, doorOrientation, doorScale, doorDimensions);
+Knife toilet(doorLocation, doorOrientation, doorScale, doorDimensions);
 
 void display(void)
 {
@@ -59,9 +60,9 @@ void display(void)
 	glColor3f(1.0, 1.0, 1.0);
 
 	glPushMatrix();
-	// glScaled(0.15, 0.15, 0.15);
+	glScaled(0.15, 0.15, 0.15);
 	// glScaled(0.0003, 0.0003, 0.0003);
-	glScaled(0.001, 0.001, 0.001);
+	// glScaled(0.001, 0.001, 0.001);
 	//glRotatef(90.f, 1, 0, 0);
 	toilet.draw();
 	glPopMatrix();
@@ -73,7 +74,7 @@ void display(void)
 
 void LoadAssets()
 {
-	loadBookcaseModel(toilet);
+	loadKnifeModel(toilet);
 	// Loading texture files
 	// Starting music
 }

@@ -34,6 +34,12 @@
     <Filter Include="sourceFiles\GL">
       <UniqueIdentifier>{c2efa3c7-b013-401c-bf83-915a0dbe42e2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="sourceFiles\Objects\InteractiveObjects\Clues">
+      <UniqueIdentifier>{9f73f93c-49c5-45a6-a2d3-2eea21681e68}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="headerFiles\Objects\InteractiveObjects\Clues">
+      <UniqueIdentifier>{315be35f-7264-477f-b34b-d3059849715a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="headerFiles\Camera.h">
@@ -50,9 +56,6 @@
     </ClInclude>
     <ClInclude Include="headerFiles\Objects\Player.h">
       <Filter>headerFiles\Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="headerFiles\Objects\InteractiveObjects\Clues\Clue.h">
-      <Filter>headerFiles\Objects\InteractiveObjects</Filter>
     </ClInclude>
     <ClInclude Include="headerFiles\Objects\InteractiveObjects\Door.h">
       <Filter>headerFiles\Objects\InteractiveObjects</Filter>
@@ -108,6 +111,12 @@
     <ClInclude Include="headerFiles\Objects\NonInteractiveObjects\Bookcase.h">
       <Filter>headerFiles\Objects\NonInteractiveObjects</Filter>
     </ClInclude>
+    <ClInclude Include="headerFiles\Objects\InteractiveObjects\Clues\Knife.h">
+      <Filter>headerFiles\Objects\InteractiveObjects\Clues</Filter>
+    </ClInclude>
+    <ClInclude Include="headerFiles\Objects\InteractiveObjects\Clues\Clue.h">
+      <Filter>headerFiles\Objects\InteractiveObjects\Clues</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sourceFiles\Camera.cpp">
@@ -127,9 +136,6 @@
     </ClCompile>
     <ClCompile Include="sourceFiles\Objects\Player.cpp">
       <Filter>sourceFiles\Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="sourceFiles\Objects\InteractiveObjects\Clues\Clue.cpp">
-      <Filter>sourceFiles\Objects\InteractiveObjects</Filter>
     </ClCompile>
     <ClCompile Include="sourceFiles\Objects\InteractiveObjects\Door.cpp">
       <Filter>sourceFiles\Objects\InteractiveObjects</Filter>
@@ -175,6 +181,12 @@
     </ClCompile>
     <ClCompile Include="sourceFiles\Objects\NonInteractiveObjects\Bookcase.cpp">
       <Filter>sourceFiles\Objects\NonInteractiveObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="sourceFiles\Objects\InteractiveObjects\Clues\Clue.cpp">
+      <Filter>sourceFiles\Objects\InteractiveObjects\Clues</Filter>
+    </ClCompile>
+    <ClCompile Include="sourceFiles\Objects\InteractiveObjects\Clues\Knife.cpp">
+      <Filter>sourceFiles\Objects\InteractiveObjects\Clues</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

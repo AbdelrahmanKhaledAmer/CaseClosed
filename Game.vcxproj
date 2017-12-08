@@ -91,6 +91,7 @@
     <ClCompile Include="sourceFiles\Loader.cpp" />
     <ClCompile Include="sourceFiles\Main.cpp" />
     <ClCompile Include="sourceFiles\Objects\InteractiveObjects\Clues\Clue.cpp" />
+    <ClCompile Include="sourceFiles\Objects\InteractiveObjects\Clues\Knife.cpp" />
     <ClCompile Include="sourceFiles\Objects\InteractiveObjects\Door.cpp" />
     <ClCompile Include="sourceFiles\Objects\InteractiveObjects\InteractiveObject.cpp" />
     <ClCompile Include="sourceFiles\Objects\NonInteractiveObjects\DiningSet.cpp" />
@@ -117,6 +118,7 @@
     <ClInclude Include="headerFiles\Loader.h" />
     <ClInclude Include="headerFiles\Model_3DS.h" />
     <ClInclude Include="headerFiles\Objects\InteractiveObjects\Clues\Clue.h" />
+    <ClInclude Include="headerFiles\Objects\InteractiveObjects\Clues\Knife.h" />
     <ClInclude Include="headerFiles\Objects\InteractiveObjects\Door.h" />
     <ClInclude Include="headerFiles\Objects\InteractiveObjects\InteractiveObject.h" />
     <ClInclude Include="headerFiles\Objects\NonInteractiveObjects\DiningSet.h" />

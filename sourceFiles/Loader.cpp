@@ -70,9 +70,17 @@ void loadBookcaseModel(Bookcase &bookcase){
 	bookcase.setModel(bookcaseModel);
 }
 
-void loadWardrobeModel(Wardrobe &wardrobe){
-	char* wardrobePath = "assets/models/furniture/Wardrobe/Wardrobe.3DS";
-	Model_3DS wardrobeModel;
-	wardrobeModel.Load(wardrobePath);
-	wardrobe.setModel(wardrobeModel);
+void loadWardrobeModel(Wardrobe &knife){
+	char* knifePath = "assets/models/furniture/Wardrobe/Wardrobe.3DS";
+	Model_3DS knifeModel;
+	knifeModel.Load(knifePath);
+	knife.setModel(knifeModel);
+}
+
+void loadKnifeModel(Knife &knife){
+	// char* knifePath = "assets/models/furniture/Knife/Knife.3DS";
+	char* knifePath = "assets/models/furniture/Knife/Knife_3ds.3DS";
+	Model_3DS knifeModel;
+	knifeModel.Load(knifePath);
+	knife.setModel(knifeModel);
 }
