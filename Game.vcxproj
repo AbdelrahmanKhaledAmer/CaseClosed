@@ -101,6 +101,7 @@
     <ClCompile Include="sourceFiles\Objects\NonInteractiveObjects\Tv.cpp" />
     <ClCompile Include="sourceFiles\Objects\NonInteractiveObjects\CoffeeTable.cpp" />
     <ClCompile Include="sourceFiles\Objects\NonInteractiveObjects\Sink.cpp" />
+    <ClCompile Include="sourceFiles\Objects\NonInteractiveObjects\Bed.cpp" />
     <ClCompile Include="sourceFiles\Objects\Journal.cpp" />
     <ClCompile Include="sourceFiles\Objects\Object.cpp" />
     <ClCompile Include="sourceFiles\Objects\Player.cpp" />
@@ -124,6 +125,7 @@
     <ClInclude Include="headerFiles\Objects\NonInteractiveObjects\Tv.h" />
     <ClInclude Include="headerFiles\Objects\NonInteractiveObjects\CoffeeTable.h" />
     <ClInclude Include="headerFiles\Objects\NonInteractiveObjects\Sink.h" />
+    <ClInclude Include="headerFiles\Objects\NonInteractiveObjects\Bed.h" />
     <ClInclude Include="headerFiles\Objects\Journal.h" />
     <ClInclude Include="headerFiles\Objects\Object.h" />
     <ClInclude Include="headerFiles\Objects\Player.h" />

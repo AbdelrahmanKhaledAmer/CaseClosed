@@ -9,6 +9,7 @@
 #include "headerFiles/Objects/NonInteractiveObjects/Tv.h"
 #include "headerFiles/Objects/NonInteractiveObjects/CoffeeTable.h"
 #include "headerFiles/Objects/NonInteractiveObjects/Sink.h"
+#include "headerFiles/Objects/NonInteractiveObjects/Bed.h"
 
 void loadDoorModel(Door &door);
 void loadDiningSetModel(DiningSet &diningSet);
@@ -18,4 +19,6 @@ void loadTvModel(Tv &tv);
 void loadKitchenModel(Kitchen &kitchen);
 void loadCoffeeTableModel(CoffeeTable &coffeeTable);
 void loadSinkModel(Sink &sink);
+void loadBedModel(Bed &bed);
+void loadBookcaseModel(Bed &bookcase);
 #endif

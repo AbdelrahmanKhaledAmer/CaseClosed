@@ -20,6 +20,7 @@
 #include "headerFiles/Objects/NonInteractiveObjects/Tv.h"
 #include "headerFiles/Objects/NonInteractiveObjects/CoffeeTable.h"
 #include "headerFiles/Objects/NonInteractiveObjects/Sink.h"
+#include "headerFiles/Objects/NonInteractiveObjects/Bed.h"
 #include "headerFiles/Loader.h"
 
 // Screen Constants
@@ -38,7 +39,7 @@ Eigen::Vector3f doorOrientation(0,0,0);
 Eigen::Vector3f doorScale(1,1,1);
 Eigen::Vector3f doorDimensions(1,1,1);
 
-Sink toilet(doorLocation, doorOrientation, doorScale, doorDimensions);
+Bed toilet(doorLocation, doorOrientation, doorScale, doorDimensions);
 
 void display(void)
 {
@@ -70,7 +71,7 @@ void display(void)
 
 void LoadAssets()
 {
-	loadSinkModel(toilet);
+	loadBookcaseModel(toilet);
 	// Loading texture files
 	// Starting music
 }

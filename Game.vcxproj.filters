@@ -93,6 +93,9 @@
     <ClInclude Include="headerFiles\Objects\NonInteractiveObjects\Sink.h">
       <Filter>headerFiles\Objects\NonInteractiveObjects</Filter>
     </ClInclude>
+    <ClInclude Include="headerFiles\Objects\NonInteractiveObjects\Bed.h">
+      <Filter>headerFiles\Objects\NonInteractiveObjects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sourceFiles\GLTexture.cpp">
@@ -150,6 +153,9 @@
       <Filter>sourceFiles\Objects\NonInteractiveObjects</Filter>
     </ClCompile>
     <ClCompile Include="sourceFiles\Objects\NonInteractiveObjects\Sink.cpp">
+      <Filter>sourceFiles\Objects\NonInteractiveObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="sourceFiles\Objects\NonInteractiveObjects\Bed.cpp">
       <Filter>sourceFiles\Objects\NonInteractiveObjects</Filter>
     </ClCompile>
   </ItemGroup>

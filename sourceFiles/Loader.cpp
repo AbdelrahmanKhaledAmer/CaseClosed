@@ -55,3 +55,17 @@ void loadSinkModel(Sink &sink){
 	sinkModel.Load(sinkPath);
 	sink.setModel(sinkModel);
 }
+
+void loadBedModel(Bed &bed){
+	char* bedPath = "assets/models/furniture/Bed/Bed Cattelan Italia Logan 7410 N100317.3DS";
+	Model_3DS bedModel;
+	bedModel.Load(bedPath);
+	bed.setModel(bedModel);
+}
+
+void loadBookcaseModel(Bed &bookcase){
+	char* bookcasePath = "assets/models/furniture/Bookcase/Bookcase N160810.3DS";
+	Model_3DS bookcaseModel;
+	bookcaseModel.Load(bookcasePath);
+	bookcase.setModel(bookcaseModel);
+}
