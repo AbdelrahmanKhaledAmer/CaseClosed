@@ -13,12 +13,24 @@ global origin.
 @return: Pointer to InteractiveObject interactiveObject
 */
 
-Bed::Bed(Vector3f location, Vector3f orientation, Vector3f scale,
-         Vector3f dimensions)
-    : NonInteractiveObject(location, orientation, scale, dimensions) {}
+Bed::Bed(Vector3f location, Vector3f orientation, Vector3f scale)
+    : NonInteractiveObject(location, orientation, scale,
+                           Vector3f(2.5f, 0.5f, 2.8f)) {}
 
 /**
 Destructor for the Bed object.
 Deletes the pointer for the Bed object.
 */
 Bed::~Bed() {}
+
+void Bed::draw() {
+  float scale = 0.0026;
+
+  glPushMatrix();
+  {
+    glTranslatef(-0.1, 0, 0);
+    glScalef(scale, scale, scale);
+    __super::draw();
+  }
+  glPopMatrix();
+}

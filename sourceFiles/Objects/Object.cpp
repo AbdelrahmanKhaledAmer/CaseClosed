@@ -76,9 +76,14 @@ void Object::setModel(Model_3DS model){
     OpenGL drawing function.
     Draws an Object on the screen. To be Overridden by the subclasses.
 */
-void Object::draw()
-{
+void Object::draw() {
+  glPushMatrix();
+  {
+    glTranslatef(location_.x(), location_.y(), location_.z());
+    glScalef(scale_.x(), scale_.y(), scale_.z());
     model_.Draw();
+  }
+  glPopMatrix();
 }
 
 /**
