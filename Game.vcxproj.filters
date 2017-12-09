@@ -126,6 +126,9 @@
     <ClInclude Include="headerFiles\Objects\NonInteractiveObjects\Nightstand.h">
       <Filter>headerFiles\Objects\NonInteractiveObjects</Filter>
     </ClInclude>
+    <ClInclude Include="headerFiles\Objects\Flashlight.h">
+      <Filter>headerFiles\Objects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sourceFiles\Camera.cpp">
@@ -205,6 +208,9 @@
     </ClCompile>
     <ClCompile Include="sourceFiles\Objects\NonInteractiveObjects\Nightstand.cpp">
       <Filter>sourceFiles\Objects\InteractiveObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="sourceFiles\Objects\Flashlight.cpp">
+      <Filter>sourceFiles\Objects</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

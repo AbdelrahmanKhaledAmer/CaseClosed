@@ -104,3 +104,10 @@ void loadNightstandModel(Nightstand &nightstand){
 	nightstandModel.Load(nightstandPath);
 	nightstand.setModel(nightstandModel);
 }
+
+void loadFlashlightModel(Flashlight &flashlight){
+	char* flashlightPath = "assets/models/Flashlight/fonarik_low_3ds.3DS";
+	Model_3DS flashlightModel;
+	flashlightModel.Load(flashlightPath);
+	flashlight.setModel(flashlightModel);
+}

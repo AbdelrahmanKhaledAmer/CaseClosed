@@ -1,0 +1,32 @@
+#include "headerFiles/Objects/Flashlight.h"
+
+/*
+Constructor for the Flashlight object.
+Returns a pointer for a Flashlight.
+
+@param (location) The current location of the Flashlight with respect to the
+global origin.
+@param (orientation) The current rotation angles across all three axes.
+@param (scale) The amount to scale across all three axes.
+@param (dimensions) The length of the object along every axis before scaling.
+
+
+@return: Pointer to Flashlight Object
+*/
+
+Flashlight::Flashlight(Vector3f location, Vector3f orientation, Vector3f scale,
+                       Vector3f dimensions)
+    : Object(location, orientation, scale, dimensions) {
+  this->on_ = false;
+}
+
+/**
+Destructor for the Flashlight object.
+Deletes the pointer for the Flashlight object.
+*/
+Flashlight::~Flashlight() {}
+
+void Flashlight::turnOn() { this->on_ = true; }
+void Flashlight::turnOff() { this->on_ = false; }
+
+bool Flashlight::isOn() { return this->on_; }
