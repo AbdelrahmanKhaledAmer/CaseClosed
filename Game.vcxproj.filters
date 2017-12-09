@@ -129,6 +129,9 @@
     <ClInclude Include="headerFiles\Objects\Flashlight.h">
       <Filter>headerFiles\Objects</Filter>
     </ClInclude>
+    <ClInclude Include="headerFiles\Objects\NonInteractiveObjects\Wall.h">
+      <Filter>headerFiles</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sourceFiles\Camera.cpp">
@@ -211,6 +214,9 @@
     </ClCompile>
     <ClCompile Include="sourceFiles\Objects\Flashlight.cpp">
       <Filter>sourceFiles\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="sourceFiles\Objects\NonInteractiveObjects\Wall.cpp">
+      <Filter>sourceFiles</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

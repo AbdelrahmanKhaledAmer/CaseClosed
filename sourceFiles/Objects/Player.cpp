@@ -26,6 +26,11 @@ Player::~Player()
 
 }
 
+Camera Player::getCamera()
+{
+    return this->head_;
+}
+
 /**
     Translation Function.
     Moves the player one step forward
