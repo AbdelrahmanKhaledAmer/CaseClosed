@@ -103,8 +103,8 @@ bool Object::intersects(Object object)
     float obj2YMax = object.location_.y() + object.dimensions_.y()/2;
     float obj2ZMin = object.location_.z() - object.dimensions_.z()/2;
     float obj2ZMax = object.location_.z() + object.dimensions_.z()/2;
-    bool intersectsX = (obj1XMin >= obj2XMin && obj1XMin <= obj2XMax) || (obj1XMax >= obj2XMin && obj1XMax <= obj2XMin);
-    bool intersectsY = (obj1YMin >= obj2YMin && obj1YMin <= obj2YMax) || (obj1YMax >= obj2YMin && obj1YMax <= obj2YMin);
-    bool intersectsZ = (obj1ZMin >= obj2ZMin && obj1ZMin <= obj2ZMax) || (obj1ZMax >= obj2ZMin && obj1ZMax <= obj2ZMin);
+    bool intersectsX = (obj1XMin >= obj2XMin && obj1XMin <= obj2XMax) || (obj1XMax >= obj2XMin && obj1XMax <= obj2XMax);
+    bool intersectsY = (obj1YMin >= obj2YMin && obj1YMin <= obj2YMax) || (obj1YMax >= obj2YMin && obj1YMax <= obj2YMax);
+    bool intersectsZ = (obj1ZMin >= obj2ZMin && obj1ZMin <= obj2ZMax) || (obj1ZMax >= obj2ZMin && obj1ZMax <= obj2ZMax);
     return intersectsX && intersectsY && intersectsZ;
 }

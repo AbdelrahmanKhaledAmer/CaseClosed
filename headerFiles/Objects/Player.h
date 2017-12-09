@@ -14,6 +14,9 @@ public:
     Player(Vector3f location, Vector3f orientation, Vector3f scale, Vector3f dimensions, Camera camera);    // Constructor
     ~Player();                                                                                              // Destructor
 
+    // Getters and Setters
+    Camera getCamera();
+
     // Motion functions
     void moveForward(float scale = 1);
     void moveBackward(float scale = 1);

@@ -58,22 +58,40 @@ void Wall::draw()
 
     @Override
 */
-// bool Wall::intersects(Object object)
-// {
-//     float obj1XMin = this->location_.x() - this->dimensions_.x()/2;
-//     float obj1XMax = this->location_.x() + this->dimensions_.x()/2;
-//     float obj1YMin = this->location_.y() - this->dimensions_.y()/2;
-//     float obj1YMax = this->location_.y() + this->dimensions_.y()/2;
-//     float obj1ZMin = this->location_.z() - this->dimensions_.z()/2;
-//     float obj1ZMax = this->location_.z() + this->dimensions_.z()/2;
-//     float obj2XMin = object.location_.x() - object.dimensions_.x()/2;
-//     float obj2XMax = object.location_.x() + object.dimensions_.x()/2;
-//     float obj2YMin = object.location_.y() - object.dimensions_.y()/2;
-//     float obj2YMax = object.location_.y() + object.dimensions_.y()/2;
-//     float obj2ZMin = object.location_.z() - object.dimensions_.z()/2;
-//     float obj2ZMax = object.location_.z() + object.dimensions_.z()/2;
-//     bool intersectsX = (obj1XMin >= obj2XMin && obj1XMin <= obj2XMax) || (obj1XMax >= obj2XMin && obj1XMax <= obj2XMin);
-//     bool intersectsY = (obj1YMin >= obj2YMin && obj1YMin <= obj2YMax) || (obj1YMax >= obj2YMin && obj1YMax <= obj2YMin);
-//     bool intersectsZ = (obj1ZMin >= obj2ZMin && obj1ZMin <= obj2ZMax) || (obj1ZMax >= obj2ZMin && obj1ZMax <= obj2ZMin);
-//     return intersectsX && intersectsY && intersectsZ;
-// }
+bool Wall::intersects(Object object)
+{
+    float obj1XMax, obj1ZMax;
+    float obj1XMin = this->location_.x();
+    float obj1YMin = this->location_.y();
+    float obj1ZMin = this->location_.z();
+    float obj1YMax = this->location_.y() + this->dimensions_.y();
+    if(this->orientation_.y() > -0.5 && this->orientation_.y() < 0.5)
+    {
+        // printf("No Rotation\n");
+        obj1XMax = this->location_.x() + this->dimensions_.x();
+        obj1ZMax = this->location_.z() + this->dimensions_.z();
+    }else{
+        // printf("Rotation\n");
+        obj1XMax = this->location_.x() + this->dimensions_.z();
+        obj1ZMax = this->location_.z() - this->dimensions_.x();
+    }
+    float obj2XMin = object.location().x() - object.dimensions().x()/2;
+    float obj2XMax = object.location().x() + object.dimensions().x()/2;
+    float obj2YMin = object.location().y() - object.dimensions().y()/2;
+    float obj2YMax = object.location().y() + object.dimensions().y()/2;
+    float obj2ZMin = object.location().z() - object.dimensions().z()/2;
+    float obj2ZMax = object.location().z() + object.dimensions().z()/2;
+    bool intersectsX = (obj1XMin >= obj2XMin && obj1XMin <= obj2XMax)
+                    || (obj1XMax >= obj2XMin && obj1XMax <= obj2XMax)
+                    || (obj2XMin >= obj1XMin && obj2XMin <= obj1XMax)
+                    || (obj2XMax >= obj1XMin && obj2XMax <= obj1XMax);
+    bool intersectsY = (obj1YMin >= obj2YMin && obj1YMin <= obj2YMax)
+                    || (obj1YMax >= obj2YMin && obj1YMax <= obj2YMax)
+                    || (obj2YMin >= obj1YMin && obj2YMin <= obj1YMax)
+                    || (obj2YMax >= obj1YMin && obj2YMax <= obj1YMax);
+    bool intersectsZ = (obj1ZMin >= obj2ZMin && obj1ZMin <= obj2ZMax)
+                    || (obj1ZMax >= obj2ZMin && obj1ZMax <= obj2ZMax)
+                    || (obj2ZMin >= obj1ZMin && obj2ZMin <= obj1ZMax)
+                    || (obj2ZMax >= obj1ZMin && obj2ZMax <= obj1ZMax);
+    return intersectsX && intersectsY && intersectsZ;
+}

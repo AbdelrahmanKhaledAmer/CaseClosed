@@ -15,6 +15,7 @@ public:
 
     // Game Logic Functions
     void draw();
+	bool intersects(Object object);
 };
 
 #endif
