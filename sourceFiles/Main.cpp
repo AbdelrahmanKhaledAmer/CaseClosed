@@ -13,6 +13,7 @@
 #include "headerFiles/Camera.h"
 #include "headerFiles/Lights.h"
 #include "headerFiles/Loader.h"
+#include "headerFiles/Objects/Flashlight.h"
 #include "headerFiles/Objects/InteractiveObjects/Clues/Knife.h"
 #include "headerFiles/Objects/InteractiveObjects/Door.h"
 #include "headerFiles/Objects/NonInteractiveObjects/Bed.h"
@@ -20,7 +21,9 @@
 #include "headerFiles/Objects/NonInteractiveObjects/CellingLight.h"
 #include "headerFiles/Objects/NonInteractiveObjects/CoffeeTable.h"
 #include "headerFiles/Objects/NonInteractiveObjects/DiningSet.h"
+#include "headerFiles/Objects/NonInteractiveObjects/Fan.h"
 #include "headerFiles/Objects/NonInteractiveObjects/Kitchen.h"
+#include "headerFiles/Objects/NonInteractiveObjects/Nightstand.h"
 #include "headerFiles/Objects/NonInteractiveObjects/Sink.h"
 #include "headerFiles/Objects/NonInteractiveObjects/Sofa.h"
 #include "headerFiles/Objects/NonInteractiveObjects/Toilet.h"
@@ -264,6 +267,13 @@ void intersects()
 	// }
 }
 
+Eigen::Vector3f doorLocation(0,0,0);
+Eigen::Vector3f doorOrientation(0,0,0);
+Eigen::Vector3f doorScale(1,1,1);
+Eigen::Vector3f doorDimensions(1,1,1);
+
+Tv balabizo(doorLocation, doorOrientation, doorScale, doorDimensions);
+
 void display(void)
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -284,6 +294,15 @@ void display(void)
 	// Reset color and flush buffer
 	glColor3f(1.0, 1.0, 1.0);
 
+	glPushMatrix();
+	// glTranslated(0, 1, 0);
+	// glScaled(0.15, 0.15, 0.15);
+	// glScaled(0.0003, 0.0003, 0.0003);
+	glScaled(0.001, 0.001, 0.001);
+	// glRotatef(90.f, 1, 0, 0);
+	balabizo.draw();
+	glPopMatrix();
+
 	glFlush();
 
 	glutSwapBuffers();
@@ -291,6 +310,7 @@ void display(void)
 
 void loadAssets()
 {
+	// loadTvModel(balabizo);
 	// Loading texture files
 	// Starting music
 }
@@ -365,11 +385,13 @@ void mouseMovement(int x, int y)
 	y = height - y;
 
 	//pins mouse in screen center
-	if(abs(x - width / 2) > 1)
-		glutWarpPointer(width / 2, y);
+	if(abs(x - width_center) > 1){
+		x = width_center;
+		glutWarpPointer(width_center, y);
+	}
 		 
-	if(abs(y - height / 2) > 1)
-          glutWarpPointer(width / 2, height / 2);
+	if(abs(y - height_center) > 1)
+          glutWarpPointer(x, height_center);
     glutPostRedisplay();
 }
 
