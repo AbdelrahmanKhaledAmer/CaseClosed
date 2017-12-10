@@ -267,9 +267,14 @@ void intersects()
 	// }
 }
 
-// DiningSet diningSet(Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
+//livingroom
+Sofa sofa(Vector3f(20.5, 0, 8.5), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
+CoffeeTable coffeeTable(Vector3f(20.5, 0, 10), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
+Tv tv(Vector3f(20.5, 0, 11), Vector3f(0, 180, 0), Vector3f(1, 1, 1));
 
-// 		(Vector3f location, Vector3f orientation, Vector3f scale)
+//kitchen
+DiningSet diningSet(Vector3f(24, 0, 9), Vector3f(0, -90, 0), Vector3f(1, 1, 1));
+Kitchen kitchen(Vector3f(25, 0, 11), Vector3f(0, 90, 0), Vector3f(1, 1, 1));
 
 //Bedroom
 Bed bed(Vector3f(23, 0, 14.9), Vector3f(0, 180, 0), Vector3f(1, 1, 1));
@@ -298,11 +303,16 @@ void display(void)
 
 	glPushMatrix();
 	{
-		glTranslated(-26, 0, -14);
-
 		drawEnvironment();
 
+		//livingroom
+		sofa.draw();
+		coffeeTable.draw();
+		tv.draw();
+
 		//kitchen
+		kitchen.draw();
+		diningSet.draw();
 
 		//bedroom
 		bed.draw();
@@ -313,7 +323,6 @@ void display(void)
 		//Toilet
 		toilet.draw();
 		sink.draw();
-		// sink.drawBoundries();
 	}
 	glPopMatrix();
 
@@ -324,6 +333,14 @@ void display(void)
 
 void loadAssets()
 {
+	//loading models
+	loadSofaModel(sofa);
+	loadCoffeeTableModel(coffeeTable);
+	loadTvModel(tv);
+
+	loadKitchenModel(kitchen);
+	loadDiningSetModel(diningSet);
+
 	loadBedModel(bed);
 	loadNightstandModel(nightstand1);
 	loadNightstandModel(nightstand2);
@@ -331,6 +348,7 @@ void loadAssets()
 
 	loadToiletModel(toilet);
 	loadSinkModel(sink);
+	
 	// Loading texture files
 	// Starting music
 }

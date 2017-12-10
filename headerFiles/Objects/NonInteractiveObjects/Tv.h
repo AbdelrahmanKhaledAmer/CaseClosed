@@ -10,8 +10,9 @@ class Tv : public NonInteractiveObject
 {
 public:
 	// Main functions
-	Tv(Vector3f location, Vector3f orientation, Vector3f scale, Vector3f dimensions);    // Constructor
+	Tv(Vector3f location, Vector3f orientation, Vector3f scale);    // Constructor
 	~Tv();                                                                     		   // Destructor
+	void draw();
+	void drawBoundries();           // Draw Object Boundries
 };
-
 #endif

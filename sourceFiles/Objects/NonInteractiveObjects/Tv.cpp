@@ -13,11 +13,9 @@ global origin.
 @return: Pointer to InteractiveObject interactiveObject
 */
 
-Tv::Tv(Vector3f location, Vector3f orientation, Vector3f scale,
-                     Vector3f dimensions)
-    : NonInteractiveObject(location, orientation, scale, dimensions) {
-
-}
+Tv::Tv(Vector3f location, Vector3f orientation, Vector3f scale)
+    : NonInteractiveObject(location, orientation, scale,
+                           Vector3f(1.7, 0.9, 0.975)) {}
 
 /**
 Destructor for the Tv object.
@@ -26,3 +24,17 @@ Deletes the pointer for the Tv object.
 Tv::~Tv() {
 
 }
+
+void Tv::draw() {
+  float scale = 0.025;
+
+  glPushMatrix();
+  {
+    glTranslatef(0, 0, 0.25);
+    glScalef(scale, scale, scale);
+    __super::draw(scale);
+  }
+  glPopMatrix();
+}
+
+void Tv::drawBoundries() { __super::drawBoundries(1 , 1.1, 0.5); }

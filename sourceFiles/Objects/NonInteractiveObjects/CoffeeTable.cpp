@@ -25,22 +25,14 @@ Deletes the pointer for the CoffeeTable object.
 CoffeeTable::~CoffeeTable() {}
 
 void CoffeeTable::draw() {
-  float scale = 0.0007;
+  float scale = 0.0005;
 
   glPushMatrix();
   {
     glScalef(scale, scale, scale);
-    __super::draw();
+    __super::draw(scale);
   }
   glPopMatrix();
 }
 
-void CoffeeTable::drawBoundries() {
-  glPushMatrix();
-  {
-    glScalef(1.7, 0.5, 1.7);
-    glTranslatef(0, 0.5, 0);
-    glutWireCube(1);
-  }
-  glPopMatrix();
-}
+void CoffeeTable::drawBoundries() { __super::drawBoundries(1.2, 0.4, 1.2); }

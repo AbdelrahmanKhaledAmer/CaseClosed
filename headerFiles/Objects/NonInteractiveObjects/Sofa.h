@@ -10,8 +10,9 @@ class Sofa : public NonInteractiveObject
 {
 public:
 	// Main functions
-	Sofa(Vector3f location, Vector3f orientation, Vector3f scale, Vector3f dimensions);    // Constructor
-	~Sofa();                                                                     		   // Destructor
+	Sofa(Vector3f location, Vector3f orientation, Vector3f scale);    // Constructor
+~Sofa();                                                              // Destructor
+	void draw();
+	void drawBoundries();           // Draw Object Boundries
 };
-
 #endif
