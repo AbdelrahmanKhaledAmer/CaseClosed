@@ -27,5 +27,16 @@ Deletes the pointer for the Clue object.
 */
 Clue::~Clue()
 {
+	__super::draw();
+}
 
+void Clue::draw()
+{
+	__super::draw();
+}
+bool Clue::isFound() {
+	return this->isFound_;
+}
+void Clue::find(bool state) {
+	this->isFound_ = state;
 }

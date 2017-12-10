@@ -78,7 +78,7 @@ void loadWardrobeModel(Wardrobe &wardrobe){
 }
 
 void loadKnifeModel(Knife &knife){
-	char* knifePath = "assets/models/furniture/Knife/Knife_3ds.3DS";
+	char* knifePath = "assets/models/furniture/knife/Knife_3ds.3DS";
 	Model_3DS knifeModel;
 	knifeModel.Load(knifePath);
 	knife.setModel(knifeModel);
@@ -110,4 +110,18 @@ void loadFlashlightModel(Flashlight &flashlight){
 	Model_3DS flashlightModel;
 	flashlightModel.Load(flashlightPath);
 	flashlight.setModel(flashlightModel);
+}
+
+void loadBathModel(Bath &bath){
+	char* bathPath = "assets/models/furniture/Bath/Bath Askew KOHLER N021017.3DS";
+	Model_3DS bathModel;
+	bathModel.Load(bathPath);
+	bath.setModel(bathModel);
+}
+
+void loadBodyModel(Body &body) {
+  char *bodyPath = "assets/models/clues/Body/Man N050214.3DS";
+  Model_3DS bodyModel;
+  bodyModel.Load(bodyPath);
+  body.setModel(bodyModel);
 }

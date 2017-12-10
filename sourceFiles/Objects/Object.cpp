@@ -78,11 +78,11 @@ void Object::setModel(Model_3DS model){
     Draws an Object on the screen. To be Overridden by the subclasses.
 */
 void Object::draw(float locScale) {
-    
   glPushMatrix();
   {
     glTranslatef(location_.x() / locScale, location_.y() / locScale, location_.z() / locScale);
     glScalef(scale_.x(), scale_.y(), scale_.z());
+    glRotatef(orientation_.y(), 0, 1, 0);
     model_.Draw();
   }
   glPopMatrix();
@@ -92,7 +92,19 @@ void Object::draw(float locScale) {
     OpenGL drawing function.
     Draws an Object's boundries on the screen. To be Overridden by the subclasses.
 */
-void Object::drawBoundries() {}
+void Object::drawBoundries(float xLength, float yLength, float zLength) {
+  glColor3f(1.0, 1.0, 1.0);
+  glColor3f(1.0, 0, 0);
+  glPushMatrix();
+  {
+    glTranslatef(location_.x(), location_.y(), location_.z());
+    glScalef(xLength, yLength, zLength);
+    glTranslatef(0, 0.5f, 0);
+    glutSolidCube(1);
+  }
+  glPopMatrix();
+  glColor3f(1.0, 1.0, 1.0);
+}
 
 /**
     Collision logic function.
@@ -120,4 +132,9 @@ bool Object::intersects(Object object)
     bool intersectsY = (obj1YMin >= obj2YMin && obj1YMin <= obj2YMax) || (obj1YMax >= obj2YMin && obj1YMax <= obj2YMax);
     bool intersectsZ = (obj1ZMin >= obj2ZMin && obj1ZMin <= obj2ZMax) || (obj1ZMax >= obj2ZMin && obj1ZMax <= obj2ZMax);
     return intersectsX && intersectsY && intersectsZ;
+}
+
+void Object::rotate(float scale)
+{
+    this->orientation_.y() += scale;
 }

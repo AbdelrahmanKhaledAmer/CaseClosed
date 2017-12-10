@@ -13,7 +13,7 @@ public:
                        Vector3f dimensions); // Constructor
   ~NonInteractiveObject();              // Destructor
   void draw(float locScale = 1);
-  void drawBoundries();           // Draw Object Boundries
+  void drawBoundries(float xLength, float yLength, float zLength);   // Draw Object Boundries
 };
 
 #endif

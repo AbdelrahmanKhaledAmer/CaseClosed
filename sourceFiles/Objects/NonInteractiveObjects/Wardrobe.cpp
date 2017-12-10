@@ -13,12 +13,27 @@ global origin.
 @return: Pointer to InteractiveObject interactiveObject
 */
 
-Wardrobe::Wardrobe(Vector3f location, Vector3f orientation, Vector3f scale,
-                   Vector3f dimensions)
-    : NonInteractiveObject(location, orientation, scale, dimensions) {}
-
+Wardrobe::Wardrobe(Vector3f location, Vector3f orientation, Vector3f scale)
+    : NonInteractiveObject(location, orientation, scale,
+                           Vector3f(0.4f, 1.8f, 0.95f)) {}
 /**
 Destructor for the Wardrobe object.
 Deletes the pointer for the Wardrobe object.
 */
 Wardrobe::~Wardrobe() {}
+
+void Wardrobe::draw() {
+  float scale = 0.0025;
+
+  glPushMatrix();
+  {
+    glTranslatef(0.21, 0, 0.36);
+    glScalef(scale, scale, scale);
+    __super::draw(scale);
+  }
+  glPopMatrix();
+}
+
+void Wardrobe::drawBoundries() {
+  __super::drawBoundries(0.4f, 1.8f, 0.95f);
+}

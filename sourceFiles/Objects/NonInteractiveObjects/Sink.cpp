@@ -13,12 +13,24 @@ global origin.
 @return: Pointer to InteractiveObject interactiveObject
 */
 
-Sink::Sink(Vector3f location, Vector3f orientation, Vector3f scale,
-           Vector3f dimensions)
-    : NonInteractiveObject(location, orientation, scale, dimensions) {}
-
+Sink::Sink(Vector3f location, Vector3f orientation, Vector3f scale)
+    : NonInteractiveObject(location, orientation, scale,
+                           Vector3f(1.1f, 0.8f, 0.6f)) {}
 /**
 Destructor for the Sink object.
 Deletes the pointer for the Sink object.
 */
 Sink::~Sink() {}
+
+void Sink::draw() {
+  float scale = 0.028;
+
+  glPushMatrix();
+  {
+    glScalef(scale, scale, scale);
+    __super::draw(scale);
+  }
+  glPopMatrix();
+}
+
+void Sink::drawBoundries() { __super::drawBoundries(1.1f, 0.8f, 0.6f); }

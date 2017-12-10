@@ -132,8 +132,11 @@
     <ClInclude Include="headerFiles\Objects\NonInteractiveObjects\Wall.h">
       <Filter>headerFiles</Filter>
     </ClInclude>
-    <ClInclude Include="headerFiles\Objects\NonInteractiveObjects\Wall.h">
-      <Filter>headerFiles</Filter>
+    <ClInclude Include="headerFiles\Objects\NonInteractiveObjects\Bath.h">
+      <Filter>headerFiles\Objects\NonInteractiveObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="headerFiles\Objects\InteractiveObjects\Clues\Body.h">
+      <Filter>headerFiles\Objects\InteractiveObjects\Clues</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -221,8 +224,11 @@
     <ClCompile Include="sourceFiles\Objects\NonInteractiveObjects\Wall.cpp">
       <Filter>sourceFiles</Filter>
     </ClCompile>
-    <ClCompile Include="sourceFiles\Objects\NonInteractiveObjects\Wall.cpp">
-      <Filter>sourceFiles</Filter>
+    <ClCompile Include="sourceFiles\Objects\NonInteractiveObjects\Bath.cpp">
+      <Filter>sourceFiles\Objects\NonInteractiveObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="sourceFiles\Objects\InteractiveObjects\Clues\Body.cpp">
+      <Filter>sourceFiles\Objects\InteractiveObjects\Clues</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

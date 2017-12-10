@@ -22,3 +22,13 @@ Destructor for the Knife object.
 Deletes the pointer for the Knife object.
 */
 Knife::~Knife() {}
+
+void Knife::draw()
+{
+    __super::draw();
+}
+
+std::string Knife::Interact()
+{
+	return "Clue: This is a knife used in the murder.";
+}

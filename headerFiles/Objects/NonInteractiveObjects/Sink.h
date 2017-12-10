@@ -10,9 +10,10 @@ using namespace Eigen;
 class Sink : public NonInteractiveObject {
 public:
   // Main functions
-  Sink(Vector3f location, Vector3f orientation, Vector3f scale,
-       Vector3f dimensions); // Constructor
+  Sink(Vector3f location, Vector3f orientation, Vector3f scale); // Constructor
   ~Sink();                   // Destructor
+  void draw();
+  void drawBoundries();   // Draw Object Boundries
 };
 
 #endif

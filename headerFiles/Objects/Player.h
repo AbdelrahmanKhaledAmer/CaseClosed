@@ -4,6 +4,7 @@
 #include <Eigen/Dense>
 #include "headerFiles/Camera.h"
 #include "headerFiles/Objects/Object.h"
+#include "headerFiles/Objects/InteractiveObjects/InteractiveObject.h"
 
 using namespace Eigen;
 
@@ -28,6 +29,9 @@ public:
     void lookLeft(float scale = 1);
     void lookUp(float scale = 1);
     void lookDown(float scale = 1);
+
+    // Game Logic functions
+    bool isLookingAt(InteractiveObject object);
 protected:
     Camera head_;
 };

@@ -1,5 +1,10 @@
 // Defines
 #define PI 3.14159265358979323846
+#define PLAYING_STATE 0
+#define LOSING_STATE 1
+#define WINNING_STATE 2
+#define INTERACTING_STATE 3
+#define JOURNAL_STATE 4
 // Libraries, dependencies and classes
 #include "headerFiles/TextureBuilder.h"
 #include "headerFiles/Model_3DS.h"
@@ -14,8 +19,10 @@
 #include "headerFiles/Lights.h"
 #include "headerFiles/Loader.h"
 #include "headerFiles/Objects/Flashlight.h"
+#include "headerFiles/Objects/InteractiveObjects/Clues/Body.h"
 #include "headerFiles/Objects/InteractiveObjects/Clues/Knife.h"
 #include "headerFiles/Objects/InteractiveObjects/Door.h"
+#include "headerFiles/Objects/NonInteractiveObjects/Bath.h"
 #include "headerFiles/Objects/NonInteractiveObjects/Bed.h"
 #include "headerFiles/Objects/NonInteractiveObjects/Bookcase.h"
 #include "headerFiles/Objects/NonInteractiveObjects/CellingLight.h"
@@ -40,13 +47,18 @@ const int scale = 70;
 const int width = 16 * scale / 1.5;
 const int height = 9 * scale / 1.5;
 
+// Game variables
+int gameState = PLAYING_STATE;
+InteractiveObject interactingObject(Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(0, 0, 0));
+
 Eigen::Vector3f eye(1, 1, 1);
 Eigen::Vector3f lookAt(3, 0.5, 1);
 Eigen::Vector3f orientation(0, 1, 0);
 
 Camera camera(eye, lookAt, orientation);
 Player player(eye, Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vector3f(0.5, 1.5, 0.2), camera);
-
+//Knife knife(Vector3f(3, 0.5, 1), Vector3f(45, 45, 45), Vector3f(1, 1, 1), Vector3f(1, 1, 1));
+Clue* clues[3];
 //Same texture for each group?
 //Groups are Separated by an empty line.
 Wall* walls[23];
@@ -78,6 +90,36 @@ Wall* walls[23];
 //Wall* wall20;	// South wall of bathroom part 1
 //Wall* wall21;	// South wall of bathroom part 2
 //Wall* wall22;	// East wall of bathroom
+void initClues() {
+
+	
+	int len = sizeof(clues) / sizeof(*clues);
+	//TODO
+	for (int i = 0; i < len; i++)
+	{
+		//clues[i]=
+
+
+	}
+	clues[0] = new Knife(Vector3f(4, 0.5, 1), Vector3f(45, 45, 45), Vector3f(1, 1, 1), Vector3f(1, 1, 1));
+	clues[1] = new Knife(Vector3f(3, 0.5, 1), Vector3f(45, 45, 45), Vector3f(1, 1, 1), Vector3f(1, 1, 1));
+	clues[2] = new Knife(Vector3f(2, 0.5, 1), Vector3f(45, 45, 45), Vector3f(1, 1, 1), Vector3f(1, 1, 1));
+	printf("%p",clues[0]);
+}
+void DrawClues() {
+	int len = sizeof(clues) / sizeof(*clues);
+	bool win = true;
+	for (int i = 0; i < len; i++)
+	{
+		if (!(*clues[i]).isFound())
+		{
+			(*clues[i]).draw();
+			win = false;
+		}
+	}
+	if (win)
+		gameState = WINNING_STATE;
+}
 
 void initEnvironment()
 {
@@ -187,34 +229,62 @@ void initEnvironment()
 
 void drawEnvironment()
 {
-
-	for (int i = 0; i < 23; i++)
+	for (int i = 0; i < sizeof(walls) / sizeof(*walls); i++)
 	{
 		(*walls[i]).draw();
 	}
-
+	glColor3f(1.0, 0.9, 0.9);
+	glBegin(GL_QUADS);
+	{
+		glNormal3f(0, 1, 0);
+		glVertex3f(-1, 0, -1);
+		glVertex3f(-1, 0, 31);
+		glVertex3f(31, 0, 31);
+		glVertex3f(31, 0, -1);
+	}
+	glEnd();
+	glColor3f(1.0, 0.9, 0.9);
+	glBegin(GL_QUADS);
+	{
+		glNormal3f(0, -1, 0);
+		glVertex3f(-1, 2, -1);
+		glVertex3f(-1, 2, 31);
+		glVertex3f(31, 2, 31);
+		glVertex3f(31, 2, -1);
+	}
+	glEnd();
 }
-int i =0;
-bool intersects()
+
+bool intersectsWalls()
 {
-	bool hi = false;
-	for (int i = 0; i < 23; i++)
+	bool intersects = false;
+	for (int i = 0; i < sizeof(walls) / sizeof(*walls); i++)
 	{
-		hi |= walls[i]->intersects(player);
-
+		intersects |= (*walls[i]).intersects(player);
 	}
-	if (hi)
-	{
-		printf("COLLISION DETECTED %d\n",i++);
-	}
-	return hi;
+	return intersects;
 }
-Eigen::Vector3f doorLocation(0, 0, 0);
-Eigen::Vector3f doorOrientation(0, 0, 0);
-Eigen::Vector3f doorScale(1, 1, 1);
-Eigen::Vector3f doorDimensions(1, 1, 1);
 
-Tv balabizo(doorLocation, doorOrientation, doorScale, doorDimensions);
+//livingroom
+Sofa sofa(Vector3f(20.5, 0, 8.5), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
+CoffeeTable coffeeTable(Vector3f(20.5, 0, 10), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
+Tv tv(Vector3f(20.5, 0, 11), Vector3f(0, 180, 0), Vector3f(1, 1, 1));
+
+//kitchen
+DiningSet diningSet(Vector3f(24.2, 0, 9), Vector3f(0, -90, 0), Vector3f(1, 1, 1));
+Kitchen kitchen(Vector3f(25, 0, 10.9), Vector3f(0, 90, 0), Vector3f(1, 1, 1));
+
+//Bedroom
+Body body(Vector3f(23, 0, 14.9), Vector3f(0, 180, 0), Vector3f(1, 1, 1));
+Bed bed(Vector3f(23, 0, 14.9), Vector3f(0, 180, 0), Vector3f(1, 1, 1));
+Nightstand nightstand1(Vector3f(24.17, 0, 16.2), Vector3f(0, 180, 0), Vector3f(1, 1, 1));
+Nightstand nightstand2(Vector3f(21.27, 0, 16.2), Vector3f(0, 180, 0), Vector3f(1, 1, 1));
+Wardrobe wardrobe(Vector3f(19.85, 0, 12.6), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
+
+//Bathroom
+Toilet toilet(Vector3f(25.9, 0, 15), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
+Sink sink(Vector3f(27.2, 0, 12.3), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
+Bath bath(Vector3f(28, 0, 14.9), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
 
 void display(void)
 {
@@ -231,18 +301,44 @@ void display(void)
 
 	drawEnvironment();
 
-	intersects();
-
+	glColor3f(0.8f, 0.1f, 0.2f);
+	if(gameState == PLAYING_STATE)
+	{
+		DrawClues();
+	} else if(gameState == INTERACTING_STATE) {
+		interactingObject.rotate();
+		interactingObject.draw();
+	}
+	
 	// Reset color and flush buffer
 	glColor3f(1.0, 1.0, 1.0);
 
 	glPushMatrix();
-	// glTranslated(0, 1, 0);
-	// glScaled(0.15, 0.15, 0.15);
-	// glScaled(0.0003, 0.0003, 0.0003);
-	glScaled(0.001, 0.001, 0.001);
-	// glRotatef(90.f, 1, 0, 0);
-	balabizo.draw();
+	{
+		drawEnvironment();
+		
+		//livingroom
+		sofa.draw();
+		coffeeTable.draw();
+		tv.draw();
+
+		//kitchen
+		kitchen.draw();
+		diningSet.draw();
+
+		//bedroom
+		body.draw();
+		bed.draw();
+		nightstand1.draw();
+		nightstand2.draw();
+		wardrobe.draw();
+
+		//Toilet
+		toilet.draw();
+		sink.draw();
+		bath.draw();
+		// bath.drawBoundries();
+	}
 	glPopMatrix();
 
 	glFlush();
@@ -252,71 +348,126 @@ void display(void)
 
 void loadAssets()
 {
-	// loadTvModel(balabizo);
+	//loading models
+	loadSofaModel(sofa);
+	loadCoffeeTableModel(coffeeTable);
+	loadTvModel(tv);
+
+	loadKitchenModel(kitchen);
+	loadDiningSetModel(diningSet);
+
+	loadBodyModel(body);
+	loadBedModel(bed);
+	loadNightstandModel(nightstand1);
+	loadNightstandModel(nightstand2);
+	loadWardrobeModel(wardrobe);
+
+	loadToiletModel(toilet);
+	loadSinkModel(sink);
+	loadBathModel(bath);
+	
 	// Loading texture files
 	// Starting music
 }
 
+void interactionTimer(int val)
+{
+	if(gameState == INTERACTING_STATE)
+	{
+		interactingObject.rotate();
+		glutPostRedisplay();
+		glutTimerFunc(20, interactionTimer, 0);
+	}
+}
+
 void key(unsigned char k, int x, int y)
 {
-	switch (k)
+	int len = sizeof(clues) / sizeof(*clues);
+	if(gameState == PLAYING_STATE)
 	{
-	case 'l':
-		//camera.rotateRight();
-		player.lookRight();
-		break;
-	case 'j':
-		//camera.rotateLeft();
-		player.lookLeft();
-		break;
-	case 'i':
-		//camera.rotateUp();
-		player.lookUp();
-		break;
-	case 'k':
-		//camera.rotateDown();
-		player.lookDown();
-		break;
-	case 'o':
-		camera.tiltRight();
-		break;
-	case 'u':
-		camera.tiltLeft();
-		break;
-	case 'w':
-		//camera.translateForward();
-		player.moveForward();
-		if (intersects()) {
-			player.moveBackward();
-		}
-		break;
-	case 's':
-		//camera.translateBackward();
-		player.moveBackward();
-		if (intersects()) {
+		switch (k)
+		{
+		case 'l':
+			//camera.rotateRight();
+			player.lookRight();
+			break;
+		case 'j':
+			//camera.rotateLeft();
+			player.lookLeft();
+			break;
+		case 'i':
+			//camera.rotateUp();
+			player.lookUp();
+			break;
+		case 'k':
+			//camera.rotateDown();
+			player.lookDown();
+			break;
+		case 'o':
+			camera.tiltRight();
+			break;
+		case 'u':
+			camera.tiltLeft();
+			break;
+		case 'w':
+			//camera.translateForward();
 			player.moveForward();
-		}
-		break;
-	case 'a':
-		//camera.translateLeft();
-		player.moveLeft();
-		if (intersects()) {
-			player.moveRight();
-		}
-		break;
-	case 'd':
-		//camera.translateRight();
-		player.moveRight();
-		if (intersects()) {
+			if (intersectsWalls()) {
+				player.moveBackward();
+			}
+			break;
+		case 's':
+			//camera.translateBackward();
+			player.moveBackward();
+			if (intersectsWalls()) {
+				player.moveForward();
+			}
+			break;
+		case 'a':
+			//camera.translateLeft();
 			player.moveLeft();
+			if (intersectsWalls()) {
+				player.moveRight();
+			}
+			break;
+		case 'd':
+			//camera.translateRight();
+			player.moveRight();
+			if (intersectsWalls()) {
+				player.moveLeft();
+			}
+			break;
+		case 'e':
+			// camera.translateUp();
+			
+			for ( int i = 0;  i < len;  i++)
+			{
+				//printf("%d\n", clues[0]);
+			  if(player.isLookingAt(*(clues[i])))
+				{
+					std::string s = (*clues[i]).Interact().append("\n");
+					interactingObject = *clues[i];
+					gameState = INTERACTING_STATE;
+					Vector3f newVector = player.getCamera().location() + (player.getCamera().lookAt() - player.getCamera().location()).normalized() * 0.8;
+					interactingObject.setLocation(newVector);
+					glutTimerFunc(20, interactionTimer, 0);
+					//remove clue
+					(*clues[i]).find(true);
+					break;
+				}
+			}
+			break;
+		case 'q':
+			camera.translateDown();
+			break;
 		}
-		break;
-	case 'e':
-		camera.translateUp();
-		break;
-	case 'q':
-		camera.translateDown();
-		break;
+	} else if (gameState == INTERACTING_STATE) {
+		switch(k)
+		{
+		case 'e':
+			gameState = PLAYING_STATE;
+			break;
+		}
 	}
 	glutPostRedisplay();
 }
@@ -327,29 +478,42 @@ const int height_center = height / 2, width_center = width / 2;
 //=======================================================================
 void mouseMovement(int x, int y)
 {
-	if (y > height_center)
-		//		camera.rotateDown(0.4);
-		player.lookDown(0.4);
-	if (y < height_center)
-		//camera.rotateUp(0.4);
-		player.lookUp(0.4);
-	if (x > width_center)
-		//camera.rotateRight(0.4);
-		player.lookRight(0.4);
-	if (x < width_center)
-		//camera.rotateLeft(0.4);
-		player.lookLeft(0.4);
+	if(gameState == PLAYING_STATE)
+	{
+		if (y > height_center)
+			//		camera.rotateDown(0.4);
+			player.lookDown(0.4);
+		if (y < height_center)
+			//camera.rotateUp(0.4);
+			player.lookUp(0.4);
+		if (x > width_center)
+			//camera.rotateRight(0.4);
+			player.lookRight(0.4);
+		if (x < width_center)
+			//camera.rotateLeft(0.4);
+			player.lookLeft(0.4);
 
-	y = height - y;
+		y = height - y;
 
-	//pins mouse in screen center
-	if (abs(x - width_center) > 1) {
-		x = width_center;
-		glutWarpPointer(width_center, y);
+		//pins mouse in screen center
+		if (abs(x - width_center) > 1) {
+			x = width_center;
+			glutWarpPointer(width_center, y);
+		}
+
+		if (abs(y - height_center) > 1)
+			glutWarpPointer(x, height_center);
+		glutPostRedisplay();
 	}
+}
 
-	if (abs(y - height_center) > 1)
-		glutWarpPointer(x, height_center);
+void losingStateCaller(int val)
+{
+
+	if (gameState != WINNING_STATE) {
+		gameState = LOSING_STATE;
+		printf("koko lost\n");
+	}
 	glutPostRedisplay();
 }
 
@@ -370,6 +534,7 @@ void main(int argc, char** argv)
 	glClearColor(1, 1, 1, 0);
 
 	initEnvironment();
+	initClues();
 	loadAssets();
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_LIGHTING);
@@ -378,6 +543,9 @@ void main(int argc, char** argv)
 	glEnable(GL_COLOR_MATERIAL);
 
 	glShadeModel(GL_SMOOTH);
+
+	//TODO 10 mins
+	glutTimerFunc(10000, losingStateCaller, 0);
 
 	glutMainLoop();
 }

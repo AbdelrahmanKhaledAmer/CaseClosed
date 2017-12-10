@@ -10,8 +10,10 @@ class Toilet : public NonInteractiveObject
 {
 public:
 	// Main functions
-	Toilet(Vector3f location, Vector3f orientation, Vector3f scale, Vector3f dimensions);    // Constructor
-	~Toilet();                                                                     		   // Destructor
+	Toilet(Vector3f location, Vector3f orientation, Vector3f scale);    // Constructor
+	~Toilet();   
+	void draw();
+  	void drawBoundries();   // Draw Object Boundries                                                                  		   // Destructor
 };
 
 #endif

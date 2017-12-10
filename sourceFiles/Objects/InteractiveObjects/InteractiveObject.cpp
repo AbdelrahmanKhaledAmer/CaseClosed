@@ -14,6 +14,10 @@ Returns a pointer for a InteractiveObject.
 @return: Pointer to Object object
 */
 
+std::string InteractiveObject::Interact() {
+	//TODO
+	return "";
+}
 InteractiveObject::InteractiveObject(Vector3f location, Vector3f orientation, Vector3f scale, Vector3f dimensions) 
 	:Object(location, orientation, scale, dimensions)
 {
@@ -29,7 +33,24 @@ InteractiveObject::~InteractiveObject()
 
 }
 
-std::string Interact()
+void InteractiveObject::setLocation(Vector3f location)
 {
-	return "";
+	this->location_ = location;
+}
+
+void InteractiveObject::draw()
+{
+	//__super::draw();
+	glPushMatrix();
+	{
+		glTranslatef(location_.x(), location_.y(), location_.z());
+		glRotatef(orientation_.y(), 0, 1, 0);
+		glutSolidCube(0.5);
+	}
+	glPopMatrix();
+}
+
+void InteractiveObject::rotate()
+{
+	orientation_.y() -= 1;
 }

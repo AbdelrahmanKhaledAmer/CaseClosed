@@ -12,6 +12,7 @@ public:
   Bed(Vector3f location, Vector3f orientation, Vector3f scale); // Constructor
   ~Bed();                   // Destructor
   void draw();
+  void drawBoundries();   // Draw Object Boundries
 };
 
 #endif
