@@ -34,3 +34,9 @@ void Clue::draw()
 {
 	__super::draw();
 }
+bool Clue::isFound() {
+	return this->isFound_;
+}
+void Clue::find(bool state) {
+	this->isFound_ = state;
+}

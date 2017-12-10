@@ -55,8 +55,8 @@ Eigen::Vector3f orientation(0, 1, 0);
 
 Camera camera(eye, lookAt, orientation);
 Player player(eye, Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vector3f(0.5, 1.5, 0.2), camera);
-Knife knife(Vector3f(3, 0.5, 1), Vector3f(45, 45, 45), Vector3f(1, 1, 1), Vector3f(1, 1, 1));
-
+//Knife knife(Vector3f(3, 0.5, 1), Vector3f(45, 45, 45), Vector3f(1, 1, 1), Vector3f(1, 1, 1));
+Clue* clues[3];
 //Same texture for each group?
 //Groups are Separated by an empty line.
 Wall* walls[23];
@@ -88,6 +88,30 @@ Wall* walls[23];
 //Wall* wall20;	// South wall of bathroom part 1
 //Wall* wall21;	// South wall of bathroom part 2
 //Wall* wall22;	// East wall of bathroom
+void initClues() {
+
+	
+	int len = sizeof(clues) / sizeof(*clues);
+	//TODO
+	for (int i = 0; i < len; i++)
+	{
+		//clues[i]=
+
+
+	}
+	clues[0] = new Knife(Vector3f(4, 0.5, 1), Vector3f(45, 45, 45), Vector3f(1, 1, 1), Vector3f(1, 1, 1));
+	clues[1] = new Knife(Vector3f(3, 0.5, 1), Vector3f(45, 45, 45), Vector3f(1, 1, 1), Vector3f(1, 1, 1));
+	clues[2] = new Knife(Vector3f(2, 0.5, 1), Vector3f(45, 45, 45), Vector3f(1, 1, 1), Vector3f(1, 1, 1));
+	printf("%p",clues[0]);
+}
+void DrawClues() {
+	int len = sizeof(clues) / sizeof(*clues);
+	for (int i = 0; i < len; i++)
+	{
+		if(!(*clues[i]).isFound())
+		(*clues[i]).draw();
+	}
+}
 
 void initEnvironment()
 {
@@ -198,7 +222,7 @@ void initEnvironment()
 void drawEnvironment()
 {
 
-	for (int i = 0; i < 23; i++)
+	for (int i = 0; i < sizeof(walls) / sizeof(*walls); i++)
 	{
 		(*walls[i]).draw();
 	}
@@ -208,7 +232,7 @@ void drawEnvironment()
 bool intersectsWalls()
 {
 	bool intersects = false;
-	for (int i = 0; i < 23; i++)
+	for (int i = 0; i < sizeof(walls) / sizeof(*walls); i++)
 	{
 		intersects |= walls[i]->intersects(player);
 
@@ -240,7 +264,7 @@ void display(void)
 	glColor3f(0.8f, 0.1f, 0.2f);
 	if(gameState == PLAYING_STATE)
 	{
-		knife.draw();
+		DrawClues();
 	} else if(gameState == INTERACTING_STATE) {
 		interactingObject.rotate();
 		interactingObject.draw();
@@ -282,6 +306,7 @@ void interactionTimer(int val)
 
 void key(unsigned char k, int x, int y)
 {
+	int len = sizeof(clues) / sizeof(*clues);
 	if(gameState == PLAYING_STATE)
 	{
 		switch (k)
@@ -338,14 +363,22 @@ void key(unsigned char k, int x, int y)
 			break;
 		case 'e':
 			// camera.translateUp();
-			if(player.isLookingAt(knife))
+			
+			for ( int i = 0;  i < len;  i++)
 			{
-				std::string s = knife.Interact().append("\n");
-				interactingObject = knife;
-				gameState = INTERACTING_STATE;
-				Vector3f newVector = player.getCamera().location() + (player.getCamera().lookAt() - player.getCamera().location()).normalized() * 0.8;
-				interactingObject.setLocation(newVector);
-				glutTimerFunc(20, interactionTimer, 0);
+				//printf("%d\n", clues[0]);
+			  if(player.isLookingAt(*(clues[i])))
+				{
+					std::string s = (*clues[i]).Interact().append("\n");
+					interactingObject = *clues[i];
+					gameState = INTERACTING_STATE;
+					Vector3f newVector = player.getCamera().location() + (player.getCamera().lookAt() - player.getCamera().location()).normalized() * 0.8;
+					interactingObject.setLocation(newVector);
+					glutTimerFunc(20, interactionTimer, 0);
+					//remove clue
+					(*clues[i]).find(true);
+					break;
+				}
 			}
 			break;
 		case 'q':
@@ -415,6 +448,7 @@ void main(int argc, char** argv)
 	glClearColor(1, 1, 1, 0);
 
 	initEnvironment();
+	initClues();
 	loadAssets();
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_LIGHTING);
