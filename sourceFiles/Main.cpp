@@ -16,6 +16,7 @@
 #include "headerFiles/Objects/Flashlight.h"
 #include "headerFiles/Objects/InteractiveObjects/Clues/Knife.h"
 #include "headerFiles/Objects/InteractiveObjects/Door.h"
+#include "headerFiles/Objects/NonInteractiveObjects/Bath.h"
 #include "headerFiles/Objects/NonInteractiveObjects/Bed.h"
 #include "headerFiles/Objects/NonInteractiveObjects/Bookcase.h"
 #include "headerFiles/Objects/NonInteractiveObjects/CellingLight.h"
@@ -35,8 +36,8 @@
 
 // Screen Constants
 const int scale = 70;
-const int width = 16 * scale/1.5;
-const int height = 9 * scale/1.5;
+const int width = 16 * scale;
+const int height = 9 * scale;
 
 Eigen::Vector3f eye(1, 1, 1);
 Eigen::Vector3f lookAt(3, 0.5, 1);
@@ -285,6 +286,9 @@ Wardrobe wardrobe(Vector3f(19.85, 0, 12.6), Vector3f(0, 0, 0), Vector3f(1, 1, 1)
 //Bathroom
 Toilet toilet(Vector3f(25.9, 0, 15), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
 Sink sink(Vector3f(27.2, 0, 12.3), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
+Bath bath(Vector3f(28, 0, 14.9), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
+// Bath bath(Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
+
 void display(void)
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -303,8 +307,9 @@ void display(void)
 
 	glPushMatrix();
 	{
+		glTranslated(-28, 0, -13);
 		drawEnvironment();
-
+		
 		//livingroom
 		sofa.draw();
 		coffeeTable.draw();
@@ -323,6 +328,8 @@ void display(void)
 		//Toilet
 		toilet.draw();
 		sink.draw();
+		bath.draw();
+		// bath.drawBoundries();
 	}
 	glPopMatrix();
 
@@ -348,6 +355,7 @@ void loadAssets()
 
 	loadToiletModel(toilet);
 	loadSinkModel(sink);
+	loadBathModel(bath);
 	
 	// Loading texture files
 	// Starting music

@@ -111,3 +111,10 @@ void loadFlashlightModel(Flashlight &flashlight){
 	flashlightModel.Load(flashlightPath);
 	flashlight.setModel(flashlightModel);
 }
+
+void loadBathModel(Bath &bath){
+	char* bathPath = "assets/models/furniture/Bath/Bath Askew KOHLER N021017.3DS";
+	Model_3DS bathModel;
+	bathModel.Load(bathPath);
+	bath.setModel(bathModel);
+}
