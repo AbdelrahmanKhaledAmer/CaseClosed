@@ -267,13 +267,19 @@ void intersects()
 	// }
 }
 
-Eigen::Vector3f doorLocation(0,0,0);
-Eigen::Vector3f doorOrientation(0,0,0);
-Eigen::Vector3f doorScale(1,1,1);
-Eigen::Vector3f doorDimensions(1,1,1);
+// DiningSet diningSet(Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
 
-Tv balabizo(doorLocation, doorOrientation, doorScale, doorDimensions);
+// 		(Vector3f location, Vector3f orientation, Vector3f scale)
 
+//Bedroom
+Bed bed(Vector3f(23, 0, 14.9), Vector3f(0, 180, 0), Vector3f(1, 1, 1));
+Nightstand nightstand1(Vector3f(24.17, 0, 16.2), Vector3f(0, 180, 0), Vector3f(1, 1, 1));
+Nightstand nightstand2(Vector3f(21.27, 0, 16.2), Vector3f(0, 180, 0), Vector3f(1, 1, 1));
+Wardrobe wardrobe(Vector3f(19.85, 0, 12.6), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
+
+//Bathroom
+Toilet toilet(Vector3f(25.9, 0, 15), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
+Sink sink(Vector3f(27.2, 0, 12.3), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
 void display(void)
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -287,20 +293,28 @@ void display(void)
 	// Axes for modeling 
 	Axes axes(0.5);
 
-	drawEnvironment();
-
-	intersects();
-
 	// Reset color and flush buffer
 	glColor3f(1.0, 1.0, 1.0);
 
 	glPushMatrix();
-	// glTranslated(0, 1, 0);
-	// glScaled(0.15, 0.15, 0.15);
-	// glScaled(0.0003, 0.0003, 0.0003);
-	glScaled(0.001, 0.001, 0.001);
-	// glRotatef(90.f, 1, 0, 0);
-	balabizo.draw();
+	{
+		glTranslated(-26, 0, -14);
+
+		drawEnvironment();
+
+		//kitchen
+
+		//bedroom
+		bed.draw();
+		nightstand1.draw();
+		nightstand2.draw();
+		wardrobe.draw();
+
+		//Toilet
+		toilet.draw();
+		sink.draw();
+		// sink.drawBoundries();
+	}
 	glPopMatrix();
 
 	glFlush();
@@ -310,7 +324,13 @@ void display(void)
 
 void loadAssets()
 {
-	// loadTvModel(balabizo);
+	loadBedModel(bed);
+	loadNightstandModel(nightstand1);
+	loadNightstandModel(nightstand2);
+	loadWardrobeModel(wardrobe);
+
+	loadToiletModel(toilet);
+	loadSinkModel(sink);
 	// Loading texture files
 	// Starting music
 }
