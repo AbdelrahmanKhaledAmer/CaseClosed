@@ -11,7 +11,7 @@ public:
   // Main functions
   CoffeeTable(Vector3f location, Vector3f orientation, Vector3f scale); // Constructor
   ~CoffeeTable();                   // Destructor
-  void CoffeeTable::draw();
+  void draw();
   void drawBoundries();           // Draw Object Boundries
 };
 

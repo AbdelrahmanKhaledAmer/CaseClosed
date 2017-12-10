@@ -11,7 +11,7 @@ public:
   // Main functions
   Bookcase(Vector3f location, Vector3f orientation, Vector3f scale); // Constructor
   ~Bookcase();                   // Destructor
-  void Bookcase::draw();
+  void draw();
 };
 
 #endif
