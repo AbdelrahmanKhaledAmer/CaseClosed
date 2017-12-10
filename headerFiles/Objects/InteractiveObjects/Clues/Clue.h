@@ -16,6 +16,11 @@ public:
 	~Clue();                                                                                              // Destructor
 
 	void draw();
+	bool isFound();
+	void find(bool state);
+	protected:
+		bool isFound_=false;
+
 };
 
 #endif

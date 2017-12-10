@@ -14,6 +14,10 @@ Returns a pointer for a InteractiveObject.
 @return: Pointer to Object object
 */
 
+std::string InteractiveObject::Interact() {
+	//TODO
+	return "";
+}
 InteractiveObject::InteractiveObject(Vector3f location, Vector3f orientation, Vector3f scale, Vector3f dimensions) 
 	:Object(location, orientation, scale, dimensions)
 {
