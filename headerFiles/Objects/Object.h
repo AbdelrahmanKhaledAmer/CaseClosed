@@ -24,8 +24,9 @@ public:
 
     // Game logic functions
     bool intersects(Object object); // Check overlapping objects
-    void draw(float locScale = 1);                    // Draw Objects
-    void drawBoundries();           // Draw Object Boundries
+    void draw(float locScale = 1);  // Draw Objects
+    void drawBoundries(float xLength, float yLength, float zLength);   // Draw Object Boundries
+    void rotate(float step = 1);    // Rotate an object
 protected:
     Model_3DS model_;
     Vector3f location_;     // Current Object location

@@ -34,3 +34,7 @@ void Bed::draw() {
   }
   glPopMatrix();
 }
+
+void Bed::drawBoundries() {
+  __super::drawBoundries(2.5f, 0.5f, 2.8f);
+}
