@@ -15,7 +15,7 @@
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>Game</RootNamespace>
     <ProjectName>Game</ProjectName>
-    <WindowsTargetPlatformVersion>10.0.14393.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -90,12 +90,26 @@
     <ClCompile Include="sourceFiles\Camera.cpp" />
     <ClCompile Include="sourceFiles\Loader.cpp" />
     <ClCompile Include="sourceFiles\Main.cpp" />
+    <ClCompile Include="sourceFiles\Objects\Flashlight.cpp" />
     <ClCompile Include="sourceFiles\Objects\InteractiveObjects\Clues\Clue.cpp" />
+    <ClCompile Include="sourceFiles\Objects\InteractiveObjects\Clues\Knife.cpp" />
     <ClCompile Include="sourceFiles\Objects\InteractiveObjects\Door.cpp" />
     <ClCompile Include="sourceFiles\Objects\InteractiveObjects\InteractiveObject.cpp" />
     <ClCompile Include="sourceFiles\Objects\NonInteractiveObjects\DiningSet.cpp" />
     <ClCompile Include="sourceFiles\Objects\NonInteractiveObjects\NonInteractiveObject.cpp" />
     <ClCompile Include="sourceFiles\Objects\NonInteractiveObjects\Sofa.cpp" />
+    <ClCompile Include="sourceFiles\Objects\NonInteractiveObjects\Toilet.cpp" />
+    <ClCompile Include="sourceFiles\Objects\NonInteractiveObjects\Kitchen.cpp" />
+    <ClCompile Include="sourceFiles\Objects\NonInteractiveObjects\Tv.cpp" />
+    <ClCompile Include="sourceFiles\Objects\NonInteractiveObjects\CoffeeTable.cpp" />
+    <ClCompile Include="sourceFiles\Objects\NonInteractiveObjects\Sink.cpp" />
+    <ClCompile Include="sourceFiles\Objects\NonInteractiveObjects\Bed.cpp" />
+    <ClCompile Include="sourceFiles\Objects\NonInteractiveObjects\Wardrobe.cpp" />
+    <ClCompile Include="sourceFiles\Objects\NonInteractiveObjects\Bookcase.cpp" />
+    <ClCompile Include="sourceFiles\Objects\NonInteractiveObjects\CellingLight.cpp" />
+    <ClCompile Include="sourceFiles\Objects\NonInteractiveObjects\Fan.cpp" />
+    <ClCompile Include="sourceFiles\Objects\NonInteractiveObjects\Nightstand.cpp" />
+    <ClCompile Include="sourceFiles\Objects\NonInteractiveObjects\Wall.cpp" />
     <ClCompile Include="sourceFiles\Objects\Journal.cpp" />
     <ClCompile Include="sourceFiles\Objects\Object.cpp" />
     <ClCompile Include="sourceFiles\Objects\Player.cpp" />
@@ -108,12 +122,26 @@
     <ClInclude Include="headerFiles\GL\glut.h" />
     <ClInclude Include="headerFiles\Loader.h" />
     <ClInclude Include="headerFiles\Model_3DS.h" />
+    <ClInclude Include="headerFiles\Objects\Flashlight.h" />
     <ClInclude Include="headerFiles\Objects\InteractiveObjects\Clues\Clue.h" />
+    <ClInclude Include="headerFiles\Objects\InteractiveObjects\Clues\Knife.h" />
     <ClInclude Include="headerFiles\Objects\InteractiveObjects\Door.h" />
     <ClInclude Include="headerFiles\Objects\InteractiveObjects\InteractiveObject.h" />
     <ClInclude Include="headerFiles\Objects\NonInteractiveObjects\DiningSet.h" />
     <ClInclude Include="headerFiles\Objects\NonInteractiveObjects\NonInteractiveObject.h" />
     <ClInclude Include="headerFiles\Objects\NonInteractiveObjects\Sofa.h" />
+    <ClInclude Include="headerFiles\Objects\NonInteractiveObjects\Toilet.h" />
+    <ClInclude Include="headerFiles\Objects\NonInteractiveObjects\Kitchen.h" />
+    <ClInclude Include="headerFiles\Objects\NonInteractiveObjects\Tv.h" />
+    <ClInclude Include="headerFiles\Objects\NonInteractiveObjects\CoffeeTable.h" />
+    <ClInclude Include="headerFiles\Objects\NonInteractiveObjects\Sink.h" />
+    <ClInclude Include="headerFiles\Objects\NonInteractiveObjects\Bed.h" />
+    <ClInclude Include="headerFiles\Objects\NonInteractiveObjects\Bookcase.h" />
+    <ClInclude Include="headerFiles\Objects\NonInteractiveObjects\Wardrobe.h" />
+    <ClInclude Include="headerFiles\Objects\NonInteractiveObjects\CellingLight.h" />
+    <ClInclude Include="headerFiles\Objects\NonInteractiveObjects\Fan.h" />
+    <ClInclude Include="headerFiles\Objects\NonInteractiveObjects\Nightstand.h" />
+    <ClInclude Include="headerFiles\Objects\NonInteractiveObjects\Wall.h" />
     <ClInclude Include="headerFiles\Objects\Journal.h" />
     <ClInclude Include="headerFiles\Objects\Object.h" />
     <ClInclude Include="headerFiles\Objects\Player.h" />

@@ -10,64 +10,130 @@
     <Filter Include="sourceFiles">
       <UniqueIdentifier>{6c45f8fb-d770-4f7d-b3c8-da1caae30faa}</UniqueIdentifier>
     </Filter>
+    <Filter Include="sourceFiles\Objects">
+      <UniqueIdentifier>{f45c65dc-2a64-44d0-8a7c-6c2fc4845bf6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sourceFiles\Objects\NonInteractiveObjects">
+      <UniqueIdentifier>{1d4c6ec5-b460-41f3-91c8-fef45e533501}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sourceFiles\Objects\InteractiveObjects">
+      <UniqueIdentifier>{05fb6f2c-d5f6-404f-a64b-dd96c921be52}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="headerFiles\Objects">
+      <UniqueIdentifier>{d9f25480-e23b-452b-95dd-b11e7557abd2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="headerFiles\Objects\InteractiveObjects">
+      <UniqueIdentifier>{2e89f012-7149-459f-9c56-b23c41a6d277}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="headerFiles\Objects\NonInteractiveObjects">
+      <UniqueIdentifier>{e64c79dc-29b5-419f-bb46-6d20d7f391eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="headerFiles\GL">
+      <UniqueIdentifier>{bc0e155b-6064-4095-b635-b9ca8646e91e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sourceFiles\GL">
+      <UniqueIdentifier>{c2efa3c7-b013-401c-bf83-915a0dbe42e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sourceFiles\Objects\InteractiveObjects\Clues">
+      <UniqueIdentifier>{9f73f93c-49c5-45a6-a2d3-2eea21681e68}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="headerFiles\Objects\InteractiveObjects\Clues">
+      <UniqueIdentifier>{315be35f-7264-477f-b34b-d3059849715a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="headerFiles\GL\glaux.h">
-      <Filter>headerFiles</Filter>
-    </ClInclude>
-    <ClInclude Include="headerFiles\GL\glew.h">
-      <Filter>headerFiles</Filter>
-    </ClInclude>
-    <ClInclude Include="headerFiles\GL\glut.h">
-      <Filter>headerFiles</Filter>
-    </ClInclude>
-    <ClInclude Include="headerFiles\GLTexture.h">
-      <Filter>headerFiles</Filter>
-    </ClInclude>
-    <ClInclude Include="headerFiles\Model_3DS.h">
-      <Filter>headerFiles</Filter>
-    </ClInclude>
     <ClInclude Include="headerFiles\Camera.h">
       <Filter>headerFiles</Filter>
     </ClInclude>
     <ClInclude Include="headerFiles\Loader.h">
       <Filter>headerFiles</Filter>
     </ClInclude>
-    <ClInclude Include="headerFiles\Objects\InteractiveObjects\InteractiveObject.h">
-      <Filter>headerFiles</Filter>
-    </ClInclude>
-    <ClInclude Include="headerFiles\Objects\InteractiveObjects\Door.h">
-      <Filter>headerFiles</Filter>
-    </ClInclude>
-    <ClInclude Include="headerFiles\Objects\InteractiveObjects\Clues\Clue.h">
-      <Filter>headerFiles</Filter>
+    <ClInclude Include="headerFiles\Objects\Journal.h">
+      <Filter>headerFiles\Objects</Filter>
     </ClInclude>
     <ClInclude Include="headerFiles\Objects\Object.h">
-      <Filter>headerFiles</Filter>
-    </ClInclude>
-    <ClInclude Include="headerFiles\Objects\NonInteractiveObjects\NonInteractiveObject.h">
-      <Filter>headerFiles</Filter>
+      <Filter>headerFiles\Objects</Filter>
     </ClInclude>
     <ClInclude Include="headerFiles\Objects\Player.h">
-      <Filter>headerFiles</Filter>
+      <Filter>headerFiles\Objects</Filter>
     </ClInclude>
-    <ClInclude Include="headerFiles\Objects\Journal.h">
-      <Filter>headerFiles</Filter>
+    <ClInclude Include="headerFiles\Objects\InteractiveObjects\Door.h">
+      <Filter>headerFiles\Objects\InteractiveObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="headerFiles\Objects\InteractiveObjects\InteractiveObject.h">
+      <Filter>headerFiles\Objects\InteractiveObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="headerFiles\Objects\NonInteractiveObjects\CoffeeTable.h">
+      <Filter>headerFiles\Objects\NonInteractiveObjects</Filter>
     </ClInclude>
     <ClInclude Include="headerFiles\Objects\NonInteractiveObjects\DiningSet.h">
-      <Filter>headerFiles</Filter>
+      <Filter>headerFiles\Objects\NonInteractiveObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="headerFiles\Objects\NonInteractiveObjects\Kitchen.h">
+      <Filter>headerFiles\Objects\NonInteractiveObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="headerFiles\Objects\NonInteractiveObjects\NonInteractiveObject.h">
+      <Filter>headerFiles\Objects\NonInteractiveObjects</Filter>
     </ClInclude>
     <ClInclude Include="headerFiles\Objects\NonInteractiveObjects\Sofa.h">
+      <Filter>headerFiles\Objects\NonInteractiveObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="headerFiles\Objects\NonInteractiveObjects\Toilet.h">
+      <Filter>headerFiles\Objects\NonInteractiveObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="headerFiles\Objects\NonInteractiveObjects\Tv.h">
+      <Filter>headerFiles\Objects\NonInteractiveObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="headerFiles\Objects\NonInteractiveObjects\Sink.h">
+      <Filter>headerFiles\Objects\NonInteractiveObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="headerFiles\Objects\NonInteractiveObjects\Bed.h">
+      <Filter>headerFiles\Objects\NonInteractiveObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="headerFiles\Objects\NonInteractiveObjects\Wardrobe.h">
+      <Filter>headerFiles\Objects\NonInteractiveObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="headerFiles\GL\glaux.h">
+      <Filter>headerFiles\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="headerFiles\GL\glew.h">
+      <Filter>headerFiles\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="headerFiles\GLTexture.h">
+      <Filter>headerFiles\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="headerFiles\Model_3DS.h">
+      <Filter>headerFiles\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="headerFiles\GL\glut.h">
+      <Filter>headerFiles\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="headerFiles\Objects\NonInteractiveObjects\Bookcase.h">
+      <Filter>headerFiles\Objects\NonInteractiveObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="headerFiles\Objects\InteractiveObjects\Clues\Knife.h">
+      <Filter>headerFiles\Objects\InteractiveObjects\Clues</Filter>
+    </ClInclude>
+    <ClInclude Include="headerFiles\Objects\InteractiveObjects\Clues\Clue.h">
+      <Filter>headerFiles\Objects\InteractiveObjects\Clues</Filter>
+    </ClInclude>
+    <ClInclude Include="headerFiles\Objects\NonInteractiveObjects\CellingLight.h">
+      <Filter>headerFiles\Objects\NonInteractiveObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="headerFiles\Objects\NonInteractiveObjects\Fan.h">
+      <Filter>headerFiles\Objects\NonInteractiveObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="headerFiles\Objects\NonInteractiveObjects\Nightstand.h">
+      <Filter>headerFiles\Objects\NonInteractiveObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="headerFiles\Objects\Flashlight.h">
+      <Filter>headerFiles\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="headerFiles\Objects\NonInteractiveObjects\Wall.h">
       <Filter>headerFiles</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="sourceFiles\GLTexture.cpp">
-      <Filter>sourceFiles</Filter>
-    </ClCompile>
-    <ClCompile Include="sourceFiles\Model_3DS.cpp">
-      <Filter>sourceFiles</Filter>
-    </ClCompile>
     <ClCompile Include="sourceFiles\Camera.cpp">
       <Filter>sourceFiles</Filter>
     </ClCompile>
@@ -77,31 +143,79 @@
     <ClCompile Include="sourceFiles\main.cpp">
       <Filter>sourceFiles</Filter>
     </ClCompile>
-    <ClCompile Include="sourceFiles\Objects\InteractiveObjects\InteractiveObject.cpp">
-      <Filter>sourceFiles</Filter>
-    </ClCompile>
-    <ClCompile Include="sourceFiles\Objects\InteractiveObjects\Door.cpp">
-      <Filter>sourceFiles</Filter>
-    </ClCompile>
-    <ClCompile Include="sourceFiles\Objects\InteractiveObjects\Clues\Clue.cpp">
-      <Filter>sourceFiles</Filter>
+    <ClCompile Include="sourceFiles\Objects\Journal.cpp">
+      <Filter>sourceFiles\Objects</Filter>
     </ClCompile>
     <ClCompile Include="sourceFiles\Objects\Object.cpp">
-      <Filter>sourceFiles</Filter>
-    </ClCompile>
-    <ClCompile Include="sourceFiles\Objects\NonInteractiveObjects\NonInteractiveObject.cpp">
-      <Filter>sourceFiles</Filter>
-    </ClCompile>
-    <ClCompile Include="sourceFiles\Objects\Journal.cpp">
-      <Filter>sourceFiles</Filter>
+      <Filter>sourceFiles\Objects</Filter>
     </ClCompile>
     <ClCompile Include="sourceFiles\Objects\Player.cpp">
-      <Filter>sourceFiles</Filter>
+      <Filter>sourceFiles\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="sourceFiles\Objects\InteractiveObjects\Door.cpp">
+      <Filter>sourceFiles\Objects\InteractiveObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="sourceFiles\Objects\InteractiveObjects\InteractiveObject.cpp">
+      <Filter>sourceFiles\Objects\InteractiveObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="sourceFiles\Objects\NonInteractiveObjects\CoffeeTable.cpp">
+      <Filter>sourceFiles\Objects\NonInteractiveObjects</Filter>
     </ClCompile>
     <ClCompile Include="sourceFiles\Objects\NonInteractiveObjects\DiningSet.cpp">
-      <Filter>sourceFiles</Filter>
+      <Filter>sourceFiles\Objects\NonInteractiveObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="sourceFiles\Objects\NonInteractiveObjects\Kitchen.cpp">
+      <Filter>sourceFiles\Objects\NonInteractiveObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="sourceFiles\Objects\NonInteractiveObjects\NonInteractiveObject.cpp">
+      <Filter>sourceFiles\Objects\NonInteractiveObjects</Filter>
     </ClCompile>
     <ClCompile Include="sourceFiles\Objects\NonInteractiveObjects\Sofa.cpp">
+      <Filter>sourceFiles\Objects\NonInteractiveObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="sourceFiles\Objects\NonInteractiveObjects\Toilet.cpp">
+      <Filter>sourceFiles\Objects\NonInteractiveObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="sourceFiles\Objects\NonInteractiveObjects\Tv.cpp">
+      <Filter>sourceFiles\Objects\NonInteractiveObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="sourceFiles\Objects\NonInteractiveObjects\Sink.cpp">
+      <Filter>sourceFiles\Objects\NonInteractiveObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="sourceFiles\Objects\NonInteractiveObjects\Bed.cpp">
+      <Filter>sourceFiles\Objects\NonInteractiveObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="sourceFiles\Objects\NonInteractiveObjects\Wardrobe.cpp">
+      <Filter>sourceFiles\Objects\NonInteractiveObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="sourceFiles\Model_3DS.cpp">
+      <Filter>sourceFiles\GL</Filter>
+    </ClCompile>
+    <ClCompile Include="sourceFiles\GLTexture.cpp">
+      <Filter>sourceFiles\GL</Filter>
+    </ClCompile>
+    <ClCompile Include="sourceFiles\Objects\NonInteractiveObjects\Bookcase.cpp">
+      <Filter>sourceFiles\Objects\NonInteractiveObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="sourceFiles\Objects\InteractiveObjects\Clues\Clue.cpp">
+      <Filter>sourceFiles\Objects\InteractiveObjects\Clues</Filter>
+    </ClCompile>
+    <ClCompile Include="sourceFiles\Objects\InteractiveObjects\Clues\Knife.cpp">
+      <Filter>sourceFiles\Objects\InteractiveObjects\Clues</Filter>
+    </ClCompile>
+    <ClCompile Include="sourceFiles\Objects\NonInteractiveObjects\CellingLight.cpp">
+      <Filter>sourceFiles\Objects\NonInteractiveObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="sourceFiles\Objects\NonInteractiveObjects\Fan.cpp">
+      <Filter>sourceFiles\Objects\NonInteractiveObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="sourceFiles\Objects\NonInteractiveObjects\Nightstand.cpp">
+      <Filter>sourceFiles\Objects\InteractiveObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="sourceFiles\Objects\Flashlight.cpp">
+      <Filter>sourceFiles\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="sourceFiles\Objects\NonInteractiveObjects\Wall.cpp">
       <Filter>sourceFiles</Filter>
     </ClCompile>
   </ItemGroup>

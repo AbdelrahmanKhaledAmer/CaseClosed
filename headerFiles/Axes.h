@@ -88,6 +88,7 @@ public:
         writeString(length, 0.0f, 0.0f, (void *)font, "x-axis");
         writeString(0.0f, length, 0.0f, (void *)font, "y-axis");
         writeString(0.0f, 0.0f, length, (void *)font, "z-axis");
+        glColor3f(1.0f, 1.0f, 1.0f);
     }
     ~Axes() { }
 };
