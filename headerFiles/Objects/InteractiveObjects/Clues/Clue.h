@@ -15,7 +15,11 @@ public:
 	Clue(Vector3f location, Vector3f orientation, Vector3f scale, Vector3f dimensions);    // Constructor
 	~Clue();                                                                                              // Destructor
 
-
+	void draw();
+	bool isFound();
+	void find(bool state);
+	protected:
+		bool isFound_=false;
 
 };
 
