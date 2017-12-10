@@ -2,6 +2,7 @@
 #define LOADER_H
 
 #include "headerFiles/Objects/Flashlight.h"
+#include "headerFiles/Objects/InteractiveObjects/Clues/Body.h"
 #include "headerFiles/Objects/InteractiveObjects/Clues/Knife.h"
 #include "headerFiles/Objects/InteractiveObjects/Door.h"
 #include "headerFiles/Objects/NonInteractiveObjects/Bath.h"
@@ -36,4 +37,5 @@ void loadFanModel(Fan &fan);
 void loadNightstandModel(Nightstand &nightstand);
 void loadFlashlightModel(Flashlight &flashlight);
 void loadBathModel(Bath &bath);
+void loadBodyModel(Body &body);
 #endif

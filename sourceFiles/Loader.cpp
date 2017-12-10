@@ -78,7 +78,7 @@ void loadWardrobeModel(Wardrobe &wardrobe){
 }
 
 void loadKnifeModel(Knife &knife){
-	char* knifePath = "assets/models/furniture/Knife/Knife_3ds.3DS";
+	char* knifePath = "assets/models/furniture/knife/Knife_3ds.3DS";
 	Model_3DS knifeModel;
 	knifeModel.Load(knifePath);
 	knife.setModel(knifeModel);
@@ -117,4 +117,11 @@ void loadBathModel(Bath &bath){
 	Model_3DS bathModel;
 	bathModel.Load(bathPath);
 	bath.setModel(bathModel);
+}
+
+void loadBodyModel(Body &body) {
+  char *bodyPath = "assets/models/clues/Body/Man N050214.3DS";
+  Model_3DS bodyModel;
+  bodyModel.Load(bodyPath);
+  body.setModel(bodyModel);
 }
