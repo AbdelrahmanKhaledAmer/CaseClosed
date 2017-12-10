@@ -31,6 +31,8 @@
 #include "headerFiles/Objects/NonInteractiveObjects/Wall.h"
 #include "headerFiles/Objects/NonInteractiveObjects/Wardrobe.h"
 #include "headerFiles/Objects/Object.h"
+#include "headerFiles/Objects/NonInteractiveObjects/Wall.h"
+#include "headerFiles/Loader.h"
 #include "headerFiles/Objects/Player.h"
 
 // Screen Constants
@@ -266,7 +268,6 @@ void intersects()
 	// 	printf("COLLISION DETECTED\n");
 	// }
 }
-
 Eigen::Vector3f doorLocation(0,0,0);
 Eigen::Vector3f doorOrientation(0,0,0);
 Eigen::Vector3f doorScale(1,1,1);
