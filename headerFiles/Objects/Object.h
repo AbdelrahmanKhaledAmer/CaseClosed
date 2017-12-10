@@ -25,6 +25,7 @@ public:
     // Game logic functions
     bool intersects(Object object); // Check overlapping objects
     void draw();                    // Draw Objects
+    void drawBoundries();           // Draw Object Boundries
 protected:
     Model_3DS model_;
     Vector3f location_;     // Current Object location

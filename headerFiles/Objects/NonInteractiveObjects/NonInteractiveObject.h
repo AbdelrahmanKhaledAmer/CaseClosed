@@ -13,6 +13,7 @@ public:
                        Vector3f dimensions); // Constructor
   ~NonInteractiveObject();              // Destructor
   void draw();
+  void drawBoundries();           // Draw Object Boundries
 };
 
 #endif

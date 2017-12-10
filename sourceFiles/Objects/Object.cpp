@@ -87,6 +87,12 @@ void Object::draw() {
 }
 
 /**
+    OpenGL drawing function.
+    Draws an Object on the screen. To be Overridden by the subclasses.
+*/
+void Object::drawBoundries() {}
+
+/**
     Collision logic function.
     Detects if an object occupies the same space as another.
 

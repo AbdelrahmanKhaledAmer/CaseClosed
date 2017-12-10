@@ -26,3 +26,4 @@ Deletes the pointer for the NonInteractiveObject object.
 NonInteractiveObject::~NonInteractiveObject() {}
 
 void NonInteractiveObject::draw() { __super::draw(); }
+void NonInteractiveObject::drawBoundries() { __super::drawBoundries(); }

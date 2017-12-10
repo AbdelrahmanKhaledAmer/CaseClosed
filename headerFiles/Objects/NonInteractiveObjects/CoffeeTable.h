@@ -9,9 +9,10 @@ using namespace Eigen;
 class CoffeeTable : public NonInteractiveObject {
 public:
   // Main functions
-  CoffeeTable(Vector3f location, Vector3f orientation, Vector3f scale,
-              Vector3f dimensions); // Constructor
+  CoffeeTable(Vector3f location, Vector3f orientation, Vector3f scale); // Constructor
   ~CoffeeTable();                   // Destructor
+  void CoffeeTable::draw();
+  void drawBoundries();           // Draw Object Boundries
 };
 
 #endif
