@@ -106,11 +106,17 @@ void initClues() {
 }
 void DrawClues() {
 	int len = sizeof(clues) / sizeof(*clues);
+	bool win = true;
 	for (int i = 0; i < len; i++)
 	{
-		if(!(*clues[i]).isFound())
-		(*clues[i]).draw();
+		if (!(*clues[i]).isFound())
+		{
+			(*clues[i]).draw();
+			win = false;
+		}
 	}
+	if (win)
+		gameState = WINNING_STATE;
 }
 
 void initEnvironment()
@@ -234,7 +240,7 @@ bool intersectsWalls()
 	bool intersects = false;
 	for (int i = 0; i < sizeof(walls) / sizeof(*walls); i++)
 	{
-		intersects |= walls[i]->intersects(player);
+		intersects |= (*walls[i]).intersects(player);
 
 	}
 	return intersects;
@@ -431,6 +437,16 @@ void mouseMovement(int x, int y)
 	}
 }
 
+void losingStateCaller(int val)
+{
+
+	if (gameState != WINNING_STATE) {
+		gameState = LOSING_STATE;
+		printf("koko lost\n");
+	}
+	glutPostRedisplay();
+}
+
 void main(int argc, char** argv)
 {
 	glutInit(&argc, argv);
@@ -457,6 +473,9 @@ void main(int argc, char** argv)
 	glEnable(GL_COLOR_MATERIAL);
 
 	glShadeModel(GL_SMOOTH);
+
+	//TODO 10 mins
+	glutTimerFunc(10000, losingStateCaller, 0);
 
 	glutMainLoop();
 }
