@@ -27,5 +27,10 @@ Deletes the pointer for the Clue object.
 */
 Clue::~Clue()
 {
+	__super::draw();
+}
 
+void Clue::draw()
+{
+	__super::draw();
 }

@@ -1,5 +1,10 @@
 // Defines
 #define PI 3.14159265358979323846
+#define PLAYING_STATE 0
+#define LOSING_STATE 1
+#define WINNING_STATE 2
+#define INTERACTING_STATE 3
+#define JOURNAL_STATE 4
 // Libraries, dependencies and classes
 #include "headerFiles/TextureBuilder.h"
 #include "headerFiles/Model_3DS.h"
@@ -40,12 +45,17 @@ const int scale = 70;
 const int width = 16 * scale / 1.5;
 const int height = 9 * scale / 1.5;
 
+// Game variables
+int gameState = PLAYING_STATE;
+InteractiveObject interactingObject(Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(0, 0, 0));
+
 Eigen::Vector3f eye(1, 1, 1);
 Eigen::Vector3f lookAt(3, 0.5, 1);
 Eigen::Vector3f orientation(0, 1, 0);
 
 Camera camera(eye, lookAt, orientation);
 Player player(eye, Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vector3f(0.5, 1.5, 0.2), camera);
+Knife knife(Vector3f(3, 0.5, 1), Vector3f(45, 45, 45), Vector3f(1, 1, 1), Vector3f(1, 1, 1));
 
 //Same texture for each group?
 //Groups are Separated by an empty line.
@@ -194,20 +204,16 @@ void drawEnvironment()
 	}
 
 }
-int i =0;
-bool intersects()
+
+bool intersectsWalls()
 {
-	bool hi = false;
+	bool intersects = false;
 	for (int i = 0; i < 23; i++)
 	{
-		hi |= walls[i]->intersects(player);
+		intersects |= walls[i]->intersects(player);
 
 	}
-	if (hi)
-	{
-		printf("COLLISION DETECTED %d\n",i++);
-	}
-	return hi;
+	return intersects;
 }
 Eigen::Vector3f doorLocation(0, 0, 0);
 Eigen::Vector3f doorOrientation(0, 0, 0);
@@ -231,8 +237,15 @@ void display(void)
 
 	drawEnvironment();
 
-	intersects();
-
+	glColor3f(0.8f, 0.1f, 0.2f);
+	if(gameState == PLAYING_STATE)
+	{
+		knife.draw();
+	} else if(gameState == INTERACTING_STATE) {
+		interactingObject.rotate();
+		interactingObject.draw();
+	}
+	
 	// Reset color and flush buffer
 	glColor3f(1.0, 1.0, 1.0);
 
@@ -257,66 +270,95 @@ void loadAssets()
 	// Starting music
 }
 
+void interactionTimer(int val)
+{
+	if(gameState == INTERACTING_STATE)
+	{
+		interactingObject.rotate();
+		glutPostRedisplay();
+		glutTimerFunc(20, interactionTimer, 0);
+	}
+}
+
 void key(unsigned char k, int x, int y)
 {
-	switch (k)
+	if(gameState == PLAYING_STATE)
 	{
-	case 'l':
-		//camera.rotateRight();
-		player.lookRight();
-		break;
-	case 'j':
-		//camera.rotateLeft();
-		player.lookLeft();
-		break;
-	case 'i':
-		//camera.rotateUp();
-		player.lookUp();
-		break;
-	case 'k':
-		//camera.rotateDown();
-		player.lookDown();
-		break;
-	case 'o':
-		camera.tiltRight();
-		break;
-	case 'u':
-		camera.tiltLeft();
-		break;
-	case 'w':
-		//camera.translateForward();
-		player.moveForward();
-		if (intersects()) {
-			player.moveBackward();
-		}
-		break;
-	case 's':
-		//camera.translateBackward();
-		player.moveBackward();
-		if (intersects()) {
+		switch (k)
+		{
+		case 'l':
+			//camera.rotateRight();
+			player.lookRight();
+			break;
+		case 'j':
+			//camera.rotateLeft();
+			player.lookLeft();
+			break;
+		case 'i':
+			//camera.rotateUp();
+			player.lookUp();
+			break;
+		case 'k':
+			//camera.rotateDown();
+			player.lookDown();
+			break;
+		case 'o':
+			camera.tiltRight();
+			break;
+		case 'u':
+			camera.tiltLeft();
+			break;
+		case 'w':
+			//camera.translateForward();
 			player.moveForward();
-		}
-		break;
-	case 'a':
-		//camera.translateLeft();
-		player.moveLeft();
-		if (intersects()) {
-			player.moveRight();
-		}
-		break;
-	case 'd':
-		//camera.translateRight();
-		player.moveRight();
-		if (intersects()) {
+			if (intersectsWalls()) {
+				player.moveBackward();
+			}
+			break;
+		case 's':
+			//camera.translateBackward();
+			player.moveBackward();
+			if (intersectsWalls()) {
+				player.moveForward();
+			}
+			break;
+		case 'a':
+			//camera.translateLeft();
 			player.moveLeft();
+			if (intersectsWalls()) {
+				player.moveRight();
+			}
+			break;
+		case 'd':
+			//camera.translateRight();
+			player.moveRight();
+			if (intersectsWalls()) {
+				player.moveLeft();
+			}
+			break;
+		case 'e':
+			// camera.translateUp();
+			if(player.isLookingAt(knife))
+			{
+				std::string s = knife.Interact().append("\n");
+				interactingObject = knife;
+				gameState = INTERACTING_STATE;
+				Vector3f newVector = player.getCamera().location() + (player.getCamera().lookAt() - player.getCamera().location()).normalized() * 0.8;
+				interactingObject.setLocation(newVector);
+				glutTimerFunc(20, interactionTimer, 0);
+			}
+			break;
+		case 'q':
+			camera.translateDown();
+			break;
 		}
-		break;
-	case 'e':
-		camera.translateUp();
-		break;
-	case 'q':
-		camera.translateDown();
-		break;
+	} else if (gameState == INTERACTING_STATE) {
+		switch(k)
+		{
+		case 'e':
+			gameState = PLAYING_STATE;
+			break;
+		}
 	}
 	glutPostRedisplay();
 }
@@ -327,30 +369,33 @@ const int height_center = height / 2, width_center = width / 2;
 //=======================================================================
 void mouseMovement(int x, int y)
 {
-	if (y > height_center)
-		//		camera.rotateDown(0.4);
-		player.lookDown(0.4);
-	if (y < height_center)
-		//camera.rotateUp(0.4);
-		player.lookUp(0.4);
-	if (x > width_center)
-		//camera.rotateRight(0.4);
-		player.lookRight(0.4);
-	if (x < width_center)
-		//camera.rotateLeft(0.4);
-		player.lookLeft(0.4);
+	if(gameState == PLAYING_STATE)
+	{
+		if (y > height_center)
+			//		camera.rotateDown(0.4);
+			player.lookDown(0.4);
+		if (y < height_center)
+			//camera.rotateUp(0.4);
+			player.lookUp(0.4);
+		if (x > width_center)
+			//camera.rotateRight(0.4);
+			player.lookRight(0.4);
+		if (x < width_center)
+			//camera.rotateLeft(0.4);
+			player.lookLeft(0.4);
 
-	y = height - y;
+		y = height - y;
 
-	//pins mouse in screen center
-	if (abs(x - width_center) > 1) {
-		x = width_center;
-		glutWarpPointer(width_center, y);
+		//pins mouse in screen center
+		if (abs(x - width_center) > 1) {
+			x = width_center;
+			glutWarpPointer(width_center, y);
+		}
+
+		if (abs(y - height_center) > 1)
+			glutWarpPointer(x, height_center);
+		glutPostRedisplay();
 	}
-
-	if (abs(y - height_center) > 1)
-		glutWarpPointer(x, height_center);
-	glutPostRedisplay();
 }
 
 void main(int argc, char** argv)

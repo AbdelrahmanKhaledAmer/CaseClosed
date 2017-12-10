@@ -25,12 +25,10 @@ Knife::~Knife() {}
 
 void Knife::draw()
 {
-    glPushMatrix();
-    {
-        glTranslatef(location_.x(), location_.y(), location_.z());
-        glRotatef(45, 1, 0, 0);
-        glRotatef(45, 0, 0, 1);
-        glutSolidCube(1);
-    }
-    glPopMatrix();
+    __super::draw();
+}
+
+std::string Knife::Interact()
+{
+	return "Clue: This is a knife used in the murder.";
 }

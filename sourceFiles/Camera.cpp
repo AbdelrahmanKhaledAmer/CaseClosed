@@ -64,6 +64,15 @@ Vector3f Camera::location()
 }
 
 /**
+    Getter Function.
+    Returns the current target of the Camera object.
+*/
+Vector3f Camera::lookAt()
+{
+    return this->lookAt_;
+}
+
+/**
     Rotation Function.
     Rotates the Camera object by the preset angular step along the Camera's y axis. This is done by changing the lookAt_ variable.
 

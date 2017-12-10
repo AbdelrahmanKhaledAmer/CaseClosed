@@ -29,7 +29,24 @@ InteractiveObject::~InteractiveObject()
 
 }
 
-std::string Interact()
+void InteractiveObject::setLocation(Vector3f location)
 {
-	return "";
+	this->location_ = location;
+}
+
+void InteractiveObject::draw()
+{
+	//__super::draw();
+	glPushMatrix();
+	{
+		glTranslatef(location_.x(), location_.y(), location_.z());
+		glRotatef(orientation_.y(), 0, 1, 0);
+		glutSolidCube(0.5);
+	}
+	glPopMatrix();
+}
+
+void InteractiveObject::rotate()
+{
+	orientation_.y() -= 1;
 }

@@ -14,6 +14,7 @@ public:
   ~Knife();                   // Destructor
 
   void draw();
+  std::string Interact();
 };
 
 #endif
