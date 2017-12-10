@@ -25,5 +25,5 @@ Deletes the pointer for the NonInteractiveObject object.
 */
 NonInteractiveObject::~NonInteractiveObject() {}
 
-void NonInteractiveObject::draw() { __super::draw(); }
+void NonInteractiveObject::draw(float locScale) { __super::draw(locScale); }
 void NonInteractiveObject::drawBoundries() { __super::drawBoundries(); }

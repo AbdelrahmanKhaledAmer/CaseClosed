@@ -13,9 +13,9 @@ global origin.
 @return: Pointer to InteractiveObject interactiveObject
 */
 
-Nightstand::Nightstand(Vector3f location, Vector3f orientation, Vector3f scale,
-                       Vector3f dimensions)
-    : NonInteractiveObject(location, orientation, scale, dimensions) {}
+Nightstand::Nightstand(Vector3f location, Vector3f orientation, Vector3f scale)
+    : NonInteractiveObject(location, orientation, scale,
+                           Vector3f(1.7f, 0.5f, 1.7f)) {}
 
 /**
 Destructor for the Nightstand object.

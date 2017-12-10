@@ -30,7 +30,7 @@ void Bed::draw() {
   {
     glTranslatef(-0.1, 0, 0);
     glScalef(scale, scale, scale);
-    __super::draw();
+    __super::draw(scale);
   }
   glPopMatrix();
 }

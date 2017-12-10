@@ -1,4 +1,5 @@
 #include "headerFiles/Objects/Object.h"
+#include <iostream>
 
 /*
     Constructor for the Object object.
@@ -34,7 +35,7 @@ Object::~Object()
 */
 Vector3f Object::location()
 {
-    return this->dimensions_;
+    return this->location_;
 }
 
 /**
@@ -43,7 +44,7 @@ Vector3f Object::location()
 */
 Vector3f Object::orientation()
 {
-    return this->dimensions_;
+    return this->orientation_;
 }
 
 /**
@@ -52,7 +53,7 @@ Vector3f Object::orientation()
 */
 Vector3f Object::scale()
 {
-    return this->dimensions_;
+    return this->scale_;
 }
 
 /**
@@ -76,10 +77,11 @@ void Object::setModel(Model_3DS model){
     OpenGL drawing function.
     Draws an Object on the screen. To be Overridden by the subclasses.
 */
-void Object::draw() {
+void Object::draw(float locScale) {
+    
   glPushMatrix();
   {
-    glTranslatef(location_.x(), location_.y(), location_.z());
+    glTranslatef(location_.x() / locScale, location_.y() / locScale, location_.z() / locScale);
     glScalef(scale_.x(), scale_.y(), scale_.z());
     model_.Draw();
   }
@@ -88,7 +90,7 @@ void Object::draw() {
 
 /**
     OpenGL drawing function.
-    Draws an Object on the screen. To be Overridden by the subclasses.
+    Draws an Object's boundries on the screen. To be Overridden by the subclasses.
 */
 void Object::drawBoundries() {}
 
