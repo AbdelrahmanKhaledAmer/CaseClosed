@@ -274,8 +274,8 @@ CoffeeTable coffeeTable(Vector3f(20.5, 0, 10), Vector3f(0, 0, 0), Vector3f(1, 1,
 Tv tv(Vector3f(20.5, 0, 11), Vector3f(0, 180, 0), Vector3f(1, 1, 1));
 
 //kitchen
-DiningSet diningSet(Vector3f(24, 0, 9), Vector3f(0, -90, 0), Vector3f(1, 1, 1));
-Kitchen kitchen(Vector3f(25, 0, 11), Vector3f(0, 90, 0), Vector3f(1, 1, 1));
+DiningSet diningSet(Vector3f(24.2, 0, 9), Vector3f(0, -90, 0), Vector3f(1, 1, 1));
+Kitchen kitchen(Vector3f(25, 0, 10.9), Vector3f(0, 90, 0), Vector3f(1, 1, 1));
 
 //Bedroom
 Bed bed(Vector3f(23, 0, 14.9), Vector3f(0, 180, 0), Vector3f(1, 1, 1));
@@ -307,7 +307,6 @@ void display(void)
 
 	glPushMatrix();
 	{
-		glTranslated(-28, 0, -13);
 		drawEnvironment();
 		
 		//livingroom
