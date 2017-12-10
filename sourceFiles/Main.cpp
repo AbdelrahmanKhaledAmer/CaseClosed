@@ -45,7 +45,8 @@ Eigen::Vector3f lookAt(3, 0.5, 1);
 Eigen::Vector3f orientation(0, 1, 0);
 
 Camera camera(eye, lookAt, orientation);
-Player player(eye, Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vector3f(0.5, 1.5, 0.2), camera);
+Player player(eye, Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vector3f(1, 1.5, 1), camera);
+Knife knife (Vector3f(3,0.5,1), Vector3f(0,0,0), Vector3f(1,1,1), Vector3f(1,1,1));
 
 //Same texture for each group?
 //Groups are Separated by an empty line.
@@ -194,8 +195,8 @@ void drawEnvironment()
 	}
 
 }
-int i =0;
-bool intersects()
+
+void intersects()
 {
 	bool hi = false;
 	for (int i = 0; i < 23; i++)
@@ -205,9 +206,8 @@ bool intersects()
 	}
 	if (hi)
 	{
-		printf("COLLISION DETECTED %d\n",i++);
+		printf("COLLISION DETECTED\n");
 	}
-	return hi;
 }
 Eigen::Vector3f doorLocation(0, 0, 0);
 Eigen::Vector3f doorOrientation(0, 0, 0);
@@ -230,6 +230,9 @@ void display(void)
 	Axes axes(0.5);
 
 	drawEnvironment();
+
+	glColor3f(1.0f, 0.0f, 0.0f);
+	knife.draw();
 
 	intersects();
 
@@ -286,33 +289,22 @@ void key(unsigned char k, int x, int y)
 	case 'w':
 		//camera.translateForward();
 		player.moveForward();
-		if (intersects()) {
-			player.moveBackward();
-		}
 		break;
 	case 's':
 		//camera.translateBackward();
 		player.moveBackward();
-		if (intersects()) {
-			player.moveForward();
-		}
 		break;
 	case 'a':
 		//camera.translateLeft();
 		player.moveLeft();
-		if (intersects()) {
-			player.moveRight();
-		}
 		break;
 	case 'd':
 		//camera.translateRight();
 		player.moveRight();
-		if (intersects()) {
-			player.moveLeft();
-		}
 		break;
 	case 'e':
-		camera.translateUp();
+		// camera.translateUp();
+		//knife.rotate();
 		break;
 	case 'q':
 		camera.translateDown();

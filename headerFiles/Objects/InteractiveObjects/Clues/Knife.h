@@ -12,6 +12,8 @@ public:
   Knife(Vector3f location, Vector3f orientation, Vector3f scale,
         Vector3f dimensions); // Constructor
   ~Knife();                   // Destructor
+
+  void draw();
 };
 
 #endif
