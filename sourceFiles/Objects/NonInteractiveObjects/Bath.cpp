@@ -16,7 +16,7 @@ global origin.
 Bath::Bath(Vector3f location, Vector3f orientation,
                          Vector3f scale)
     : NonInteractiveObject(location, orientation, scale,
-                           Vector3f(0.9, 0.7, 1.)) {}
+                           Vector3f(0.9, 0.7, 1.9)) {}
 
 /**
 Destructor for the Bath object.
