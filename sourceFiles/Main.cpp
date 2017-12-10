@@ -197,12 +197,30 @@ void initEnvironment()
 
 void drawEnvironment()
 {
-
 	for (int i = 0; i < 23; i++)
 	{
 		(*walls[i]).draw();
 	}
-
+	glColor3f(1.0, 0.9, 0.9);
+	glBegin(GL_QUADS);
+	{
+		glNormal3f(0, 1, 0);
+		glVertex3f(-1, 0, -1);
+		glVertex3f(-1, 0, 31);
+		glVertex3f(31, 0, 31);
+		glVertex3f(31, 0, -1);
+	}
+	glEnd();
+	glColor3f(1.0, 0.9, 0.9);
+	glBegin(GL_QUADS);
+	{
+		glNormal3f(0, -1, 0);
+		glVertex3f(-1, 2, -1);
+		glVertex3f(-1, 2, 31);
+		glVertex3f(31, 2, 31);
+		glVertex3f(31, 2, -1);
+	}
+	glEnd();
 }
 
 bool intersectsWalls()
