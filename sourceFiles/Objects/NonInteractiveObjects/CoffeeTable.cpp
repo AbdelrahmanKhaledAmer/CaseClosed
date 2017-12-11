@@ -14,11 +14,29 @@ global origin.
 */
 
 CoffeeTable::CoffeeTable(Vector3f location, Vector3f orientation,
-                         Vector3f scale, Vector3f dimensions)
-    : NonInteractiveObject(location, orientation, scale, dimensions) {}
+                         Vector3f scale)
+    : NonInteractiveObject(location, orientation, scale,
+                           Vector3f(1.7f, 0.5f, 1.7f)) {}
 
 /**
 Destructor for the CoffeeTable object.
 Deletes the pointer for the CoffeeTable object.
 */
 CoffeeTable::~CoffeeTable() {}
+
+void CoffeeTable::draw() {
+  float scale = 0.0005;
+
+  glPushMatrix();
+  {
+    glScalef(scale, scale, scale);
+    __super::draw(scale);
+  }
+  glPopMatrix();
+}
+
+void CoffeeTable::drawBoundries() { __super::drawBoundries(1.2, 0.4, 1.2); }
+
+void CoffeeTable::setModel() {
+  __super::setModel("assets/models/furniture/CoffeeTable/Table N280817.3DS");
+}

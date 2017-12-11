@@ -1,10 +1,10 @@
 #ifndef OBJECT_H
 #define OBJECT_H
 
-#include "headerFiles/Model_3DS.h"
 #include "headerFiles/GLTexture.h"
-#include <headerFiles/GL/glut.h>
+#include "headerFiles/Model_3DS.h"
 #include <Eigen/Dense>
+#include <headerFiles/GL/glut.h>
 
 using namespace Eigen;
 
@@ -16,15 +16,17 @@ public:
     ~Object();                                                                              // Destructor
 
     // Getteres and Setters
-    Vector3f location();    // Get Location
-    Vector3f orientation(); // Get Orientation
-    Vector3f scale();       // Get Scale
-    Vector3f dimensions();  // Get Dimensions
-    void setModel(Model_3DS model);     // Get Model
+    Vector3f location();                // Get Location
+    Vector3f orientation();             // Get Orientation
+    Vector3f scale();                   // Get Scale
+    Vector3f dimensions();              // Get Dimensions
+	void setModel(char * modelPath);    //Set Model
 
     // Game logic functions
     bool intersects(Object object); // Check overlapping objects
-    void draw();                    // Draw Objects
+    void draw(float locScale = 1);  // Draw Objects
+    void drawBoundries(float xLength, float yLength, float zLength);   // Draw Object Boundries
+    void rotate(float step = 1);    // Rotate an object
 protected:
     Model_3DS model_;
     Vector3f location_;     // Current Object location

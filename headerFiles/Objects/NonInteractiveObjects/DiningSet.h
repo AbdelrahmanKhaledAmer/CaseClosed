@@ -10,8 +10,11 @@ class DiningSet : public NonInteractiveObject
 {
 public:
 	// Main functions
-	DiningSet(Vector3f location, Vector3f orientation, Vector3f scale, Vector3f dimensions);    // Constructor
-	~DiningSet();                                                                     		   // Destructor
+	DiningSet(Vector3f location, Vector3f orientation, Vector3f scale);    // Constructor
+	~DiningSet();
+	void draw();
+	void drawBoundries();           // Draw Object Boundries                                                       		   // Destructor
+	void setModel();
 };
 
 #endif

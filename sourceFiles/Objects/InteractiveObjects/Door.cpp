@@ -17,8 +17,15 @@ Door::Door(Vector3f location, Vector3f orientation, Vector3f scale,
            Vector3f dimensions)
     : InteractiveObject(location, orientation, scale, dimensions) {}
 
+
 /**
 Destructor for the Door object.
 Deletes the pointer for the Door object.
 */
 Door::~Door() {}
+
+
+std::string Interact()
+{
+	return "";
+}

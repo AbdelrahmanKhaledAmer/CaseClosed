@@ -13,16 +13,29 @@ global origin.
 @return: Pointer to InteractiveObject interactiveObject
 */
 
-Toilet::Toilet(Vector3f location, Vector3f orientation, Vector3f scale,
-                     Vector3f dimensions)
-    : NonInteractiveObject(location, orientation, scale, dimensions) {
-
-}
+Toilet::Toilet(Vector3f location, Vector3f orientation, Vector3f scale)
+    : NonInteractiveObject(location, orientation, scale,
+                           Vector3f(0.6f, 0.9f, 0.5f)) {}
 
 /**
 Destructor for the Toilet object.
 Deletes the pointer for the Toilet object.
 */
-Toilet::~Toilet() {
+Toilet::~Toilet() {}
 
+void Toilet::draw() {
+  float scale = 0.0026;
+
+  glPushMatrix();
+  {
+    glScalef(scale, scale, scale);
+    __super::draw(scale);
+  }
+  glPopMatrix();
+}
+
+void Toilet::drawBoundries() { __super::drawBoundries(0.6f, 0.9f, 0.5f); }
+
+void Toilet::setModel() {
+  __super::setModel("assets/models/furniture/Toilet/Lavatory pan N200317.3DS");
 }

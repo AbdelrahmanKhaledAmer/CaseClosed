@@ -124,3 +124,18 @@ void Player::lookDown(float scale)
     head_.rotateDown(scale);
     // TODO add limit
 }
+
+bool Player::isLookingAt(InteractiveObject object)
+{
+    float dist = (location_ - object.location()).norm();
+    Vector3f objVec = object.location() - location_;
+    Vector3f lookVec = head_.lookAt() - location_;
+    if(dist < 2)
+    {
+        if(acos(objVec.dot(lookVec) / (objVec.norm() * lookVec.norm())) * 180 / 3.141592654 < 10 )
+        {
+            return true;
+        }
+    }
+    return false;
+}
