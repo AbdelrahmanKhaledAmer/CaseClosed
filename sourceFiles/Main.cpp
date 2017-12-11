@@ -1,17 +1,19 @@
-// Defines
+// Defines ==========================================================
 #define PI 3.14159265358979323846
-#define PLAYING_STATE 0
-#define LOSING_STATE 1
-#define WINNING_STATE 2
-#define INTERACTING_STATE 3
-#define JOURNAL_STATE 4
-// Libraries, dependencies and classes
+#define PLAYING_STATE 		0
+#define LOSING_STATE 		1
+#define WINNING_STATE 		2
+#define INTERACTING_STATE 	3
+#define JOURNAL_STATE 		4
+
+// Libraries, dependencies and classe ===============================
 #include "headerFiles/TextureBuilder.h"
 #include "headerFiles/Model_3DS.h"
 #include "headerFiles/GLTexture.h"
 #include <math.h>
 #include <iostream>
 #include <Eigen/Dense>
+#include "SOIL/src/SOIL.h"
 #include <headerFiles/GL/glut.h>
 
 #include "headerFiles/Axes.h"
@@ -367,6 +369,21 @@ void loadAssets()
 	loadBathModel(bath);
 	
 	// Loading texture files
+	GLuint tex_2d = SOIL_load_OGL_texture
+	(
+		"Simple OpenGL Image Library/img_test.png",
+		SOIL_LOAD_AUTO,
+		SOIL_CREATE_NEW_ID,
+		SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
+	);
+
+	int save_result = SOIL_save_screenshot
+	(
+		"awesomenessity.bmp",
+		SOIL_SAVE_TYPE_BMP,
+		0, 0, 1024, 768
+	);
+
 	// Starting music
 }
 
@@ -545,7 +562,7 @@ void main(int argc, char** argv)
 	glShadeModel(GL_SMOOTH);
 
 	//TODO 10 mins
-	glutTimerFunc(10000, losingStateCaller, 0);
+	// glutTimerFunc(10000, losingStateCaller, 0);
 
 	glutMainLoop();
 }
