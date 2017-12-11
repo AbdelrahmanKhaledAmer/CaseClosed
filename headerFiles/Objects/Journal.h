@@ -17,9 +17,13 @@ public:
 
 	// write function
 	void write(std::string write = "");
-
+	bool appear();
+	bool disappear();
+	bool isShown();
+	void draw();
 protected:
 	std::string* notes_;
+	bool on_;
 };
 
 #endif

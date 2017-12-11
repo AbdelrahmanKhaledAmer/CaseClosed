@@ -545,7 +545,7 @@ void main(int argc, char** argv)
 	glShadeModel(GL_SMOOTH);
 
 	//TODO 10 mins
-	glutTimerFunc(10000, losingStateCaller, 0);
+	//glutTimerFunc(10000, losingStateCaller, 0);
 
 	glutMainLoop();
 }

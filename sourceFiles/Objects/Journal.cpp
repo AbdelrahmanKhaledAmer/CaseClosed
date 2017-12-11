@@ -17,6 +17,7 @@ Returns a pointer for a Journal.
 Journal::Journal(Vector3f location, Vector3f orientation, Vector3f scale, Vector3f dimensions, std::string words):Object(location, orientation, scale, dimensions)
 {
 	this->notes_ = &words;
+	this->on_ = false;
 }
 
 /**
@@ -27,3 +28,19 @@ Journal::~Journal()
 {
 
 }
+
+	bool Journal::appear() { this->on_ = true; }
+	bool Journal::disappear() { this->on_ = false; }
+	bool Journal::isShown() { return this->on_; }
+	void Journal::draw()
+	{
+		float scale = 0.0025;
+
+  		glPushMatrix();
+		{
+		    glTranslatef(0.21, 0, 0.36);
+   			glScalef(scale, scale, scale);
+    		__super::draw(scale);
+  		}
+  		glPopMatrix();
+	}
