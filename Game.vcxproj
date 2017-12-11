@@ -91,6 +91,7 @@
     <ClCompile Include="sourceFiles\Loader.cpp" />
     <ClCompile Include="sourceFiles\Main.cpp" />
     <ClCompile Include="sourceFiles\Objects\Flashlight.cpp" />
+    <ClCompile Include="sourceFiles\Objects\InteractiveObjects\Clues\Blootrail.cpp" />
     <ClCompile Include="sourceFiles\Objects\InteractiveObjects\Clues\Body.cpp" />
     <ClCompile Include="sourceFiles\Objects\InteractiveObjects\Clues\BrokenGlass.cpp" />
     <ClCompile Include="sourceFiles\Objects\InteractiveObjects\Clues\Clue.cpp" />
@@ -127,6 +128,7 @@
     <ClInclude Include="headerFiles\Loader.h" />
     <ClInclude Include="headerFiles\Model_3DS.h" />
     <ClInclude Include="headerFiles\Objects\Flashlight.h" />
+    <ClInclude Include="headerFiles\Objects\InteractiveObjects\Clues\Bloodtrail.h" />
     <ClInclude Include="headerFiles\Objects\InteractiveObjects\Clues\Body.h" />
     <ClInclude Include="headerFiles\Objects\InteractiveObjects\Clues\BrokenGlass.h" />
     <ClInclude Include="headerFiles\Objects\InteractiveObjects\Clues\Clue.h" />

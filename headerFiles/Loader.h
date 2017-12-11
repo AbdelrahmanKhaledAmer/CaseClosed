@@ -5,6 +5,7 @@
 
 #include "headerFiles/Objects/Flashlight.h"
 #include "headerFiles/Objects/InteractiveObjects/Clues/Body.h"
+#include "headerFiles/Objects/InteractiveObjects/Clues/Bloodtrail.h"
 #include "headerFiles/Objects/InteractiveObjects/Clues/BrokenGlass.h"
 #include "headerFiles/Objects/InteractiveObjects/Clues/Footprints.h"
 #include "headerFiles/Objects/InteractiveObjects/Clues/Knife.h"
@@ -45,4 +46,5 @@ void loadBodyModel(Body &body);
 
 void loadBrokenGlassImage(BrokenGlass &brokenGlass);
 void loadFootprintsImage(Footprints &footprints);
+void loadBloodtrailImage(Bloodtrail &bloodtrail);
 #endif

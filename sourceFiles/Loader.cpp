@@ -147,3 +147,14 @@ void loadFootprintsImage(Footprints &footprints) {
   );
   footprints.setImage(footprintsImage);
 }
+
+void loadBloodtrailImage(Bloodtrail &bloodtrail) {
+  char *bloodtrailPath =  "assets/images/blood_trail.png";
+  GLuint bloodtrailImage 
+  		= SOIL_load_OGL_texture(
+   	bloodtrailPath, 
+    SOIL_LOAD_RGBA, SOIL_CREATE_NEW_ID,
+    SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_COMPRESS_TO_DXT |SOIL_FLAG_MULTIPLY_ALPHA
+  );
+  bloodtrail.setImage(bloodtrailImage);
+}
