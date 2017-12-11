@@ -13,8 +13,7 @@ global origin.
 @return: Pointer to InteractiveObject interactiveObject
 */
 
-Bath::Bath(Vector3f location, Vector3f orientation,
-                         Vector3f scale)
+Bath::Bath(Vector3f location, Vector3f orientation, Vector3f scale)
     : NonInteractiveObject(location, orientation, scale,
                            Vector3f(0.9, 0.7, 1.9)) {}
 
@@ -36,3 +35,7 @@ void Bath::draw() {
 }
 
 void Bath::drawBoundries() { __super::drawBoundries(0.9, 0.7, 1.9); }
+
+void Bath::setModel(){
+	__super::setModel("assets/models/furniture/Bath/Bath Askew KOHLER N021017.3DS");
+}

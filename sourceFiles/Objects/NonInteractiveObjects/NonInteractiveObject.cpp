@@ -1,4 +1,4 @@
-#include "headerFiles/Objects/NonInteractiveObjects/NonInteractiveObject.h"
+#include "headerFiles\Objects\NonInteractiveObjects\NonInteractiveObject.h"
 
 /*
 Constructor for the NonInteractiveObject object.
@@ -26,6 +26,11 @@ Deletes the pointer for the NonInteractiveObject object.
 NonInteractiveObject::~NonInteractiveObject() {}
 
 void NonInteractiveObject::draw(float locScale) { __super::draw(locScale); }
+
 void NonInteractiveObject::drawBoundries(float xLength, float yLength, float zLength) {
   __super::drawBoundries(xLength, yLength, zLength);
+}
+
+void NonInteractiveObject::setModel(char *modelPath) {
+  __super::setModel(modelPath);
 }

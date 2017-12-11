@@ -17,11 +17,15 @@
 #include "headerFiles/Axes.h"
 #include "headerFiles/Camera.h"
 #include "headerFiles/Lights.h"
-#include "headerFiles/Loader.h"
 #include "headerFiles/Objects/Flashlight.h"
+#include "headerFiles/Objects/InteractiveObjects/Clues/Bloodtrail.h"
+#include "headerFiles/Objects/InteractiveObjects/Clues/Body.h"
+#include "headerFiles/Objects/InteractiveObjects/Clues/BrokenGlass.h"
+#include "headerFiles/Objects/InteractiveObjects/Clues/Footprints.h"
 #include "headerFiles/Objects/InteractiveObjects/Clues/Body.h"
 #include "headerFiles/Objects/InteractiveObjects/Clues/Knife.h"
 #include "headerFiles/Objects/InteractiveObjects/Door.h"
+#include "headerFiles/Objects/NonInteractiveObjects/Armchair.h"
 #include "headerFiles/Objects/NonInteractiveObjects/Bath.h"
 #include "headerFiles/Objects/NonInteractiveObjects/Bed.h"
 #include "headerFiles/Objects/NonInteractiveObjects/Bookcase.h"
@@ -35,11 +39,11 @@
 #include "headerFiles/Objects/NonInteractiveObjects/Sofa.h"
 #include "headerFiles/Objects/NonInteractiveObjects/Toilet.h"
 #include "headerFiles/Objects/NonInteractiveObjects/Tv.h"
+#include "headerFiles/Objects/NonInteractiveObjects/TvTable.h"
 #include "headerFiles/Objects/NonInteractiveObjects/Wall.h"
 #include "headerFiles/Objects/NonInteractiveObjects/Wardrobe.h"
 #include "headerFiles/Objects/Object.h"
 #include "headerFiles/Objects/NonInteractiveObjects/Wall.h"
-#include "headerFiles/Loader.h"
 #include "headerFiles/Objects/Player.h"
 
 // Screen Constants
@@ -51,8 +55,8 @@ const int height = 9 * scale;
 int gameState = PLAYING_STATE;
 InteractiveObject interactingObject(Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(0, 0, 0));
 
-Eigen::Vector3f eye(1, 1, 1);
-Eigen::Vector3f lookAt(3, 0.5, 1);
+Eigen::Vector3f eye(13, 1, 2);
+Eigen::Vector3f lookAt(15, 0.5, 2);
 Eigen::Vector3f orientation(0, 1, 0);
 
 Camera camera(eye, lookAt, orientation);
@@ -61,7 +65,7 @@ Player player(eye, Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vector3f(0.5, 1.5, 0.2)
 Clue* clues[3];
 //Same texture for each group?
 //Groups are Separated by an empty line.
-Wall* walls[23];
+Wall* walls[24];
 //Wall* wall0;	// South wall of corridor
 //Wall* wall1;	// West wall of corridor
 //Wall* wall2;	// North wall of corridor
@@ -69,27 +73,60 @@ Wall* walls[23];
 //Wall* wall4;	// East wall of corridor part 2
 //limits for corridor are east and west limits for total frame are
 //
-//Wall* wall5;	// North wall of kitchen
-//Wall* wall6;	// West wall of kitchen
+//Wall* wall5;	// West wall of kitchen
+//Wall* wall6;	// South wall of kitchen
 //
-//Wall* wall7;	// West wall of reception area part 1
-//Wall* wall8;	// West wall of reception area part 2
-//Wall* wall9;	// South wall of reception area
-//Wall* wall10;	// East wall of reception area part 1
-//Wall* wall11;	// East wall of reception area part 2
+//Wall* wall7;	// North wall of reception area
+//Wall* wall8;	// West wall of reception area part 1
+//Wall* wall9;	// West wall of reception area part 2
+//Wall* wall10;	// South wall of reception area
+//Wall* wall11;	// East wall of reception area part 1
+//Wall* wall12; // East wall of reception area part 2
 //
-//Wall* wall12;	// North wall of bedroom part 1
-//Wall* wall13;	// North wall of bedroom part 2
-//Wall* wall14;	// West wall of bedroom part 1
-//Wall* wall15;	// West wall of bedroom part 2
-//Wall* wall16;	// South wall of bedroom
-//Wall* wall17;	// East wall of bedroom
+//Wall* wall13;	// North wall of bedroom part 1
+//Wall* wall14;	// North wall of bedroom part 2
+//Wall* wall15;	// West wall of bedroom part 1
+//Wall* wall16;	// West wall of bedroom part 2
+//Wall* wall17;	// South wall of bedroom
+//Wall* wall18;	// East wall of bedroom
 //
-//Wall* wall18;	// North wall of bathroom
-//Wall* wall19;	// West wall of bathroom
-//Wall* wall20;	// South wall of bathroom part 1
-//Wall* wall21;	// South wall of bathroom part 2
-//Wall* wall22;	// East wall of bathroom
+//Wall* wall19;	// North wall of bathroom
+//Wall* wall20;	// West wall of bathroom
+//Wall* wall21;	// South wall of bathroom part 1
+//Wall* wall22;	// South wall of bathroom part 2
+//Wall* wall23;	// East wall of bathroom
+
+//livingroom
+Armchair armchair(Vector3f(22.8, 0, 10.2), Vector3f(0, 90, 0), Vector3f(1, 1, 1));
+Sofa sofa(Vector3f(24.5, 0, 9), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
+CoffeeTable coffeeTable(Vector3f(23.7, 0, 10.6), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
+Tv tv(Vector3f(24.5, 0, 11.5), Vector3f(0, -115+180, 0), Vector3f(1, 1, 1));
+TvTable tvTable(Vector3f(24.5, 0, 11.5), Vector3f(0, 180, 0), Vector3f(1, 1, 1));
+Bookcase bookcase(Vector3f(25.7, 0, 7), Vector3f(0, 180, 0), Vector3f(1, 1, 1));
+
+// Tv tv(Vector3f(0, 0, 0), Vector3f(0, -115, 0), Vector3f(1, 1, 1));
+// TvTable tvTable(Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
+
+//kitchen
+DiningSet diningSet(Vector3f(22.2, 0, 7), Vector3f(0, -90, 0), Vector3f(1, 1, 1));
+Kitchen kitchen(Vector3f(21.15, 0, 5.5), Vector3f(0, 270, 0), Vector3f(1, 1, 1));
+
+//Bedroom
+Bed bed(Vector3f(23, 0, 14.9), Vector3f(0, 180, 0), Vector3f(1, 1, 1));
+Nightstand nightstand1(Vector3f(24.17, 0, 16.2), Vector3f(0, 180, 0), Vector3f(1, 1, 1));
+Nightstand nightstand2(Vector3f(21.27, 0, 16.2), Vector3f(0, 180, 0), Vector3f(1, 1, 1));
+Wardrobe wardrobe(Vector3f(19.85, 0, 12.6), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
+
+//Bathroom
+Toilet toilet(Vector3f(25.9, 0, 15), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
+Sink sink(Vector3f(27.2, 0, 12.3), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
+Bath bath(Vector3f(28, 0, 14.9), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
+
+//Clues
+Body body(Vector3f(23, 0, 14.9), Vector3f(0, 180, 0), Vector3f(1, 1, 1));
+BrokenGlass brokenGlass(Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vector3f(1, 1, 1));
+Footprints footprints(Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vector3f(1, 1, 1));
+Bloodtrail bloodtrail(Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vector3f(1, 1, 1));
 void initClues() {
 
 	
@@ -104,8 +141,9 @@ void initClues() {
 	clues[0] = new Knife(Vector3f(4, 0.5, 1), Vector3f(45, 45, 45), Vector3f(1, 1, 1), Vector3f(1, 1, 1));
 	clues[1] = new Knife(Vector3f(3, 0.5, 1), Vector3f(45, 45, 45), Vector3f(1, 1, 1), Vector3f(1, 1, 1));
 	clues[2] = new Knife(Vector3f(2, 0.5, 1), Vector3f(45, 45, 45), Vector3f(1, 1, 1), Vector3f(1, 1, 1));
-	printf("%p",clues[0]);
+	// printf("%p",clues[0]);
 }
+
 void DrawClues() {
 	int len = sizeof(clues) / sizeof(*clues);
 	bool win = true;
@@ -131,106 +169,110 @@ void initEnvironment()
 {
 	Eigen::Vector3f dim(0.2, 2, 1);
 	// Corridor
-	Eigen::Vector3f loc0(0, 0, 0);		// (0, 0)
+	Eigen::Vector3f loc0(12, 0, 1.63);	// (1.63, 12)
 	Eigen::Vector3f ori0(0, 0, 0);		// along z
 	Eigen::Vector3f scl0(1, 1, 3);		// length 3
 	walls[0] = new Wall(loc0, ori0, scl0, dim);
-	Eigen::Vector3f loc1(0, 0, 0);		// (0, 0)
+	Eigen::Vector3f loc1(12, 0, 1.63);	// (1.63, 12)
 	Eigen::Vector3f ori1(0, 90, 0);		// along x
-	Eigen::Vector3f scl1(1, 1, 30);		// length 30
+	Eigen::Vector3f scl1(1, 1, 18);		// length 18
 	walls[1] = new Wall(loc1, ori1, scl1, dim);
-	Eigen::Vector3f loc2(30, 0, 0);		// (0, 30)
+	Eigen::Vector3f loc2(30, 0, 1.63);	// (1.63, 30)
 	Eigen::Vector3f ori2(0, 0, 0);		// along z
 	Eigen::Vector3f scl2(1, 1, 3);		// length 3
 	walls[2] = new Wall(loc2, ori2, scl2, dim);
-	Eigen::Vector3f loc3(0, 0, 3);		// (3,0)
+	Eigen::Vector3f loc3(12, 0, 4.63);	// (4.63, 12)
 	Eigen::Vector3f ori3(0, 90, 0);		// along x
-	Eigen::Vector3f scl3(1, 1, 24);		// length 24
+	Eigen::Vector3f scl3(1, 1, 12);		// length 12 
 	walls[3] = new Wall(loc3, ori3, scl3, dim);
-	Eigen::Vector3f loc4(24.75, 0, 3);	// (3,24.75)
+	Eigen::Vector3f loc4(25, 0, 4.63);	// (4.63, 25)
 	Eigen::Vector3f ori4(0, 90, 0);		// along x
-	Eigen::Vector3f scl4(1, 1, 5.25);	// length 5.25
+	Eigen::Vector3f scl4(1, 1, 5);		// length 5
 	walls[4] = new Wall(loc4, ori4, scl4, dim);
 
 	// Kitchen
-	Eigen::Vector3f loc5(28.5, 0, 3);		// (3, 28.5)
-	Eigen::Vector3f ori5(0, 0, 0);			// along z
-	Eigen::Vector3f scl5(1, 1, 9);			// length 9
+	Eigen::Vector3f loc5(19.5, 0, 4.64);	// (4.63, 19.5)
+	Eigen::Vector3f ori5(0, 90, 0);			// along x
+	Eigen::Vector3f scl5(1, 1, 3.5);		// length 3
 	walls[5] = new Wall(loc5, ori5, scl5, dim);
-	Eigen::Vector3f loc6(25.5, 0, 3.01);	// (3, 25.5)
-	Eigen::Vector3f ori6(0, 90, 0);			// along x
-	Eigen::Vector3f scl6(1, 1, 3);			// length 3
+	Eigen::Vector3f loc6(19.5, 0, 4.64);	// (4.63, 19.5)
+	Eigen::Vector3f ori6(0, 0, 0);			// along z
+	Eigen::Vector3f scl6(1, 1, 2.87);		// length 2.87
 	walls[6] = new Wall(loc6, ori6, scl6, dim);
 
 	// Reception
-	Eigen::Vector3f loc7(24.76, 0, 3.01);	// (3, 24.76)
-	Eigen::Vector3f ori7(0, 90, 0);			// along x
-	Eigen::Vector3f scl7(1, 1, 0.75);		// length 0.75
+	Eigen::Vector3f loc7(26, 0, 4.64);		// (4.63, 26)
+	Eigen::Vector3f ori7(0, 0, 0);			// along z
+	Eigen::Vector3f scl7(1, 1, 7.37);		// length 7.37
 	walls[7] = new Wall(loc7, ori7, scl7, dim);
-	Eigen::Vector3f loc8(19.5, 0, 3.01); 	// (3, 16.5) || (3, 19.5)
+	Eigen::Vector3f loc8(23, 0, 4.64); 		// (4.63, 23)
 	Eigen::Vector3f ori8(0, 90, 0);			// along x
-	Eigen::Vector3f scl8(1, 1, 4.49);		// length 7.5 || length 4.5
+	Eigen::Vector3f scl8(1, 1, 1);			// length 1
 	walls[8] = new Wall(loc8, ori8, scl8, dim);
-	Eigen::Vector3f loc9(19.5, 0, 3.01); 	// (3, 16.5) || (3, 19.5)
-	Eigen::Vector3f ori9(0, 0, 0);			// along z
-	Eigen::Vector3f scl9(1, 1, 9);			// length 9 || length 9
+	Eigen::Vector3f loc9(25, 0, 4.64);	 	// (4.63, 25)
+	Eigen::Vector3f ori9(0, 90, 0);			// along x
+	Eigen::Vector3f scl9(1, 1, 1);			// length 1
 	walls[9] = new Wall(loc9, ori9, scl9, dim);
-	Eigen::Vector3f loc10(19.5, 0, 12);		//(12, 16.5) || (12, 19.5)
-	Eigen::Vector3f ori10(0, 90, 0);		// along x
-	Eigen::Vector3f scl10(1, 1, 1.5);		// length 1.5 || length 1.5
+	Eigen::Vector3f loc10(19.5, 0, 7.5);	// (6.5, 19.5)
+	Eigen::Vector3f ori10(0, 0, 0);			// along z
+	Eigen::Vector3f scl10(1, 1, 4.5);		// length 4.5
 	walls[10] = new Wall(loc10, ori10, scl10, dim);
-	Eigen::Vector3f loc11(21.75, 0, 12);	// (12, 18.75) || (12, 21.75)
+	Eigen::Vector3f loc11(19.5, 0, 12);		// (12, 19.5)
 	Eigen::Vector3f ori11(0, 90, 0);		// along x
-	Eigen::Vector3f scl11(1, 1, 6.75);		// length 9.75	|| length 6.75
+	Eigen::Vector3f scl11(1, 1, 1.5);		// length 1.5
 	walls[11] = new Wall(loc11, ori11, scl11, dim);
+	Eigen::Vector3f loc12(22, 0, 12);		// (12, 22)
+	Eigen::Vector3f ori12(0, 90, 0);		// along x
+	Eigen::Vector3f scl12(1, 1, 3.5);		// length 3.5
+	walls[12] = new Wall(loc12, ori12, scl12, dim);
 
 	// Bedroom
-	Eigen::Vector3f loc12(25.5, 0, 12.01);	// (12, 24) || (12, 25.5)
-	Eigen::Vector3f ori12(0, 0, 0);			// along z
-	Eigen::Vector3f scl12(1, 1, 0.99);		// length 1 || length 1
-	walls[12] = new Wall(loc12, ori12, scl12, dim);
-	Eigen::Vector3f loc13(25.5, 0, 13.75);	// (13.75, 24) || (13.75, 25.5)
+	Eigen::Vector3f loc13(25.5, 0, 12.01);	// (12, 25.5)
 	Eigen::Vector3f ori13(0, 0, 0);			// along z
-	Eigen::Vector3f scl13(1, 1, 2.75);		// length 4.25 || length 2.75
+	Eigen::Vector3f scl13(1, 1, 0.99);		// length 1
 	walls[13] = new Wall(loc13, ori13, scl13, dim);
-	Eigen::Vector3f loc14(19.5, 0, 12.01);	//	(12, 16.5) || (12, 19.5)
-	Eigen::Vector3f ori14(0, 90, 0);		// along x
-	Eigen::Vector3f scl14(1, 1, 1.5);		// length 1.5 || length 1.5
+	Eigen::Vector3f loc14(25.5, 0, 14);	// (14, 25.5)
+	Eigen::Vector3f ori14(0, 0, 0);			// along z
+	Eigen::Vector3f scl14(1, 1, 2.5);		// length 2.5
 	walls[14] = new Wall(loc14, ori14, scl14, dim);
-	Eigen::Vector3f loc15(21.75, 0, 12.01);	// (12, 18.75) || (12, 21.75)
+	Eigen::Vector3f loc15(19.5, 0, 12.01);	// (12, 19.5)
 	Eigen::Vector3f ori15(0, 90, 0);		// along x
-	Eigen::Vector3f scl15(1, 1, 3.75);		// length 5.25 || length 3.75
+	Eigen::Vector3f scl15(1, 1, 1.5);		// length 1.5
 	walls[15] = new Wall(loc15, ori15, scl15, dim);
-	Eigen::Vector3f loc16(19.5, 0, 12);		// (12, 16.5) || (12, 19.5)
-	Eigen::Vector3f ori16(0, 0, 0);			// along z
-	Eigen::Vector3f scl16(1, 1, 4.5);		// length 6	|| length 4.5
+	Eigen::Vector3f loc16(22, 0, 12.01);	// (12, 22)
+	Eigen::Vector3f ori16(0, 90, 0);		// along x
+	Eigen::Vector3f scl16(1, 1, 3.5);		// length 3.5
 	walls[16] = new Wall(loc16, ori16, scl16, dim);
-	Eigen::Vector3f loc17(19.5, 0, 16.5);	// (18, 16.5) || (16.5, 19.5)
-	Eigen::Vector3f ori17(0, 90, 0);		// along x
-	Eigen::Vector3f scl17(1, 1, 6);			// length 7.5 || length 6
+	Eigen::Vector3f loc17(19.5, 0, 12);		// (12, 19.5)
+	Eigen::Vector3f ori17(0, 0, 0);			// along z
+	Eigen::Vector3f scl17(1, 1, 4.5);		// length 4.5
 	walls[17] = new Wall(loc17, ori17, scl17, dim);
+	Eigen::Vector3f loc18(19.5, 0, 16.5);	// (16.5, 19.5)
+	Eigen::Vector3f ori18(0, 90, 0);		// along x
+	Eigen::Vector3f scl18(1, 1, 6);			// length 6
+	walls[18] = new Wall(loc18, ori18, scl18, dim);
 
 	// Bathroom
-	Eigen::Vector3f loc18(28.5, 0, 12);		// (12, 28.5) || (12, 28.5)
-	Eigen::Vector3f ori18(0, 0, 0);			// along z
-	Eigen::Vector3f scl18(1, 1, 4);			// length 6	|| length 4
-	walls[18] = new Wall(loc18, ori18, scl18, dim);
-	Eigen::Vector3f loc19(25.5, 0, 12.01);	// (12, 24) || (12, 25.5)
-	Eigen::Vector3f ori19(0, 90, 0);		// along x
-	Eigen::Vector3f scl19(1, 1, 3);			// length 4.5 || length 3
+	Eigen::Vector3f loc19(28.5, 0, 12);		// (12, 28.5)
+	Eigen::Vector3f ori19(0, 0, 0);			// along z
+	Eigen::Vector3f scl19(1, 1, 4);			// length 4
 	walls[19] = new Wall(loc19, ori19, scl19, dim);
-	Eigen::Vector3f loc20(25.51, 0, 12.01);	// (12, 24) || (12, 25.5)
+	Eigen::Vector3f loc20(25.5, 0, 12.01);	// (12, 25.5)
 	Eigen::Vector3f ori20(0, 90, 0);		// along x
-	Eigen::Vector3f scl20(1, 1, 0.99);		// length 1 || length 1
+	Eigen::Vector3f scl20(1, 1, 3);			// length 3
 	walls[20] = new Wall(loc20, ori20, scl20, dim);
-	Eigen::Vector3f loc21(25.51, 0, 13.76);	// (13.75, 24) || (13.75, 25.5)
+	Eigen::Vector3f loc21(25.51, 0, 12.01);	// (12, 25.5)
 	Eigen::Vector3f ori21(0, 0, 0);			// along z
-	Eigen::Vector3f scl21(1, 1, 2.25);		// length 4.25 || length 2.25
+	Eigen::Vector3f scl21(1, 1, 0.99);		// length 1
 	walls[21] = new Wall(loc21, ori21, scl21, dim);
-	Eigen::Vector3f loc22(25.51, 0, 16);	// (18, 24) || (16, 25.5)
-	Eigen::Vector3f ori22(0, 90, 0);		// along x
-	Eigen::Vector3f scl22(1, 1, 3);			// length 4.5 || length 3
+	Eigen::Vector3f loc22(25.51, 0, 14.01);	// (14, 25.5)
+	Eigen::Vector3f ori22(0, 0, 0);			// along z
+	Eigen::Vector3f scl22(1, 1, 2);			// length 2
 	walls[22] = new Wall(loc22, ori22, scl22, dim);
+	Eigen::Vector3f loc23(25.51, 0, 16);	// (16, 25.5)
+	Eigen::Vector3f ori23(0, 90, 0);		// along x
+	Eigen::Vector3f scl23(1, 1, 3);			// length 3
+	walls[23] = new Wall(loc23, ori23, scl23, dim);
 }
 
 void drawEnvironment()
@@ -268,29 +310,22 @@ bool intersectsWalls()
 	{
 		intersects |= (*walls[i]).intersects(player);
 	}
+
+	intersects |= sofa.intersects(player);    
+	intersects |= coffeeTable.intersects(player);
+	intersects |= tv.intersects(player);
+	intersects |= diningSet.intersects(player);
+	intersects |= kitchen.intersects(player);
+	intersects |= bed.intersects(player);
+	intersects |= nightstand1.intersects(player);
+	intersects |= nightstand2.intersects(player);
+	intersects |= wardrobe.intersects(player);
+	intersects |= toilet.intersects(player);
+	intersects |= sink.intersects(player);
+	intersects |= bath.intersects(player);
+
 	return intersects;
 }
-
-//livingroom
-Sofa sofa(Vector3f(20.5, 0, 8.5), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
-CoffeeTable coffeeTable(Vector3f(20.5, 0, 10), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
-Tv tv(Vector3f(20.5, 0, 11), Vector3f(0, 180, 0), Vector3f(1, 1, 1));
-
-//kitchen
-DiningSet diningSet(Vector3f(24.2, 0, 9), Vector3f(0, -90, 0), Vector3f(1, 1, 1));
-Kitchen kitchen(Vector3f(25, 0, 10.9), Vector3f(0, 90, 0), Vector3f(1, 1, 1));
-
-//Bedroom
-Body body(Vector3f(23, 0, 14.9), Vector3f(0, 180, 0), Vector3f(1, 1, 1));
-Bed bed(Vector3f(23, 0, 14.9), Vector3f(0, 180, 0), Vector3f(1, 1, 1));
-Nightstand nightstand1(Vector3f(24.17, 0, 16.2), Vector3f(0, 180, 0), Vector3f(1, 1, 1));
-Nightstand nightstand2(Vector3f(21.27, 0, 16.2), Vector3f(0, 180, 0), Vector3f(1, 1, 1));
-Wardrobe wardrobe(Vector3f(19.85, 0, 12.6), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
-
-//Bathroom
-Toilet toilet(Vector3f(25.9, 0, 15), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
-Sink sink(Vector3f(27.2, 0, 12.3), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
-Bath bath(Vector3f(28, 0, 14.9), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
 
 
 void initFlashLight() {
@@ -329,9 +364,11 @@ void initFlashLight() {
 void display(void)
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	
 	// Setup light
 	Lights::initLightSource();
-Lights::setupLights();
+	Lights::setupLights();
+	
 	// Set the camera
 	initFlashLight();
 	player.getCamera().setup();
@@ -340,9 +377,7 @@ Lights::setupLights();
 	// Axes for modeling 
 	Axes axes(0.5);
 
-	drawEnvironment();
-
-	//glColor3f(0.8f, 0.1f, 0.2f);
+	glColor3f(0.8f, 0.1f, 0.2f);
 	if(gameState == PLAYING_STATE)
 	{
 		DrawClues();
@@ -359,9 +394,12 @@ Lights::setupLights();
 		drawEnvironment();
 		
 		//livingroom
+		armchair.draw();
 		sofa.draw();
 		coffeeTable.draw();
 		tv.draw();
+		tvTable.draw();
+		bookcase.draw();
 
 		//kitchen
 		kitchen.draw();
@@ -378,7 +416,28 @@ Lights::setupLights();
 		toilet.draw();
 		sink.draw();
 		bath.draw();
+		
+		// armchair.drawBoundries();
+		// sofa.drawBoundries();
+		// coffeeTable.drawBoundries();
+		// tv.drawBoundries();
+		// tvTable.drawBoundries();
+		// bookcase.drawBoundries();
+		// kitchen.drawBoundries();
+		// diningSet.drawBoundries();
+		// bed.drawBoundries();
+		// nightstand1.drawBoundries();
+		// nightstand2.drawBoundries();
+		// wardrobe.drawBoundries();
+		// toilet.drawBoundries();
+		// sink.drawBoundries();
 		// bath.drawBoundries();
+
+		//clues
+		body.draw();
+		// brokenGlass.draw();
+		// footprints.draw();
+		bloodtrail.draw();
 	}
 	glPopMatrix();
 
@@ -389,25 +448,30 @@ Lights::setupLights();
 
 void loadAssets()
 {
-	//loading models
-	loadSofaModel(sofa);
-	loadCoffeeTableModel(coffeeTable);
-	loadTvModel(tv);
+	armchair.setModel();
+	sofa.setModel();
+	coffeeTable.setModel();
+	tv.setModel();
+	tvTable.setModel();
+	bookcase.setModel();
 
-	loadKitchenModel(kitchen);
-	loadDiningSetModel(diningSet);
+	kitchen.setModel();
+	diningSet.setModel();
 
-	loadBodyModel(body);
-	loadBedModel(bed);
-	loadNightstandModel(nightstand1);
-	loadNightstandModel(nightstand2);
-	loadWardrobeModel(wardrobe);
+	bed.setModel();
+	nightstand1.setModel();
+	nightstand2.setModel();
+	wardrobe.setModel();
 
-	loadToiletModel(toilet);
-	loadSinkModel(sink);
-	loadBathModel(bath);
+	toilet.setModel();
+	sink.setModel();
+	bath.setModel();
 	
-	// Loading texture files
+	body.setModel();
+	brokenGlass.setImage();
+	footprints.setImage();
+	bloodtrail.setImage();
+
 	// Starting music
 }
 
@@ -436,8 +500,7 @@ void key(unsigned char k, int x, int y)
 			player.lookRight();
 			break;
 		case 'j':
-			//camera.rotateLeft();
-			player.lookLeft();
+			
 			break;
 		case 'i':
 			//camera.rotateUp();
@@ -513,6 +576,13 @@ void key(unsigned char k, int x, int y)
 		case 'e':
 			gameState = PLAYING_STATE;
 			break;
+		} 
+	}else if (gameState == JOURNAL_STATE) {
+		switch(k)
+		{
+			case 'j':
+			gameState = PLAYING_STATE;
+			break;
 		}
 	}
 	glutPostRedisplay();
@@ -527,7 +597,7 @@ void mouseMovement(int x, int y)
 	if(gameState == PLAYING_STATE)
 	{
 		if (y > height_center)
-			//		camera.rotateDown(0.4);
+			//camera.rotateDown(0.4);
 			player.lookDown(0.4);
 		if (y < height_center)
 			//camera.rotateUp(0.4);
@@ -563,8 +633,14 @@ void losingStateCaller(int val)
 	glutPostRedisplay();
 }
 
-
-
+void journalStateCaller(int val)
+{
+	if(gameState != PLAYING_STATE){
+		gameState = JOURNAL_STATE;
+		printf("journal appear\n");
+	}
+	glutPostRedisplay();
+}
 
 void main(int argc, char** argv)
 {
@@ -595,7 +671,7 @@ void main(int argc, char** argv)
 	glShadeModel(GL_SMOOTH);
 
 	//TODO 10 mins
-	//glutTimerFunc(10000, losingStateCaller, 0);
+	// glutTimerFunc(10000, losingStateCaller, 0);
 
 	glutMainLoop();
 }

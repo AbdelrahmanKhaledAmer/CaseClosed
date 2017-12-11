@@ -34,3 +34,7 @@ void Sink::draw() {
 }
 
 void Sink::drawBoundries() { __super::drawBoundries(1.1f, 0.8f, 0.6f); }
+
+void Sink::setModel() {
+  __super::setModel("assets/models/furniture/Sink/Wash-basin Ravak SDZU praktik S N080317.3DS");
+}

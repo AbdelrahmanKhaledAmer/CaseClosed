@@ -35,3 +35,7 @@ void Toilet::draw() {
 }
 
 void Toilet::drawBoundries() { __super::drawBoundries(0.6f, 0.9f, 0.5f); }
+
+void Toilet::setModel() {
+  __super::setModel("assets/models/furniture/Toilet/Lavatory pan N200317.3DS");
+}

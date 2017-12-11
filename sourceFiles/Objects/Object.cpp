@@ -69,8 +69,8 @@ Vector3f Object::dimensions()
     Setter Function.
     Sets the current model of the Object object.
 */
-void Object::setModel(Model_3DS model){
-    this->model_ = model;
+void Object::setModel(char *modelPath) {
+	model_.Load(modelPath);	
 }
 
 /**
@@ -128,9 +128,18 @@ bool Object::intersects(Object object)
     float obj2YMax = object.location_.y() + object.dimensions_.y()/2;
     float obj2ZMin = object.location_.z() - object.dimensions_.z()/2;
     float obj2ZMax = object.location_.z() + object.dimensions_.z()/2;
-    bool intersectsX = (obj1XMin >= obj2XMin && obj1XMin <= obj2XMax) || (obj1XMax >= obj2XMin && obj1XMax <= obj2XMax);
-    bool intersectsY = (obj1YMin >= obj2YMin && obj1YMin <= obj2YMax) || (obj1YMax >= obj2YMin && obj1YMax <= obj2YMax);
-    bool intersectsZ = (obj1ZMin >= obj2ZMin && obj1ZMin <= obj2ZMax) || (obj1ZMax >= obj2ZMin && obj1ZMax <= obj2ZMax);
+    bool intersectsX = (obj1XMin >= obj2XMin && obj1XMin <= obj2XMax)
+                    || (obj1XMax >= obj2XMin && obj1XMax <= obj2XMax)
+                    || (obj2XMin >= obj1XMin && obj2XMin <= obj1XMax)
+                    || (obj2XMax >= obj1XMin && obj2XMax <= obj1XMax);
+    bool intersectsY = (obj1YMin >= obj2YMin && obj1YMin <= obj2YMax)
+                    || (obj1YMax >= obj2YMin && obj1YMax <= obj2YMax)
+                    || (obj2YMin >= obj1YMin && obj2YMin <= obj1YMax)
+                    || (obj2YMax >= obj1YMin && obj2YMax <= obj1YMax);
+    bool intersectsZ = (obj1ZMin >= obj2ZMin && obj1ZMin <= obj2ZMax)
+                    || (obj1ZMax >= obj2ZMin && obj1ZMax <= obj2ZMax)
+                    || (obj2ZMin >= obj1ZMin && obj2ZMin <= obj1ZMax)
+                    || (obj2ZMax >= obj1ZMin && obj2ZMax <= obj1ZMax);
     return intersectsX && intersectsY && intersectsZ;
 }
 

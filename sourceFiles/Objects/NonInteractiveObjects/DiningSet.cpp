@@ -38,3 +38,6 @@ void DiningSet::draw() {
 
 void DiningSet::drawBoundries() { __super::drawBoundries(1.25, 0.9, 1.5); }
 
+void DiningSet::setModel() {
+  __super::setModel("assets/models/furniture/DiningSet/4 Chair 2 Tone.3ds");
+}

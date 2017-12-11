@@ -45,9 +45,6 @@
     <ClInclude Include="headerFiles\Camera.h">
       <Filter>headerFiles</Filter>
     </ClInclude>
-    <ClInclude Include="headerFiles\Loader.h">
-      <Filter>headerFiles</Filter>
-    </ClInclude>
     <ClInclude Include="headerFiles\Objects\Journal.h">
       <Filter>headerFiles\Objects</Filter>
     </ClInclude>
@@ -138,12 +135,27 @@
     <ClInclude Include="headerFiles\Objects\InteractiveObjects\Clues\Body.h">
       <Filter>headerFiles\Objects\InteractiveObjects\Clues</Filter>
     </ClInclude>
+    <ClInclude Include="headerFiles\Objects\InteractiveObjects\Clues\BrokenGlass.h">
+      <Filter>headerFiles\Objects\InteractiveObjects\Clues</Filter>
+    </ClInclude>
+    <ClInclude Include="headerFiles\Objects\InteractiveObjects\Clues\Footprints.h">
+      <Filter>headerFiles\Objects\InteractiveObjects\Clues</Filter>
+    </ClInclude>
+    <ClInclude Include="headerFiles\Objects\InteractiveObjects\Clues\Bloodtrail.h">
+      <Filter>headerFiles\Objects\InteractiveObjects\Clues</Filter>
+    </ClInclude>
+    <ClInclude Include="headerFiles\Objects\InteractiveObjects\Clues\ClueImage.h">
+      <Filter>headerFiles\Objects\InteractiveObjects\Clues</Filter>
+    </ClInclude>
+    <ClInclude Include="headerFiles\Objects\NonInteractiveObjects\Armchair.h">
+      <Filter>headerFiles\Objects\NonInteractiveObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="headerFiles\Objects\NonInteractiveObjects\TvTable.h">
+      <Filter>headerFiles\Objects\NonInteractiveObjects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sourceFiles\Camera.cpp">
-      <Filter>sourceFiles</Filter>
-    </ClCompile>
-    <ClCompile Include="sourceFiles\Loader.cpp">
       <Filter>sourceFiles</Filter>
     </ClCompile>
     <ClCompile Include="sourceFiles\main.cpp">
@@ -229,6 +241,24 @@
     </ClCompile>
     <ClCompile Include="sourceFiles\Objects\InteractiveObjects\Clues\Body.cpp">
       <Filter>sourceFiles\Objects\InteractiveObjects\Clues</Filter>
+    </ClCompile>
+    <ClCompile Include="sourceFiles\Objects\InteractiveObjects\Clues\BrokenGlass.cpp">
+      <Filter>sourceFiles\Objects\InteractiveObjects\Clues</Filter>
+    </ClCompile>
+    <ClCompile Include="sourceFiles\Objects\InteractiveObjects\Clues\Footprints.cpp">
+      <Filter>sourceFiles\Objects\InteractiveObjects\Clues</Filter>
+    </ClCompile>
+    <ClCompile Include="sourceFiles\Objects\InteractiveObjects\Clues\Bloodtrail.cpp">
+      <Filter>sourceFiles\Objects\InteractiveObjects\Clues</Filter>
+    </ClCompile>
+    <ClCompile Include="sourceFiles\Objects\InteractiveObjects\Clues\ClueImage.cpp">
+      <Filter>sourceFiles\Objects\InteractiveObjects\Clues</Filter>
+    </ClCompile>
+    <ClCompile Include="sourceFiles\Objects\NonInteractiveObjects\Armchair.cpp">
+      <Filter>sourceFiles\Objects\NonInteractiveObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="sourceFiles\Objects\NonInteractiveObjects\TvTable.cpp">
+      <Filter>sourceFiles\Objects\NonInteractiveObjects</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
