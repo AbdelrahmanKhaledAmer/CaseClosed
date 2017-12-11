@@ -147,6 +147,9 @@
     <ClInclude Include="headerFiles\Objects\InteractiveObjects\Clues\ClueImage.h">
       <Filter>headerFiles\Objects\InteractiveObjects\Clues</Filter>
     </ClInclude>
+    <ClInclude Include="headerFiles\Objects\NonInteractiveObjects\Armchair.h">
+      <Filter>headerFiles\Objects\NonInteractiveObjects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sourceFiles\Camera.cpp">
@@ -247,6 +250,9 @@
     </ClCompile>
     <ClCompile Include="sourceFiles\Objects\InteractiveObjects\Clues\ClueImage.cpp">
       <Filter>sourceFiles\Objects\InteractiveObjects\Clues</Filter>
+    </ClCompile>
+    <ClCompile Include="sourceFiles\Objects\NonInteractiveObjects\Armchair.cpp">
+      <Filter>sourceFiles\Objects\NonInteractiveObjects</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

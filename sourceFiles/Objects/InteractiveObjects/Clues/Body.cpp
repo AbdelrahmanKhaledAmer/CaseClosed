@@ -37,7 +37,6 @@ void Body::draw() {
   glPopMatrix();
 }
 
-void Body::setModel(){
-    char* modelPath = "assets/models/clues/Body/Man N050214.3DS";
-    model_.Load(modelPath);
+void Body::setModel() {
+  __super::setModel("assets/models/clues/Body/Man N050214.3DS");
 }

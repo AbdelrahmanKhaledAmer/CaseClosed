@@ -4,7 +4,6 @@
 #include "headerFiles/Objects/NonInteractiveObjects/NonInteractiveObject.h"
 #include <Eigen/Dense>
 
-
 using namespace Eigen;
 
 class Sofa : public NonInteractiveObject {

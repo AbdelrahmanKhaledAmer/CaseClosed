@@ -39,7 +39,6 @@ void Sofa::draw() {
 
 void Sofa::drawBoundries() { __super::drawBoundries(1.7, 0.9, 0.975); }
 
-void Sofa::setModel(){
-    char* modelPath = "assets/models/furniture/Sofa/Sofa 1.3DS";
-    model_.Load(modelPath);
+void Sofa::setModel() {
+  __super::setModel("assets/models/furniture/Sofa/Sofa 1.3DS");
 }

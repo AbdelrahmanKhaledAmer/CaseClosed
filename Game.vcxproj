@@ -99,6 +99,7 @@
     <ClCompile Include="sourceFiles\Objects\InteractiveObjects\Clues\Knife.cpp" />
     <ClCompile Include="sourceFiles\Objects\InteractiveObjects\Door.cpp" />
     <ClCompile Include="sourceFiles\Objects\InteractiveObjects\InteractiveObject.cpp" />
+    <ClCompile Include="sourceFiles\Objects\NonInteractiveObjects\Armchair.cpp" />
     <ClCompile Include="sourceFiles\Objects\NonInteractiveObjects\Bath.cpp" />
     <ClCompile Include="sourceFiles\Objects\NonInteractiveObjects\DiningSet.cpp" />
     <ClCompile Include="sourceFiles\Objects\NonInteractiveObjects\NonInteractiveObject.cpp" />
@@ -136,6 +137,7 @@
     <ClInclude Include="headerFiles\Objects\InteractiveObjects\Clues\Knife.h" />
     <ClInclude Include="headerFiles\Objects\InteractiveObjects\Door.h" />
     <ClInclude Include="headerFiles\Objects\InteractiveObjects\InteractiveObject.h" />
+    <ClInclude Include="headerFiles\Objects\NonInteractiveObjects\Armchair.h" />
     <ClInclude Include="headerFiles\Objects\NonInteractiveObjects\Bath.h" />
     <ClInclude Include="headerFiles\Objects\NonInteractiveObjects\DiningSet.h" />
     <ClInclude Include="headerFiles\Objects\NonInteractiveObjects\NonInteractiveObject.h" />

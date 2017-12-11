@@ -25,6 +25,7 @@
 #include "headerFiles/Objects/InteractiveObjects/Clues/Body.h"
 #include "headerFiles/Objects/InteractiveObjects/Clues/Knife.h"
 #include "headerFiles/Objects/InteractiveObjects/Door.h"
+#include "headerFiles/Objects/NonInteractiveObjects/Armchair.h"
 #include "headerFiles/Objects/NonInteractiveObjects/Bath.h"
 #include "headerFiles/Objects/NonInteractiveObjects/Bed.h"
 #include "headerFiles/Objects/NonInteractiveObjects/Bookcase.h"
@@ -46,8 +47,8 @@
 
 // Screen Constants
 const int scale = 70;
-const int width = 16 * scale / 1.5;
-const int height = 9 * scale / 1.5;
+const int width = 16 * scale;
+const int height = 9 * scale;
 
 // Game variables
 int gameState = PLAYING_STATE;
@@ -94,8 +95,10 @@ Wall* walls[23];
 //Wall* wall22;	// East wall of bathroom
 
 //livingroom
+Armchair armchair(Vector3f(22.4, 0, 11), Vector3f(0, 90, 0), Vector3f(1, 1, 1));
 Sofa sofa(Vector3f(22.4, 0, 11), Vector3f(0, 90, 0), Vector3f(1, 1, 1));
-CoffeeTable coffeeTable(Vector3f(24, 0, 11.2), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
+// CoffeeTable coffeeTable(Vector3f(0, 0, 0), Vector3f(0, 90, 0), Vector3f(1, 1, 1));
+CoffeeTable coffeeTable(Vector3f(24, 0, 11.2), Vector3f(0, 90, 0), Vector3f(1, 1, 1));
 Tv tv(Vector3f(25.5, 0, 11), Vector3f(0, 270, 0), Vector3f(1, 1, 1));
 
 //kitchen
@@ -135,6 +138,7 @@ void initClues() {
 	clues[2] = new Knife(Vector3f(2, 0.5, 1), Vector3f(45, 45, 45), Vector3f(1, 1, 1), Vector3f(1, 1, 1));
 	// printf("%p",clues[0]);
 }
+
 void DrawClues() {
 	int len = sizeof(clues) / sizeof(*clues);
 	bool win = true;
@@ -149,8 +153,6 @@ void DrawClues() {
 	if (win)
 		gameState = WINNING_STATE;
 }
-
-
 
 void initEnvironment()
 {
@@ -323,8 +325,6 @@ void display(void)
 	// Axes for modeling 
 	Axes axes(0.5);
 
-	drawEnvironment();
-
 	glColor3f(0.8f, 0.1f, 0.2f);
 	if(gameState == PLAYING_STATE)
 	{
@@ -339,9 +339,10 @@ void display(void)
 
 	glPushMatrix();
 	{
-		drawEnvironment();
+		// drawEnvironment();
 		
 		//livingroom
+		armchair.draw();
 		sofa.draw();
 		coffeeTable.draw();
 		tv.draw();
@@ -362,6 +363,7 @@ void display(void)
 		sink.draw();
 		bath.draw();
 		
+		// armchair.drawBoundries();
 		// sofa.drawBoundries();
 		// coffeeTable.drawBoundries();
 		// tv.drawBoundries();
@@ -390,6 +392,7 @@ void display(void)
 
 void loadAssets()
 {
+	armchair.setModel();
 	sofa.setModel();
 	coffeeTable.setModel();
 	tv.setModel();

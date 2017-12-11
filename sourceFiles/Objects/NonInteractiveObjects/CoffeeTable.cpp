@@ -16,7 +16,7 @@ global origin.
 CoffeeTable::CoffeeTable(Vector3f location, Vector3f orientation,
                          Vector3f scale)
     : NonInteractiveObject(location, orientation, scale,
-                           Vector3f(1.7f, 0.5f, 1.7f)) {}
+                           Vector3f(0.4, 0.6, 1.05)) {}
 
 /**
 Destructor for the CoffeeTable object.
@@ -25,18 +25,19 @@ Deletes the pointer for the CoffeeTable object.
 CoffeeTable::~CoffeeTable() {}
 
 void CoffeeTable::draw() {
-  float scale = 0.0005;
+  float scale = 0.02;
 
   glPushMatrix();
   {
+    glTranslatef(0.42, -0.3, 0.48);
     glScalef(scale, scale, scale);
     __super::draw(scale);
   }
   glPopMatrix();
 }
 
-void CoffeeTable::drawBoundries() { __super::drawBoundries(1.2, 0.4, 1.2); }
+void CoffeeTable::drawBoundries() { __super::drawBoundries(0.4, 0.6, 1.05); }
 
 void CoffeeTable::setModel() {
-  __super::setModel("assets/models/furniture/CoffeeTable/Table N280817.3DS");
+  __super::setModel("assets/models/furniture/CoffeeTable/Table.3DS");
 }
