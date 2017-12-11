@@ -1,6 +1,6 @@
 #include "headerFiles\Objects\Journal.h"
 #include <iostream>
-
+using namespace std;
 /*
 Constructor for the Journal object.
 Returns a pointer for a Journal.
@@ -27,3 +27,19 @@ Journal::~Journal()
 {
 
 }
+
+	void write(string s) {
+	
+	}
+	void Journal::draw()
+	{
+		float scale = 0.0025;
+
+  		glPushMatrix();
+		{
+		    glTranslatef(0.21, 0, 0.36);
+   			glScalef(scale, scale, scale);
+    		__super::draw(scale);
+  		}
+  		glPopMatrix();
+	}
