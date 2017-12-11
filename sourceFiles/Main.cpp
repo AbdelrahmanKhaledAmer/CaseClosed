@@ -94,13 +94,13 @@ Wall* walls[23];
 //Wall* wall22;	// East wall of bathroom
 
 //livingroom
-Sofa sofa(Vector3f(20.5, 0, 8.5), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
-CoffeeTable coffeeTable(Vector3f(20.5, 0, 10), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
-Tv tv(Vector3f(20.5, 0, 11), Vector3f(0, 180, 0), Vector3f(1, 1, 1));
+Sofa sofa(Vector3f(22.4, 0, 11), Vector3f(0, 90, 0), Vector3f(1, 1, 1));
+CoffeeTable coffeeTable(Vector3f(24, 0, 11.2), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
+Tv tv(Vector3f(25.5, 0, 11), Vector3f(0, 270, 0), Vector3f(1, 1, 1));
 
 //kitchen
-DiningSet diningSet(Vector3f(24.2, 0, 9), Vector3f(0, -90, 0), Vector3f(1, 1, 1));
-Kitchen kitchen(Vector3f(25, 0, 10.9), Vector3f(0, 90, 0), Vector3f(1, 1, 1));
+DiningSet diningSet(Vector3f(22.2, 0, 7), Vector3f(0, -90, 0), Vector3f(1, 1, 1));
+Kitchen kitchen(Vector3f(21.15, 0, 5.5), Vector3f(0, 270, 0), Vector3f(1, 1, 1));
 
 //Bedroom
 Bed bed(Vector3f(23, 0, 14.9), Vector3f(0, 180, 0), Vector3f(1, 1, 1));
