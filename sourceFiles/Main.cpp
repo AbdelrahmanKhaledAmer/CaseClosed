@@ -1,19 +1,17 @@
-// Defines ==========================================================
+// Defines
 #define PI 3.14159265358979323846
-#define PLAYING_STATE 		0
-#define LOSING_STATE 		1
-#define WINNING_STATE 		2
-#define INTERACTING_STATE 	3
-#define JOURNAL_STATE 		4
-
-// Libraries, dependencies and classe ===============================
+#define PLAYING_STATE 0
+#define LOSING_STATE 1
+#define WINNING_STATE 2
+#define INTERACTING_STATE 3
+#define JOURNAL_STATE 4
+// Libraries, dependencies and classes
 #include "headerFiles/TextureBuilder.h"
 #include "headerFiles/Model_3DS.h"
 #include "headerFiles/GLTexture.h"
 #include <math.h>
 #include <iostream>
 #include <Eigen/Dense>
-#include "SOIL/src/SOIL.h"
 #include <headerFiles/GL/glut.h>
 
 #include "headerFiles/Axes.h"
@@ -24,6 +22,7 @@
 #include "headerFiles/Objects/InteractiveObjects/Clues/Body.h"
 #include "headerFiles/Objects/InteractiveObjects/Clues/BrokenGlass.h"
 #include "headerFiles/Objects/InteractiveObjects/Clues/Footprints.h"
+#include "headerFiles/Objects/InteractiveObjects/Clues/Body.h"
 #include "headerFiles/Objects/InteractiveObjects/Clues/Knife.h"
 #include "headerFiles/Objects/InteractiveObjects/Door.h"
 #include "headerFiles/Objects/NonInteractiveObjects/Bath.h"
@@ -42,6 +41,7 @@
 #include "headerFiles/Objects/NonInteractiveObjects/Wall.h"
 #include "headerFiles/Objects/NonInteractiveObjects/Wardrobe.h"
 #include "headerFiles/Objects/Object.h"
+#include "headerFiles/Objects/NonInteractiveObjects/Wall.h"
 #include "headerFiles/Objects/Player.h"
 
 // Screen Constants
@@ -149,6 +149,8 @@ void DrawClues() {
 	if (win)
 		gameState = WINNING_STATE;
 }
+
+
 
 void initEnvironment()
 {
@@ -311,17 +313,17 @@ bool intersectsWalls()
 void display(void)
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	
 	// Setup light
 	Lights::initLightSource();
 	Lights::setupLights();
-	
 	// Set the camera
 	player.getCamera().setup();
 	//	camera.setup();
 
 	// Axes for modeling 
 	Axes axes(0.5);
+
+	drawEnvironment();
 
 	glColor3f(0.8f, 0.1f, 0.2f);
 	if(gameState == PLAYING_STATE)
@@ -338,7 +340,7 @@ void display(void)
 	glPushMatrix();
 	{
 		drawEnvironment();
-
+		
 		//livingroom
 		sofa.draw();
 		coffeeTable.draw();
@@ -349,6 +351,7 @@ void display(void)
 		diningSet.draw();
 
 		//bedroom
+		body.draw();
 		bed.draw();
 		nightstand1.draw();
 		nightstand2.draw();
@@ -433,8 +436,7 @@ void key(unsigned char k, int x, int y)
 			player.lookRight();
 			break;
 		case 'j':
-			//camera.rotateLeft();
-			player.lookLeft();
+			
 			break;
 		case 'i':
 			//camera.rotateUp();
@@ -508,7 +510,14 @@ void key(unsigned char k, int x, int y)
 		case 'e':
 			gameState = PLAYING_STATE;
 			break;
-		}
+		} 
+		}else if (gameState == JOURNAL_STATE) {
+			switch(k)
+			{
+				case 'j':
+				gameState = PLAYING_STATE;
+				break;
+			}
 	}
 	glutPostRedisplay();
 }
@@ -554,6 +563,15 @@ void losingStateCaller(int val)
 	if (gameState != WINNING_STATE) {
 		gameState = LOSING_STATE;
 		printf("koko lost\n");
+	}
+	glutPostRedisplay();
+}
+
+void journalStateCaller(int val)
+{
+	if(gameState != PLAYING_STATE){
+		gameState = JOURNAL_STATE;
+		printf("journal appear\n");
 	}
 	glutPostRedisplay();
 }
