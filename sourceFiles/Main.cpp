@@ -92,6 +92,33 @@ Wall* walls[23];
 //Wall* wall20;	// South wall of bathroom part 1
 //Wall* wall21;	// South wall of bathroom part 2
 //Wall* wall22;	// East wall of bathroom
+
+//livingroom
+Sofa sofa(Vector3f(20.5, 0, 8.5), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
+CoffeeTable coffeeTable(Vector3f(20.5, 0, 10), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
+Tv tv(Vector3f(20.5, 0, 11), Vector3f(0, 180, 0), Vector3f(1, 1, 1));
+
+//kitchen
+DiningSet diningSet(Vector3f(24.2, 0, 9), Vector3f(0, -90, 0), Vector3f(1, 1, 1));
+Kitchen kitchen(Vector3f(25, 0, 10.9), Vector3f(0, 90, 0), Vector3f(1, 1, 1));
+
+//Bedroom
+Bed bed(Vector3f(23, 0, 14.9), Vector3f(0, 180, 0), Vector3f(1, 1, 1));
+Nightstand nightstand1(Vector3f(24.17, 0, 16.2), Vector3f(0, 180, 0), Vector3f(1, 1, 1));
+Nightstand nightstand2(Vector3f(21.27, 0, 16.2), Vector3f(0, 180, 0), Vector3f(1, 1, 1));
+Wardrobe wardrobe(Vector3f(19.85, 0, 12.6), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
+
+//Bathroom
+Toilet toilet(Vector3f(25.9, 0, 15), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
+Sink sink(Vector3f(27.2, 0, 12.3), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
+Bath bath(Vector3f(28, 0, 14.9), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
+
+//Clues
+Body body(Vector3f(23, 0, 14.9), Vector3f(0, 180, 0), Vector3f(1, 1, 1));
+BrokenGlass brokenGlass(Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vector3f(1, 1, 1));
+Footprints footprints(Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vector3f(1, 1, 1));
+Bloodtrail bloodtrail(Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vector3f(1, 1, 1));
+
 void initClues() {
 
 	
@@ -226,7 +253,7 @@ void initEnvironment()
 	Eigen::Vector3f loc22(25.51, 0, 16);	// (18, 24) || (16, 25.5)
 	Eigen::Vector3f ori22(0, 90, 0);		// along x
 	Eigen::Vector3f scl22(1, 1, 3);			// length 4.5 || length 3
-	walls[22] = new Wall(loc22, ori22, scl22, dim);
+	walls[22] = new Wall(loc22, ori22, scl22, dim);	
 }
 
 void drawEnvironment()
@@ -264,34 +291,22 @@ bool intersectsWalls()
 	{
 		intersects |= (*walls[i]).intersects(player);
 	}
+
+	intersects |= sofa.intersects(player);    
+	intersects |= coffeeTable.intersects(player);
+	intersects |= tv.intersects(player);
+	intersects |= diningSet.intersects(player);
+	intersects |= kitchen.intersects(player);
+	intersects |= bed.intersects(player);
+	intersects |= nightstand1.intersects(player);
+	intersects |= nightstand2.intersects(player);
+	intersects |= wardrobe.intersects(player);
+	intersects |= toilet.intersects(player);
+	intersects |= sink.intersects(player);
+	intersects |= bath.intersects(player);
+
 	return intersects;
 }
-
-//livingroom
-Sofa sofa(Vector3f(20.5, 0, 8.5), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
-CoffeeTable coffeeTable(Vector3f(20.5, 0, 10), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
-Tv tv(Vector3f(20.5, 0, 11), Vector3f(0, 180, 0), Vector3f(1, 1, 1));
-
-//kitchen
-DiningSet diningSet(Vector3f(24.2, 0, 9), Vector3f(0, -90, 0), Vector3f(1, 1, 1));
-Kitchen kitchen(Vector3f(25, 0, 10.9), Vector3f(0, 90, 0), Vector3f(1, 1, 1));
-
-//Bedroom
-Bed bed(Vector3f(23, 0, 14.9), Vector3f(0, 180, 0), Vector3f(1, 1, 1));
-Nightstand nightstand1(Vector3f(24.17, 0, 16.2), Vector3f(0, 180, 0), Vector3f(1, 1, 1));
-Nightstand nightstand2(Vector3f(21.27, 0, 16.2), Vector3f(0, 180, 0), Vector3f(1, 1, 1));
-Wardrobe wardrobe(Vector3f(19.85, 0, 12.6), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
-
-//Bathroom
-Toilet toilet(Vector3f(25.9, 0, 15), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
-Sink sink(Vector3f(27.2, 0, 12.3), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
-Bath bath(Vector3f(28, 0, 14.9), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
-
-//Clues
-Body body(Vector3f(23, 0, 14.9), Vector3f(0, 180, 0), Vector3f(1, 1, 1));
-BrokenGlass brokenGlass(Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vector3f(1, 1, 1));
-Footprints footprints(Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vector3f(1, 1, 1));
-Bloodtrail bloodtrail(Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vector3f(1, 1, 1));
 
 void display(void)
 {
@@ -343,6 +358,19 @@ void display(void)
 		toilet.draw();
 		sink.draw();
 		bath.draw();
+		
+		// sofa.drawBoundries();
+		// coffeeTable.drawBoundries();
+		// tv.drawBoundries();
+		// kitchen.drawBoundries();
+		// diningSet.drawBoundries();
+		// bed.drawBoundries();
+		// nightstand1.drawBoundries();
+		// nightstand2.drawBoundries();
+		// wardrobe.drawBoundries();
+		// toilet.drawBoundries();
+		// sink.drawBoundries();
+		// bath.drawBoundries();
 
 		//clues
 		body.draw();
