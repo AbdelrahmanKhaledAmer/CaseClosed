@@ -113,6 +113,12 @@ void DrawClues() {
 	{
 		if (!(*clues[i]).isFound())
 		{
+			if(i==0)
+			glColor3f(0, 1, 0);
+			if(i==1)
+				glColor3f(0, 1,1);
+			if(i==2)
+				glColor3f(1,0,0);
 			(*clues[i]).draw();
 			win = false;
 		}
@@ -286,13 +292,48 @@ Toilet toilet(Vector3f(25.9, 0, 15), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
 Sink sink(Vector3f(27.2, 0, 12.3), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
 Bath bath(Vector3f(28, 0, 14.9), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
 
+
+void initFlashLight() {
+
+
+
+
+	//GLfloat lmodel_ambient[] = { 0.1f, 0.1f, 0.1f, 1.0f };
+	//glLightModelfv(GL_LIGHT_MODEL_AMBIENT, lmodel_ambient);
+
+	//
+	Vector3f viewVec=(player.getCamera().lookAt() - player.location()).normalized();
+	
+	//Vector3f upVector = player.getCamera().Upvector();
+	//Vector3f eye = player.getCamera().location().normalized();
+	//Vector3f ViewCross = viewVec.cross(upVector).normalized();
+	GLfloat l1Diffuse[] = { 0.1f, 0.1f, 0.1f, 1.0f };
+	GLfloat l1Ambient[] = { 0.1f, 0.1f, 0.1f, 1.0f };
+	GLfloat l1Position[] = { player.location().x(), player.location().y(),player.location().z(), true };
+	//GLfloat l1Position[] = {eye.x(),eye.y(),eye.z()};
+	Vector3f dir = viewVec;
+	GLfloat l1Direction[] = {dir.x(),dir.y(),dir.z()};
+	GLfloat lightIntensity[] = { 0.8, 0.8, 0.8, 1.0f };
+	glLightfv(GL_LIGHT1, GL_DIFFUSE, l1Diffuse);
+	glLightfv(GL_LIGHT1, GL_AMBIENT, l1Ambient);
+	glLightfv(GL_LIGHT1, GL_POSITION, l1Position);
+	glLightf(GL_LIGHT1, GL_SPOT_CUTOFF, 15.0);
+	glLightf(GL_LIGHT1, GL_SPOT_EXPONENT, 90.0);
+	glLightfv(GL_LIGHT1, GL_SPOT_DIRECTION, l1Direction);
+
+	glLightfv(GL_LIGHT1, GL_AMBIENT, lightIntensity);
+
+
+}
+
 void display(void)
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	// Setup light
 	Lights::initLightSource();
-	Lights::setupLights();
+Lights::setupLights();
 	// Set the camera
+	initFlashLight();
 	player.getCamera().setup();
 	//	camera.setup();
 
@@ -301,7 +342,7 @@ void display(void)
 
 	drawEnvironment();
 
-	glColor3f(0.8f, 0.1f, 0.2f);
+	//glColor3f(0.8f, 0.1f, 0.2f);
 	if(gameState == PLAYING_STATE)
 	{
 		DrawClues();
@@ -380,6 +421,9 @@ void interactionTimer(int val)
 	}
 }
 
+
+
+
 void key(unsigned char k, int x, int y)
 {
 	int len = sizeof(clues) / sizeof(*clues);
@@ -443,7 +487,7 @@ void key(unsigned char k, int x, int y)
 			for ( int i = 0;  i < len;  i++)
 			{
 				//printf("%d\n", clues[0]);
-			  if(player.isLookingAt(*(clues[i])))
+			  if(player.isLookingAt(*(clues[i]))&&!(*clues[i]).isFound())
 				{
 					std::string s = (*clues[i]).Interact().append("\n");
 					interactingObject = *clues[i];
@@ -455,6 +499,8 @@ void key(unsigned char k, int x, int y)
 					(*clues[i]).find(true);
 					break;
 				}
+			 
+
 			}
 			break;
 		case 'q':
@@ -517,6 +563,9 @@ void losingStateCaller(int val)
 	glutPostRedisplay();
 }
 
+
+
+
 void main(int argc, char** argv)
 {
 	glutInit(&argc, argv);
@@ -539,13 +588,14 @@ void main(int argc, char** argv)
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT0);
+	glEnable(GL_LIGHT1);
+	//glEnable(GL_LIGHT2);
 	glEnable(GL_NORMALIZE);
 	glEnable(GL_COLOR_MATERIAL);
-
 	glShadeModel(GL_SMOOTH);
 
 	//TODO 10 mins
-	glutTimerFunc(10000, losingStateCaller, 0);
+	//glutTimerFunc(10000, losingStateCaller, 0);
 
 	glutMainLoop();
 }
