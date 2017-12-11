@@ -150,6 +150,9 @@
     <ClInclude Include="headerFiles\Objects\NonInteractiveObjects\Armchair.h">
       <Filter>headerFiles\Objects\NonInteractiveObjects</Filter>
     </ClInclude>
+    <ClInclude Include="headerFiles\Objects\NonInteractiveObjects\TvTable.h">
+      <Filter>headerFiles\Objects\NonInteractiveObjects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sourceFiles\Camera.cpp">
@@ -252,6 +255,9 @@
       <Filter>sourceFiles\Objects\InteractiveObjects\Clues</Filter>
     </ClCompile>
     <ClCompile Include="sourceFiles\Objects\NonInteractiveObjects\Armchair.cpp">
+      <Filter>sourceFiles\Objects\NonInteractiveObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="sourceFiles\Objects\NonInteractiveObjects\TvTable.cpp">
       <Filter>sourceFiles\Objects\NonInteractiveObjects</Filter>
     </ClCompile>
   </ItemGroup>

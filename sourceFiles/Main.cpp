@@ -39,6 +39,7 @@
 #include "headerFiles/Objects/NonInteractiveObjects/Sofa.h"
 #include "headerFiles/Objects/NonInteractiveObjects/Toilet.h"
 #include "headerFiles/Objects/NonInteractiveObjects/Tv.h"
+#include "headerFiles/Objects/NonInteractiveObjects/TvTable.h"
 #include "headerFiles/Objects/NonInteractiveObjects/Wall.h"
 #include "headerFiles/Objects/NonInteractiveObjects/Wardrobe.h"
 #include "headerFiles/Objects/Object.h"
@@ -97,9 +98,11 @@ Wall* walls[23];
 //livingroom
 Armchair armchair(Vector3f(22.4, 0, 11), Vector3f(0, 90, 0), Vector3f(1, 1, 1));
 Sofa sofa(Vector3f(22.4, 0, 11), Vector3f(0, 90, 0), Vector3f(1, 1, 1));
-// CoffeeTable coffeeTable(Vector3f(0, 0, 0), Vector3f(0, 90, 0), Vector3f(1, 1, 1));
 CoffeeTable coffeeTable(Vector3f(24, 0, 11.2), Vector3f(0, 90, 0), Vector3f(1, 1, 1));
-Tv tv(Vector3f(25.5, 0, 11), Vector3f(0, 270, 0), Vector3f(1, 1, 1));
+// Tv tv(Vector3f(25.5, 0, 11), Vector3f(0, 270, 0), Vector3f(1, 1, 1));
+Tv tv(Vector3f(0, 0, 0), Vector3f(0, -115, 0), Vector3f(1, 1, 1));
+// TvTable tvTable(Vector3f(25.5, 0, 11), Vector3f(0, 270, 0), Vector3f(1, 1, 1));
+TvTable tvTable(Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
 
 //kitchen
 DiningSet diningSet(Vector3f(22.2, 0, 7), Vector3f(0, -90, 0), Vector3f(1, 1, 1));
@@ -315,9 +318,11 @@ bool intersectsWalls()
 void display(void)
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	
 	// Setup light
 	Lights::initLightSource();
 	Lights::setupLights();
+	
 	// Set the camera
 	player.getCamera().setup();
 	//	camera.setup();
@@ -346,6 +351,7 @@ void display(void)
 		sofa.draw();
 		coffeeTable.draw();
 		tv.draw();
+		tvTable.draw();
 
 		//kitchen
 		kitchen.draw();
@@ -367,6 +373,7 @@ void display(void)
 		// sofa.drawBoundries();
 		// coffeeTable.drawBoundries();
 		// tv.drawBoundries();
+		// tvTable.drawBoundries();
 		// kitchen.drawBoundries();
 		// diningSet.drawBoundries();
 		// bed.drawBoundries();
@@ -396,6 +403,7 @@ void loadAssets()
 	sofa.setModel();
 	coffeeTable.setModel();
 	tv.setModel();
+	tvTable.setModel();
 
 	kitchen.setModel();
 	diningSet.setModel();
