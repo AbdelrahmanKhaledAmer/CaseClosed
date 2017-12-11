@@ -26,20 +26,25 @@ BrokenGlass::~BrokenGlass() {}
 void BrokenGlass::setImage(GLuint image) { this->image_ = image; }
 
 void BrokenGlass::draw() {
-  glColor4ub(255, 255, 255, 255);
+  glPushMatrix();
+  {
+    glTranslated(0, location_.y(), 0);
+    glColor4ub(255, 255, 255, 255);
 
-  glEnable(GL_TEXTURE_2D);
-  glEnable(GL_BLEND);
-  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    glEnable(GL_TEXTURE_2D);
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-  glBindTexture(GL_TEXTURE_2D, image_);
+    glBindTexture(GL_TEXTURE_2D, image_);
 
-  glBegin(GL_QUADS);
-  glVertex3f(1, 0, 1); glTexCoord2f(location_.x() + dimensions_.x() , location_.z() + dimensions_.z());
-  glVertex3f(1, 0, 0); glTexCoord2f(location_.x() + dimensions_.x() , location_.z());
-  glVertex3f(0, 0, 0); glTexCoord2f(location_.x() , location_.z());
-  glVertex3f(0, 0, 1); glTexCoord2f(location_.x() , location_.z() + dimensions_.z());
-  glEnd();
+    glBegin(GL_QUADS);
+    glVertex3f(1, 0, 1); glTexCoord2f(location_.x() + dimensions_.x() , location_.z() + dimensions_.z());
+    glVertex3f(1, 0, 0); glTexCoord2f(location_.x() + dimensions_.x() , location_.z());
+    glVertex3f(0, 0, 0); glTexCoord2f(location_.x() , location_.z());
+    glVertex3f(0, 0, 1); glTexCoord2f(location_.x() , location_.z() + dimensions_.z());
+    glEnd();
 
-  glDisable(GL_TEXTURE_2D);
+    glDisable(GL_TEXTURE_2D);
+  }
+  glPopMatrix();
 }
