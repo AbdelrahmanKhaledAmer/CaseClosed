@@ -10,8 +10,9 @@ class Body : public Clue {
 public:
   // Main functions
   Body(Vector3f location, Vector3f orientation, Vector3f scale); // Constructor
-  ~Body();                   // Destructor
+  ~Body();                                                       // Destructor
   void draw();
+  void setModel();
 };
 
 #endif

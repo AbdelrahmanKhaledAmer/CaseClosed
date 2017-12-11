@@ -376,11 +376,11 @@ void loadAssets()
 	sink.setModel();
 	bath.setModel();
 	
-	// loadBodyModel(body);
+	body.setModel();
 
 	// // Loading texture files
-	// loadBrokenGlassImage(brokenGlass);
-	// loadFootprintsImage(footprints);
+	brokenGlass.setImage();
+	footprints.setImage();
 	bloodtrail.setImage();
 
 	// Starting music
