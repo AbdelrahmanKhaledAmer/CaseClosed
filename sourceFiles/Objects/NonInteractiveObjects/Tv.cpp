@@ -30,7 +30,7 @@ void Tv::draw() {
 
   glPushMatrix();
   {
-    glTranslatef(0, 0.5, 0);
+    glTranslatef(0.05, 0.5, 0);
     glScalef(scale, scale, scale);
     __super::draw(scale);
   }

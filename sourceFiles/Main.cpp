@@ -97,13 +97,15 @@ Wall* walls[24];
 //Wall* wall23;	// East wall of bathroom
 
 //livingroom
-Armchair armchair(Vector3f(22.4, 0, 11), Vector3f(0, 90, 0), Vector3f(1, 1, 1));
-Sofa sofa(Vector3f(22.4, 0, 11), Vector3f(0, 90, 0), Vector3f(1, 1, 1));
-CoffeeTable coffeeTable(Vector3f(24, 0, 11.2), Vector3f(0, 90, 0), Vector3f(1, 1, 1));
-// Tv tv(Vector3f(25.5, 0, 11), Vector3f(0, 270, 0), Vector3f(1, 1, 1));
-Tv tv(Vector3f(0, 0, 0), Vector3f(0, -115, 0), Vector3f(1, 1, 1));
-// TvTable tvTable(Vector3f(25.5, 0, 11), Vector3f(0, 270, 0), Vector3f(1, 1, 1));
-TvTable tvTable(Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
+Armchair armchair(Vector3f(22.8, 0, 10.2), Vector3f(0, 90, 0), Vector3f(1, 1, 1));
+Sofa sofa(Vector3f(24.5, 0, 9), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
+CoffeeTable coffeeTable(Vector3f(23.7, 0, 10.6), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
+Tv tv(Vector3f(24.5, 0, 11.5), Vector3f(0, -115+180, 0), Vector3f(1, 1, 1));
+TvTable tvTable(Vector3f(24.5, 0, 11.5), Vector3f(0, 180, 0), Vector3f(1, 1, 1));
+Bookcase bookcase(Vector3f(25.7, 0, 7), Vector3f(0, 180, 0), Vector3f(1, 1, 1));
+
+// Tv tv(Vector3f(0, 0, 0), Vector3f(0, -115, 0), Vector3f(1, 1, 1));
+// TvTable tvTable(Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
 
 //kitchen
 DiningSet diningSet(Vector3f(22.2, 0, 7), Vector3f(0, -90, 0), Vector3f(1, 1, 1));
@@ -348,7 +350,7 @@ void display(void)
 
 	glPushMatrix();
 	{
-		// drawEnvironment();
+		drawEnvironment();
 		
 		//livingroom
 		armchair.draw();
@@ -356,6 +358,7 @@ void display(void)
 		coffeeTable.draw();
 		tv.draw();
 		tvTable.draw();
+		bookcase.draw();
 
 		//kitchen
 		kitchen.draw();
@@ -378,6 +381,7 @@ void display(void)
 		// coffeeTable.drawBoundries();
 		// tv.drawBoundries();
 		// tvTable.drawBoundries();
+		// bookcase.drawBoundries();
 		// kitchen.drawBoundries();
 		// diningSet.drawBoundries();
 		// bed.drawBoundries();
@@ -408,6 +412,7 @@ void loadAssets()
 	coffeeTable.setModel();
 	tv.setModel();
 	tvTable.setModel();
+	bookcase.setModel();
 
 	kitchen.setModel();
 	diningSet.setModel();

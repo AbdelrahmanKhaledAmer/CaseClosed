@@ -15,7 +15,7 @@ global origin.
 
 Kitchen::Kitchen(Vector3f location, Vector3f orientation, Vector3f scale)
     : NonInteractiveObject(location, orientation, scale,
-                           Vector3f(2.1, 1.9, 3)) {}
+                           Vector3f(3, 1.9, 2.1)) {}
 
 /**
 Destructor for the Kitchen object.
@@ -37,7 +37,7 @@ void Kitchen::draw() {
   glPopMatrix();
 }
 
-void Kitchen::drawBoundries() { __super::drawBoundries(2.1, 1.9, 3); }
+void Kitchen::drawBoundries() { __super::drawBoundries(3, 1.9, 2.1); }
 
 void Kitchen::setModel() {
   __super::setModel("assets/models/furniture/Kitchen/Kitchen N100714.3DS");
