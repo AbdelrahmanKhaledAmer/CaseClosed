@@ -125,3 +125,14 @@ void loadBodyModel(Body &body) {
   bodyModel.Load(bodyPath);
   body.setModel(bodyModel);
 }
+
+void loadBrokenGlassImage(BrokenGlass &brokenGlass) {
+  char *brokenGlassPath =  "assets/images/broken_glass.png";
+  GLuint brokenGlassImage 
+  		= SOIL_load_OGL_texture(
+   	brokenGlassPath, 
+    SOIL_LOAD_RGBA, SOIL_CREATE_NEW_ID,
+    SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_COMPRESS_TO_DXT |SOIL_FLAG_MULTIPLY_ALPHA
+  );
+  brokenGlass.setImage(brokenGlassImage);
+}

@@ -138,6 +138,9 @@
     <ClInclude Include="headerFiles\Objects\InteractiveObjects\Clues\Body.h">
       <Filter>headerFiles\Objects\InteractiveObjects\Clues</Filter>
     </ClInclude>
+    <ClInclude Include="headerFiles\Objects\InteractiveObjects\Clues\BrokenGlass.h">
+      <Filter>headerFiles\Objects\InteractiveObjects\Clues</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sourceFiles\Camera.cpp">
@@ -228,6 +231,9 @@
       <Filter>sourceFiles\Objects\NonInteractiveObjects</Filter>
     </ClCompile>
     <ClCompile Include="sourceFiles\Objects\InteractiveObjects\Clues\Body.cpp">
+      <Filter>sourceFiles\Objects\InteractiveObjects\Clues</Filter>
+    </ClCompile>
+    <ClCompile Include="sourceFiles\Objects\InteractiveObjects\Clues\BrokenGlass.cpp">
       <Filter>sourceFiles\Objects\InteractiveObjects\Clues</Filter>
     </ClCompile>
   </ItemGroup>

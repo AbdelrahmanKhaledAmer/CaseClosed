@@ -22,6 +22,7 @@
 #include "headerFiles/Loader.h"
 #include "headerFiles/Objects/Flashlight.h"
 #include "headerFiles/Objects/InteractiveObjects/Clues/Body.h"
+#include "headerFiles/Objects/InteractiveObjects/Clues/BrokenGlass.h"
 #include "headerFiles/Objects/InteractiveObjects/Clues/Knife.h"
 #include "headerFiles/Objects/InteractiveObjects/Door.h"
 #include "headerFiles/Objects/NonInteractiveObjects/Bath.h"
@@ -40,8 +41,6 @@
 #include "headerFiles/Objects/NonInteractiveObjects/Wall.h"
 #include "headerFiles/Objects/NonInteractiveObjects/Wardrobe.h"
 #include "headerFiles/Objects/Object.h"
-#include "headerFiles/Objects/NonInteractiveObjects/Wall.h"
-#include "headerFiles/Loader.h"
 #include "headerFiles/Objects/Player.h"
 
 // Screen Constants
@@ -277,7 +276,6 @@ DiningSet diningSet(Vector3f(24.2, 0, 9), Vector3f(0, -90, 0), Vector3f(1, 1, 1)
 Kitchen kitchen(Vector3f(25, 0, 10.9), Vector3f(0, 90, 0), Vector3f(1, 1, 1));
 
 //Bedroom
-Body body(Vector3f(23, 0, 14.9), Vector3f(0, 180, 0), Vector3f(1, 1, 1));
 Bed bed(Vector3f(23, 0, 14.9), Vector3f(0, 180, 0), Vector3f(1, 1, 1));
 Nightstand nightstand1(Vector3f(24.17, 0, 16.2), Vector3f(0, 180, 0), Vector3f(1, 1, 1));
 Nightstand nightstand2(Vector3f(21.27, 0, 16.2), Vector3f(0, 180, 0), Vector3f(1, 1, 1));
@@ -288,20 +286,24 @@ Toilet toilet(Vector3f(25.9, 0, 15), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
 Sink sink(Vector3f(27.2, 0, 12.3), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
 Bath bath(Vector3f(28, 0, 14.9), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
 
+//Clues
+Body body(Vector3f(23, 0, 14.9), Vector3f(0, 180, 0), Vector3f(1, 1, 1));
+BrokenGlass brokenGlass(Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vector3f(1, 1, 1));
+
 void display(void)
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	
 	// Setup light
 	Lights::initLightSource();
 	Lights::setupLights();
+	
 	// Set the camera
 	player.getCamera().setup();
 	//	camera.setup();
 
 	// Axes for modeling 
 	Axes axes(0.5);
-
-	drawEnvironment();
 
 	glColor3f(0.8f, 0.1f, 0.2f);
 	if(gameState == PLAYING_STATE)
@@ -318,7 +320,7 @@ void display(void)
 	glPushMatrix();
 	{
 		drawEnvironment();
-		
+
 		//livingroom
 		sofa.draw();
 		coffeeTable.draw();
@@ -329,7 +331,6 @@ void display(void)
 		diningSet.draw();
 
 		//bedroom
-		body.draw();
 		bed.draw();
 		nightstand1.draw();
 		nightstand2.draw();
@@ -339,7 +340,10 @@ void display(void)
 		toilet.draw();
 		sink.draw();
 		bath.draw();
-		// bath.drawBoundries();
+
+		//clues
+		body.draw();
+		brokenGlass.draw();
 	}
 	glPopMatrix();
 
@@ -358,7 +362,6 @@ void loadAssets()
 	loadKitchenModel(kitchen);
 	loadDiningSetModel(diningSet);
 
-	loadBodyModel(body);
 	loadBedModel(bed);
 	loadNightstandModel(nightstand1);
 	loadNightstandModel(nightstand2);
@@ -368,21 +371,10 @@ void loadAssets()
 	loadSinkModel(sink);
 	loadBathModel(bath);
 	
-	// Loading texture files
-	GLuint tex_2d = SOIL_load_OGL_texture
-	(
-		"Simple OpenGL Image Library/img_test.png",
-		SOIL_LOAD_AUTO,
-		SOIL_CREATE_NEW_ID,
-		SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
-	);
+	loadBodyModel(body);
 
-	int save_result = SOIL_save_screenshot
-	(
-		"awesomenessity.bmp",
-		SOIL_SAVE_TYPE_BMP,
-		0, 0, 1024, 768
-	);
+	// Loading texture files
+	loadBrokenGlassImage(brokenGlass);
 
 	// Starting music
 }

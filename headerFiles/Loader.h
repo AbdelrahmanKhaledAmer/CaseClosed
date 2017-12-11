@@ -3,6 +3,7 @@
 
 #include "headerFiles/Objects/Flashlight.h"
 #include "headerFiles/Objects/InteractiveObjects/Clues/Body.h"
+#include "headerFiles/Objects/InteractiveObjects/Clues/BrokenGlass.h"
 #include "headerFiles/Objects/InteractiveObjects/Clues/Knife.h"
 #include "headerFiles/Objects/InteractiveObjects/Door.h"
 #include "headerFiles/Objects/NonInteractiveObjects/Bath.h"
@@ -38,4 +39,6 @@ void loadNightstandModel(Nightstand &nightstand);
 void loadFlashlightModel(Flashlight &flashlight);
 void loadBathModel(Bath &bath);
 void loadBodyModel(Body &body);
+
+void loadBrokenGlassImage(BrokenGlass &brokenGlass);
 #endif
