@@ -5,7 +5,7 @@
 #include "headerFiles/Objects/Object.h"
 #include <stdarg.h>
 
-
+using namespace std;
 using namespace Eigen;
 
 class Journal : public Object
@@ -16,14 +16,10 @@ public:
 	~Journal();                                                                                              // Destructor
 
 	// write function
-	void write(std::string write = "");
-	bool appear();
-	bool disappear();
-	bool isShown();
+	void write(string write = "");
 	void draw();
 protected:
 	std::string* notes_;
-	bool on_;
 };
 
 #endif
