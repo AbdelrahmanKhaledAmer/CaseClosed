@@ -94,6 +94,7 @@
     <ClCompile Include="sourceFiles\Objects\InteractiveObjects\Clues\Body.cpp" />
     <ClCompile Include="sourceFiles\Objects\InteractiveObjects\Clues\BrokenGlass.cpp" />
     <ClCompile Include="sourceFiles\Objects\InteractiveObjects\Clues\Clue.cpp" />
+    <ClCompile Include="sourceFiles\Objects\InteractiveObjects\Clues\Footprints.cpp" />
     <ClCompile Include="sourceFiles\Objects\InteractiveObjects\Clues\Knife.cpp" />
     <ClCompile Include="sourceFiles\Objects\InteractiveObjects\Door.cpp" />
     <ClCompile Include="sourceFiles\Objects\InteractiveObjects\InteractiveObject.cpp" />
@@ -129,6 +130,7 @@
     <ClInclude Include="headerFiles\Objects\InteractiveObjects\Clues\Body.h" />
     <ClInclude Include="headerFiles\Objects\InteractiveObjects\Clues\BrokenGlass.h" />
     <ClInclude Include="headerFiles\Objects\InteractiveObjects\Clues\Clue.h" />
+    <ClInclude Include="headerFiles\Objects\InteractiveObjects\Clues\Footprints.h" />
     <ClInclude Include="headerFiles\Objects\InteractiveObjects\Clues\Knife.h" />
     <ClInclude Include="headerFiles\Objects\InteractiveObjects\Door.h" />
     <ClInclude Include="headerFiles\Objects\InteractiveObjects\InteractiveObject.h" />

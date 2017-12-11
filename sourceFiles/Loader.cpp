@@ -136,3 +136,14 @@ void loadBrokenGlassImage(BrokenGlass &brokenGlass) {
   );
   brokenGlass.setImage(brokenGlassImage);
 }
+
+void loadFootprintsImage(Footprints &footprints) {
+  char *footprintsPath =  "assets/images/foot_prints.png";
+  GLuint footprintsImage 
+  		= SOIL_load_OGL_texture(
+   	footprintsPath, 
+    SOIL_LOAD_RGBA, SOIL_CREATE_NEW_ID,
+    SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_COMPRESS_TO_DXT |SOIL_FLAG_MULTIPLY_ALPHA
+  );
+  footprints.setImage(footprintsImage);
+}

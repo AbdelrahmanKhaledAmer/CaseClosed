@@ -23,6 +23,7 @@
 #include "headerFiles/Objects/Flashlight.h"
 #include "headerFiles/Objects/InteractiveObjects/Clues/Body.h"
 #include "headerFiles/Objects/InteractiveObjects/Clues/BrokenGlass.h"
+#include "headerFiles/Objects/InteractiveObjects/Clues/Footprints.h"
 #include "headerFiles/Objects/InteractiveObjects/Clues/Knife.h"
 #include "headerFiles/Objects/InteractiveObjects/Door.h"
 #include "headerFiles/Objects/NonInteractiveObjects/Bath.h"
@@ -289,6 +290,7 @@ Bath bath(Vector3f(28, 0, 14.9), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
 //Clues
 Body body(Vector3f(23, 0, 14.9), Vector3f(0, 180, 0), Vector3f(1, 1, 1));
 BrokenGlass brokenGlass(Vector3f(0, 0.001, 0), Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vector3f(1, 1, 1));
+Footprints footprints(Vector3f(0, 0.001, 0), Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vector3f(1, 1, 1));
 
 void display(void)
 {
@@ -343,7 +345,8 @@ void display(void)
 
 		//clues
 		body.draw();
-		brokenGlass.draw();
+		// brokenGlass.draw();
+		footprints.draw();
 	}
 	glPopMatrix();
 
@@ -375,6 +378,7 @@ void loadAssets()
 
 	// Loading texture files
 	loadBrokenGlassImage(brokenGlass);
+	loadFootprintsImage(footprints);
 
 	// Starting music
 }

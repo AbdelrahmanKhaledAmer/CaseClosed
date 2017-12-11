@@ -1,9 +1,12 @@
 #ifndef LOADER_H
 #define LOADER_H
 
+#include "SOIL/src/SOIL.h"
+
 #include "headerFiles/Objects/Flashlight.h"
 #include "headerFiles/Objects/InteractiveObjects/Clues/Body.h"
 #include "headerFiles/Objects/InteractiveObjects/Clues/BrokenGlass.h"
+#include "headerFiles/Objects/InteractiveObjects/Clues/Footprints.h"
 #include "headerFiles/Objects/InteractiveObjects/Clues/Knife.h"
 #include "headerFiles/Objects/InteractiveObjects/Door.h"
 #include "headerFiles/Objects/NonInteractiveObjects/Bath.h"
@@ -41,4 +44,5 @@ void loadBathModel(Bath &bath);
 void loadBodyModel(Body &body);
 
 void loadBrokenGlassImage(BrokenGlass &brokenGlass);
+void loadFootprintsImage(Footprints &footprints);
 #endif
