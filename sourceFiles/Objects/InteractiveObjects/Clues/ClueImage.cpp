@@ -35,6 +35,8 @@ void ClueImage::draw() {
   glPushMatrix();
   {
     glTranslated(0, location_.y(), 0);
+    glTranslated(0,  0.001, 0);
+   
     glColor4ub(255, 255, 255, 255);
 
     glEnable(GL_TEXTURE_2D);
