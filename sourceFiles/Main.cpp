@@ -19,6 +19,7 @@
 #include "headerFiles/Lights.h"
 #include "headerFiles/Objects/Flashlight.h"
 #include "headerFiles/Objects/InteractiveObjects/Clues/Bloodtrail.h"
+#include "headerFiles/Objects/InteractiveObjects/Clues/Body.h"
 #include "headerFiles/Objects/InteractiveObjects/Clues/BrokenGlass.h"
 #include "headerFiles/Objects/InteractiveObjects/Clues/Footprints.h"
 #include "headerFiles/Objects/InteractiveObjects/Clues/Body.h"
@@ -356,7 +357,6 @@ void display(void)
 
 void loadAssets()
 {
-	//loading models
 	sofa.setModel();
 	coffeeTable.setModel();
 	tv.setModel();
@@ -374,8 +374,6 @@ void loadAssets()
 	bath.setModel();
 	
 	body.setModel();
-
-	// // Loading texture files
 	brokenGlass.setImage();
 	footprints.setImage();
 	bloodtrail.setImage();
