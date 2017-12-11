@@ -113,6 +113,12 @@ void DrawClues() {
 	{
 		if (!(*clues[i]).isFound())
 		{
+			if(i==0)
+			glColor3f(0, 0, 1);
+			if(i==1)
+				glColor3f(0, 1,0);
+			if(i==2)
+				glColor3f(1,0,0);
 			(*clues[i]).draw();
 			win = false;
 		}
@@ -301,7 +307,7 @@ void display(void)
 
 	drawEnvironment();
 
-	glColor3f(0.8f, 0.1f, 0.2f);
+	//glColor3f(0.8f, 0.1f, 0.2f);
 	if(gameState == PLAYING_STATE)
 	{
 		DrawClues();
@@ -443,7 +449,7 @@ void key(unsigned char k, int x, int y)
 			for ( int i = 0;  i < len;  i++)
 			{
 				//printf("%d\n", clues[0]);
-			  if(player.isLookingAt(*(clues[i])))
+			  if(player.isLookingAt(*(clues[i]))&&!(*clues[i]).isFound())
 				{
 					std::string s = (*clues[i]).Interact().append("\n");
 					interactingObject = *clues[i];
@@ -455,6 +461,8 @@ void key(unsigned char k, int x, int y)
 					(*clues[i]).find(true);
 					break;
 				}
+			 
+
 			}
 			break;
 		case 'q':
@@ -545,7 +553,7 @@ void main(int argc, char** argv)
 	glShadeModel(GL_SMOOTH);
 
 	//TODO 10 mins
-	glutTimerFunc(10000, losingStateCaller, 0);
+	//glutTimerFunc(10000, losingStateCaller, 0);
 
 	glutMainLoop();
 }
