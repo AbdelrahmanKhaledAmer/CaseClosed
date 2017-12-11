@@ -44,8 +44,8 @@
 
 // Screen Constants
 const int scale = 70;
-const int width = 16 * scale / 1.5;
-const int height = 9 * scale / 1.5;
+const int width = 16 * scale;
+const int height = 9 * scale;
 
 // Game variables
 int gameState = PLAYING_STATE;
@@ -307,17 +307,17 @@ void initFlashLight() {
 	//Vector3f upVector = player.getCamera().Upvector();
 	//Vector3f eye = player.getCamera().location().normalized();
 	//Vector3f ViewCross = viewVec.cross(upVector).normalized();
-	GLfloat l1Diffuse[] = { 0.1f, 0.1f, 0.1f, 1.0f };
-	GLfloat l1Ambient[] = { 0.1f, 0.1f, 0.1f, 1.0f };
+	GLfloat l1Diffuse[] = { 1.0f,1.0f, 1.0f, 1.0f };
+	GLfloat l1Ambient[] = { 1.0f, 1.0f, 1.0f, 1.0f };
 	GLfloat l1Position[] = { player.location().x(), player.location().y(),player.location().z(), true };
 	//GLfloat l1Position[] = {eye.x(),eye.y(),eye.z()};
 	Vector3f dir = viewVec;
 	GLfloat l1Direction[] = {dir.x(),dir.y(),dir.z()};
-	GLfloat lightIntensity[] = { 0.8, 0.8, 0.8, 1.0f };
+	GLfloat lightIntensity[] = { 1.3, 1.3, 1.3, 1.0f };
 	glLightfv(GL_LIGHT1, GL_DIFFUSE, l1Diffuse);
 	glLightfv(GL_LIGHT1, GL_AMBIENT, l1Ambient);
 	glLightfv(GL_LIGHT1, GL_POSITION, l1Position);
-	glLightf(GL_LIGHT1, GL_SPOT_CUTOFF, 15.0);
+	glLightf(GL_LIGHT1, GL_SPOT_CUTOFF, 25.0);
 	glLightf(GL_LIGHT1, GL_SPOT_EXPONENT, 90.0);
 	glLightfv(GL_LIGHT1, GL_SPOT_DIRECTION, l1Direction);
 
@@ -591,7 +591,7 @@ void main(int argc, char** argv)
 	glEnable(GL_LIGHT1);
 	//glEnable(GL_LIGHT2);
 	glEnable(GL_NORMALIZE);
-	glEnable(GL_COLOR_MATERIAL);
+	//glEnable(GL_COLOR_MATERIAL);
 	glShadeModel(GL_SMOOTH);
 
 	//TODO 10 mins
