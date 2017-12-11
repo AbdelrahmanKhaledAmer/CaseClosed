@@ -327,7 +327,6 @@ bool intersectsWalls()
 	return intersects;
 }
 
-
 void initFlashLight() {
 
 
@@ -472,6 +471,11 @@ void loadAssets()
 	footprints.setImage();
 	bloodtrail.setImage();
 
+	(*walls[0]).setTexture("assets/images/corridor_wall.jpg");
+	(*walls[1]).setTexture("assets/images/corridor_wall.jpg");
+	(*walls[2]).setTexture("assets/images/corridor_wall.jpg");
+	(*walls[3]).setTexture("assets/images/corridor_wall.jpg");
+	(*walls[4]).setTexture("assets/images/corridor_wall.jpg");
 	// Starting music
 }
 
@@ -484,9 +488,6 @@ void interactionTimer(int val)
 		glutTimerFunc(20, interactionTimer, 0);
 	}
 }
-
-
-
 
 void key(unsigned char k, int x, int y)
 {
