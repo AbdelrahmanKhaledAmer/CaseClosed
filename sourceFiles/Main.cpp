@@ -19,7 +19,6 @@
 #include "headerFiles/Axes.h"
 #include "headerFiles/Camera.h"
 #include "headerFiles/Lights.h"
-#include "headerFiles/Loader.h"
 #include "headerFiles/Objects/Flashlight.h"
 #include "headerFiles/Objects/InteractiveObjects/Clues/Body.h"
 #include "headerFiles/Objects/InteractiveObjects/Clues/Bloodtrail.h"
@@ -107,7 +106,7 @@ void initClues() {
 	clues[0] = new Knife(Vector3f(4, 0.5, 1), Vector3f(45, 45, 45), Vector3f(1, 1, 1), Vector3f(1, 1, 1));
 	clues[1] = new Knife(Vector3f(3, 0.5, 1), Vector3f(45, 45, 45), Vector3f(1, 1, 1), Vector3f(1, 1, 1));
 	clues[2] = new Knife(Vector3f(2, 0.5, 1), Vector3f(45, 45, 45), Vector3f(1, 1, 1), Vector3f(1, 1, 1));
-	printf("%p",clues[0]);
+	// printf("%p",clues[0]);
 }
 void DrawClues() {
 	int len = sizeof(clues) / sizeof(*clues);
@@ -361,28 +360,28 @@ void display(void)
 void loadAssets()
 {
 	//loading models
-	loadSofaModel(sofa);
-	loadCoffeeTableModel(coffeeTable);
-	loadTvModel(tv);
+	sofa.setModel();
+	coffeeTable.setModel();
+	tv.setModel();
 
-	loadKitchenModel(kitchen);
-	loadDiningSetModel(diningSet);
+	kitchen.setModel();
+	diningSet.setModel();
 
-	loadBedModel(bed);
-	loadNightstandModel(nightstand1);
-	loadNightstandModel(nightstand2);
-	loadWardrobeModel(wardrobe);
+	bed.setModel();
+	nightstand1.setModel();
+	nightstand2.setModel();
+	wardrobe.setModel();
 
-	loadToiletModel(toilet);
-	loadSinkModel(sink);
-	loadBathModel(bath);
+	toilet.setModel();
+	sink.setModel();
+	bath.setModel();
 	
-	loadBodyModel(body);
+	// loadBodyModel(body);
 
-	// Loading texture files
-	loadBrokenGlassImage(brokenGlass);
-	loadFootprintsImage(footprints);
-	loadBloodtrailImage(bloodtrail);
+	// // Loading texture files
+	// loadBrokenGlassImage(brokenGlass);
+	// loadFootprintsImage(footprints);
+	bloodtrail.setImage();
 
 	// Starting music
 }

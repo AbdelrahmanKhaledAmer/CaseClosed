@@ -45,9 +45,6 @@
     <ClInclude Include="headerFiles\Camera.h">
       <Filter>headerFiles</Filter>
     </ClInclude>
-    <ClInclude Include="headerFiles\Loader.h">
-      <Filter>headerFiles</Filter>
-    </ClInclude>
     <ClInclude Include="headerFiles\Objects\Journal.h">
       <Filter>headerFiles\Objects</Filter>
     </ClInclude>
@@ -147,12 +144,12 @@
     <ClInclude Include="headerFiles\Objects\InteractiveObjects\Clues\Bloodtrail.h">
       <Filter>headerFiles\Objects\InteractiveObjects\Clues</Filter>
     </ClInclude>
+    <ClInclude Include="headerFiles\Objects\InteractiveObjects\Clues\ClueImage.h">
+      <Filter>headerFiles\Objects\InteractiveObjects\Clues</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sourceFiles\Camera.cpp">
-      <Filter>sourceFiles</Filter>
-    </ClCompile>
-    <ClCompile Include="sourceFiles\Loader.cpp">
       <Filter>sourceFiles</Filter>
     </ClCompile>
     <ClCompile Include="sourceFiles\main.cpp">
@@ -245,7 +242,10 @@
     <ClCompile Include="sourceFiles\Objects\InteractiveObjects\Clues\Footprints.cpp">
       <Filter>sourceFiles\Objects\InteractiveObjects\Clues</Filter>
     </ClCompile>
-    <ClCompile Include="sourceFiles\Objects\InteractiveObjects\Clues\Blootrail.cpp">
+    <ClCompile Include="sourceFiles\Objects\InteractiveObjects\Clues\Bloodtrail.cpp">
+      <Filter>sourceFiles\Objects\InteractiveObjects\Clues</Filter>
+    </ClCompile>
+    <ClCompile Include="sourceFiles\Objects\InteractiveObjects\Clues\ClueImage.cpp">
       <Filter>sourceFiles\Objects\InteractiveObjects\Clues</Filter>
     </ClCompile>
   </ItemGroup>

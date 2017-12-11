@@ -36,3 +36,7 @@ void CoffeeTable::draw() {
 }
 
 void CoffeeTable::drawBoundries() { __super::drawBoundries(1.2, 0.4, 1.2); }
+
+void CoffeeTable::setModel() {
+  __super::setModel("assets/models/furniture/CoffeeTable/Table N280817.3DS");
+}

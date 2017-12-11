@@ -14,6 +14,7 @@ public:
 	~DiningSet();
 	void draw();
 	void drawBoundries();           // Draw Object Boundries                                                       		   // Destructor
+	void setModel();
 };
 
 #endif

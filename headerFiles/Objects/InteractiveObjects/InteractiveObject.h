@@ -20,6 +20,7 @@ public:
 
 	void draw();
 	void rotate();
+	void setModel(char* modelPath);
 };
 
 #endif

@@ -39,3 +39,6 @@ void Kitchen::draw() {
 
 void Kitchen::drawBoundries() { __super::drawBoundries(2.1, 1.9, 3); }
 
+void Kitchen::setModel() {
+  __super::setModel("assets/models/furniture/Kitchen/Kitchen N100714.3DS");
+}

@@ -1,10 +1,10 @@
-#include "headerFiles\Objects\InteractiveObjects\Clues\Bloodtrail.h"
+#include "headerFiles\Objects\InteractiveObjects\Clues\ClueImage.h"
 
 /*
-Constructor for the Bloodtrail object.
-Returns a pointer for a Bloodtrail.
+Constructor for the ClueImage object.
+Returns a pointer for a ClueImage.
 
-@param (location) The current location of the Bloodtrail with respect to the global
+@param (location) The current location of the Body with respect to the global
 origin.
 @param (orientation) The current rotation angles across all three axes.
 @param (scale) The amount to scale across all three axes.
@@ -13,19 +13,25 @@ origin.
 
 @return: Pointer to InteractiveObject interactiveObject
 */
-Bloodtrail::Bloodtrail(Vector3f location, Vector3f orientation,
+ClueImage::ClueImage(Vector3f location, Vector3f orientation,
                          Vector3f scale, Vector3f dimensions)
     : Clue(location, orientation, scale, dimensions) {}
 
 /**
-Destructor for the Bloodtrail object.
-Deletes the pointer for the Bloodtrail object.
+Destructor for the ClueImage object.
+Deletes the pointer for the ClueImage object.
 */
-Bloodtrail::~Bloodtrail() {}
+ClueImage::~ClueImage() {}
 
-void Bloodtrail::setImage(GLuint image) { this->image_ = image; }
+void ClueImage::setImage(char* imagePath) { 
+  image_ = SOIL_load_OGL_texture(
+   	imagePath, 
+    SOIL_LOAD_RGBA, SOIL_CREATE_NEW_ID,
+    SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_COMPRESS_TO_DXT |SOIL_FLAG_MULTIPLY_ALPHA
+  );    
+}
 
-void Bloodtrail::draw() {
+void ClueImage::draw() {
   glPushMatrix();
   {
     glTranslated(0, location_.y(), 0);

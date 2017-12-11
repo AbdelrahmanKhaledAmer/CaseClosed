@@ -14,6 +14,7 @@ public:
 	~Toilet();   
 	void draw();
   	void drawBoundries();   // Draw Object Boundries                                                                  		   // Destructor
+	void setModel();
 };
 
 #endif

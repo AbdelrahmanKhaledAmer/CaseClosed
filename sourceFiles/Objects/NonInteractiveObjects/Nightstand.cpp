@@ -38,3 +38,7 @@ void Nightstand::draw() {
 void Nightstand::drawBoundries() {
   __super::drawBoundries(0.7f, 0.5f, 0.5f);
 }
+
+void Nightstand::setModel() {
+  __super::setModel("assets/models/furniture/Nightstand/Nightstand.3DS");
+}

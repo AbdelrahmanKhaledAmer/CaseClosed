@@ -69,8 +69,8 @@ Vector3f Object::dimensions()
     Setter Function.
     Sets the current model of the Object object.
 */
-void Object::setModel(Model_3DS model){
-    this->model_ = model;
+void Object::setModel(char *modelPath) {
+	model_.Load(modelPath);	
 }
 
 /**

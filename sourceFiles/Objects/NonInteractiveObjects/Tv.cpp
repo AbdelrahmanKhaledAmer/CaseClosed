@@ -38,3 +38,7 @@ void Tv::draw() {
 }
 
 void Tv::drawBoundries() { __super::drawBoundries(1 , 1.1, 0.5); }
+
+void Tv::setModel() {
+  __super::setModel("assets/models/furniture/Tv/TV set samsung N160913.3DS");
+}

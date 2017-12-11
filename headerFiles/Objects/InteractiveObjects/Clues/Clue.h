@@ -4,8 +4,6 @@
 #include <Eigen/Dense>
 #include "headerFiles\Objects\InteractiveObjects\InteractiveObject.h"
 
-
-
 using namespace Eigen;
 
 class Clue : public InteractiveObject
@@ -16,6 +14,7 @@ public:
 	~Clue();                                                                                              // Destructor
 
 	void draw();
+  	void setModel(char* modelPath);
 	bool isFound();
 	void find(bool state);
 	protected:
