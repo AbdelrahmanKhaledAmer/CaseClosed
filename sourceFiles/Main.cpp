@@ -117,7 +117,7 @@ Nightstand nightstand2(Vector3f(21.27, 0, 16.2), Vector3f(0, 180, 0), Vector3f(1
 Wardrobe wardrobe(Vector3f(19.85, 0, 12.6), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
 
 //Bathroom
-Toilet toilet(Vector3f(25.9, 0, 15), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
+Toilet toilet(Vector3f(26, 0, 15), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
 Sink sink(Vector3f(27.2, 0, 12.3), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
 Bath bath(Vector3f(28, 0, 14.9), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
 
@@ -197,7 +197,7 @@ void initEnvironment()
 	walls[5] = new Wall(loc5, ori5, scl5, dim);
 	Eigen::Vector3f loc6(19.5, 0, 4.64);	// (4.63, 19.5)
 	Eigen::Vector3f ori6(0, 0, 0);			// along z
-	Eigen::Vector3f scl6(1, 1, 2.87);		// length 2.87
+	Eigen::Vector3f scl6(1, 1, 1.97);		// length 1.97
 	walls[6] = new Wall(loc6, ori6, scl6, dim);
 
 	// Reception
@@ -209,13 +209,13 @@ void initEnvironment()
 	Eigen::Vector3f ori8(0, 90, 0);			// along x
 	Eigen::Vector3f scl8(1, 1, 1);			// length 1
 	walls[8] = new Wall(loc8, ori8, scl8, dim);
-	Eigen::Vector3f loc9(25, 0, 4.64);	 	// (4.63, 25)
+	Eigen::Vector3f loc9(25.01, 0, 4.64);	 	// (4.63, 25)
 	Eigen::Vector3f ori9(0, 90, 0);			// along x
-	Eigen::Vector3f scl9(1, 1, 1);			// length 1
+	Eigen::Vector3f scl9(1, 1, 0.99);			// length 1
 	walls[9] = new Wall(loc9, ori9, scl9, dim);
-	Eigen::Vector3f loc10(19.5, 0, 7.5);	// (6.5, 19.5)
+	Eigen::Vector3f loc10(19.5, 0, 6.6);	// (7.5, 19.5)
 	Eigen::Vector3f ori10(0, 0, 0);			// along z
-	Eigen::Vector3f scl10(1, 1, 4.5);		// length 4.5
+	Eigen::Vector3f scl10(1, 1, 5.4);		// length 4.5
 	walls[10] = new Wall(loc10, ori10, scl10, dim);
 	Eigen::Vector3f loc11(19.5, 0, 12);		// (12, 19.5)
 	Eigen::Vector3f ori11(0, 90, 0);		// along x
@@ -223,7 +223,7 @@ void initEnvironment()
 	walls[11] = new Wall(loc11, ori11, scl11, dim);
 	Eigen::Vector3f loc12(22, 0, 12);		// (12, 22)
 	Eigen::Vector3f ori12(0, 90, 0);		// along x
-	Eigen::Vector3f scl12(1, 1, 3.5);		// length 3.5
+	Eigen::Vector3f scl12(1, 1, 4);			// length 4
 	walls[12] = new Wall(loc12, ori12, scl12, dim);
 
 	// Bedroom
@@ -493,15 +493,34 @@ void loadAssets()
 	footprints.setImage();
 	bloodtrail.setImage();
 
-	for (int i = 0; i < sizeof(walls) / sizeof(*walls); i++) {
-		(*walls[i]).setTexture("assets/images/paint_wall.jpg");
-	}
-
+	// Corridor Texturs
 	(*walls[0]).setTexture("assets/images/corridor_wall.jpg");
 	(*walls[1]).setTexture("assets/images/corridor_wall.jpg");
 	(*walls[2]).setTexture("assets/images/corridor_wall.jpg");
 	(*walls[3]).setTexture("assets/images/corridor_wall.jpg");
 	(*walls[4]).setTexture("assets/images/corridor_wall.jpg");
+	// Kitchen Texturs
+	(*walls[5]).setTexture("assets/images/kitchen_wall.jpg");
+	(*walls[6]).setTexture("assets/images/kitchen_wall.jpg");
+	// Reception and Bedroom Textures
+	(*walls[7]).setTexture("assets/images/reception_wall.jpg");
+	(*walls[8]).setTexture("assets/images/reception_wall.jpg");
+	(*walls[9]).setTexture("assets/images/reception_wall.jpg");
+	(*walls[10]).setTexture("assets/images/reception_wall.jpg");
+	(*walls[11]).setTexture("assets/images/reception_wall.jpg");
+	(*walls[12]).setTexture("assets/images/reception_wall.jpg");
+	(*walls[13]).setTexture("assets/images/reception_wall.jpg");
+	(*walls[14]).setTexture("assets/images/reception_wall.jpg");
+	(*walls[15]).setTexture("assets/images/reception_wall.jpg");
+	(*walls[16]).setTexture("assets/images/reception_wall.jpg");
+	(*walls[17]).setTexture("assets/images/reception_wall.jpg");
+	(*walls[18]).setTexture("assets/images/reception_wall.jpg");
+	// Bathroom Textures
+	(*walls[19]).setTexture("assets/images/bathroom_wall.jpg");
+	(*walls[20]).setTexture("assets/images/bathroom_wall.jpg");
+	(*walls[21]).setTexture("assets/images/bathroom_wall.jpg");
+	(*walls[22]).setTexture("assets/images/bathroom_wall.jpg");
+	(*walls[23]).setTexture("assets/images/bathroom_wall.jpg");	
 	// Starting music
 }
 
@@ -527,7 +546,8 @@ void key(unsigned char k, int x, int y)
 			player.lookRight();
 			break;
 		case 'j':
-			
+			//camera.rotateLeft();
+			player.lookLeft();
 			break;
 		case 'i':
 			//camera.rotateUp();
@@ -577,7 +597,7 @@ void key(unsigned char k, int x, int y)
 			for ( int i = 0;  i < len;  i++)
 			{
 				//printf("%d\n", clues[0]);
-			  if(player.isLookingAt(*(clues[i]))&&!(*clues[i]).isFound())
+				if(player.isLookingAt(*(clues[i]))&&!(*clues[i]).isFound())
 				{
 					std::string s = (*clues[i]).Interact().append("\n");
 					interactingObject = *clues[i];
@@ -589,8 +609,6 @@ void key(unsigned char k, int x, int y)
 					(*clues[i]).find(true);
 					break;
 				}
-			 
-
 			}
 			break;
 		case 'q':
