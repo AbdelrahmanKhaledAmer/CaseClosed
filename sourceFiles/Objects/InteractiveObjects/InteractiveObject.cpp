@@ -14,11 +14,6 @@ the global origin.
 
 @return: Pointer to Object object
 */
-
-std::string InteractiveObject::Interact() {
-  // TODO
-  return "";
-}
 InteractiveObject::InteractiveObject(Vector3f location, Vector3f orientation,
                                      Vector3f scale, Vector3f dimensions)
     : Object(location, orientation, scale, dimensions) {}
@@ -29,21 +24,17 @@ Deletes the pointer for the InteractiveObject object.
 */
 InteractiveObject::~InteractiveObject() {}
 
-void InteractiveObject::setLocation(Vector3f location) {
-  this->location_ = location;
-}
-
-void InteractiveObject::draw() {
-  //__super::draw();
-  glPushMatrix();
-  {
-    glTranslatef(location_.x(), location_.y(), location_.z());
-    glRotatef(orientation_.y(), 0, 1, 0);
-    glutSolidCube(0.5);
-  }
-  glPopMatrix();
+std::string InteractiveObject::Interact() {
+  // TODO
+  return "";
 }
 
 void InteractiveObject::rotate() { orientation_.y() -= 1; }
+
+void InteractiveObject::draw(float locScale) { __super::draw(locScale); }
+
+void InteractiveObject::drawBoundries(float xLength, float yLength, float zLength) {
+  __super::drawBoundries(xLength, yLength, zLength);
+}
 
 void InteractiveObject::setModel(char *modelPath) { __super::setModel(modelPath); }
