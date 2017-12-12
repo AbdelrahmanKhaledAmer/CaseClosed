@@ -37,7 +37,7 @@ void Door::draw() {
   glPopMatrix();
 }
 
-void Door::drawBoundries() { __super::drawBoundries(0.15, 1.7, 0.7); }
+void Door::drawBoundries() { __super::drawBoundries(0.7, 1.7, 0.15); }
 
 void Door::setModel() {
   __super::setModel("assets/models/furniture/Door/Door Endless Boiserie Sliding Door Longhi N291216.3DS");

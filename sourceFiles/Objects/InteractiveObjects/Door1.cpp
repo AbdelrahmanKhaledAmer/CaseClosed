@@ -15,7 +15,7 @@ origin.
 */
 Door1::Door1(Vector3f location, Vector3f orientation, Vector3f scale)
     : InteractiveObject(location, orientation, scale,
-                           Vector3f(0.7, 1.7, 0.15)) {}
+                           Vector3f(0.15, 1.7, 0.15)) {}
 
 /**
 Destructor for the Door1 object.
@@ -26,7 +26,7 @@ Door1::~Door1() {}
 std::string Door1::Interact() { return ""; }
 
 void Door1::draw() {
-  float scale = 0.02;
+  float scale = 0.0235;
 
   glPushMatrix();
   {
@@ -37,7 +37,7 @@ void Door1::draw() {
   glPopMatrix();
 }
 
-void Door1::drawBoundries() { __super::drawBoundries(0.15, 1.7, 0.7); }
+void Door1::drawBoundries() { __super::drawBoundries(0.15, 1.7, 0.15); }
 
 void Door1::setModel() {
   __super::setModel("assets/models/furniture/Door1/Door ROMAGNOLI Senso Fly N040717.3DS");
