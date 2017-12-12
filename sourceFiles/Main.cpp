@@ -23,9 +23,9 @@
 #include "headerFiles/Objects/InteractiveObjects/Clues/Body.h"
 #include "headerFiles/Objects/InteractiveObjects/Clues/BrokenGlass.h"
 #include "headerFiles/Objects/InteractiveObjects/Clues/Footprints.h"
-#include "headerFiles/Objects/InteractiveObjects/Clues/Body.h"
 #include "headerFiles/Objects/InteractiveObjects/Clues/Knife.h"
 #include "headerFiles/Objects/InteractiveObjects/Door.h"
+#include "headerFiles/Objects/InteractiveObjects/Door1.h"
 #include "headerFiles/Objects/NonInteractiveObjects/Armchair.h"
 #include "headerFiles/Objects/NonInteractiveObjects/Bath.h"
 #include "headerFiles/Objects/NonInteractiveObjects/Bed.h"
@@ -44,7 +44,6 @@
 #include "headerFiles/Objects/NonInteractiveObjects/Wall.h"
 #include "headerFiles/Objects/NonInteractiveObjects/Wardrobe.h"
 #include "headerFiles/Objects/Object.h"
-#include "headerFiles/Objects/NonInteractiveObjects/Wall.h"
 #include "headerFiles/Objects/Player.h"
 
 // Screen Constants =================================================
@@ -98,6 +97,9 @@ Wall* walls[24];
 //Wall* wall23;	// East wall of bathroom
 
 // Appartment Layout ================================================
+Door door(Vector3f(24.5, 0, 4.5), Vector3f(0, 180, 0), Vector3f(1, 1, 1));
+Door1 door1(Vector3f(24, 0, 5), Vector3f(0, 90, 0), Vector3f(1, 1, 1));
+
 //livingroom
 Armchair armchair(Vector3f(22.8, 0, 10.2), Vector3f(0, 90, 0), Vector3f(1, 1, 1));
 Sofa sofa(Vector3f(24.5, 0, 9), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
@@ -144,7 +146,7 @@ void initClues() {
 	// printf("%p",clues[0]);
 }
 
-void DrawClues() {
+void drawClues() {
 	int len = sizeof(clues) / sizeof(*clues);
 	bool win = true;
 	for (int i = 0; i < len; i++)
@@ -331,6 +333,8 @@ bool intersectsWalls()
 		intersects |= (*walls[i]).intersects(player);
 	}
 
+	// intersects |= door.intersects(player);    
+	// intersects |= door1.intersects(player);    
 	intersects |= armchair.intersects(player);    
 	intersects |= sofa.intersects(player);    
 	intersects |= coffeeTable.intersects(player);
@@ -382,93 +386,104 @@ void initFlashLight() {
 
 }
 
-void display(void)
-{
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	
-	// Setup light
-	Lights::initLightSource();
-	Lights::setupLights();
-	
-	// Set the camera
-	initFlashLight();
-	player.getCamera().setup();
-	//	camera.setup();
+void drawHitBoxes(){
+  door.drawBoundries();
+  door1.drawBoundries();
+  armchair.drawBoundries();
+  sofa.drawBoundries();
+  coffeeTable.drawBoundries();
+  tv.drawBoundries();
+  tvTable.drawBoundries();
+  bookcase.drawBoundries();
+  kitchen.drawBoundries();
+  diningSet.drawBoundries();
+  bed.drawBoundries();
+  nightstand1.drawBoundries();
+  nightstand2.drawBoundries();
+  wardrobe.drawBoundries();
+  toilet.drawBoundries();
+  sink.drawBoundries();
+  bath.drawBoundries();
+}
 
-	// Axes for modeling 
-	Axes axes(0.5);
+void drawApartment() {
+    drawEnvironment();
+	door.draw();
+	// door1.draw();
 
-	glColor3f(0.8f, 0.1f, 0.2f);
-	if(gameState == PLAYING_STATE)
-	{
-		DrawClues();
-	} else if(gameState == INTERACTING_STATE) {
-		interactingObject.rotate();
-		interactingObject.draw();
-	}
-	
-	// Reset color and flush buffer
-	glColor3f(1.0, 1.0, 1.0);
+    // livingroom
+    armchair.draw();
+    sofa.draw();
+    coffeeTable.draw();
+    tv.draw();
+    tvTable.draw();
+    bookcase.draw();
 
-	glPushMatrix();
-	{
-		drawEnvironment();
-		
-		//livingroom
-		armchair.draw();
-		sofa.draw();
-		coffeeTable.draw();
-		tv.draw();
-		tvTable.draw();
-		bookcase.draw();
+    // kitchen
+    kitchen.draw();
+    diningSet.draw();
 
-		//kitchen
-		kitchen.draw();
-		diningSet.draw();
+    // bedroom
+    body.draw();
+    bed.draw();
+    nightstand1.draw();
+    nightstand2.draw();
+    wardrobe.draw();
 
-		//bedroom
-		body.draw();
-		bed.draw();
-		nightstand1.draw();
-		nightstand2.draw();
-		wardrobe.draw();
+    // Toilet
+    toilet.draw();
+    sink.draw();
+    bath.draw();
 
-		//Toilet
-		toilet.draw();
-		sink.draw();
-		bath.draw();
-		
-		// armchair.drawBoundries();
-		// sofa.drawBoundries();
-		// coffeeTable.drawBoundries();
-		// tv.drawBoundries();
-		// tvTable.drawBoundries();
-		// bookcase.drawBoundries();
-		// kitchen.drawBoundries();
-		// diningSet.drawBoundries();
-		// bed.drawBoundries();
-		// nightstand1.drawBoundries();
-		// nightstand2.drawBoundries();
-		// wardrobe.drawBoundries();
-		// toilet.drawBoundries();
-		// sink.drawBoundries();
-		// bath.drawBoundries();
+    // clues
+    body.draw();
+    // brokenGlass.draw();
+    // footprints.draw();
+    bloodtrail.draw();
+}
 
-		//clues
-		body.draw();
-		// brokenGlass.draw();
-		// footprints.draw();
-		bloodtrail.draw();
-	}
-	glPopMatrix();
+void display(void) {
+  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	glFlush();
+  // Setup light
+  Lights::initLightSource();
+  Lights::setupLights();
 
-	glutSwapBuffers();
+  // Set the camera
+  initFlashLight();
+  player.getCamera().setup();
+  //	camera.setup();
+
+  // Axes for modeling
+  Axes axes(0.5);
+
+  glColor3f(0.8f, 0.1f, 0.2f);
+  if (gameState == PLAYING_STATE) {
+    drawClues();
+  } else if (gameState == INTERACTING_STATE) {
+    interactingObject.rotate();
+    interactingObject.draw();
+  }
+
+  // Reset color and flush buffer
+  glColor3f(1.0, 1.0, 1.0);
+
+  glPushMatrix();
+  {
+    drawApartment();
+    // drawHitBoxes();
+  }
+  glPopMatrix();
+
+  glFlush();
+  glutSwapBuffers();
 }
 
 void loadAssets()
 {
+	door.setModel();
+	door1.setModel();
+	
 	armchair.setModel();
 	sofa.setModel();
 	coffeeTable.setModel();

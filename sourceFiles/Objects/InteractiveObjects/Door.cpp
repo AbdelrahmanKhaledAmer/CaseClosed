@@ -26,7 +26,7 @@ Door::~Door() {}
 std::string Door::Interact() { return ""; }
 
 void Door::draw() {
-  float scale = 0.008;
+  float scale = 0.009;
 
   glPushMatrix();
   {
