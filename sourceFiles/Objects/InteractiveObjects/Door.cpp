@@ -13,10 +13,9 @@ origin.
 
 @return: Pointer to InteractiveObject interactiveObject
 */
-Door::Door(Vector3f location, Vector3f orientation, Vector3f scale,
-           Vector3f dimensions)
-    : InteractiveObject(location, orientation, scale, dimensions) {}
-
+Door::Door(Vector3f location, Vector3f orientation, Vector3f scale)
+    : InteractiveObject(location, orientation, scale,
+                           Vector3f(0.7, 1.7, 0.15)) {}
 
 /**
 Destructor for the Door object.
@@ -24,8 +23,22 @@ Deletes the pointer for the Door object.
 */
 Door::~Door() {}
 
+std::string Door::Interact() { return ""; }
 
-std::string Interact()
-{
-	return "";
+void Door::draw() {
+  float scale = 0.008;
+
+  glPushMatrix();
+  {
+    // glTranslatef(0, 0.35, 0);
+    glScalef(scale, scale, scale);
+    __super::draw(scale);
+  }
+  glPopMatrix();
+}
+
+void Door::drawBoundries() { __super::drawBoundries(0.15, 1.7, 0.7); }
+
+void Door::setModel() {
+  __super::setModel("assets/models/furniture/Door/Door Endless Boiserie Sliding Door Longhi N291216.3DS");
 }
