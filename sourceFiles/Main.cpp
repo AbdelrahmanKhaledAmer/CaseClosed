@@ -99,7 +99,7 @@ Wall* walls[24];
 // Appartment Layout ================================================
 Door door(Vector3f(24.5, 0, 4.5), Vector3f(0, 180, 0), Vector3f(1, 1, 1));
 Door1 door1(Vector3f(21.5, 0, 12), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
-// Door1 door1(Vector3f(19.6, 0, 11.9), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
+Door1 door2(Vector3f(25.5, 0, 13.5), Vector3f(0, 90, 0), Vector3f(1, 1, 1));
 
 //livingroom
 Armchair armchair(Vector3f(22.8, 0, 10.2), Vector3f(0, 90, 0), Vector3f(1, 1, 1));
@@ -336,6 +336,7 @@ bool intersectsWalls()
 
 	// intersects |= door.intersects(player);    
 	// intersects |= door1.intersects(player);    
+	// intersects |= door2.intersects(player);    
 	intersects |= armchair.intersects(player);    
 	intersects |= sofa.intersects(player);    
 	intersects |= coffeeTable.intersects(player);
@@ -388,29 +389,31 @@ void initFlashLight() {
 }
 
 void drawHitBoxes(){
-//   door.drawBoundries();
+  door.drawBoundries();
   door1.drawBoundries();
-//   armchair.drawBoundries();
-//   sofa.drawBoundries();
-//   coffeeTable.drawBoundries();
-//   tv.drawBoundries();
-//   tvTable.drawBoundries();
-//   bookcase.drawBoundries();
-//   kitchen.drawBoundries();
-//   diningSet.drawBoundries();
-//   bed.drawBoundries();
-//   nightstand1.drawBoundries();
-//   nightstand2.drawBoundries();
-//   wardrobe.drawBoundries();
-//   toilet.drawBoundries();
-//   sink.drawBoundries();
-//   bath.drawBoundries();
+  door2.drawBoundries();
+  armchair.drawBoundries();
+  sofa.drawBoundries();
+  coffeeTable.drawBoundries();
+  tv.drawBoundries();
+  tvTable.drawBoundries();
+  bookcase.drawBoundries();
+  kitchen.drawBoundries();
+  diningSet.drawBoundries();
+  bed.drawBoundries();
+  nightstand1.drawBoundries();
+  nightstand2.drawBoundries();
+  wardrobe.drawBoundries();
+  toilet.drawBoundries();
+  sink.drawBoundries();
+  bath.drawBoundries();
 }
 
 void drawApartment() {
     drawEnvironment();
 	door.draw();
 	door1.draw();
+	door2.draw();
 
     // livingroom
     armchair.draw();
@@ -484,6 +487,7 @@ void loadAssets()
 {
 	door.setModel();
 	door1.setModel();
+	door2.setModel();
 	
 	armchair.setModel();
 	sofa.setModel();
