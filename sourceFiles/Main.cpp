@@ -1,11 +1,12 @@
-// Defines
+// Defines ==========================================================
 #define PI 3.14159265358979323846
-#define PLAYING_STATE 0
-#define LOSING_STATE 1
-#define WINNING_STATE 2
-#define INTERACTING_STATE 3
-#define JOURNAL_STATE 4
-// Libraries, dependencies and classes
+#define PLAYING_STATE 			0
+#define LOSING_STATE 			1
+#define WINNING_STATE 			2
+#define INTERACTING_STATE 		3
+#define JOURNAL_STATE 			4
+
+// Libraries, dependencies and classes ==============================
 #include "headerFiles/TextureBuilder.h"
 #include "headerFiles/Model_3DS.h"
 #include "headerFiles/GLTexture.h"
@@ -46,12 +47,12 @@
 #include "headerFiles/Objects/NonInteractiveObjects/Wall.h"
 #include "headerFiles/Objects/Player.h"
 
-// Screen Constants
+// Screen Constants =================================================
 const int scale = 70;
 const int width = 16 * scale;
 const int height = 9 * scale;
 
-// Game variables
+// Game variables ===================================================
 int gameState = PLAYING_STATE;
 InteractiveObject interactingObject(Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(0, 0, 0));
 
@@ -96,6 +97,7 @@ Wall* walls[24];
 //Wall* wall22;	// South wall of bathroom part 2
 //Wall* wall23;	// East wall of bathroom
 
+// Appartment Layout ================================================
 //livingroom
 Armchair armchair(Vector3f(22.8, 0, 10.2), Vector3f(0, 90, 0), Vector3f(1, 1, 1));
 Sofa sofa(Vector3f(24.5, 0, 9), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
@@ -103,9 +105,6 @@ CoffeeTable coffeeTable(Vector3f(23.7, 0, 10.6), Vector3f(0, 0, 0), Vector3f(1, 
 Tv tv(Vector3f(24.5, 0, 11.5), Vector3f(0, -115+180, 0), Vector3f(1, 1, 1));
 TvTable tvTable(Vector3f(24.5, 0, 11.5), Vector3f(0, 180, 0), Vector3f(1, 1, 1));
 Bookcase bookcase(Vector3f(25.7, 0, 7), Vector3f(0, 180, 0), Vector3f(1, 1, 1));
-
-// Tv tv(Vector3f(0, 0, 0), Vector3f(0, -115, 0), Vector3f(1, 1, 1));
-// TvTable tvTable(Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
 
 //kitchen
 DiningSet diningSet(Vector3f(22.2, 0, 7), Vector3f(0, -90, 0), Vector3f(1, 1, 1));
@@ -127,6 +126,7 @@ Body body(Vector3f(23, 0, 14.9), Vector3f(0, 180, 0), Vector3f(1, 1, 1));
 BrokenGlass brokenGlass(Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vector3f(1, 1, 1));
 Footprints footprints(Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vector3f(1, 1, 1));
 Bloodtrail bloodtrail(Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vector3f(1, 1, 1));
+
 void initClues() {
 
 	
@@ -281,26 +281,46 @@ void drawEnvironment()
 	{
 		(*walls[i]).draw();
 	}
-	glColor3f(1.0, 0.9, 0.9);
+
+	GLuint floorTexture = SOIL_load_OGL_texture(
+		"assets/images/floor.jpg", 
+		SOIL_LOAD_RGBA, SOIL_CREATE_NEW_ID,
+		SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_COMPRESS_TO_DXT |SOIL_FLAG_MULTIPLY_ALPHA
+	);
+
+    glColor4ub(255, 255, 255, 255);
+	glEnable(GL_TEXTURE_2D);
+    glBindTexture(GL_TEXTURE_2D, floorTexture);
 	glBegin(GL_QUADS);
 	{
 		glNormal3f(0, 1, 0);
-		glVertex3f(-1, 0, -1);
-		glVertex3f(-1, 0, 31);
-		glVertex3f(31, 0, 31);
-		glVertex3f(31, 0, -1);
+		glVertex3f(-1, 0, -1);	glTexCoord2f(1, 1);
+		glVertex3f(-1, 0, 31);	glTexCoord2f(1, 0);
+		glVertex3f(31, 0, 31);	glTexCoord2f(0, 0);
+		glVertex3f(31, 0, -1);	glTexCoord2f(0, 1);
 	}
 	glEnd();
-	glColor3f(1.0, 0.9, 0.9);
+    glDisable(GL_TEXTURE_2D);
+
+	GLuint roofTexture = SOIL_load_OGL_texture(
+		"assets/images/celling.jpg", 
+		SOIL_LOAD_RGBA, SOIL_CREATE_NEW_ID,
+		SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_COMPRESS_TO_DXT |SOIL_FLAG_MULTIPLY_ALPHA
+	);
+
+    glColor4ub(255, 255, 255, 255);
+	glEnable(GL_TEXTURE_2D);
+    glBindTexture(GL_TEXTURE_2D, roofTexture);
 	glBegin(GL_QUADS);
 	{
 		glNormal3f(0, -1, 0);
-		glVertex3f(-1, 2, -1);
-		glVertex3f(-1, 2, 31);
-		glVertex3f(31, 2, 31);
-		glVertex3f(31, 2, -1);
+		glVertex3f(-1, 2, -1);	glTexCoord2f(1, 1);
+		glVertex3f(-1, 2, 31);	glTexCoord2f(1, 0);
+		glVertex3f(31, 2, 31);	glTexCoord2f(0, 0);
+		glVertex3f(31, 2, -1);	glTexCoord2f(0, 1);
 	}
 	glEnd();
+	glDisable(GL_TEXTURE_2D);
 }
 
 bool intersectsWalls()
@@ -311,9 +331,11 @@ bool intersectsWalls()
 		intersects |= (*walls[i]).intersects(player);
 	}
 
+	intersects |= armchair.intersects(player);    
 	intersects |= sofa.intersects(player);    
 	intersects |= coffeeTable.intersects(player);
 	intersects |= tv.intersects(player);
+	intersects |= bookcase.intersects(player);
 	intersects |= diningSet.intersects(player);
 	intersects |= kitchen.intersects(player);
 	intersects |= bed.intersects(player);
@@ -326,7 +348,6 @@ bool intersectsWalls()
 
 	return intersects;
 }
-
 
 void initFlashLight() {
 
@@ -472,6 +493,15 @@ void loadAssets()
 	footprints.setImage();
 	bloodtrail.setImage();
 
+	for (int i = 0; i < sizeof(walls) / sizeof(*walls); i++) {
+		(*walls[i]).setTexture("assets/images/paint_wall.jpg");
+	}
+
+	(*walls[0]).setTexture("assets/images/corridor_wall.jpg");
+	(*walls[1]).setTexture("assets/images/corridor_wall.jpg");
+	(*walls[2]).setTexture("assets/images/corridor_wall.jpg");
+	(*walls[3]).setTexture("assets/images/corridor_wall.jpg");
+	(*walls[4]).setTexture("assets/images/corridor_wall.jpg");
 	// Starting music
 }
 
@@ -484,9 +514,6 @@ void interactionTimer(int val)
 		glutTimerFunc(20, interactionTimer, 0);
 	}
 }
-
-
-
 
 void key(unsigned char k, int x, int y)
 {

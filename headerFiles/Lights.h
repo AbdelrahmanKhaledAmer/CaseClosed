@@ -30,7 +30,7 @@ public:
     // Function to set up lights for the scene.
     static void setupLights()
     {
-        GLfloat lightIntensity[] = { 0.5, 0.5, 0.5, 1.0f };
+        GLfloat lightIntensity[] = { 1, 1, 1, 1.0f };
 	    GLfloat lightPosition[] = {0.0f, 100.0f, 0.0f, 0.0f };
 	    glLightfv(GL_LIGHT0, GL_POSITION, lightPosition);
 	    glLightfv(GL_LIGHT0, GL_AMBIENT, lightIntensity);
