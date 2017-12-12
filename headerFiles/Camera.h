@@ -28,6 +28,7 @@ public:
     void tiltLeft(float scale = 1);     // Sideways rotation
 
     // Translation Functions
+    void move(int x);
     void translateForward(float scale = 1); // Translate to the front
     void translateBackward(float scale = 1);// Translate to the back
     void translateLeft(float scale = 1);    // Translate to the left

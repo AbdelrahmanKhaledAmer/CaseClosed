@@ -50,6 +50,7 @@ const int height = 9 * scale;
 // Game variables
 int gameState = PLAYING_STATE;
 InteractiveObject interactingObject(Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(0, 0, 0));
+int intersectingWall = -1;
 
 Eigen::Vector3f eye(1, 1, 1);
 Eigen::Vector3f lookAt(3, 0.5, 1);
@@ -104,7 +105,7 @@ void initClues() {
 	clues[0] = new Knife(Vector3f(4, 0.5, 1), Vector3f(45, 45, 45), Vector3f(1, 1, 1), Vector3f(1, 1, 1));
 	clues[1] = new Knife(Vector3f(3, 0.5, 1), Vector3f(45, 45, 45), Vector3f(1, 1, 1), Vector3f(1, 1, 1));
 	clues[2] = new Knife(Vector3f(2, 0.5, 1), Vector3f(45, 45, 45), Vector3f(1, 1, 1), Vector3f(1, 1, 1));
-	printf("%p",clues[0]);
+	// printf("%p",clues[0]);
 }
 void DrawClues() {
 	int len = sizeof(clues) / sizeof(*clues);
@@ -267,6 +268,11 @@ bool intersectsWalls()
 	for (int i = 0; i < sizeof(walls) / sizeof(*walls); i++)
 	{
 		intersects |= (*walls[i]).intersects(player);
+		if(intersects)
+		{
+			intersectingWall = i;
+			break;
+		}
 	}
 	return intersects;
 }
@@ -293,11 +299,8 @@ Sink sink(Vector3f(27.2, 0, 12.3), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
 Bath bath(Vector3f(28, 0, 14.9), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
 
 
-void initFlashLight() {
-
-
-
-
+void initFlashLight()
+{
 	//GLfloat lmodel_ambient[] = { 0.1f, 0.1f, 0.1f, 1.0f };
 	//glLightModelfv(GL_LIGHT_MODEL_AMBIENT, lmodel_ambient);
 
@@ -322,8 +325,6 @@ void initFlashLight() {
 	glLightfv(GL_LIGHT1, GL_SPOT_DIRECTION, l1Direction);
 
 	glLightfv(GL_LIGHT1, GL_AMBIENT, lightIntensity);
-
-
 }
 
 void display(void)
@@ -421,9 +422,6 @@ void interactionTimer(int val)
 	}
 }
 
-
-
-
 void key(unsigned char k, int x, int y)
 {
 	int len = sizeof(clues) / sizeof(*clues);
@@ -458,6 +456,13 @@ void key(unsigned char k, int x, int y)
 			player.moveForward();
 			if (intersectsWalls()) {
 				player.moveBackward();
+				// float angle = (*walls[intersectingWall]).orientation().y();
+				// if(angle > 85 && angle < 95)
+				// {
+				// 	player.move(1);
+				// } else {
+				// 	player.move(0);
+				// }
 			}
 			break;
 		case 's':
@@ -499,8 +504,6 @@ void key(unsigned char k, int x, int y)
 					(*clues[i]).find(true);
 					break;
 				}
-			 
-
 			}
 			break;
 		case 'q':
@@ -558,13 +561,10 @@ void losingStateCaller(int val)
 
 	if (gameState != WINNING_STATE) {
 		gameState = LOSING_STATE;
-		printf("koko lost\n");
+		// printf("koko lost\n");
 	}
 	glutPostRedisplay();
 }
-
-
-
 
 void main(int argc, char** argv)
 {
@@ -591,7 +591,7 @@ void main(int argc, char** argv)
 	glEnable(GL_LIGHT1);
 	//glEnable(GL_LIGHT2);
 	glEnable(GL_NORMALIZE);
-	//glEnable(GL_COLOR_MATERIAL);
+	// glEnable(GL_COLOR_MATERIAL);
 	glShadeModel(GL_SMOOTH);
 
 	//TODO 10 mins
