@@ -13,10 +13,11 @@ origin.
 
 @return: Pointer to InteractiveObject interactiveObject
 */
-Door::Door(Vector3f location, Vector3f orientation, Vector3f scale,
-           Vector3f dimensions)
-    : InteractiveObject(location, orientation, scale, dimensions) {}
-
+Door::Door(Vector3f location, Vector3f orientation, Vector3f scale)
+:InteractiveObject(location, orientation, scale, Vector3f(0.85, 1.7, 0.15))
+{
+  initialAngle_ = orientation_.y();
+}
 
 /**
 Destructor for the Door object.
@@ -24,8 +25,55 @@ Deletes the pointer for the Door object.
 */
 Door::~Door() {}
 
-
-std::string Interact()
+std::string Door::Interact()
 {
-	return "";
+  return "Door:0";
+}
+
+void Door::draw()
+{
+  float scale = 0.009;
+  glPushMatrix();
+  {
+    glTranslatef((-dimensions_.x()/2), -1, 0);    
+    glScalef(scale, scale, scale);
+    glTranslatef(location_.x() / scale, location_.y() / scale, location_.z() / scale);
+    glScalef(scale_.x(), scale_.y(), scale_.z());
+    glRotatef(orientation_.y(), 0, 1, 0);
+    glTranslatef((-dimensions_.x()/2)/scale, 0, (orientation_.z()/2)/scale);
+    model_.Draw();
+  }
+  glPopMatrix();
+}
+
+void Door::drawBoundries() { __super::drawBoundries(0.7, 1.7, 0.15); }
+
+void Door::setModel()
+{
+  __super::setModel("assets/models/furniture/Door/Door Endless Boiserie Sliding Door Longhi N291216.3DS");
+}
+
+void Door::openDoor(float scale) 
+{
+  if(orientation_.y() > initialAngle_ - 90 && !isOpen_)
+  {
+    orientation_.y() -= 1;
+  } else {
+    isOpen_ = true;
+  }
+}
+
+void Door::closeDoor(float scale)
+{
+  if(orientation_.y() < initialAngle_ && isOpen_)
+  {
+    orientation_.y() += 1;
+  } else {
+    isOpen_ = false;
+  }
+}
+
+bool Door::isOpen()
+{
+  return this->isOpen_;
 }

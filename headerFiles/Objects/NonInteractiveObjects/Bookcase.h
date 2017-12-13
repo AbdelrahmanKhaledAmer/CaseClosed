@@ -12,6 +12,8 @@ public:
   Bookcase(Vector3f location, Vector3f orientation, Vector3f scale); // Constructor
   ~Bookcase();                   // Destructor
   void draw();
+  void drawBoundries();
+  void setModel();
 };
 
 #endif

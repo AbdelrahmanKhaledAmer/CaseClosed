@@ -144,7 +144,7 @@ bool Player::isLookingAt(InteractiveObject object)
     Vector3f lookVec = head_.lookAt() - location_;
     if(dist < 2)
     {
-        if(acos(objVec.dot(lookVec) / (objVec.norm() * lookVec.norm())) * 180 / 3.141592654 < 10 )
+        if(acos(objVec.dot(lookVec) / (objVec.norm() * lookVec.norm())) * 180 / 3.141592654 < 15 )
         {
             return true;
         }

@@ -37,3 +37,7 @@ void Wardrobe::draw() {
 void Wardrobe::drawBoundries() {
   __super::drawBoundries(0.4f, 1.8f, 0.95f);
 }
+
+void Wardrobe::setModel() {
+  __super::setModel("assets/models/furniture/Wardrobe/Wardrobe.3DS");
+}

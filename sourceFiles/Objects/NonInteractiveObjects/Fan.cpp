@@ -13,12 +13,28 @@ global origin.
 @return: Pointer to InteractiveObject interactiveObject
 */
 
-Fan::Fan(Vector3f location, Vector3f orientation, Vector3f scale,
-         Vector3f dimensions)
-    : NonInteractiveObject(location, orientation, scale, dimensions) {}
-
+Fan::Fan(Vector3f location, Vector3f orientation, Vector3f scale)
+    : NonInteractiveObject(location, orientation, scale,
+                         Vector3f(0, 0, 0)) {}
+                         
 /**
 Destructor for the Fan object.
 Deletes the pointer for the Fan object.
 */
 Fan::~Fan() {}
+
+void Fan::draw() {
+  float scale = 0.0045;
+
+  glPushMatrix();
+  {
+    // glTranslatef(0, 0.35, 0);
+    glScalef(scale, scale, scale);
+    __super::draw(scale);
+  }
+  glPopMatrix();
+}
+
+void Fan::setModel() {
+  __super::setModel("assets/models/furniture/Fan/Artemis Fan Collection designed by George Kovacs.3ds");
+}

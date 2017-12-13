@@ -30,16 +30,17 @@ void Bookcase::draw() {
   {
     glTranslatef(0, 0.9, 0);
     glScalef(scale, scale, scale);
+    glTranslatef(location_.x() / scale, location_.y() / scale,
+                 location_.z() / scale);
+    glScalef(scale_.x(), scale_.y(), scale_.z());
+    glRotatef(orientation_.y(), 0, 1, 0);
     glRotatef(-90, 1, 0, 0);
-    __super::draw();
+    model_.Draw();
   }
   glPopMatrix();
+}
+void Bookcase::drawBoundries() { __super::drawBoundries(0.25, 1.8, 1.45); }
 
-  // glPushMatrix();
-  // {
-  //   glTranslatef(0, 0.9, 0);
-  //   glScalef(0.25, 1.8, 1.45);
-  //   glutSolidCube(1);
-  // }
-  // glPopMatrix();
+void Bookcase::setModel() {
+  __super::setModel("assets/models/furniture/Bookcase/Bookcase.3DS");
 }

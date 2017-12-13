@@ -13,6 +13,7 @@ public:
   ~Bed();                   // Destructor
   void draw();
   void drawBoundries();   // Draw Object Boundries
+	void setModel();
 };
 
 #endif

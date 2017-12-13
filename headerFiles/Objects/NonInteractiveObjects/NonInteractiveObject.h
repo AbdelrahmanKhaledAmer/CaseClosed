@@ -14,6 +14,7 @@ public:
   ~NonInteractiveObject();              // Destructor
   void draw(float locScale = 1);
   void drawBoundries(float xLength, float yLength, float zLength);   // Draw Object Boundries
+  void setModel(char* modelPath);
 };
 
 #endif

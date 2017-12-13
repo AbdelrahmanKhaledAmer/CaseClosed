@@ -14,6 +14,7 @@ public:
   ~Sink();                   // Destructor
   void draw();
   void drawBoundries();   // Draw Object Boundries
+	void setModel();
 };
 
 #endif

@@ -10,9 +10,10 @@ class Bath : public NonInteractiveObject {
 public:
   // Main functions
   Bath(Vector3f location, Vector3f orientation, Vector3f scale); // Constructor
-  ~Bath();                   // Destructor
+  ~Bath();                                                       // Destructor
   void draw();
-  void drawBoundries();           // Draw Object Boundries
+  void drawBoundries(); // Draw Object Boundries
+  void setModel();
 };
 
 #endif
