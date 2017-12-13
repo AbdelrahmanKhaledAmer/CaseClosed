@@ -1,17 +1,17 @@
-#ifndef FAN_H
-#define FAN_H
+#ifndef CELLINGLIGHT1_H
+#define CELLINGLIGHT1_H
 
 #include "headerFiles/Objects/NonInteractiveObjects/NonInteractiveObject.h"
 #include <Eigen/Dense>
 
 using namespace Eigen;
 
-class Fan : public NonInteractiveObject {
+class CellingLight1 : public NonInteractiveObject {
 public:
   // Main functions
-  Fan(Vector3f location, Vector3f orientation,
+  CellingLight1(Vector3f location, Vector3f orientation,
                Vector3f scale); // Constructor
-  ~Fan();              // Destructor
+  ~CellingLight1();              // Destructor
   void draw();
   void setModel();
 };

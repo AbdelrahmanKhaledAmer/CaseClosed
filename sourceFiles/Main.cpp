@@ -31,6 +31,7 @@
 #include "headerFiles/Objects/NonInteractiveObjects/Bed.h"
 #include "headerFiles/Objects/NonInteractiveObjects/Bookcase.h"
 #include "headerFiles/Objects/NonInteractiveObjects/CellingLight.h"
+#include "headerFiles/Objects/NonInteractiveObjects/CellingLight1.h"
 #include "headerFiles/Objects/NonInteractiveObjects/CoffeeTable.h"
 #include "headerFiles/Objects/NonInteractiveObjects/DiningSet.h"
 #include "headerFiles/Objects/NonInteractiveObjects/Fan.h"
@@ -64,8 +65,8 @@ unsigned char* ceilingTex;
 int gameState = PLAYING_STATE;
 InteractiveObject interactingObject(Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(0, 0, 0));
 
-// Eigen::Vector3f eye(13, 1, 2);
-Eigen::Vector3f eye(1, 1, 1.2);
+Eigen::Vector3f eye(13, 1, 2);
+// Eigen::V ector3f eye(1, 1, 1.2);
 Eigen::Vector3f lookAt(15, 0.5, 2);
 Eigen::Vector3f orientation(0, 1, 0);
 
@@ -76,10 +77,14 @@ Clue* clues[3];
 Wall* walls[24];
 
 // Appartment Layout ================================================
-Door door(Vector3f(24.5, 0, 4.5), Vector3f(0, 180, 0), Vector3f(1, 1, 1));
-Door1 door1(Vector3f(21.5, 0, 12), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
-Door1 door2(Vector3f(25.5, 0, 13.5), Vector3f(0, 90, 0), Vector3f(1, 1, 1));
+Door apartmentDoor(Vector3f(24.5, 0, 4.5), Vector3f(0, 180, 0), Vector3f(1, 1, 1));
+Door1 bedroomDoor(Vector3f(21.5, 0, 12), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
+Door1 bathroomDoor(Vector3f(25.5, 0, 13.5), Vector3f(0, 90, 0), Vector3f(1, 1, 1));
 Window window(Vector3f(0, 0, 0), Vector3f(0, 90, 0), Vector3f(1, 1, 1));
+CellingLight livingroomLight(Vector3f(24.4, 2.25, 10.38), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
+CellingLight kitchenLight(Vector3f(22.04, 2, 6.89), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
+CellingLight1 bathroomLight(Vector3f(26.68, 2.25, 13.3), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
+Fan bedroomFan(Vector3f(22.79, 2.5, 14.57), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
 
 //livingroom
 Armchair armchair(Vector3f(22.8, 0, 10.2), Vector3f(0, 90, 0), Vector3f(1, 1, 1));
@@ -268,10 +273,10 @@ void drawEnvironment(){
 	glBegin(GL_QUADS);
 	{
 		glNormal3f(0, 1, 0);
-		glTexCoord2f(12, 1);		glVertex3f(12, 0, 1);
-		glTexCoord2f(30, 1);		glVertex3f(12, 0, 17);
-		glTexCoord2f(30, 17);		glVertex3f(30, 0, 17);
-		glTexCoord2f(12, 17);		glVertex3f(30, 0, 1);
+		glTexCoord2f(0, 0);		glVertex3f(12, 0, 1);
+		glTexCoord2f(1, 0);		glVertex3f(12, 0, 17);
+		glTexCoord2f(1, 1);		glVertex3f(30, 0, 17);
+		glTexCoord2f(0, 1);		glVertex3f(30, 0, 1);
 	}
 	glEnd();
 	glDisable(GL_TEXTURE_2D);
@@ -286,10 +291,10 @@ void drawEnvironment(){
 	glBegin(GL_QUADS);
 	{
 		glNormal3f(0, -1, 0);
-		glTexCoord2f(12, 1);		glVertex3f(12, 2, 1);
-		glTexCoord2f(30, 1);		glVertex3f(12, 2, 17);
-		glTexCoord2f(30, 17);		glVertex3f(30, 2, 17);
-		glTexCoord2f(12, 17);		glVertex3f(30, 2, 1);
+		glTexCoord2f(0, 0);		glVertex3f(12, 2, 1);
+		glTexCoord2f(1, 0);		glVertex3f(12, 2, 17);
+		glTexCoord2f(1, 1);		glVertex3f(30, 2, 17);
+		glTexCoord2f(0, 1);		glVertex3f(30, 2, 1);
 	}
 	glEnd();
 	glDisable(GL_TEXTURE_2D);
@@ -301,9 +306,9 @@ bool intersectsWalls() {
     intersects |= (*walls[i]).intersects(player);
   }
 
-  // intersects |= door.intersects(player);
-  // intersects |= door1.intersects(player);
-  // intersects |= door2.intersects(player);
+  // intersects |= apartmentDoor.intersects(player);
+  // intersects |= bedroomDoor.intersects(player);
+  // intersects |= bathroomDoor.intersects(player);
   intersects |= armchair.intersects(player);
   intersects |= sofa.intersects(player);
   intersects |= coffeeTable.intersects(player);
@@ -352,9 +357,9 @@ void initFlashLight()
 }
 
 void drawHitBoxes() {
-  door.drawBoundries();
-  door1.drawBoundries();
-  door2.drawBoundries();
+  apartmentDoor.drawBoundries();
+  bedroomDoor.drawBoundries();
+  bathroomDoor.drawBoundries();
   armchair.drawBoundries();
   sofa.drawBoundries();
   coffeeTable.drawBoundries();
@@ -374,10 +379,14 @@ void drawHitBoxes() {
 
 void drawApartment() {
   drawEnvironment();
-  door.draw();
-  door1.draw();
-  door2.draw();
-  window.draw();
+  apartmentDoor.draw();
+  bedroomDoor.draw();
+  bathroomDoor.draw();
+  // window.draw();
+  livingroomLight.draw();
+  kitchenLight.draw();
+  bathroomLight.draw();
+  bedroomFan.draw();
 
   // livingroom
   armchair.draw();
@@ -438,7 +447,6 @@ void display(void) {
 
   glPushMatrix();
   {
-	glTranslatef(-12, 0, -2);
     drawApartment();
     // drawHitBoxes();
   }
@@ -449,10 +457,14 @@ void display(void) {
 }
 
 void loadAssets() {
-  door.setModel();
-  door1.setModel();
-  door2.setModel();
+  apartmentDoor.setModel();
+  bedroomDoor.setModel();
+  bathroomDoor.setModel();
   window.setModel();
+  livingroomLight.setModel();
+  kitchenLight.setModel();
+  bathroomLight.setModel();
+  bedroomFan.setModel();
 
   armchair.setModel();
   sofa.setModel();
