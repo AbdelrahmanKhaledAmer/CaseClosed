@@ -17,7 +17,7 @@ public:
   void turnOn();
   void turnOff();
 
-  void draw();
+  void draw(float yAngle);
   void setModel();
 
 protected:

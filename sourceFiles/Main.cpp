@@ -573,9 +573,14 @@ void display(void)
   // Reset color and flush buffer
   glColor3f(1.0, 1.0, 1.0);
 
+  Vector3f viewVec = (player.getCamera().lookAt() - player.location()).normalized();
+  Vector3f xAxis(1,0,0);
+  float angle=acos((viewVec.dot(xAxis))/viewVec.norm());
+  printf("%.2f\n",angle);
   glPushMatrix();
   {
-    flashlight.draw();
+
+    flashlight.draw(angle);
     drawApartment();
     // drawHitBoxes();
   }

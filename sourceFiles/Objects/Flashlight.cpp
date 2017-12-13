@@ -29,7 +29,7 @@ void Flashlight::turnOff() { this->on_ = false; }
 
 bool Flashlight::isOn() { return this->on_; }
 
-void Flashlight::draw() {
+void Flashlight::draw(float yAngle) {
   float scale = 0.005;
 
   glPushMatrix();
@@ -39,7 +39,7 @@ void Flashlight::draw() {
     {
       glTranslatef(location_.x() / scale, location_.y() / scale, location_.z() / scale);
       glScalef(scale_.x(), scale_.y(), scale_.z());
-      glRotatef(orientation_.y(), 0, 1, 0);
+      glRotatef(yAngle, 0, 1, 0);
       model_.Draw();
     }
     glPopMatrix();
