@@ -9,9 +9,11 @@ using namespace Eigen;
 class Wardrobe : public NonInteractiveObject {
 public:
   // Main functions
-  Wardrobe(Vector3f location, Vector3f orientation, Vector3f scale,
-           Vector3f dimensions); // Constructor
+  Wardrobe(Vector3f location, Vector3f orientation, Vector3f scale); // Constructor
   ~Wardrobe();                   // Destructor
+  void draw();
+  void drawBoundries();   // Draw Object Boundries
+	void setModel();
 };
 
 #endif

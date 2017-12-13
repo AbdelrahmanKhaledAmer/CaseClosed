@@ -34,3 +34,11 @@ void Bed::draw() {
   }
   glPopMatrix();
 }
+
+void Bed::drawBoundries() {
+  __super::drawBoundries(2.5f, 0.5f, 2.8f);
+}
+
+void Bed::setModel() {
+  __super::setModel("assets/models/furniture/Bed/Bed Cattelan Italia Logan 7410 N100317.3DS");
+}

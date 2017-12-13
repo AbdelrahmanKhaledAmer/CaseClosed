@@ -14,7 +14,7 @@ global origin.
 */
 DiningSet::DiningSet(Vector3f location, Vector3f orientation, Vector3f scale)
     : NonInteractiveObject(location, orientation, scale,
-                           Vector3f(1.7f, 0.5f, 1.7f)) {}
+                           Vector3f(1.25, 0.9, 1.5)) {}
 
 /**
 Destructor for the DiningSet object.
@@ -31,18 +31,13 @@ void DiningSet::draw() {
   {
     glTranslatef(0, 0.35, 0);
     glScalef(scale, scale, scale);
-    __super::draw();
+    __super::draw(scale);
   }
   glPopMatrix();
 }
 
-void DiningSet::drawBoundries() {
-  glPushMatrix();
-  {
-    glScalef(1.5, 0.9, 1.25);
-    glTranslatef(0, 0.5, 0);
-    glutWireCube(1);
-    // glutSolidCube(1);
-  }
-  glPopMatrix();
+void DiningSet::drawBoundries() { __super::drawBoundries(1.25, 0.9, 1.5); }
+
+void DiningSet::setModel() {
+  __super::setModel("assets/models/furniture/DiningSet/4 Chair 2 Tone.3ds");
 }

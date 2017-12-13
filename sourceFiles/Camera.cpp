@@ -53,6 +53,9 @@ void Camera::setup()
     glLoadIdentity();
     gluLookAt(eye_.x(), eye_.y(), eye_.z(), lookAt_.x(), lookAt_.y(), lookAt_.z(), orientation_.x(), orientation_.y(), orientation_.z());
 }
+Vector3f Camera::Upvector() {
+	return this->orientation_;
+}
 
 /**
     Getter Function.
@@ -61,6 +64,15 @@ void Camera::setup()
 Vector3f Camera::location()
 {
     return this->eye_;
+}
+
+/**
+    Getter Function.
+    Returns the current target of the Camera object.
+*/
+Vector3f Camera::lookAt()
+{
+    return this->lookAt_;
 }
 
 /**

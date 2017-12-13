@@ -13,11 +13,9 @@ global origin.
 @return: Pointer to InteractiveObject interactiveObject
 */
 
-Sofa::Sofa(Vector3f location, Vector3f orientation, Vector3f scale,
-                     Vector3f dimensions)
-    : NonInteractiveObject(location, orientation, scale, dimensions) {
-
-}
+Sofa::Sofa(Vector3f location, Vector3f orientation, Vector3f scale)
+    : NonInteractiveObject(location, orientation, scale,
+                           Vector3f(1.7, 0.9, 0.975)) {}
 
 /**
 Destructor for the Sofa object.
@@ -25,4 +23,22 @@ Deletes the pointer for the Sofa object.
 */
 Sofa::~Sofa() {
 
+}
+
+void Sofa::draw() {
+  float scale = 0.0009;
+
+  glPushMatrix();
+  {
+    glTranslatef(0, 0.42, 0);
+    glScalef(scale, scale, scale);
+    __super::draw(scale);
+  }
+  glPopMatrix();
+}
+
+void Sofa::drawBoundries() { __super::drawBoundries(1.7, 0.9, 0.975); }
+
+void Sofa::setModel() {
+  __super::setModel("assets/models/furniture/Sofa/Sofa 1.3DS");
 }

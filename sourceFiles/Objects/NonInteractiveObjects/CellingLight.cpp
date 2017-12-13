@@ -14,11 +14,28 @@ global origin.
 */
 
 CellingLight::CellingLight(Vector3f location, Vector3f orientation,
-                           Vector3f scale, Vector3f dimensions)
-    : NonInteractiveObject(location, orientation, scale, dimensions) {}
+                           Vector3f scale)
+    : NonInteractiveObject(location, orientation, scale,
+                         Vector3f(0, 0, 0)) {}
 
 /**
 Destructor for the CellingLight object.
 Deletes the pointer for the CellingLight object.
 */
 CellingLight::~CellingLight() {}
+
+void CellingLight::draw() {
+  float scale = 0.009;
+
+  glPushMatrix();
+  {
+    // glTranslatef(0, 0.35, 0);
+    glScalef(scale, scale, scale);
+    __super::draw(scale);
+  }
+  glPopMatrix();
+}
+
+void CellingLight::setModel() {
+  __super::setModel("assets/models/furniture/CellingLight/Luster Donolux S111000-3 white N010917.3DS");
+}

@@ -67,22 +67,46 @@ Vector3f Object::dimensions()
 
 /**
     Setter Function.
+    Sets the current location of the Object object.
+*/
+void Object::setLocation(Vector3f location) { this->location_ = location; }
+
+/**
+    Setter Function.
+    Sets the current orientation of the Object object.
+*/
+void Object::setOrientation(Vector3f orientation) {
+  this->orientation_ = orientation;
+}
+
+/**
+    Setter Function.
+    Sets the current scale of the Object object.
+*/
+void Object::setScale(Vector3f scale) { this->scale_ = scale; }
+
+/**
+    Setter Function.
+    Sets the current dimensions of the Object object.
+*/
+void Object::setDimension(Vector3f dimensions) { this->dimensions_ = dimensions; }
+
+/**
+    Setter Function.
     Sets the current model of the Object object.
 */
-void Object::setModel(Model_3DS model){
-    this->model_ = model;
-}
+void Object::setModel(char *modelPath) { model_.Load(modelPath); }
 
 /**
     OpenGL drawing function.
     Draws an Object on the screen. To be Overridden by the subclasses.
 */
 void Object::draw(float locScale) {
-    
   glPushMatrix();
   {
     glTranslatef(location_.x() / locScale, location_.y() / locScale, location_.z() / locScale);
     glScalef(scale_.x(), scale_.y(), scale_.z());
+    glRotatef(orientation_.y(), 0, 1, 0);
     model_.Draw();
   }
   glPopMatrix();
@@ -92,7 +116,18 @@ void Object::draw(float locScale) {
     OpenGL drawing function.
     Draws an Object's boundries on the screen. To be Overridden by the subclasses.
 */
-void Object::drawBoundries() {}
+void Object::drawBoundries(float xLength, float yLength, float zLength) {
+  glColor3f(1.0, 0, 0);
+  glPushMatrix();
+  {
+    glTranslatef(location_.x(), location_.y(), location_.z());
+    glScalef(xLength, yLength, zLength);
+    glTranslatef(0, 0.5f, 0);
+    glutSolidCube(1);
+  }
+  glPopMatrix();
+  glColor3f(1.0, 1.0, 1.0);
+}
 
 /**
     Collision logic function.
@@ -116,8 +151,22 @@ bool Object::intersects(Object object)
     float obj2YMax = object.location_.y() + object.dimensions_.y()/2;
     float obj2ZMin = object.location_.z() - object.dimensions_.z()/2;
     float obj2ZMax = object.location_.z() + object.dimensions_.z()/2;
-    bool intersectsX = (obj1XMin >= obj2XMin && obj1XMin <= obj2XMax) || (obj1XMax >= obj2XMin && obj1XMax <= obj2XMax);
-    bool intersectsY = (obj1YMin >= obj2YMin && obj1YMin <= obj2YMax) || (obj1YMax >= obj2YMin && obj1YMax <= obj2YMax);
-    bool intersectsZ = (obj1ZMin >= obj2ZMin && obj1ZMin <= obj2ZMax) || (obj1ZMax >= obj2ZMin && obj1ZMax <= obj2ZMax);
+    bool intersectsX = (obj1XMin >= obj2XMin && obj1XMin <= obj2XMax)
+                    || (obj1XMax >= obj2XMin && obj1XMax <= obj2XMax)
+                    || (obj2XMin >= obj1XMin && obj2XMin <= obj1XMax)
+                    || (obj2XMax >= obj1XMin && obj2XMax <= obj1XMax);
+    bool intersectsY = (obj1YMin >= obj2YMin && obj1YMin <= obj2YMax)
+                    || (obj1YMax >= obj2YMin && obj1YMax <= obj2YMax)
+                    || (obj2YMin >= obj1YMin && obj2YMin <= obj1YMax)
+                    || (obj2YMax >= obj1YMin && obj2YMax <= obj1YMax);
+    bool intersectsZ = (obj1ZMin >= obj2ZMin && obj1ZMin <= obj2ZMax)
+                    || (obj1ZMax >= obj2ZMin && obj1ZMax <= obj2ZMax)
+                    || (obj2ZMin >= obj1ZMin && obj2ZMin <= obj1ZMax)
+                    || (obj2ZMax >= obj1ZMin && obj2ZMax <= obj1ZMax);
     return intersectsX && intersectsY && intersectsZ;
+}
+
+void Object::rotate(float scale)
+{
+    this->orientation_.y() += scale;
 }

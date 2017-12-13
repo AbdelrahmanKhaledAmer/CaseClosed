@@ -9,9 +9,11 @@ using namespace Eigen;
 class CellingLight : public NonInteractiveObject {
 public:
   // Main functions
-  CellingLight(Vector3f location, Vector3f orientation, Vector3f scale,
-               Vector3f dimensions); // Constructor
-  ~CellingLight();                   // Destructor
+  CellingLight(Vector3f location, Vector3f orientation,
+               Vector3f scale); // Constructor
+  ~CellingLight();              // Destructor
+  void draw();
+  void setModel();
 };
 
 #endif
