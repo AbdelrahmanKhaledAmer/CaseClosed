@@ -25,6 +25,7 @@
 #include "headerFiles/Objects/InteractiveObjects/Clues/Footprints.h"
 #include "headerFiles/Objects/InteractiveObjects/Clues/Knife.h"
 #include "headerFiles/Objects/InteractiveObjects/Clues/YellowHoodie.h"
+#include "headerFiles/Objects/InteractiveObjects/Clues/SuicideNote.h"
 #include "headerFiles/Objects/InteractiveObjects/Door.h"
 #include "headerFiles/Objects/InteractiveObjects/Door1.h"
 #include "headerFiles/Objects/NonInteractiveObjects/Armchair.h"
@@ -128,6 +129,7 @@ Bath bath(Vector3f(28, 0, 14.9), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
 YellowHoodie yellowHoodie(Vector3f(1, 0, 1), Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vector3f(1, 1, 1));
 YellowHoodie yellowHoodie1(Vector3f(0, 3, 0), Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vector3f(1, 1, 1));
 BrokenGlass brokenGlass(Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vector3f(1, 1, 1));
+SuicideNote suicideNote(Vector3f(1, 0, 1), Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vector3f(1, 1, 1));
 Footprints footprints(Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vector3f(1, 1, 1));
 Bloodtrail bloodtrail(Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vector3f(1, 1, 1));
 
@@ -529,7 +531,8 @@ void drawApartment() {
   bath.draw();
 
   // clues
-  yellowHoodie.draw();
+  // yellowHoodie.draw();
+  suicideNote.draw();
   // brokenGlass.draw();
   // footprints.draw();
   // bloodtrail.draw();
@@ -581,33 +584,6 @@ void display(void)
   }
   glPopMatrix();
 
-  glPushMatrix();
-  glTranslated(1, 0.5, 1);
-  glutSolidCube(0.1);
-  glPopMatrix();
-
-  glPushMatrix();
-  Vector3f viewVec = ((player.getCamera().lookAt() - player.location()).normalized()) * 1.5;
-  Vector3f loc = player.location();
-  Vector3f Upvector = player.getCamera().Upvector();
-  Vector3f crossV = viewVec.cross(Upvector);
-  //the required plane is the plane between the up and cross vector
-  glColor3f(1, 0, 0);
-  glBegin(GL_QUADS);
-  {
-    glNormal3f(0, 1, 0);
-    glTexCoord2f(0.0f, 0.0f);
-    glVertex3f(-1, 0, -1);
-    glTexCoord2f(1.0f, 0.0f);
-    glVertex3f(-1, 0.5, -1);
-    glTexCoord2f(1.0f, 1.0f);
-    glVertex3f(-1, 0.5, -2);
-    glTexCoord2f(0.0f, 1.0f);
-    glVertex3f(-1, 0, -2);
-  }
-  glEnd();
-  glPopMatrix();
-
   glFlush();
   glutSwapBuffers();
 }
@@ -651,6 +627,7 @@ void loadAssets() {
   // bloodtrail.setImage();
   journal.setModel();
   yellowHoodie.setModel();
+  suicideNote.setModel();
 
   // Corridor Texturs
   (*walls[0]).setTexture("assets/images/corridor_wall.jpg");
