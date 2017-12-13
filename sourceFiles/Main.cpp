@@ -43,6 +43,7 @@
 #include "headerFiles/Objects/NonInteractiveObjects/TvTable.h"
 #include "headerFiles/Objects/NonInteractiveObjects/Wall.h"
 #include "headerFiles/Objects/NonInteractiveObjects/Wardrobe.h"
+#include "headerFiles/Objects/NonInteractiveObjects/Window.h"
 #include "headerFiles/Objects/Object.h"
 #include "headerFiles/Objects/Player.h"
 
@@ -100,6 +101,7 @@ Wall* walls[24];
 Door door(Vector3f(24.5, 0, 4.5), Vector3f(0, 180, 0), Vector3f(1, 1, 1));
 Door1 door1(Vector3f(21.5, 0, 12), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
 Door1 door2(Vector3f(25.5, 0, 13.5), Vector3f(0, 90, 0), Vector3f(1, 1, 1));
+Window window(Vector3f(0, 0, 0), Vector3f(0, 90, 0), Vector3f(1, 1, 1));
 
 //livingroom
 Armchair armchair(Vector3f(22.8, 0, 10.2), Vector3f(0, 90, 0), Vector3f(1, 1, 1));
@@ -352,7 +354,8 @@ bool intersectsWalls()
 	intersects |= sink.intersects(player);
 	intersects |= bath.intersects(player);
 
-	return intersects;
+	// return intersects;
+	return false;
 }
 
 void initFlashLight() {
@@ -410,10 +413,11 @@ void drawHitBoxes(){
 }
 
 void drawApartment() {
-    drawEnvironment();
+    // drawEnvironment();
 	door.draw();
 	door1.draw();
 	door2.draw();
+	window.draw();
 
     // livingroom
     armchair.draw();
@@ -475,7 +479,7 @@ void display(void) {
   glPushMatrix();
   {
     drawApartment();
-    drawHitBoxes();
+    // drawHitBoxes();
   }
   glPopMatrix();
 
@@ -488,6 +492,7 @@ void loadAssets()
 	door.setModel();
 	door1.setModel();
 	door2.setModel();
+	window.setModel();
 	
 	armchair.setModel();
 	sofa.setModel();

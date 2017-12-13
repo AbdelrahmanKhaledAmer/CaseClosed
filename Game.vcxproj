@@ -119,6 +119,7 @@
     <ClCompile Include="sourceFiles\Objects\NonInteractiveObjects\Nightstand.cpp" />
     <ClCompile Include="sourceFiles\Objects\NonInteractiveObjects\Wall.cpp" />
     <ClCompile Include="sourceFiles\Objects\Journal.cpp" />
+    <ClCompile Include="sourceFiles\Objects\NonInteractiveObjects\Window.cpp" />
     <ClCompile Include="sourceFiles\Objects\Object.cpp" />
     <ClCompile Include="sourceFiles\Objects\Player.cpp" />
   </ItemGroup>
@@ -159,6 +160,7 @@
     <ClInclude Include="headerFiles\Objects\NonInteractiveObjects\Nightstand.h" />
     <ClInclude Include="headerFiles\Objects\NonInteractiveObjects\Wall.h" />
     <ClInclude Include="headerFiles\Objects\Journal.h" />
+    <ClInclude Include="headerFiles\Objects\NonInteractiveObjects\Window.h" />
     <ClInclude Include="headerFiles\Objects\Object.h" />
     <ClInclude Include="headerFiles\Objects\Player.h" />
   </ItemGroup>
