@@ -25,10 +25,12 @@
 #include "headerFiles/Objects/InteractiveObjects/Clues/Footprints.h"
 #include "headerFiles/Objects/InteractiveObjects/Clues/Knife.h"
 #include "headerFiles/Objects/InteractiveObjects/Clues/PhotoFrame.h"
-#include "headerFiles/Objects/InteractiveObjects/Clues/YellowHoodie.h"
+#include "headerFiles/Objects/InteractiveObjects/Clues/Pills.h"
 #include "headerFiles/Objects/InteractiveObjects/Clues/SuicideNote.h"
+#include "headerFiles/Objects/InteractiveObjects/Clues/YellowHoodie.h"
 #include "headerFiles/Objects/InteractiveObjects/Door.h"
 #include "headerFiles/Objects/InteractiveObjects/Door1.h"
+#include "headerFiles/Objects/Journal.h"
 #include "headerFiles/Objects/NonInteractiveObjects/Armchair.h"
 #include "headerFiles/Objects/NonInteractiveObjects/Bath.h"
 #include "headerFiles/Objects/NonInteractiveObjects/Bed.h"
@@ -50,7 +52,6 @@
 #include "headerFiles/Objects/NonInteractiveObjects/Wardrobe.h"
 #include "headerFiles/Objects/NonInteractiveObjects/Window.h"
 #include "headerFiles/Objects/Object.h"
-#include "headerFiles/Objects/Journal.h"
 #include "headerFiles/Objects/Player.h"
 using namespace std;
 // Screen Constants =================================================
@@ -134,6 +135,7 @@ SuicideNote suicideNote(Vector3f(1, 0, 1), Vector3f(0, 0, 0), Vector3f(1, 1, 1),
 Footprints footprints(Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vector3f(1, 1, 1));
 Bloodtrail bloodtrail(Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vector3f(1, 1, 1));
 PhotoFrame photoFrame(Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
+Pills pills(Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
 
 void initClues()
 {
@@ -535,7 +537,8 @@ void drawApartment() {
   // clues
   // yellowHoodie.draw();
   suicideNote.draw();
-  photoFrame.draw();
+  // photoFrame.draw();
+  pills.draw();
   // brokenGlass.draw();
   // footprints.draw();
   // bloodtrail.draw();
@@ -628,10 +631,11 @@ void loadAssets() {
   // brokenGlass.setImage();
   // footprints.setImage();
   // bloodtrail.setImage();
-  journal.setModel();
-  yellowHoodie.setModel();
-  suicideNote.setModel();
-  photoFrame.setModel();
+  // journal.setModel();
+  // yellowHoodie.setModel();
+  // suicideNote.setModel();
+  // photoFrame.setModel();
+  pills.setModel();
 
   // Corridor Texturs
   (*walls[0]).setTexture("assets/images/corridor_wall.jpg");
