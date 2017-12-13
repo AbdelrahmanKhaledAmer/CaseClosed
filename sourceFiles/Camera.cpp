@@ -76,6 +76,46 @@ Vector3f Camera::lookAt()
 }
 
 /**
+
+*/
+void Camera::move(int x)
+{
+    Vector3f dir = lookAt_ - eye_;
+    if(x)
+    {
+        Vector3f xDir(1,0,0);
+        float angleX = acos(dir.dot(xDir) / dir.norm()) * 180 / 3.141592654;
+        if(angleX >= 0 && angleX <=90)
+        {
+            Vector3f direction(1,0,0);
+            direction *= translationStep_ * (90 - angleX) / 90.0;
+            eye_ += direction;
+            lookAt_ += direction;
+        } else if(angleX >= 90 && angleX <= 180){
+            Vector3f direction(-1,0,0);
+            direction *= translationStep_ * (angleX - 90) / 90.0;
+            eye_ += direction;
+            lookAt_ += direction;
+        }
+    } else {
+        Vector3f zDir(0,0,1);
+        float angleZ = acos(dir.dot(zDir) / dir.norm()) * 180 / 3.141592654;
+        if(angleZ >= 0 && angleZ <=70)
+        {
+            Vector3f direction(0,0,1);
+            direction *= translationStep_ * (90 - angleZ) / 90.0;
+            eye_ += direction;
+            lookAt_ += direction;
+        } else if(angleZ >= 110 && angleZ <=180) {
+            Vector3f direction(0,0,-1);
+            direction *= translationStep_ * (angleZ - 90) / 90.0;
+            eye_ += direction;
+            lookAt_ += direction;
+        }
+    }
+}
+
+/**
     Rotation Function.
     Rotates the Camera object by the preset angular step along the Camera's y axis. This is done by changing the lookAt_ variable.
 

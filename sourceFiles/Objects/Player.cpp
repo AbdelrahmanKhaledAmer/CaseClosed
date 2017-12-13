@@ -37,6 +37,18 @@ Camera Player::getCamera()
 
     @param (scale) a variable to determine the magnitude of the motion (default is 1)
 */
+void Player::move(int x)
+{
+    head_.move(x);
+    location_ = head_.location();
+}
+
+/**
+    Translation Function.
+    Moves the player one step forward
+
+    @param (scale) a variable to determine the magnitude of the motion (default is 1)
+*/
 void Player::moveForward(float scale)
 {
     head_.translateForward(scale);
@@ -132,7 +144,7 @@ bool Player::isLookingAt(InteractiveObject object)
     Vector3f lookVec = head_.lookAt() - location_;
     if(dist < 2)
     {
-        if(acos(objVec.dot(lookVec) / (objVec.norm() * lookVec.norm())) * 180 / 3.141592654 < 10 )
+        if(acos(objVec.dot(lookVec) / (objVec.norm() * lookVec.norm())) * 180 / 3.141592654 < 15 )
         {
             return true;
         }

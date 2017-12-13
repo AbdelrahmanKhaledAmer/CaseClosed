@@ -29,5 +29,6 @@ void Clue::draw() { __super::draw(); }
 bool Clue::isFound() { return this->isFound_; }
 
 void Clue::find(bool state) { this->isFound_ = state; }
-
+void Clue::setState(int val){this->state=val;}
+int Clue::getState(){return this->state;}
 void Clue::setModel(char *modelPath) { __super::setModel(modelPath); }
