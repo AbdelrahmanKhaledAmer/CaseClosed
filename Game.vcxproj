@@ -98,6 +98,7 @@
     <ClCompile Include="sourceFiles\Objects\InteractiveObjects\Clues\ClueImage.cpp" />
     <ClCompile Include="sourceFiles\Objects\InteractiveObjects\Clues\Footprints.cpp" />
     <ClCompile Include="sourceFiles\Objects\InteractiveObjects\Clues\Knife.cpp" />
+    <ClCompile Include="sourceFiles\Objects\InteractiveObjects\Clues\YellowHoodie.cpp" />
     <ClCompile Include="sourceFiles\Objects\InteractiveObjects\Door.cpp" />
     <ClCompile Include="sourceFiles\Objects\InteractiveObjects\Door1.cpp" />
     <ClCompile Include="sourceFiles\Objects\InteractiveObjects\InteractiveObject.cpp" />
@@ -142,6 +143,7 @@
     <ClInclude Include="headerFiles\Objects\InteractiveObjects\Clues\ClueImage.h" />
     <ClInclude Include="headerFiles\Objects\InteractiveObjects\Clues\Footprints.h" />
     <ClInclude Include="headerFiles\Objects\InteractiveObjects\Clues\Knife.h" />
+    <ClInclude Include="headerFiles\Objects\InteractiveObjects\Clues\YellowHoodie.h" />
     <ClInclude Include="headerFiles\Objects\InteractiveObjects\Door.h" />
     <ClInclude Include="headerFiles\Objects\InteractiveObjects\Door1.h" />
     <ClInclude Include="headerFiles\Objects\InteractiveObjects\InteractiveObject.h" />

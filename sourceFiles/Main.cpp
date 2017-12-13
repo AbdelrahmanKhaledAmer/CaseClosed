@@ -24,6 +24,7 @@
 #include "headerFiles/Objects/InteractiveObjects/Clues/BrokenGlass.h"
 #include "headerFiles/Objects/InteractiveObjects/Clues/Footprints.h"
 #include "headerFiles/Objects/InteractiveObjects/Clues/Knife.h"
+#include "headerFiles/Objects/InteractiveObjects/Clues/YellowHoodie.h"
 #include "headerFiles/Objects/InteractiveObjects/Door.h"
 #include "headerFiles/Objects/InteractiveObjects/Door1.h"
 #include "headerFiles/Objects/NonInteractiveObjects/Armchair.h"
@@ -67,8 +68,8 @@ unsigned char* ceilingTex;
 int gameState = PLAYING_STATE;
 InteractiveObject interactingObject(Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(0, 0, 0));
 
-Eigen::Vector3f eye(13, 1, 2);
-// Eigen::Vector3f eye(1, 1, 1.2);
+Eigen::Vector3f eye(-2, 1, 0);
+// Eigen::Vector3f eye(13, 1, 2);
 Eigen::Vector3f lookAt(15, 0.5, 2);
 Eigen::Vector3f orientation(0, 1, 0);
 
@@ -106,6 +107,7 @@ DiningSet diningSet(Vector3f(22.2, 0, 7), Vector3f(0, -90, 0), Vector3f(1, 1, 1)
 Kitchen kitchen(Vector3f(21.15, 0, 5.5), Vector3f(0, 270, 0), Vector3f(1, 1, 1));
 
 //Bedroom
+Body body(Vector3f(23, 0, 14.9), Vector3f(0, 180, 0), Vector3f(1, 1, 1));
 Bed bed(Vector3f(23, 0, 14.9), Vector3f(0, 180, 0), Vector3f(1, 1, 1));
 Nightstand nightstand1(Vector3f(24.17, 0, 16.2), Vector3f(0, 180, 0), Vector3f(1, 1, 1));
 Nightstand nightstand2(Vector3f(21.27, 0, 16.2), Vector3f(0, 180, 0), Vector3f(1, 1, 1));
@@ -117,7 +119,8 @@ Sink sink(Vector3f(27.2, 0, 12.3), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
 Bath bath(Vector3f(28, 0, 14.9), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
 
 //Clues
-Body body(Vector3f(23, 0, 14.9), Vector3f(0, 180, 0), Vector3f(1, 1, 1));
+YellowHoodie yellowHoodie(Vector3f(1, 0, 1), Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vector3f(1, 1, 1));
+YellowHoodie yellowHoodie1(Vector3f(0, 3, 0), Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vector3f(1, 1, 1));
 BrokenGlass brokenGlass(Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vector3f(1, 1, 1));
 Footprints footprints(Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vector3f(1, 1, 1));
 Bloodtrail bloodtrail(Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vector3f(1, 1, 1));
@@ -396,7 +399,7 @@ void drawApartment() {
   bedroomWindow.draw();
   livingroomWindow1.draw();
   livingroomWindow2.draw();
-  outsideImage.draw();
+  // outsideImage.draw();
 
   // livingroom
   armchair.draw();
@@ -423,10 +426,11 @@ void drawApartment() {
   bath.draw();
 
   // clues
-  body.draw();
+  yellowHoodie.draw();
   // brokenGlass.draw();
   // footprints.draw();
-  bloodtrail.draw();
+  // bloodtrail.draw();
+  yellowHoodie1.draw();
 
   drawEnvironment();
 }
@@ -459,7 +463,7 @@ void display(void) {
 
   glPushMatrix();
   {
-    // journal.draw();
+    journal.draw();
     drawApartment();
     // drawHitBoxes();
   }
@@ -470,43 +474,44 @@ void display(void) {
 }
 
 void loadAssets() {
-  apartmentDoor.setModel();
-  bedroomDoor.setModel();
-  bathroomDoor.setModel();
-  livingroomLight.setModel();
-  kitchenLight.setModel();
-  bathroomLight.setModel();
-  bedroomFan.setModel();
+  // apartmentDoor.setModel();
+  // bedroomDoor.setModel();
+  // bathroomDoor.setModel();
+  // livingroomLight.setModel();
+  // kitchenLight.setModel();
+  // bathroomLight.setModel();
+  // bedroomFan.setModel();
 
-  livingroomWindow1.setModel();
-  livingroomWindow2.setModel();
-  bedroomWindow.setModel();
-  outsideImage.setImage("assets/images/window.png");
+  // livingroomWindow1.setModel();
+  // livingroomWindow2.setModel();
+  // bedroomWindow.setModel();
+  // outsideImage.setImage("assets/images/window.png");
 
-  armchair.setModel();
-  sofa.setModel();
-  coffeeTable.setModel();
-  tv.setModel();
-  tvTable.setModel();
-  bookcase.setModel();
+  // armchair.setModel();
+  // sofa.setModel();
+  // coffeeTable.setModel();
+  // tv.setModel();
+  // tvTable.setModel();
+  // bookcase.setModel();
 
-  kitchen.setModel();
-  diningSet.setModel();
+  // kitchen.setModel();
+  // diningSet.setModel();
 
-  bed.setModel();
-  nightstand1.setModel();
-  nightstand2.setModel();
-  wardrobe.setModel();
+  // body.setModel();
+  // bed.setModel();
+  // nightstand1.setModel();
+  // nightstand2.setModel();
+  // wardrobe.setModel();
 
-  toilet.setModel();
-  sink.setModel();
-  bath.setModel();
+  // toilet.setModel();
+  // sink.setModel();
+  // bath.setModel();
 
-  body.setModel();
-  brokenGlass.setImage();
-  footprints.setImage();
-  bloodtrail.setImage();
+  // brokenGlass.setImage();
+  // footprints.setImage();
+  // bloodtrail.setImage();
   journal.setModel();
+  yellowHoodie.setModel();
 
   // Corridor Texturs
   (*walls[0]).setTexture("assets/images/corridor_wall.jpg");
