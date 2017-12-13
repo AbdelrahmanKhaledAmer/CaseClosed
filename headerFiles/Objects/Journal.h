@@ -3,10 +3,10 @@
 
 #include <Eigen/Dense>
 #include "headerFiles/Objects/Object.h"
+#include "headerFiles/Objects/InteractiveObjects/Clues/Clue.h"
 #include "headerFiles/Image.h"
 #include "SOIL/src/SOIL.h"
 
-using namespace std;
 using namespace Eigen;
 
 class Journal : public Object
@@ -17,12 +17,13 @@ public:
 	~Journal();                                                                                              // Destructor
 
 	// write function
-	void write(int clueIndex);
+	void write(int clueIndex, int property = 0);
 	void draw();
 	void setModel();
 private:
 	bool clues_[10];
-	GLuint clueImages_[10];
+	int cluesState_[10];
+	GLuint clueImages_[10][3];
 	GLuint journalImage_;
 };
 
