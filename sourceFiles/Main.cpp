@@ -76,12 +76,13 @@ Clue* clues[3];
 Wall* walls[24];
 
 // Appartment Layout ================================================
-Door door(Vector3f(24.5, 0, 4.5), Vector3f(0, 180, 0), Vector3f(1, 1, 1));
-Door1 door1(Vector3f(21.5, 0, 12), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
-Door1 door2(Vector3f(25.5, 0, 13.5), Vector3f(0, 90, 0), Vector3f(1, 1, 1));
+Door apartmentDoor(Vector3f(24.5, 0, 4.5), Vector3f(0, 180, 0), Vector3f(1, 1, 1));
+Door1 bedroomDoor(Vector3f(21.5, 0, 12), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
+Door1 bathroomDoor(Vector3f(25.5, 0, 13.5), Vector3f(0, 90, 0), Vector3f(1, 1, 1));
 Window window(Vector3f(0, 0, 0), Vector3f(0, 90, 0), Vector3f(1, 1, 1));
-CellingLight cellingLight(Vector3f(24.4, 2.25, 10.38), Vector3f(0, 90, 0), Vector3f(1, 1, 1));
-CellingLight kitchenLight(Vector3f(22.04, 2.25, 6.89), Vector3f(0, 90, 0), Vector3f(1, 1, 1));
+CellingLight livingroomLight(Vector3f(24.4, 2.25, 10.38), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
+CellingLight kitchenLight(Vector3f(22.04, 2.25, 6.89), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
+Fan bedroomFan(Vector3f(22.79, 2.5, 14.57), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
 
 //livingroom
 Armchair armchair(Vector3f(22.8, 0, 10.2), Vector3f(0, 90, 0), Vector3f(1, 1, 1));
@@ -303,9 +304,9 @@ bool intersectsWalls() {
     intersects |= (*walls[i]).intersects(player);
   }
 
-  // intersects |= door.intersects(player);
-  // intersects |= door1.intersects(player);
-  // intersects |= door2.intersects(player);
+  // intersects |= apartmentDoor.intersects(player);
+  // intersects |= bedroomDoor.intersects(player);
+  // intersects |= bathroomDoor.intersects(player);
   intersects |= armchair.intersects(player);
   intersects |= sofa.intersects(player);
   intersects |= coffeeTable.intersects(player);
@@ -354,9 +355,9 @@ void initFlashLight()
 }
 
 void drawHitBoxes() {
-  door.drawBoundries();
-  door1.drawBoundries();
-  door2.drawBoundries();
+  apartmentDoor.drawBoundries();
+  bedroomDoor.drawBoundries();
+  bathroomDoor.drawBoundries();
   armchair.drawBoundries();
   sofa.drawBoundries();
   coffeeTable.drawBoundries();
@@ -376,12 +377,13 @@ void drawHitBoxes() {
 
 void drawApartment() {
   drawEnvironment();
-  door.draw();
-  door1.draw();
-  door2.draw();
+  apartmentDoor.draw();
+  bedroomDoor.draw();
+  bathroomDoor.draw();
   // window.draw();
-  cellingLight.draw();
+  livingroomLight.draw();
   kitchenLight.draw();
+  bedroomFan.draw();
 
   // livingroom
   armchair.draw();
@@ -452,12 +454,13 @@ void display(void) {
 }
 
 void loadAssets() {
-  door.setModel();
-  door1.setModel();
-  door2.setModel();
+  apartmentDoor.setModel();
+  bedroomDoor.setModel();
+  bathroomDoor.setModel();
   window.setModel();
-  cellingLight.setModel();
+  livingroomLight.setModel();
   kitchenLight.setModel();
+  bedroomFan.setModel();
 
   armchair.setModel();
   sofa.setModel();
