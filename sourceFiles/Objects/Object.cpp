@@ -67,11 +67,35 @@ Vector3f Object::dimensions()
 
 /**
     Setter Function.
+    Sets the current location of the Object object.
+*/
+void Object::setLocation(Vector3f location) { this->location_ = location; }
+
+/**
+    Setter Function.
+    Sets the current orientation of the Object object.
+*/
+void Object::setOrientation(Vector3f orientation) {
+  this->orientation_ = orientation;
+}
+
+/**
+    Setter Function.
+    Sets the current scale of the Object object.
+*/
+void Object::setScale(Vector3f scale) { this->scale_ = scale; }
+
+/**
+    Setter Function.
+    Sets the current dimensions of the Object object.
+*/
+void Object::setDimension(Vector3f dimensions) { this->dimensions_ = dimensions; }
+
+/**
+    Setter Function.
     Sets the current model of the Object object.
 */
-void Object::setModel(char *modelPath) {
-	model_.Load(modelPath);	
-}
+void Object::setModel(char *modelPath) { model_.Load(modelPath); }
 
 /**
     OpenGL drawing function.
@@ -93,7 +117,6 @@ void Object::draw(float locScale) {
     Draws an Object's boundries on the screen. To be Overridden by the subclasses.
 */
 void Object::drawBoundries(float xLength, float yLength, float zLength) {
-  glColor3f(1.0, 1.0, 1.0);
   glColor3f(1.0, 0, 0);
   glPushMatrix();
   {

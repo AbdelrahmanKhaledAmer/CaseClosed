@@ -98,11 +98,14 @@
     <ClCompile Include="sourceFiles\Objects\InteractiveObjects\Clues\Footprints.cpp" />
     <ClCompile Include="sourceFiles\Objects\InteractiveObjects\Clues\Knife.cpp" />
     <ClCompile Include="sourceFiles\Objects\InteractiveObjects\Door.cpp" />
+    <ClCompile Include="sourceFiles\Objects\InteractiveObjects\Door1.cpp" />
     <ClCompile Include="sourceFiles\Objects\InteractiveObjects\InteractiveObject.cpp" />
     <ClCompile Include="sourceFiles\Objects\NonInteractiveObjects\Armchair.cpp" />
     <ClCompile Include="sourceFiles\Objects\NonInteractiveObjects\Bath.cpp" />
+    <ClCompile Include="sourceFiles\Objects\NonInteractiveObjects\CellingLight1.cpp" />
     <ClCompile Include="sourceFiles\Objects\NonInteractiveObjects\DiningSet.cpp" />
     <ClCompile Include="sourceFiles\Objects\NonInteractiveObjects\NonInteractiveObject.cpp" />
+    <ClCompile Include="sourceFiles\Objects\NonInteractiveObjects\OutsideImage.cpp" />
     <ClCompile Include="sourceFiles\Objects\NonInteractiveObjects\Sofa.cpp" />
     <ClCompile Include="sourceFiles\Objects\NonInteractiveObjects\Toilet.cpp" />
     <ClCompile Include="sourceFiles\Objects\NonInteractiveObjects\Kitchen.cpp" />
@@ -118,6 +121,7 @@
     <ClCompile Include="sourceFiles\Objects\NonInteractiveObjects\Nightstand.cpp" />
     <ClCompile Include="sourceFiles\Objects\NonInteractiveObjects\Wall.cpp" />
     <ClCompile Include="sourceFiles\Objects\Journal.cpp" />
+    <ClCompile Include="sourceFiles\Objects\NonInteractiveObjects\Window.cpp" />
     <ClCompile Include="sourceFiles\Objects\Object.cpp" />
     <ClCompile Include="sourceFiles\Objects\Player.cpp" />
   </ItemGroup>
@@ -137,11 +141,14 @@
     <ClInclude Include="headerFiles\Objects\InteractiveObjects\Clues\Footprints.h" />
     <ClInclude Include="headerFiles\Objects\InteractiveObjects\Clues\Knife.h" />
     <ClInclude Include="headerFiles\Objects\InteractiveObjects\Door.h" />
+    <ClInclude Include="headerFiles\Objects\InteractiveObjects\Door1.h" />
     <ClInclude Include="headerFiles\Objects\InteractiveObjects\InteractiveObject.h" />
     <ClInclude Include="headerFiles\Objects\NonInteractiveObjects\Armchair.h" />
     <ClInclude Include="headerFiles\Objects\NonInteractiveObjects\Bath.h" />
+    <ClInclude Include="headerFiles\Objects\NonInteractiveObjects\CellingLight1.h" />
     <ClInclude Include="headerFiles\Objects\NonInteractiveObjects\DiningSet.h" />
     <ClInclude Include="headerFiles\Objects\NonInteractiveObjects\NonInteractiveObject.h" />
+    <ClInclude Include="headerFiles\Objects\NonInteractiveObjects\OutsideImage.h" />
     <ClInclude Include="headerFiles\Objects\NonInteractiveObjects\Sofa.h" />
     <ClInclude Include="headerFiles\Objects\NonInteractiveObjects\Toilet.h" />
     <ClInclude Include="headerFiles\Objects\NonInteractiveObjects\Kitchen.h" />
@@ -157,6 +164,7 @@
     <ClInclude Include="headerFiles\Objects\NonInteractiveObjects\Nightstand.h" />
     <ClInclude Include="headerFiles\Objects\NonInteractiveObjects\Wall.h" />
     <ClInclude Include="headerFiles\Objects\Journal.h" />
+    <ClInclude Include="headerFiles\Objects\NonInteractiveObjects\Window.h" />
     <ClInclude Include="headerFiles\Objects\Object.h" />
     <ClInclude Include="headerFiles\Objects\Player.h" />
   </ItemGroup>
