@@ -47,6 +47,7 @@
 #include "headerFiles/Objects/NonInteractiveObjects/Wardrobe.h"
 #include "headerFiles/Objects/NonInteractiveObjects/Window.h"
 #include "headerFiles/Objects/Object.h"
+#include "headerFiles/Objects/Journal.h"
 #include "headerFiles/Objects/Player.h"
 using namespace std;
 // Screen Constants =================================================
@@ -70,12 +71,13 @@ int gameState = PLAYING_STATE;
 InteractiveObject interactingObject(Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(0, 0, 0));
 
 Eigen::Vector3f eye(13, 1, 2);
-// Eigen::V ector3f eye(1, 1, 1.2);
+// Eigen::Vector3f eye(1, 1, 1.2);
 Eigen::Vector3f lookAt(15, 0.5, 2);
 Eigen::Vector3f orientation(0, 1, 0);
 
 Camera camera(eye, lookAt, orientation);
 Player player(eye, Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vector3f(0.5, 1.5, 0.2), camera);
+Journal journal(Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(2, 2, 1)); //x:1.95, z:2.53
 //Knife knife(Vector3f(3, 0.5, 1), Vector3f(45, 45, 45), Vector3f(1, 1, 1), Vector3f(1, 1, 1));
 
 int cluesAnswer[3];
@@ -485,9 +487,13 @@ void drawHitBoxes()
   bath.drawBoundries();
 }
 
+<<<<<<< HEAD
 void drawApartment()
 {
   drawEnvironment();
+=======
+void drawApartment() {
+>>>>>>> origin/journal
   apartmentDoor.draw();
   bedroomDoor.draw();
   bathroomDoor.draw();
@@ -531,7 +537,7 @@ void drawApartment()
   // footprints.draw();
   bloodtrail.draw();
 
-  bloodtrail.draw();
+  drawEnvironment();
 }
 
 void display(void)
@@ -571,6 +577,7 @@ void display(void)
 
   glPushMatrix();
   {
+    // journal.draw();
     drawApartment();
     // drawHitBoxes();
   }
@@ -645,6 +652,7 @@ void loadAssets()
   brokenGlass.setImage();
   footprints.setImage();
   bloodtrail.setImage();
+  journal.setModel();
 
   // Corridor Texturs
   (*walls[0]).setTexture("assets/images/corridor_wall.jpg");
