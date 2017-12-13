@@ -30,8 +30,7 @@ Wall::~Wall() {}
     @Override
 */
 
-static void
-drawBox(GLfloat size, GLenum type)
+void Wall::drawBox(GLfloat size, GLenum type)
 {
   static GLfloat n[6][3] =
   {
@@ -64,16 +63,15 @@ drawBox(GLfloat size, GLenum type)
   for (i = 5; i >= 0; i--) {
     glBegin(type);
     glNormal3fv(&n[i][0]);
-    glVertex3fv(&v[faces[i][0]][0]);    glTexCoord2f(1, 1);
-    glVertex3fv(&v[faces[i][1]][0]);    glTexCoord2f(1, 0);
-    glVertex3fv(&v[faces[i][2]][0]);    glTexCoord2f(0, 0);
-    glVertex3fv(&v[faces[i][3]][0]);    glTexCoord2f(0, 1);
+    glTexCoord2f(0, 0);                 glVertex3fv(&v[faces[i][0]][0]);
+    glTexCoord2f(dimensions_.z(), 0);   glVertex3fv(&v[faces[i][1]][0]);
+    glTexCoord2f(dimensions_.z(), 2);   glVertex3fv(&v[faces[i][2]][0]);
+    glTexCoord2f(0, 2);                 glVertex3fv(&v[faces[i][3]][0]);
     glEnd();
   }
 }
 
-void APIENTRY
-gluCube(GLdouble size)
+void Wall::gluCube(GLdouble size)
 {
   drawBox(size, GL_QUADS);
 }
@@ -89,7 +87,12 @@ void Wall::draw() {
     glScalef(dimensions_.x(), dimensions_.y(), dimensions_.z());
 
     glEnable(GL_TEXTURE_2D);
-    glBindTexture(GL_TEXTURE_2D, texture_);
+    //glBindTexture(GL_TEXTURE_2D, texture_);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, imageWidth_, imageHeight_, 0, GL_RGBA, GL_UNSIGNED_BYTE, image_);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     gluCube(1);
     glDisable(GL_TEXTURE_2D);
   }
@@ -97,11 +100,12 @@ void Wall::draw() {
 }
 
 void Wall::setTexture(char* imagePath) { 
-  texture_ = SOIL_load_OGL_texture(
-   	imagePath, 
-    SOIL_LOAD_RGBA, SOIL_CREATE_NEW_ID,
-    SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_COMPRESS_TO_DXT |SOIL_FLAG_MULTIPLY_ALPHA
-  );    
+  // texture_ = SOIL_load_OGL_texture(
+  //  	imagePath, 
+  //   SOIL_LOAD_RGBA, SOIL_CREATE_NEW_ID,
+  //   SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_COMPRESS_TO_DXT |SOIL_FLAG_MULTIPLY_ALPHA
+  // );
+  image_ = SOIL_load_image(imagePath, &imageWidth_, &imageHeight_, 0, SOIL_LOAD_RGBA);
 }
 
 /**
