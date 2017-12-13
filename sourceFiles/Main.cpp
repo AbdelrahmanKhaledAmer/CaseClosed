@@ -64,8 +64,8 @@ unsigned char* ceilingTex;
 int gameState = PLAYING_STATE;
 InteractiveObject interactingObject(Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(0, 0, 0));
 
-// Eigen::Vector3f eye(13, 1, 2);
-Eigen::Vector3f eye(1, 1, 1.2);
+Eigen::Vector3f eye(13, 1, 2);
+// Eigen::V ector3f eye(1, 1, 1.2);
 Eigen::Vector3f lookAt(15, 0.5, 2);
 Eigen::Vector3f orientation(0, 1, 0);
 
@@ -268,10 +268,10 @@ void drawEnvironment(){
 	glBegin(GL_QUADS);
 	{
 		glNormal3f(0, 1, 0);
-		glTexCoord2f(12, 1);		glVertex3f(12, 0, 1);
-		glTexCoord2f(30, 1);		glVertex3f(12, 0, 17);
-		glTexCoord2f(30, 17);		glVertex3f(30, 0, 17);
-		glTexCoord2f(12, 17);		glVertex3f(30, 0, 1);
+		glTexCoord2f(0, 0);		glVertex3f(12, 0, 1);
+		glTexCoord2f(1, 0);		glVertex3f(12, 0, 17);
+		glTexCoord2f(1, 1);		glVertex3f(30, 0, 17);
+		glTexCoord2f(0, 1);		glVertex3f(30, 0, 1);
 	}
 	glEnd();
 	glDisable(GL_TEXTURE_2D);
@@ -286,10 +286,10 @@ void drawEnvironment(){
 	glBegin(GL_QUADS);
 	{
 		glNormal3f(0, -1, 0);
-		glTexCoord2f(12, 1);		glVertex3f(12, 2, 1);
-		glTexCoord2f(30, 1);		glVertex3f(12, 2, 17);
-		glTexCoord2f(30, 17);		glVertex3f(30, 2, 17);
-		glTexCoord2f(12, 17);		glVertex3f(30, 2, 1);
+		glTexCoord2f(0, 0);		glVertex3f(12, 2, 1);
+		glTexCoord2f(1, 0);		glVertex3f(12, 2, 17);
+		glTexCoord2f(1, 1);		glVertex3f(30, 2, 17);
+		glTexCoord2f(0, 1);		glVertex3f(30, 2, 1);
 	}
 	glEnd();
 	glDisable(GL_TEXTURE_2D);
@@ -319,8 +319,8 @@ bool intersectsWalls() {
   intersects |= sink.intersects(player);
   intersects |= bath.intersects(player);
 
-  // return intersects;
-  return false;
+  return intersects;
+  // return false;
 }
 
 void initFlashLight()
@@ -438,7 +438,6 @@ void display(void) {
 
   glPushMatrix();
   {
-	glTranslatef(-12, 0, -2);
     drawApartment();
     // drawHitBoxes();
   }
