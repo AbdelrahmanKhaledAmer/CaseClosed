@@ -77,9 +77,9 @@ Clue* clues[3];
 Wall* walls[24];
 
 // Appartment Layout ================================================
-Door apartmentDoor(Vector3f(24.5, 0, 4.5), Vector3f(0, 180, 0), Vector3f(1, 1, 1));
-Door1 bedroomDoor(Vector3f(21.5, 0, 12), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
-Door1 bathroomDoor(Vector3f(25.5, 0, 13.5), Vector3f(0, 90, 0), Vector3f(1, 1, 1));
+Door apartmentDoor(Vector3f(24.5, 1, 4.5), Vector3f(0, 180, 0), Vector3f(1, 1, 1));
+Door1 bedroomDoor(Vector3f(21.5, 1, 11.9), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
+Door1 bathroomDoor(Vector3f(25.6, 1, 13.5), Vector3f(0, 90, 0), Vector3f(1, 1, 1));
 Window window(Vector3f(0, 0, 0), Vector3f(0, 90, 0), Vector3f(1, 1, 1));
 CellingLight livingroomLight(Vector3f(24.4, 2.25, 10.38), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
 CellingLight kitchenLight(Vector3f(22.04, 2, 6.89), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
@@ -198,29 +198,29 @@ void initEnvironment() {
   walls[10] = new Wall(loc10, ori10, scl10, dim); // South wall
   Eigen::Vector3f loc11(19.5, 0, 12);             // (12, 19.5)
   Eigen::Vector3f ori11(0, 90, 0);                // along x
-  Eigen::Vector3f scl11(1, 1, 1.5);               // length 1.5
+  Eigen::Vector3f scl11(1, 1, 1.55);               // length 1.5
   walls[11] = new Wall(loc11, ori11, scl11, dim); // East wall part 1
-  Eigen::Vector3f loc12(22, 0, 12);               // (12, 22)
+  Eigen::Vector3f loc12(21.9, 0, 12);               // (12, 22)
   Eigen::Vector3f ori12(0, 90, 0);                // along x
-  Eigen::Vector3f scl12(1, 1, 4);                 // length 4
+  Eigen::Vector3f scl12(1, 1, 4.1);                 // length 4
   walls[12] = new Wall(loc12, ori12, scl12, dim); // East wall part 2
 
   // Bedroom
   Eigen::Vector3f loc13(25.5, 0, 12.01);          // (12, 25.5)
   Eigen::Vector3f ori13(0, 0, 0);                 // along z
-  Eigen::Vector3f scl13(1, 1, 0.99);              // length 1
+  Eigen::Vector3f scl13(1, 1, 1.09);              // length 1
   walls[13] = new Wall(loc13, ori13, scl13, dim); // North wall part 1
-  Eigen::Vector3f loc14(25.5, 0, 14);             // (14, 25.5)
+  Eigen::Vector3f loc14(25.5, 0, 13.95);             // (14, 25.5)
   Eigen::Vector3f ori14(0, 0, 0);                 // along z
-  Eigen::Vector3f scl14(1, 1, 2.5);               // length 2.5
+  Eigen::Vector3f scl14(1, 1, 2.6);               // length 2.5
   walls[14] = new Wall(loc14, ori14, scl14, dim); // North wall part 2
   Eigen::Vector3f loc15(19.5, 0, 12.01);          // (12, 19.5)
   Eigen::Vector3f ori15(0, 90, 0);                // along x
-  Eigen::Vector3f scl15(1, 1, 1.5);               // length 1.5
+  Eigen::Vector3f scl15(1, 1, 1.55);               // length 1.5
   walls[15] = new Wall(loc15, ori15, scl15, dim); // West wall part 1
-  Eigen::Vector3f loc16(22, 0, 12.01);            // (12, 22)
+  Eigen::Vector3f loc16(21.9, 0, 12.01);          // (12, 22)
   Eigen::Vector3f ori16(0, 90, 0);                // along x
-  Eigen::Vector3f scl16(1, 1, 3.5);               // length 3.5
+  Eigen::Vector3f scl16(1, 1, 3.6);               // length 3.5
   walls[16] = new Wall(loc16, ori16, scl16, dim); // West wall part 2
   Eigen::Vector3f loc17(19.5, 0, 12);             // (12, 19.5)
   Eigen::Vector3f ori17(0, 0, 0);                 // along z
@@ -242,11 +242,11 @@ void initEnvironment() {
   walls[20] = new Wall(loc20, ori20, scl20, dim); // West wall
   Eigen::Vector3f loc21(25.51, 0, 12.01);         // (12, 25.5)
   Eigen::Vector3f ori21(0, 0, 0);                 // along z
-  Eigen::Vector3f scl21(1, 1, 0.99);              // length 1
+  Eigen::Vector3f scl21(1, 1, 1.09);              // length 1
   walls[21] = new Wall(loc21, ori21, scl21, dim); // South wall part 1
-  Eigen::Vector3f loc22(25.51, 0, 14.01);         // (14, 25.5)
+  Eigen::Vector3f loc22(25.51, 0, 13.96);         // (14, 25.5)
   Eigen::Vector3f ori22(0, 0, 0);                 // along z
-  Eigen::Vector3f scl22(1, 1, 2);                 // length 2
+  Eigen::Vector3f scl22(1, 1, 2.1);               // length 2
   walls[22] = new Wall(loc22, ori22, scl22, dim); // South wall part 2
   Eigen::Vector3f loc23(25.51, 0, 16);            // (16, 25.5)
   Eigen::Vector3f ori23(0, 90, 0);                // along x
@@ -305,10 +305,19 @@ bool intersectsWalls() {
   for (int i = 0; i < sizeof(walls) / sizeof(*walls); i++) {
     intersects |= (*walls[i]).intersects(player);
   }
+  if(!apartmentDoor.isOpen())
+  {
+  	intersects |= apartmentDoor.intersects(player);
+  }
+  if(!bedroomDoor.isOpen())
+  {
+    intersects |= bedroomDoor.intersects(player);
+  }
+  if(!bathroomDoor.isOpen())
+  {
+    intersects |= bathroomDoor.intersects(player);
+  }
 
-  // intersects |= apartmentDoor.intersects(player);
-  // intersects |= bedroomDoor.intersects(player);
-  // intersects |= bathroomDoor.intersects(player);
   intersects |= armchair.intersects(player);
   intersects |= sofa.intersects(player);
   intersects |= coffeeTable.intersects(player);
@@ -521,105 +530,186 @@ void loadAssets() {
   // Starting music
 }
 
-void interactionTimer(int val) {
-  if (gameState == INTERACTING_STATE) {
-    interactingObject.rotate();
-    glutPostRedisplay();
-    glutTimerFunc(20, interactionTimer, 0);
+void interactionTimer(int val)
+{
+	if (gameState == INTERACTING_STATE)
+	{
+		interactingObject.rotate();
+		glutPostRedisplay();
+		glutTimerFunc(20, interactionTimer, 0);
+	}
+}
+
+void idle()
+{
+	bedroomFan.rotate();
+	glutPostRedisplay();
+}
+
+void openDoor(int val)
+{
+	if(val == 0)
+	{
+		apartmentDoor.openDoor();
+		if(!apartmentDoor.isOpen())
+		{
+			glutTimerFunc(0, openDoor, 0);
+		}
+	} else if(val == 1) {
+    bedroomDoor.openDoor();
+		if(!bedroomDoor.isOpen())
+		{
+			glutTimerFunc(0, openDoor, 1);
+		}
+  } else if(val == 2) {
+    bathroomDoor.openDoor();
+		if(!bathroomDoor.isOpen())
+		{
+			glutTimerFunc(0, openDoor, 2);
+		}
   }
 }
 
-void key(unsigned char k, int x, int y) {
-  int len = sizeof(clues) / sizeof(*clues);
-  if (gameState == PLAYING_STATE) {
-	printf("x:%.2f, z:%.2f\n", player.location().x(),  player.location().z());
-    switch (k) {
-    case 'l':
-      // camera.rotateRight();
-      player.lookRight();
-      break;
-    case 'j':
-      // camera.rotateLeft();
-      player.lookLeft();
-      break;
-    case 'i':
-      // camera.rotateUp();
-      player.lookUp();
-      break;
-    case 'k':
-      // camera.rotateDown();
-      player.lookDown();
-      break;
-    case 'o':
-      camera.tiltRight();
-      break;
-    case 'u':
-      camera.tiltLeft();
-      break;
-    case 'w':
-      // camera.translateForward();
-      player.moveForward();
-      if (intersectsWalls()) {
-        player.moveBackward();
-      }
-      break;
-    case 's':
-      // camera.translateBackward();
-      player.moveBackward();
-      if (intersectsWalls()) {
-        player.moveForward();
-      }
-      break;
-    case 'a':
-      // camera.translateLeft();
-      player.moveLeft();
-      if (intersectsWalls()) {
-        player.moveRight();
-      }
-      break;
-    case 'd':
-      // camera.translateRight();
-      player.moveRight();
-      if (intersectsWalls()) {
-        player.moveLeft();
-      }
-      break;
-    case 'e':
-      // camera.translateUp();
-
-      for (int i = 0; i < len; i++) {
-        // printf("%d\n", clues[0]);
-        if (player.isLookingAt(*(clues[i])) && !(*clues[i]).isFound()) {
-          std::string s = (*clues[i]).Interact().append("\n");
-          interactingObject = *clues[i];
-          gameState = INTERACTING_STATE;
-          Vector3f newVector = player.getCamera().location() + (player.getCamera().lookAt() - player.getCamera().location()).normalized() * 0.8;
-          interactingObject.setLocation(newVector);
-          glutTimerFunc(20, interactionTimer, 0);
-          // remove clue
-          (*clues[i]).find(true);
-          break;
-        }
-      }
-      break;
-    case 'q':
-      camera.translateDown();
-      break;
-    }
-  } else if (gameState == INTERACTING_STATE) {
-    switch (k) {
-    case 'e':
-      gameState = PLAYING_STATE;
-      break;
-    }
-  } else if (gameState == JOURNAL_STATE) {
-    switch (k) {
-    case 'j':
-      gameState = PLAYING_STATE;
-      break;
-    }
+void closeDoor(int val)
+{
+	if(val == 0)
+	{
+		apartmentDoor.closeDoor();
+		if(apartmentDoor.isOpen())
+		{
+			glutTimerFunc(0, closeDoor, 0);
+		}
+	} else if(val == 1) {
+    bedroomDoor.closeDoor();
+		if(bedroomDoor.isOpen())
+		{
+			glutTimerFunc(0, closeDoor, 1);
+		}
+  } else if(val == 2) {
+    bathroomDoor.closeDoor();
+		if(bathroomDoor.isOpen())
+		{
+			glutTimerFunc(0, closeDoor, 2);
+		}
   }
-  glutPostRedisplay();
+}
+
+void key(unsigned char k, int x, int y)
+{
+  	int len = sizeof(clues) / sizeof(*clues);
+  	if (gameState == PLAYING_STATE)
+  	{
+		//printf("x:%.2f, z:%.2f\n", player.location().x(),  player.location().z());
+		switch (k)
+		{
+		case 'l':
+			// camera.rotateRight();
+			player.lookRight();
+			break;
+		case 'j':
+			// camera.rotateLeft();
+			player.lookLeft();
+			break;
+		case 'i':
+			// camera.rotateUp();
+			player.lookUp();
+			break;
+		case 'k':
+			// camera.rotateDown();
+			player.lookDown();
+			break;
+		case 'w':
+			// camera.translateForward();
+			player.moveForward();
+			if (intersectsWalls())
+			{
+				player.moveBackward();
+			}
+		break;
+		case 's':
+			// camera.translateBackward();
+			player.moveBackward();
+			if (intersectsWalls())
+			{
+				player.moveForward();
+			}
+		break;
+		case 'a':
+			// camera.translateLeft();
+			player.moveLeft();
+			if (intersectsWalls())
+			{
+				player.moveRight();
+			}
+			break;
+		case 'd':
+			// camera.translateRight();
+			player.moveRight();
+			if (intersectsWalls())
+			{
+				player.moveLeft();
+			}
+			break;
+		case 'e':
+			// camera.translateUp();
+			for (int i = 0; i < len; i++)
+			{
+				// printf("%d\n", clues[0]);
+				if(player.isLookingAt(apartmentDoor))
+				{
+					if(!apartmentDoor.isOpen())
+					{
+						glutTimerFunc(0, openDoor, 0);
+					} else {
+						glutTimerFunc(0, closeDoor, 0);
+					}
+				} else if (player.isLookingAt(bedroomDoor)) {
+          if(!bedroomDoor.isOpen())
+					{
+						glutTimerFunc(0, openDoor, 1);
+					} else {
+						glutTimerFunc(0, closeDoor, 1);
+					}
+        } else if(player.isLookingAt(bathroomDoor)) {
+          if(!bathroomDoor.isOpen())
+					{
+						glutTimerFunc(0, openDoor, 2);
+					} else {
+						glutTimerFunc(0, closeDoor, 2);
+					}
+        } else if (player.isLookingAt(*(clues[i])) && !(*clues[i]).isFound()) {
+					std::string s = (*clues[i]).Interact().append("\n");
+					interactingObject = *clues[i];
+					gameState = INTERACTING_STATE;
+					Vector3f newVector = player.getCamera().location() + (player.getCamera().lookAt() - player.getCamera().location()).normalized() * 0.8;
+					interactingObject.setLocation(newVector);
+					glutTimerFunc(20, interactionTimer, 0);
+					// remove clue
+					(*clues[i]).find(true);
+					break;
+				}
+			}
+			break;
+		case 'q':
+			camera.translateDown();
+			break;
+		}
+  	} else if (gameState == INTERACTING_STATE) {
+    	switch (k)
+		{
+    	case 'e':
+      		gameState = PLAYING_STATE;
+      		break;
+    	}
+  	} else if (gameState == JOURNAL_STATE) {
+    	switch (k)
+		{
+    	case 'j':
+      		gameState = PLAYING_STATE;
+      		break;
+    	}
+  	}
+	glutPostRedisplay();
 }
 
 //=======================================================================
@@ -655,17 +745,20 @@ void mouseMovement(int x, int y) {
   }
 }
 
-void losingStateCaller(int val) {
-
-  if (gameState != WINNING_STATE) {
+void losingStateCaller(int val)
+{
+  if (gameState != WINNING_STATE)
+  {
     gameState = LOSING_STATE;
     printf("koko lost\n");
   }
   glutPostRedisplay();
 }
 
-void journalStateCaller(int val) {
-  if (gameState != PLAYING_STATE) {
+void journalStateCaller(int val)
+{
+  if (gameState != PLAYING_STATE)
+  {
     gameState = JOURNAL_STATE;
     printf("journal appear\n");
   }
@@ -701,6 +794,7 @@ void main(int argc, char **argv) {
 
   // TODO 10 mins
   // glutTimerFunc(10000, losingStateCaller, 0);
+  glutIdleFunc(idle);
 
   glutMainLoop();
 }
