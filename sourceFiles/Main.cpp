@@ -80,6 +80,8 @@ Door door(Vector3f(24.5, 0, 4.5), Vector3f(0, 180, 0), Vector3f(1, 1, 1));
 Door1 door1(Vector3f(21.5, 0, 12), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
 Door1 door2(Vector3f(25.5, 0, 13.5), Vector3f(0, 90, 0), Vector3f(1, 1, 1));
 Window window(Vector3f(0, 0, 0), Vector3f(0, 90, 0), Vector3f(1, 1, 1));
+CellingLight cellingLight(Vector3f(24.4, 2.25, 10.38), Vector3f(0, 90, 0), Vector3f(1, 1, 1));
+CellingLight kitchenLight(Vector3f(22.04, 2.25, 6.89), Vector3f(0, 90, 0), Vector3f(1, 1, 1));
 
 //livingroom
 Armchair armchair(Vector3f(22.8, 0, 10.2), Vector3f(0, 90, 0), Vector3f(1, 1, 1));
@@ -319,8 +321,8 @@ bool intersectsWalls() {
   intersects |= sink.intersects(player);
   intersects |= bath.intersects(player);
 
-  return intersects;
-  // return false;
+  // return intersects;
+  return false;
 }
 
 void initFlashLight()
@@ -377,7 +379,9 @@ void drawApartment() {
   door.draw();
   door1.draw();
   door2.draw();
-  window.draw();
+  // window.draw();
+  cellingLight.draw();
+  kitchenLight.draw();
 
   // livingroom
   armchair.draw();
@@ -452,6 +456,8 @@ void loadAssets() {
   door1.setModel();
   door2.setModel();
   window.setModel();
+  cellingLight.setModel();
+  kitchenLight.setModel();
 
   armchair.setModel();
   sofa.setModel();
