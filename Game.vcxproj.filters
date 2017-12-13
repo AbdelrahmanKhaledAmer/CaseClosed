@@ -166,7 +166,7 @@
       <Filter>headerFiles\Objects\NonInteractiveObjects</Filter>
     </ClInclude>
     <ClInclude Include="headerFiles\Image.h">
-      <Filter>headerFiles\Objects</Filter>
+      <Filter>headerFiles</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

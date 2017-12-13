@@ -18,3 +18,12 @@ void drawImage(float bottom, float top, float left, float right,
   glEnd();
   glDisable(GL_TEXTURE_2D);
 }
+
+GLuint loadImage(char * path){
+	GLuint image = SOIL_load_OGL_texture(
+		path,
+		SOIL_LOAD_RGBA, SOIL_CREATE_NEW_ID,
+		SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_COMPRESS_TO_DXT | SOIL_FLAG_MULTIPLY_ALPHA
+	);
+	return image;
+}
