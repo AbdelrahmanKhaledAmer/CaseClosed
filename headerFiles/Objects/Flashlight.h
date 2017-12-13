@@ -17,8 +17,11 @@ public:
   void turnOn();
   void turnOff();
 
+  void draw();
+  void setModel();
+
 protected:
-  bool on_;
+  bool on_ = false;
 };
 
 #endif

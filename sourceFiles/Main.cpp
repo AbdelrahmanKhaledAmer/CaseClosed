@@ -69,13 +69,14 @@ bool enableFlashLight=true;
 int gameState = PLAYING_STATE;
 InteractiveObject interactingObject(Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(0, 0, 0));
 
+// Eigen::V ector3f eye(-2, 1, 1.2);
 Eigen::Vector3f eye(13, 1, 2);
-// Eigen::V ector3f eye(1, 1, 1.2);
 Eigen::Vector3f lookAt(15, 0.5, 2);
 Eigen::Vector3f orientation(0, 1, 0);
 
 Camera camera(eye, lookAt, orientation);
 Player player(eye, Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vector3f(0.5, 1.5, 0.2), camera);
+Flashlight flashlight(Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vector3f(0, 0, 0));
 //Knife knife(Vector3f(3, 0.5, 1), Vector3f(45, 45, 45), Vector3f(1, 1, 1), Vector3f(1, 1, 1));
 Clue *clues[3];
 Wall *walls[24];
@@ -371,6 +372,8 @@ void initFlashLight()
   //
   glEnable(GL_LIGHT1);
   Vector3f viewVec = (player.getCamera().lookAt() - player.location()).normalized();
+  Vector3f diff(viewVec.x()*0.2,-0.2,viewVec.z()*0.2);
+  flashlight.setLocation(player.location()+viewVec*0.7-diff);
 
   //Vector3f upVector = player.getCamera().Upvector();
   //Vector3f eye = player.getCamera().location().normalized();
@@ -500,7 +503,7 @@ void drawApartment()
   bedroomWindow.draw();
   livingroomWindow1.draw();
   livingroomWindow2.draw();
-  outsideImage.draw();
+  // outsideImage.draw();
 
   // livingroom
   armchair.draw();
@@ -530,9 +533,9 @@ void drawApartment()
   body.draw();
   // brokenGlass.draw();
   // footprints.draw();
-  bloodtrail.draw();
+  // bloodtrail.draw();
 
-  bloodtrail.draw();
+  // bloodtrail.draw();
 }
 
 void display(void)
@@ -572,36 +575,10 @@ void display(void)
 
   glPushMatrix();
   {
+    flashlight.draw();
     drawApartment();
     // drawHitBoxes();
   }
-  glPopMatrix();
-
-  glPushMatrix();
-  glTranslated(1, 0.5, 1);
-  glutSolidCube(0.1);
-  glPopMatrix();
-
-  glPushMatrix();
-  Vector3f viewVec = ((player.getCamera().lookAt() - player.location()).normalized()) * 1.5;
-  Vector3f loc = player.location();
-  Vector3f Upvector = player.getCamera().Upvector();
-  Vector3f crossV = viewVec.cross(Upvector);
-  //the required plane is the plane between the up and cross vector
-  glColor3f(1, 0, 0);
-  glBegin(GL_QUADS);
-  {
-    glNormal3f(0, 1, 0);
-    glTexCoord2f(0.0f, 0.0f);
-    glVertex3f(-1, 0, -1);
-    glTexCoord2f(1.0f, 0.0f);
-    glVertex3f(-1, 0.5, -1);
-    glTexCoord2f(1.0f, 1.0f);
-    glVertex3f(-1, 0.5, -2);
-    glTexCoord2f(0.0f, 1.0f);
-    glVertex3f(-1, 0, -2);
-  }
-  glEnd();
   glPopMatrix();
 
   glFlush();
@@ -646,6 +623,7 @@ void loadAssets()
   brokenGlass.setImage();
   footprints.setImage();
   bloodtrail.setImage();
+  flashlight.setModel();
 
   // Corridor Texturs
   (*walls[0]).setTexture("assets/images/corridor_wall.jpg");
