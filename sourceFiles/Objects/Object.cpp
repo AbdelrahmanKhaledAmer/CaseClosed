@@ -117,7 +117,6 @@ void Object::draw(float locScale) {
     Draws an Object's boundries on the screen. To be Overridden by the subclasses.
 */
 void Object::drawBoundries(float xLength, float yLength, float zLength) {
-  glColor3f(1.0, 1.0, 1.0);
   glColor3f(1.0, 0, 0);
   glPushMatrix();
   {

@@ -156,6 +156,9 @@
     <ClInclude Include="headerFiles\Objects\InteractiveObjects\Door1.h">
       <Filter>headerFiles\Objects\InteractiveObjects</Filter>
     </ClInclude>
+    <ClInclude Include="headerFiles\Objects\NonInteractiveObjects\Window.h">
+      <Filter>headerFiles\Objects\NonInteractiveObjects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sourceFiles\Camera.cpp">
@@ -265,6 +268,9 @@
     </ClCompile>
     <ClCompile Include="sourceFiles\Objects\InteractiveObjects\Door1.cpp">
       <Filter>sourceFiles\Objects\InteractiveObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="sourceFiles\Objects\NonInteractiveObjects\Window.cpp">
+      <Filter>sourceFiles\Objects\NonInteractiveObjects</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

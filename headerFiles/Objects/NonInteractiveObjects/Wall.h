@@ -16,11 +16,16 @@ public:
 
   // Game Logic Functions
   void draw();
+  void gluCube(GLdouble size);
+  void drawBox(GLfloat size, GLenum type);
   bool intersects(Object object);
   void setTexture(char *texturePath);
 
 private:
   GLuint texture_;
+  unsigned char* image_;
+  int imageWidth_;
+  int imageHeight_;
 };
 
 #endif
