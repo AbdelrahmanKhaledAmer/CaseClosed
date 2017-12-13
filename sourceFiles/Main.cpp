@@ -64,7 +64,8 @@ unsigned char* ceilingTex;
 int gameState = PLAYING_STATE;
 InteractiveObject interactingObject(Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(0, 0, 0));
 
-Eigen::Vector3f eye(13, 1, 2);
+// Eigen::Vector3f eye(13, 1, 2);
+Eigen::Vector3f eye(1, 1, 1.2);
 Eigen::Vector3f lookAt(15, 0.5, 2);
 Eigen::Vector3f orientation(0, 1, 0);
 
@@ -267,10 +268,10 @@ void drawEnvironment(){
 	glBegin(GL_QUADS);
 	{
 		glNormal3f(0, 1, 0);
-		glTexCoord2f(0, 0);			glVertex3f(-1, 0, -1);
-		glTexCoord2f(32, 0);		glVertex3f(-1, 0, 31);
-		glTexCoord2f(32, 32);		glVertex3f(31, 0, 31);
-		glTexCoord2f(0, 32);		glVertex3f(31, 0, -1);
+		glTexCoord2f(12, 1);		glVertex3f(12, 0, 1);
+		glTexCoord2f(30, 1);		glVertex3f(12, 0, 17);
+		glTexCoord2f(30, 17);		glVertex3f(30, 0, 17);
+		glTexCoord2f(12, 17);		glVertex3f(30, 0, 1);
 	}
 	glEnd();
 	glDisable(GL_TEXTURE_2D);
@@ -285,10 +286,10 @@ void drawEnvironment(){
 	glBegin(GL_QUADS);
 	{
 		glNormal3f(0, -1, 0);
-		glTexCoord2f(0, 0);			glVertex3f(-1, 2, -1);
-		glTexCoord2f(32, 0);		glVertex3f(-1, 2, 31);
-		glTexCoord2f(32, 32);		glVertex3f(31, 2, 31);
-		glTexCoord2f(0, 32);		glVertex3f(31, 2, -1);
+		glTexCoord2f(12, 1);		glVertex3f(12, 2, 1);
+		glTexCoord2f(30, 1);		glVertex3f(12, 2, 17);
+		glTexCoord2f(30, 17);		glVertex3f(30, 2, 17);
+		glTexCoord2f(12, 17);		glVertex3f(30, 2, 1);
 	}
 	glEnd();
 	glDisable(GL_TEXTURE_2D);
@@ -372,7 +373,7 @@ void drawHitBoxes() {
 }
 
 void drawApartment() {
-  // drawEnvironment();
+  drawEnvironment();
   door.draw();
   door1.draw();
   door2.draw();
@@ -437,6 +438,7 @@ void display(void) {
 
   glPushMatrix();
   {
+	glTranslatef(-12, 0, -2);
     drawApartment();
     // drawHitBoxes();
   }
@@ -518,6 +520,7 @@ void interactionTimer(int val) {
 void key(unsigned char k, int x, int y) {
   int len = sizeof(clues) / sizeof(*clues);
   if (gameState == PLAYING_STATE) {
+	printf("x:%.2f, z:%.2f\n", player.location().x(),  player.location().z());
     switch (k) {
     case 'l':
       // camera.rotateRight();
