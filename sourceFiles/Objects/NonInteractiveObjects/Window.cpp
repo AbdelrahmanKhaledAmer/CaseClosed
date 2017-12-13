@@ -49,21 +49,11 @@ void Window::draw() {
   glPushMatrix();
   {
     glScalef(scale, scale, scale);
-    glTranslatef(location_.x() / scale, location_.y() / scale, location_.z() / scale);
-    glScalef(scale_.x(), scale_.y(), scale_.z());
-    glRotatef(orientation_.y(), 0, 1, 0);
-    drawSprite(-1, 1, -1, 1, image_);
-    model_.Draw();
+    __super::draw(scale);
   }
   glPopMatrix();
 }
 
 void Window::setModel() {
   __super::setModel("assets/models/furniture/Window/Window.3DS");
-
-    image_ = SOIL_load_OGL_texture(
-        "assets/models/furniture/Window/Window.png", 
-        SOIL_LOAD_RGBA, SOIL_CREATE_NEW_ID,
-        SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_COMPRESS_TO_DXT |SOIL_FLAG_MULTIPLY_ALPHA
-    );   
 }
