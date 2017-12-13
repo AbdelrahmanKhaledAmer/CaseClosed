@@ -24,6 +24,7 @@
 #include "headerFiles/Objects/InteractiveObjects/Clues/BrokenGlass.h"
 #include "headerFiles/Objects/InteractiveObjects/Clues/Footprints.h"
 #include "headerFiles/Objects/InteractiveObjects/Clues/Knife.h"
+#include "headerFiles/Objects/InteractiveObjects/Clues/PhotoFrame.h"
 #include "headerFiles/Objects/InteractiveObjects/Clues/YellowHoodie.h"
 #include "headerFiles/Objects/InteractiveObjects/Clues/SuicideNote.h"
 #include "headerFiles/Objects/InteractiveObjects/Door.h"
@@ -132,6 +133,7 @@ BrokenGlass brokenGlass(Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(1, 1, 1),
 SuicideNote suicideNote(Vector3f(1, 0, 1), Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vector3f(1, 1, 1));
 Footprints footprints(Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vector3f(1, 1, 1));
 Bloodtrail bloodtrail(Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vector3f(1, 1, 1));
+PhotoFrame photoFrame(Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
 
 void initClues()
 {
@@ -533,6 +535,7 @@ void drawApartment() {
   // clues
   // yellowHoodie.draw();
   suicideNote.draw();
+  photoFrame.draw();
   // brokenGlass.draw();
   // footprints.draw();
   // bloodtrail.draw();
@@ -628,6 +631,7 @@ void loadAssets() {
   journal.setModel();
   yellowHoodie.setModel();
   suicideNote.setModel();
+  photoFrame.setModel();
 
   // Corridor Texturs
   (*walls[0]).setTexture("assets/images/corridor_wall.jpg");

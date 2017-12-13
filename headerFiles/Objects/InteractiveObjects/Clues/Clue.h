@@ -17,7 +17,7 @@ public:
 	Clue(Vector3f location, Vector3f orientation, Vector3f scale, Vector3f dimensions);    // Constructor
 	~Clue();                                                                                              // Destructor
 
-	void draw();
+  	void draw(float locScale = 1);
   	void setModel(char* modelPath);
 	bool isFound();
 	void find(bool state);
