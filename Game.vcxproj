@@ -15,7 +15,7 @@
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>Game</RootNamespace>
     <ProjectName>Game</ProjectName>
-    <WindowsTargetPlatformVersion>10.0.14393.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -102,6 +102,7 @@
     <ClCompile Include="sourceFiles\Objects\InteractiveObjects\InteractiveObject.cpp" />
     <ClCompile Include="sourceFiles\Objects\NonInteractiveObjects\Armchair.cpp" />
     <ClCompile Include="sourceFiles\Objects\NonInteractiveObjects\Bath.cpp" />
+    <ClCompile Include="sourceFiles\Objects\NonInteractiveObjects\CellingLight1.cpp" />
     <ClCompile Include="sourceFiles\Objects\NonInteractiveObjects\DiningSet.cpp" />
     <ClCompile Include="sourceFiles\Objects\NonInteractiveObjects\NonInteractiveObject.cpp" />
     <ClCompile Include="sourceFiles\Objects\NonInteractiveObjects\Sofa.cpp" />
@@ -143,6 +144,7 @@
     <ClInclude Include="headerFiles\Objects\InteractiveObjects\InteractiveObject.h" />
     <ClInclude Include="headerFiles\Objects\NonInteractiveObjects\Armchair.h" />
     <ClInclude Include="headerFiles\Objects\NonInteractiveObjects\Bath.h" />
+    <ClInclude Include="headerFiles\Objects\NonInteractiveObjects\CellingLight1.h" />
     <ClInclude Include="headerFiles\Objects\NonInteractiveObjects\DiningSet.h" />
     <ClInclude Include="headerFiles\Objects\NonInteractiveObjects\NonInteractiveObject.h" />
     <ClInclude Include="headerFiles\Objects\NonInteractiveObjects\Sofa.h" />

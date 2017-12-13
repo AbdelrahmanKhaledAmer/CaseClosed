@@ -31,6 +31,7 @@
 #include "headerFiles/Objects/NonInteractiveObjects/Bed.h"
 #include "headerFiles/Objects/NonInteractiveObjects/Bookcase.h"
 #include "headerFiles/Objects/NonInteractiveObjects/CellingLight.h"
+#include "headerFiles/Objects/NonInteractiveObjects/CellingLight1.h"
 #include "headerFiles/Objects/NonInteractiveObjects/CoffeeTable.h"
 #include "headerFiles/Objects/NonInteractiveObjects/DiningSet.h"
 #include "headerFiles/Objects/NonInteractiveObjects/Fan.h"
@@ -81,7 +82,8 @@ Door1 bedroomDoor(Vector3f(21.5, 0, 12), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
 Door1 bathroomDoor(Vector3f(25.5, 0, 13.5), Vector3f(0, 90, 0), Vector3f(1, 1, 1));
 Window window(Vector3f(0, 0, 0), Vector3f(0, 90, 0), Vector3f(1, 1, 1));
 CellingLight livingroomLight(Vector3f(24.4, 2.25, 10.38), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
-CellingLight kitchenLight(Vector3f(22.04, 2.25, 6.89), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
+CellingLight kitchenLight(Vector3f(22.04, 2, 6.89), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
+CellingLight1 bathroomLight(Vector3f(26.68, 2.25, 13.3), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
 Fan bedroomFan(Vector3f(22.79, 2.5, 14.57), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
 
 //livingroom
@@ -383,6 +385,7 @@ void drawApartment() {
   // window.draw();
   livingroomLight.draw();
   kitchenLight.draw();
+  bathroomLight.draw();
   bedroomFan.draw();
 
   // livingroom
@@ -460,6 +463,7 @@ void loadAssets() {
   window.setModel();
   livingroomLight.setModel();
   kitchenLight.setModel();
+  bathroomLight.setModel();
   bedroomFan.setModel();
 
   armchair.setModel();
