@@ -1,6 +1,8 @@
 #ifndef CLUE_H
 #define CLUE_H
-
+#define RELEVANT 1
+#define IRRELEVANT -1
+#define  NOT_STATED 0
 #include <Eigen/Dense>
 #include "headerFiles\Objects\InteractiveObjects\InteractiveObject.h"
 
@@ -17,8 +19,11 @@ public:
   	void setModel(char* modelPath);
 	bool isFound();
 	void find(bool state);
+	void setState(int val);
+	int getState();
 	protected:
 		bool isFound_=false;
+		int state=NOT_STATED;
 
 };
 

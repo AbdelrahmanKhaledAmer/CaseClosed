@@ -48,7 +48,7 @@
 #include "headerFiles/Objects/NonInteractiveObjects/Window.h"
 #include "headerFiles/Objects/Object.h"
 #include "headerFiles/Objects/Player.h"
-
+using namespace std;
 // Screen Constants =================================================
 const int scale = 70;
 const int width = 16 * scale;
@@ -77,6 +77,8 @@ Eigen::Vector3f orientation(0, 1, 0);
 Camera camera(eye, lookAt, orientation);
 Player player(eye, Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vector3f(0.5, 1.5, 0.2), camera);
 //Knife knife(Vector3f(3, 0.5, 1), Vector3f(45, 45, 45), Vector3f(1, 1, 1), Vector3f(1, 1, 1));
+
+int cluesAnswer[3];
 Clue *clues[3];
 Wall *walls[24];
 
@@ -135,28 +137,25 @@ void initClues()
   clues[0] = new Knife(Vector3f(4, 0.5, 1), Vector3f(45, 45, 45), Vector3f(1, 1, 1), Vector3f(1, 1, 1));
   clues[1] = new Knife(Vector3f(3, 0.5, 1), Vector3f(45, 45, 45), Vector3f(1, 1, 1), Vector3f(1, 1, 1));
   clues[2] = new Knife(Vector3f(2, 0.5, 1), Vector3f(45, 45, 45), Vector3f(1, 1, 1), Vector3f(1, 1, 1));
+
+ cluesAnswer[0]=1;
+ cluesAnswer[1]=1;
+ cluesAnswer[2]=-1;
+
+  //TODO add relevant and irrelevant
 }
 
 void drawClues()
 {
   int len = sizeof(clues) / sizeof(*clues);
-  bool win = true;
   for (int i = 0; i < len; i++)
   {
     if (!(*clues[i]).isFound())
     {
-      if (i == 0)
-        glColor3f(0, 1, 0);
-      if (i == 1)
-        glColor3f(0, 1, 1);
-      if (i == 2)
-        glColor3f(1, 0, 0);
       (*clues[i]).draw();
-      win = false;
     }
   }
-  if (win)
-    gameState = WINNING_STATE;
+ 
 }
 
 void initEnvironment()
@@ -759,8 +758,8 @@ void key(unsigned char k, int x, int y)
 			player.lookRight();
 			break;
 		case 'j':
-			// camera.rotateLeft();
-			player.lookLeft();
+        gameState=JOURNAL_STATE;
+        //TODO open Journal
 			break;
 		case 'i':
 			// camera.rotateUp();
@@ -830,7 +829,7 @@ void key(unsigned char k, int x, int y)
 						glutTimerFunc(0, closeDoor, 2);
 					}
         } else if (player.isLookingAt(*(clues[i])) && !(*clues[i]).isFound()) {
-					std::string s = (*clues[i]).Interact().append("\n");
+				  string s = (*clues[i]).Interact().append("\n");
 					interactingObject = *clues[i];
 					gameState = INTERACTING_STATE;
 					Vector3f newVector = player.getCamera().location() + (player.getCamera().lookAt() - player.getCamera().location()).normalized() * 0.8;
@@ -911,14 +910,32 @@ void losingStateCaller(int val)
   glutPostRedisplay();
 }
 
-void journalStateCaller(int val)
-{
-  if (gameState != PLAYING_STATE)
-  {
-    gameState = JOURNAL_STATE;
-    printf("journal appear\n");
+//draw found clues so far
+void GetCluesInJournal(){
+
+int len=sizeof(clues)/sizeof(Clue);
+for(int i=0;i<len;i++){
+  if((*clues[i]).isFound()){
+
+      //TODO draw it in journal
+      // Journal.write(i,(*clues[i]).getState());
+
   }
-  glutPostRedisplay();
+}
+}
+void setClueType(int idx){
+
+  //set the clue type here
+  bool win=true;
+  (*clues[idx]).setState((*clues[idx]).getState()==1?-1:1);
+  int lenClues=(sizeof(clues)/sizeof(Clue));
+  for(int i=0;i<lenClues;i++){
+    if((*clues[i]).getState()!=1&&cluesAnswer[i]==1){
+      win=false; break;
+    }
+  }
+gameState=win?WINNING_STATE:gameState;
+
 }
 
 void main(int argc, char **argv)
@@ -949,8 +966,18 @@ void main(int argc, char **argv)
    glEnable(GL_LIGHT4);
    glEnable(GL_LIGHT5);
   glEnable(GL_NORMALIZE);
-   //glEnable(GL_COLOR_MATERIAL);
+   glEnable(GL_COLOR_MATERIAL);
   glShadeModel(GL_SMOOTH);
+
+GLfloat specular[] = {1.0f, 1.0f, 1.0f, 1.0f};
+GLfloat shinness[]={100};
+GLfloat lDiffuse[] = {0.1f, 0.1f, 0.1f, 1.0f};
+GLfloat lAmbient[] = {0.1f, 0.1f, 0.1f, 1.0f};
+glMaterialfv(GL_FRONT,GL_AMBIENT,lAmbient);
+glMaterialfv(GL_FRONT,GL_DIFFUSE,lDiffuse);
+glMaterialfv(GL_FRONT,GL_SPECULAR,specular);
+glMaterialfv(GL_FRONT,GL_SHININESS,shinness);
+glDisable(GL_COLOR_MATERIAL);
 
   // TODO 10 mins
   // glutTimerFunc(10000, losingStateCaller, 0);
