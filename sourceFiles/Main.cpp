@@ -61,6 +61,9 @@ int ceilingTexWidth;
 int ceilingTexHeight;
 unsigned char *ceilingTex;
 
+bool enableFlashLight=true;
+//flashLight ON/OFF
+
 // Game variables ===================================================
 int gameState = PLAYING_STATE;
 InteractiveObject interactingObject(Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(0, 0, 0));
@@ -351,18 +354,19 @@ void initFlashLight()
   //glLightModelfv(GL_LIGHT_MODEL_AMBIENT, lmodel_ambient);
 
   //
+  glEnable(GL_LIGHT1);
   Vector3f viewVec = (player.getCamera().lookAt() - player.location()).normalized();
 
   //Vector3f upVector = player.getCamera().Upvector();
   //Vector3f eye = player.getCamera().location().normalized();
   //Vector3f ViewCross = viewVec.cross(upVector).normalized();
-  GLfloat l1Diffuse[] = {1.0f, 1.0f, 1.0f, 1.0f};
-  GLfloat l1Ambient[] = {1.0f, 1.0f, 1.0f, 1.0f};
+  GLfloat l1Diffuse[] = {1.0f, 0.0f, 0.0f, 1.0f};
+  GLfloat l1Ambient[] = {1.0f, 0.0f, 0.0f, 1.0f};
   GLfloat l1Position[] = {player.location().x(), player.location().y(), player.location().z(), true};
   //GLfloat l1Position[] = {eye.x(),eye.y(),eye.z()};
   Vector3f dir = viewVec;
   GLfloat l1Direction[] = {dir.x(), dir.y(), dir.z()};
-  GLfloat lightIntensity[] = {1.3, 1.3, 1.3, 1.0f};
+  GLfloat lightIntensity[] = { 5,5,5, 1.0f };
   glLightfv(GL_LIGHT1, GL_DIFFUSE, l1Diffuse);
   glLightfv(GL_LIGHT1, GL_AMBIENT, l1Ambient);
   glLightfv(GL_LIGHT1, GL_POSITION, l1Position);
@@ -387,24 +391,24 @@ void initLightHere()
 // CellingLight kitchenLight(Vector3f(22.04, 2, 6.89), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
 // CellingLight1 bathroomLight(Vector3f(26.68, 2.25, 13.3), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
 // Fan bedroomFan(Vector3f(22.79, 2.5, 14.57), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
-  GLfloat l1Diffuse[] = {1.0f, 0.0f, 0.0f, 1.0f};
-  GLfloat l1Ambient[] = {1.0f, 0.0f, 0.0f, 1.0f};
-  GLfloat l1Position[] = {22.04, 1.9, 6.89, true};
-  GLfloat l2position[] = {24.4, 1.9, 10.38,true};
-  GLfloat l3position[] = {26.68, 1.9, 13.3,true};
-  GLfloat l4position[] = {22.79, 1.9, 14.57,true};
+  GLfloat l1Diffuse[] = {1.0f, 1.0f, 1.0f, 1.0f};
+  GLfloat l1Ambient[] = {1.0f, 1.0f, 1.0f, 1.0f};
+  GLfloat l1Position[] = {22.04, 2, 6.89, true};
+  GLfloat l2position[] = {24.4, 2, 10.38,true};
+  GLfloat l3position[] = {26.68, 2, 13.3,true};
+  GLfloat l4position[] = {22.79, 2, 14.57,true};
   //GLfloat l1Position[] = {eye.x(),eye.y(),eye.z()};
   // Vector3f dir = viewVec;
   GLfloat l1Direction[] = {0, -1, 0};
-  GLfloat lightIntensity[] = {1, 1, 1, 1.0f};
+  GLfloat lightIntensity[] = {5,5,5, 1.0f};
 
-  float cutoff=90;
+  float cutoff=30;
   //light2
   glLightfv(GL_LIGHT2, GL_DIFFUSE, l1Diffuse);
   glLightfv(GL_LIGHT2, GL_AMBIENT, l1Ambient);
   glLightfv(GL_LIGHT2, GL_POSITION, l1Position);
   glLightf(GL_LIGHT2, GL_SPOT_CUTOFF, cutoff);
-  glLightf(GL_LIGHT2, GL_SPOT_EXPONENT, 90.0);
+  //glLightf(GL_LIGHT2, GL_SPOT_EXPONENT, 90.0);
   glLightfv(GL_LIGHT2, GL_SPOT_DIRECTION, l1Direction);
 
   glLightfv(GL_LIGHT2, GL_INTENSITY, lightIntensity);
@@ -414,8 +418,8 @@ void initLightHere()
   glLightfv(GL_LIGHT3, GL_DIFFUSE, l1Diffuse);
   glLightfv(GL_LIGHT3, GL_AMBIENT, l1Ambient);
   glLightfv(GL_LIGHT3, GL_POSITION, l2position);
-  glLightf(GL_LIGHT3, GL_SPOT_CUTOFF, cutoff);
-  glLightf(GL_LIGHT3, GL_SPOT_EXPONENT, 90.0);
+  glLightf(GL_LIGHT3, GL_SPOT_CUTOFF, cutoff+30);
+  //glLightf(GL_LIGHT3, GL_SPOT_EXPONENT, 90.0);
   glLightfv(GL_LIGHT3, GL_SPOT_DIRECTION, l1Direction);
 
   glLightfv(GL_LIGHT3, GL_INTENSITY, lightIntensity);
@@ -425,7 +429,7 @@ void initLightHere()
   glLightfv(GL_LIGHT4, GL_DIFFUSE, l1Diffuse);
   glLightfv(GL_LIGHT4, GL_AMBIENT, l1Ambient);
   glLightfv(GL_LIGHT4, GL_POSITION, l3position);
-  glLightf(GL_LIGHT4, GL_SPOT_CUTOFF, cutoff);
+  glLightf(GL_LIGHT4, GL_SPOT_CUTOFF, cutoff+10);
   glLightf(GL_LIGHT4, GL_SPOT_EXPONENT, 90.0);
   glLightfv(GL_LIGHT4, GL_SPOT_DIRECTION, l1Direction);
 
@@ -436,13 +440,14 @@ void initLightHere()
   glLightfv(GL_LIGHT5, GL_DIFFUSE, l1Diffuse);
   glLightfv(GL_LIGHT5, GL_AMBIENT, l1Ambient);
   glLightfv(GL_LIGHT5, GL_POSITION, l4position);
-  glLightf(GL_LIGHT5, GL_SPOT_CUTOFF, cutoff);
+  glLightf(GL_LIGHT5, GL_SPOT_CUTOFF, cutoff+30);
   glLightf(GL_LIGHT5, GL_SPOT_EXPONENT, 90.0);
   glLightfv(GL_LIGHT5, GL_SPOT_DIRECTION, l1Direction);
 
   glLightfv(GL_LIGHT5, GL_INTENSITY, lightIntensity);
   glLightfv(GL_LIGHT5, GL_ATTENUATION_EXT, lightIntensity);
 }
+
 
 void drawHitBoxes()
 {
@@ -518,7 +523,11 @@ void display(void)
   // Lights::setupLights();
 
   // Set the camera
+  if(enableFlashLight){
   initFlashLight();
+  }else{
+    glDisable(GL_LIGHT1);
+  }
   initLightHere();
   player.getCamera().setup();
   //	camera.setup();
@@ -662,6 +671,9 @@ void key(unsigned char k, int x, int y)
     printf("x:%.2f, z:%.2f\n", player.location().x(), player.location().z());
     switch (k)
     {
+      case 'f':
+      enableFlashLight=!enableFlashLight;
+      break;
     case 'l':
       // camera.rotateRight();
       player.lookRight();
@@ -844,9 +856,9 @@ void main(int argc, char **argv)
   //glEnable(GL_LIGHT0);
   glEnable(GL_LIGHT1);
   glEnable(GL_LIGHT2);
-  glEnable(GL_LIGHT3);
-  glEnable(GL_LIGHT4);
-  glEnable(GL_LIGHT5);
+   glEnable(GL_LIGHT3);
+   glEnable(GL_LIGHT4);
+   glEnable(GL_LIGHT5);
   glEnable(GL_NORMALIZE);
    //glEnable(GL_COLOR_MATERIAL);
   glShadeModel(GL_SMOOTH);
