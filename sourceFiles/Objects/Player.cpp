@@ -37,6 +37,18 @@ Camera Player::getCamera()
 
     @param (scale) a variable to determine the magnitude of the motion (default is 1)
 */
+void Player::move(int x)
+{
+    head_.move(x);
+    location_ = head_.location();
+}
+
+/**
+    Translation Function.
+    Moves the player one step forward
+
+    @param (scale) a variable to determine the magnitude of the motion (default is 1)
+*/
 void Player::moveForward(float scale)
 {
     head_.translateForward(scale);
