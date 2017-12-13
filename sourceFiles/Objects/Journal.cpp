@@ -14,32 +14,47 @@ Returns a pointer for a Journal.
 @return: Pointer to Object Object
 */
 
-Journal::Journal(Vector3f location, Vector3f orientation, Vector3f scale, Vector3f dimensions, std::string words):Object(location, orientation, scale, dimensions)
-{
-	this->notes_ = &words;
-}
+Journal::Journal(Vector3f location, Vector3f orientation, Vector3f scale)
+    : Object(location, orientation, scale, Vector3f(0.975, 0.9, 0.975)) {}
 
 /**
 Destructor for the Journal object.
 Deletes the pointer for the Journal object.
 */
-Journal::~Journal()
-{
+Journal::~Journal() {}
 
+void Journal::write(int clueIndex) { clues_[clueIndex] = true; }
+
+void Journal::draw() {
+	float minX = location_.x();
+	float maxX = location_.x() + dimensions_.x();
+	float minY = location_.y();
+	float maxY = location_.y()+ dimensions_.y();
+
+  glPushMatrix();
+  {
+    glTranslatef(location_.x(), location_.y(), location_.z());
+    glScalef(scale_.x(), scale_.y(), scale_.z());
+
+    drawImage(minX, maxX, minY, maxY, journalImage_);
+	if(clues_[0] == true){
+		glTranslatef(0, 0, 0.001);
+        drawImage(minX, maxX, minY, maxY, clueImages_[0]);
+	}
+  }
+  glPopMatrix();
 }
 
-	void write(string s) {
-	
-	}
-	void Journal::draw()
-	{
-		float scale = 0.0025;
+void Journal::setModel(){
+	journalImage_ = SOIL_load_OGL_texture(
+        "assets/images/Journal/journal.png",
+		SOIL_LOAD_RGBA, SOIL_CREATE_NEW_ID,
+    	SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_COMPRESS_TO_DXT |SOIL_FLAG_MULTIPLY_ALPHA
+	);    
 
-  		glPushMatrix();
-		{
-		    glTranslatef(0.21, 0, 0.36);
-   			glScalef(scale, scale, scale);
-    		__super::draw(scale);
-  		}
-  		glPopMatrix();
-	}
+	clueImages_[0] = SOIL_load_OGL_texture(
+        "assets/images/Journal/clue_1.png",
+		SOIL_LOAD_RGBA, SOIL_CREATE_NEW_ID,
+    	SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_COMPRESS_TO_DXT |SOIL_FLAG_MULTIPLY_ALPHA
+	);    
+}

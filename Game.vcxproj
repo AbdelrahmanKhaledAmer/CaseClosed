@@ -86,6 +86,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sourceFiles\GLTexture.cpp" />
+    <ClCompile Include="sourceFiles\Image.cpp" />
     <ClCompile Include="sourceFiles\Model_3DS.cpp" />
     <ClCompile Include="sourceFiles\Camera.cpp" />
     <ClCompile Include="sourceFiles\Main.cpp" />
@@ -131,6 +132,7 @@
     <ClInclude Include="headerFiles\GL\glaux.h" />
     <ClInclude Include="headerFiles\GL\glew.h" />
     <ClInclude Include="headerFiles\GL\glut.h" />
+    <ClInclude Include="headerFiles\Image.h" />
     <ClInclude Include="headerFiles\Model_3DS.h" />
     <ClInclude Include="headerFiles\Objects\Flashlight.h" />
     <ClInclude Include="headerFiles\Objects\InteractiveObjects\Clues\Bloodtrail.h" />

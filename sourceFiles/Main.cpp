@@ -47,6 +47,7 @@
 #include "headerFiles/Objects/NonInteractiveObjects/Wardrobe.h"
 #include "headerFiles/Objects/NonInteractiveObjects/Window.h"
 #include "headerFiles/Objects/Object.h"
+#include "headerFiles/Objects/Journal.h"
 #include "headerFiles/Objects/Player.h"
 
 // Screen Constants =================================================
@@ -73,6 +74,7 @@ Eigen::Vector3f orientation(0, 1, 0);
 
 Camera camera(eye, lookAt, orientation);
 Player player(eye, Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vector3f(0.5, 1.5, 0.2), camera);
+Journal journal(Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(2, 2, 1));
 //Knife knife(Vector3f(3, 0.5, 1), Vector3f(45, 45, 45), Vector3f(1, 1, 1), Vector3f(1, 1, 1));
 Clue* clues[3];
 Wall* walls[24];
@@ -383,7 +385,6 @@ void drawHitBoxes() {
 }
 
 void drawApartment() {
-  drawEnvironment();
   apartmentDoor.draw();
   bedroomDoor.draw();
   bathroomDoor.draw();
@@ -427,7 +428,7 @@ void drawApartment() {
   // footprints.draw();
   bloodtrail.draw();
 
-  bloodtrail.draw();
+  drawEnvironment();
 }
 
 void display(void) {
@@ -458,6 +459,7 @@ void display(void) {
 
   glPushMatrix();
   {
+    journal.draw();
     drawApartment();
     // drawHitBoxes();
   }
@@ -704,7 +706,8 @@ void main(int argc, char **argv) {
 
   initEnvironment();
   initClues();
-  loadAssets();
+  journal.setModel();
+  // loadAssets();
   glEnable(GL_DEPTH_TEST);
   glEnable(GL_LIGHTING);
   glEnable(GL_LIGHT0);
