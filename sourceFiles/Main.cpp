@@ -37,6 +37,7 @@
 #include "headerFiles/Objects/NonInteractiveObjects/Fan.h"
 #include "headerFiles/Objects/NonInteractiveObjects/Kitchen.h"
 #include "headerFiles/Objects/NonInteractiveObjects/Nightstand.h"
+#include "headerFiles/Objects/NonInteractiveObjects/OutsideImage.h"
 #include "headerFiles/Objects/NonInteractiveObjects/Sink.h"
 #include "headerFiles/Objects/NonInteractiveObjects/Sofa.h"
 #include "headerFiles/Objects/NonInteractiveObjects/Toilet.h"
@@ -80,11 +81,15 @@ Wall* walls[24];
 Door apartmentDoor(Vector3f(24.5, 0, 4.5), Vector3f(0, 180, 0), Vector3f(1, 1, 1));
 Door1 bedroomDoor(Vector3f(21.5, 0, 12), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
 Door1 bathroomDoor(Vector3f(25.5, 0, 13.5), Vector3f(0, 90, 0), Vector3f(1, 1, 1));
-Window window(Vector3f(0, 0, 0), Vector3f(0, 90, 0), Vector3f(1, 1, 1));
 CellingLight livingroomLight(Vector3f(24.4, 2.25, 10.38), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
-CellingLight kitchenLight(Vector3f(22.04, 2, 6.89), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
+CellingLight kitchenLight(Vector3f(22.04, 2.25, 6.89), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
 CellingLight1 bathroomLight(Vector3f(26.68, 2.25, 13.3), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
 Fan bedroomFan(Vector3f(22.79, 2.5, 14.57), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
+
+Window bedroomWindow(Vector3f(19.7, 0.75, 14.6), Vector3f(0, 90, 0), Vector3f(1, 1, 1));
+Window livingroomWindow1(Vector3f(19.7, 0.75, 8.5), Vector3f(0, 90, 0), Vector3f(1, 1, 1));
+Window livingroomWindow2(Vector3f(26.0, 0.75, 5.4), Vector3f(0, 90, 0), Vector3f(1, 1, 1));
+OutsideImage outsideImage(Vector3f(0, 0, 0), Vector3f(0, 90, 0), Vector3f(1, 1, 1));
 
 //livingroom
 Armchair armchair(Vector3f(22.8, 0, 10.2), Vector3f(0, 90, 0), Vector3f(1, 1, 1));
@@ -382,11 +387,15 @@ void drawApartment() {
   apartmentDoor.draw();
   bedroomDoor.draw();
   bathroomDoor.draw();
-  // window.draw();
   livingroomLight.draw();
   kitchenLight.draw();
   bathroomLight.draw();
   bedroomFan.draw();
+
+  bedroomWindow.draw();
+  livingroomWindow1.draw();
+  livingroomWindow2.draw();
+  outsideImage.draw();
 
   // livingroom
   armchair.draw();
@@ -416,6 +425,8 @@ void drawApartment() {
   body.draw();
   // brokenGlass.draw();
   // footprints.draw();
+  bloodtrail.draw();
+
   bloodtrail.draw();
 }
 
@@ -460,11 +471,15 @@ void loadAssets() {
   apartmentDoor.setModel();
   bedroomDoor.setModel();
   bathroomDoor.setModel();
-  window.setModel();
   livingroomLight.setModel();
   kitchenLight.setModel();
   bathroomLight.setModel();
   bedroomFan.setModel();
+
+  livingroomWindow1.setModel();
+  livingroomWindow2.setModel();
+  bedroomWindow.setModel();
+  outsideImage.setImage("assets/images/window.png");
 
   armchair.setModel();
   sofa.setModel();
@@ -518,7 +533,7 @@ void loadAssets() {
   (*walls[21]).setTexture("assets/images/bathroom_wall.jpg");
   (*walls[22]).setTexture("assets/images/bathroom_wall.jpg");
   (*walls[23]).setTexture("assets/images/bathroom_wall.jpg");
-  // Starting music
+  // // Starting music
 }
 
 void interactionTimer(int val) {
