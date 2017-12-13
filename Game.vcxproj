@@ -105,6 +105,7 @@
     <ClCompile Include="sourceFiles\Objects\NonInteractiveObjects\CellingLight1.cpp" />
     <ClCompile Include="sourceFiles\Objects\NonInteractiveObjects\DiningSet.cpp" />
     <ClCompile Include="sourceFiles\Objects\NonInteractiveObjects\NonInteractiveObject.cpp" />
+    <ClCompile Include="sourceFiles\Objects\NonInteractiveObjects\OutsideImage.cpp" />
     <ClCompile Include="sourceFiles\Objects\NonInteractiveObjects\Sofa.cpp" />
     <ClCompile Include="sourceFiles\Objects\NonInteractiveObjects\Toilet.cpp" />
     <ClCompile Include="sourceFiles\Objects\NonInteractiveObjects\Kitchen.cpp" />
@@ -147,6 +148,7 @@
     <ClInclude Include="headerFiles\Objects\NonInteractiveObjects\CellingLight1.h" />
     <ClInclude Include="headerFiles\Objects\NonInteractiveObjects\DiningSet.h" />
     <ClInclude Include="headerFiles\Objects\NonInteractiveObjects\NonInteractiveObject.h" />
+    <ClInclude Include="headerFiles\Objects\NonInteractiveObjects\OutsideImage.h" />
     <ClInclude Include="headerFiles\Objects\NonInteractiveObjects\Sofa.h" />
     <ClInclude Include="headerFiles\Objects\NonInteractiveObjects\Toilet.h" />
     <ClInclude Include="headerFiles\Objects\NonInteractiveObjects\Kitchen.h" />
