@@ -26,7 +26,7 @@ InteractiveObject::~InteractiveObject() {}
 
 std::string InteractiveObject::Interact() {
   // TODO
-  return "";
+  return "InteractiveObject:-1";
 }
 
 void InteractiveObject::rotate() { orientation_.y() -= 1; }

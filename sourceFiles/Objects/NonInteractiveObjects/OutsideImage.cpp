@@ -14,10 +14,9 @@ origin.
 @return: Pointer to InteractiveObject interactiveObject
 */
 OutsideImage::OutsideImage(Vector3f location, Vector3f orientation,
-                         Vector3f scale)
-    : NonInteractiveObject(location, orientation, scale,
-                           Vector3f(0, 0, 0)) {}
-                           
+                           Vector3f scale, Vector3f dimensions)
+    : NonInteractiveObject(location, orientation, scale, dimensions) {}
+
 /**
 Destructor for the OutsideImage object.
 Deletes the pointer for the OutsideImage object.
@@ -25,35 +24,21 @@ Deletes the pointer for the OutsideImage object.
 OutsideImage::~OutsideImage() {}
 
 void OutsideImage::draw() {
+  float minX = -dimensions_.x();
+  float maxX = dimensions_.x();
+  float minY = -dimensions_.z();
+  float maxY = dimensions_.z();
+
   glPushMatrix();
   {
-    glTranslated(0, location_.y(), 0);
-    glTranslated(0,  0.001, 0);
-   
-    glColor4ub(255, 255, 255, 255);
-
-    glEnable(GL_TEXTURE_2D);
-    glEnable(GL_BLEND);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-    glBindTexture(GL_TEXTURE_2D, image_);
-
-    glBegin(GL_QUADS);
-    glVertex3f(1, 0, 1); glTexCoord2f(location_.x() + dimensions_.x() , location_.z() + dimensions_.z());
-    glVertex3f(1, 0, 0); glTexCoord2f(location_.x() + dimensions_.x() , location_.z());
-    glVertex3f(0, 0, 0); glTexCoord2f(location_.x() , location_.z());
-    glVertex3f(0, 0, 1); glTexCoord2f(location_.x() , location_.z() + dimensions_.z());
-    glEnd();
-
-    glDisable(GL_TEXTURE_2D);
+    glTranslatef(location_.x(), location_.y(), location_.z());
+    glScalef(scale_.x(), scale_.y(), scale_.z());
+    glRotated(90, 0, 1, 0);
+    drawImage(minX, maxX, minY, maxY, this->image_);
   }
   glPopMatrix();
 }
 
-void OutsideImage::setImage(char* imagePath) { 
-  image_ = SOIL_load_OGL_texture(
-   	imagePath, 
-    SOIL_LOAD_RGBA, SOIL_CREATE_NEW_ID,
-    SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_COMPRESS_TO_DXT |SOIL_FLAG_MULTIPLY_ALPHA
-  );    
+void OutsideImage::setImage(char *imagePath) {
+  this->image_ = loadImage(imagePath);
 }

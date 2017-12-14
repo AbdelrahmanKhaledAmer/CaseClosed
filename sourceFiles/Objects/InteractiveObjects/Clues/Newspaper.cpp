@@ -1,16 +1,16 @@
-#include "headerFiles/Objects/InteractiveObjects/Clues/SuicideNote.h"
+#include "headerFiles/Objects/InteractiveObjects/Clues/Newspaper.h"
 
-SuicideNote::SuicideNote(Vector3f location, Vector3f orientation,
+Newspaper::Newspaper(Vector3f location, Vector3f orientation,
                            Vector3f scale, Vector3f dimensions)
     : Clue(location, orientation, scale, dimensions) {}
 
-SuicideNote::~SuicideNote() {}
+Newspaper::~Newspaper() {}
 
-void SuicideNote::setModel() {
-  this->image_ = loadImage("assets/images/Clues/suicide_note.png");
+void Newspaper::setModel() {
+  this->image_ = loadImage("assets/images/Clues/newspaper.png");
 }
 
-void SuicideNote::draw() {
+void Newspaper::draw() {
   float minX = -dimensions_.x();
   float maxX = dimensions_.x();
   float minY = -dimensions_.z();
@@ -23,4 +23,9 @@ void SuicideNote::draw() {
     drawImageHorizontal(minX, maxX, minY, maxY, this->image_);
   }
   glPopMatrix();
+}
+
+std::string Newspaper::Interact()
+{
+  return "4";
 }

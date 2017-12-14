@@ -13,7 +13,7 @@ public:
                     Vector3f dimensions); // Constructor
   ~InteractiveObject();                   // Destructor
 
-  std::string Interact();
+  virtual std::string Interact();
   void rotate();
 
   void draw(float locScale = 1);
