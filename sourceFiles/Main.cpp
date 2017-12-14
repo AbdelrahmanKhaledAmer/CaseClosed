@@ -562,16 +562,22 @@ GLfloat l1Diffuse[] = {1.0f, 1.0f, 1.0f, 1.0f};
   glLightfv(GL_LIGHT6, GL_ATTENUATION_EXT, lightIntensity);
   
 }
+
+bool camInit = false;
 void startDraw()
 {
-  float scale=4*2.0/16;
+  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+  glEnable(GL_LIGHT6);
+  jCam.setup();
+  float scale=0.29;
   glPushMatrix();
   {
-    glTranslatef(-1.5,-0.5,0);
+    glTranslatef(-0.52,0.2,0);
+    glRotatef(10, 1, 0, 0);
     drawImage(0, 9*scale, 0, 16*scale, startImg);
   }
   glPopMatrix();
-
+  camInit = true;
 }
 
 void winDraw()
@@ -781,19 +787,22 @@ void idle() {
   glutPostRedisplay();
 }
 
-void idleLoading() {}
+void idleLoading() {
+  if (camInit) {
+    initClues();
+    initEnvironment();
+    loadAssets();
+    gameState = PLAYING_STATE;
+
+    currentDisplayFunc = &display;
+    currentIdleFunc = &idle;
+  }
+}
 
 void displayLoading() {
   startDraw();
   glFlush();
-
-  initClues();
-  initEnvironment();
-  loadAssets();
-  gameState = PLAYING_STATE;
-
-  currentDisplayFunc = &display;
-  currentIdleFunc = &idle;
+  glutSwapBuffers();
 }
 
 void interactionTimer(int val)
