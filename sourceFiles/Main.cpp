@@ -1,10 +1,10 @@
 // Defines ==========================================================
 #define PI 3.14159265358979323846
-#define PLAYING_STATE 			0
-#define LOSING_STATE 			1
-#define WINNING_STATE 			2
-#define INTERACTING_STATE 		3
-#define JOURNAL_STATE 			4
+#define PLAYING_STATE 0
+#define LOSING_STATE 1
+#define WINNING_STATE 2
+#define INTERACTING_STATE 3
+#define JOURNAL_STATE 4
 
 // Libraries, dependencies and classes ==============================
 #include "headerFiles/TextureBuilder.h"
@@ -57,30 +57,35 @@ const int height = 9 * scale;
 // Textures ==========================================================
 int floorTexWidth;
 int floorTexHeight;
-unsigned char* floorTex;
+unsigned char *floorTex;
 int ceilingTexWidth;
 int ceilingTexHeight;
-unsigned char* ceilingTex;
+unsigned char *ceilingTex;
+
+bool enableFlashLight=true;
+//flashLight ON/OFF
 
 // Game variables ===================================================
 int gameState = PLAYING_STATE;
 InteractiveObject interactingObject(Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(0, 0, 0));
 
+// Eigen::V ector3f eye(-2, 1, 1.2);
 Eigen::Vector3f eye(13, 1, 2);
-// Eigen::V ector3f eye(1, 1, 1.2);
 Eigen::Vector3f lookAt(15, 0.5, 2);
 Eigen::Vector3f orientation(0, 1, 0);
 
 Camera camera(eye, lookAt, orientation);
 Player player(eye, Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vector3f(0.5, 1.5, 0.2), camera);
+Flashlight flashlight(Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vector3f(0, 0, 0));
 //Knife knife(Vector3f(3, 0.5, 1), Vector3f(45, 45, 45), Vector3f(1, 1, 1), Vector3f(1, 1, 1));
-Clue* clues[3];
-Wall* walls[24];
+Clue *clues[3];
+Wall *walls[24];
 
 // Appartment Layout ================================================
-Door apartmentDoor(Vector3f(24.5, 0, 4.5), Vector3f(0, 180, 0), Vector3f(1, 1, 1));
-Door1 bedroomDoor(Vector3f(21.5, 0, 12), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
-Door1 bathroomDoor(Vector3f(25.5, 0, 13.5), Vector3f(0, 90, 0), Vector3f(1, 1, 1));
+Door apartmentDoor(Vector3f(24.5, 1, 4.5), Vector3f(0, 180, 0), Vector3f(1, 1, 1));
+Door1 bedroomDoor(Vector3f(21.5, 1, 11.9), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
+Door1 bathroomDoor(Vector3f(25.6, 1, 13.5), Vector3f(0, 90, 0), Vector3f(1, 1, 1));
+Window window(Vector3f(0, 0, 0), Vector3f(0, 90, 0), Vector3f(1, 1, 1));
 CellingLight livingroomLight(Vector3f(24.4, 2.25, 10.38), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
 CellingLight kitchenLight(Vector3f(22.04, 2.25, 6.89), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
 CellingLight1 bathroomLight(Vector3f(26.68, 2.25, 13.3), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
@@ -95,7 +100,7 @@ OutsideImage outsideImage(Vector3f(0, 0, 0), Vector3f(0, 90, 0), Vector3f(1, 1, 
 Armchair armchair(Vector3f(22.8, 0, 10.2), Vector3f(0, 90, 0), Vector3f(1, 1, 1));
 Sofa sofa(Vector3f(24.5, 0, 9), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
 CoffeeTable coffeeTable(Vector3f(23.7, 0, 10.6), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
-Tv tv(Vector3f(24.5, 0, 11.5), Vector3f(0, -115+180, 0), Vector3f(1, 1, 1));
+Tv tv(Vector3f(24.5, 0, 11.5), Vector3f(0, -115 + 180, 0), Vector3f(1, 1, 1));
 TvTable tvTable(Vector3f(24.5, 0, 11.5), Vector3f(0, 180, 0), Vector3f(1, 1, 1));
 Bookcase bookcase(Vector3f(25.7, 0, 7), Vector3f(0, 180, 0), Vector3f(1, 1, 1));
 
@@ -120,10 +125,12 @@ BrokenGlass brokenGlass(Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(1, 1, 1),
 Footprints footprints(Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vector3f(1, 1, 1));
 Bloodtrail bloodtrail(Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vector3f(1, 1, 1));
 
-void initClues() {
+void initClues()
+{
   int len = sizeof(clues) / sizeof(*clues);
   // TODO
-  for (int i = 0; i < len; i++) {
+  for (int i = 0; i < len; i++)
+  {
     // clues[i]=
   }
   clues[0] = new Knife(Vector3f(4, 0.5, 1), Vector3f(45, 45, 45), Vector3f(1, 1, 1), Vector3f(1, 1, 1));
@@ -131,11 +138,14 @@ void initClues() {
   clues[2] = new Knife(Vector3f(2, 0.5, 1), Vector3f(45, 45, 45), Vector3f(1, 1, 1), Vector3f(1, 1, 1));
 }
 
-void drawClues() {
+void drawClues()
+{
   int len = sizeof(clues) / sizeof(*clues);
   bool win = true;
-  for (int i = 0; i < len; i++) {
-    if (!(*clues[i]).isFound()) {
+  for (int i = 0; i < len; i++)
+  {
+    if (!(*clues[i]).isFound())
+    {
       if (i == 0)
         glColor3f(0, 1, 0);
       if (i == 1)
@@ -150,7 +160,8 @@ void drawClues() {
     gameState = WINNING_STATE;
 }
 
-void initEnvironment() {
+void initEnvironment()
+{
   Eigen::Vector3f dim(0.2, 2, 1);
   // Corridor
   Eigen::Vector3f loc0(12, 0, 1.63);          // (1.63, 12)
@@ -203,29 +214,29 @@ void initEnvironment() {
   walls[10] = new Wall(loc10, ori10, scl10, dim); // South wall
   Eigen::Vector3f loc11(19.5, 0, 12);             // (12, 19.5)
   Eigen::Vector3f ori11(0, 90, 0);                // along x
-  Eigen::Vector3f scl11(1, 1, 1.5);               // length 1.5
+  Eigen::Vector3f scl11(1, 1, 1.55);               // length 1.5
   walls[11] = new Wall(loc11, ori11, scl11, dim); // East wall part 1
-  Eigen::Vector3f loc12(22, 0, 12);               // (12, 22)
+  Eigen::Vector3f loc12(21.9, 0, 12);               // (12, 22)
   Eigen::Vector3f ori12(0, 90, 0);                // along x
-  Eigen::Vector3f scl12(1, 1, 4);                 // length 4
+  Eigen::Vector3f scl12(1, 1, 4.1);                 // length 4
   walls[12] = new Wall(loc12, ori12, scl12, dim); // East wall part 2
 
   // Bedroom
   Eigen::Vector3f loc13(25.5, 0, 12.01);          // (12, 25.5)
   Eigen::Vector3f ori13(0, 0, 0);                 // along z
-  Eigen::Vector3f scl13(1, 1, 0.99);              // length 1
+  Eigen::Vector3f scl13(1, 1, 1.09);              // length 1
   walls[13] = new Wall(loc13, ori13, scl13, dim); // North wall part 1
-  Eigen::Vector3f loc14(25.5, 0, 14);             // (14, 25.5)
+  Eigen::Vector3f loc14(25.5, 0, 13.95);             // (14, 25.5)
   Eigen::Vector3f ori14(0, 0, 0);                 // along z
-  Eigen::Vector3f scl14(1, 1, 2.5);               // length 2.5
+  Eigen::Vector3f scl14(1, 1, 2.6);               // length 2.5
   walls[14] = new Wall(loc14, ori14, scl14, dim); // North wall part 2
   Eigen::Vector3f loc15(19.5, 0, 12.01);          // (12, 19.5)
   Eigen::Vector3f ori15(0, 90, 0);                // along x
-  Eigen::Vector3f scl15(1, 1, 1.5);               // length 1.5
+  Eigen::Vector3f scl15(1, 1, 1.55);               // length 1.5
   walls[15] = new Wall(loc15, ori15, scl15, dim); // West wall part 1
-  Eigen::Vector3f loc16(22, 0, 12.01);            // (12, 22)
+  Eigen::Vector3f loc16(21.9, 0, 12.01);          // (12, 22)
   Eigen::Vector3f ori16(0, 90, 0);                // along x
-  Eigen::Vector3f scl16(1, 1, 3.5);               // length 3.5
+  Eigen::Vector3f scl16(1, 1, 3.6);               // length 3.5
   walls[16] = new Wall(loc16, ori16, scl16, dim); // West wall part 2
   Eigen::Vector3f loc17(19.5, 0, 12);             // (12, 19.5)
   Eigen::Vector3f ori17(0, 0, 0);                 // along z
@@ -247,11 +258,11 @@ void initEnvironment() {
   walls[20] = new Wall(loc20, ori20, scl20, dim); // West wall
   Eigen::Vector3f loc21(25.51, 0, 12.01);         // (12, 25.5)
   Eigen::Vector3f ori21(0, 0, 0);                 // along z
-  Eigen::Vector3f scl21(1, 1, 0.99);              // length 1
+  Eigen::Vector3f scl21(1, 1, 1.09);              // length 1
   walls[21] = new Wall(loc21, ori21, scl21, dim); // South wall part 1
-  Eigen::Vector3f loc22(25.51, 0, 14.01);         // (14, 25.5)
+  Eigen::Vector3f loc22(25.51, 0, 13.96);         // (14, 25.5)
   Eigen::Vector3f ori22(0, 0, 0);                 // along z
-  Eigen::Vector3f scl22(1, 1, 2);                 // length 2
+  Eigen::Vector3f scl22(1, 1, 2.1);               // length 2
   walls[22] = new Wall(loc22, ori22, scl22, dim); // South wall part 2
   Eigen::Vector3f loc23(25.51, 0, 16);            // (16, 25.5)
   Eigen::Vector3f ori23(0, 90, 0);                // along x
@@ -262,58 +273,78 @@ void initEnvironment() {
   ceilingTex = SOIL_load_image("assets/images/celling.png", &ceilingTexWidth, &ceilingTexHeight, 0, SOIL_LOAD_RGBA);
 }
 
-void drawEnvironment(){
-	for (int i = 0; i < sizeof(walls) / sizeof(*walls); i++)
-	{
-		(*walls[i]).draw();
-	}
-
-    glColor4ub(255, 255, 255, 255);
-	glEnable(GL_TEXTURE_2D);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, floorTexWidth, floorTexHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, floorTex);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glBegin(GL_QUADS);
-	{
-		glNormal3f(0, 1, 0);
-		glTexCoord2f(0, 0);		glVertex3f(12, 0, 1);
-		glTexCoord2f(1, 0);		glVertex3f(12, 0, 17);
-		glTexCoord2f(1, 1);		glVertex3f(30, 0, 17);
-		glTexCoord2f(0, 1);		glVertex3f(30, 0, 1);
-	}
-	glEnd();
-	glDisable(GL_TEXTURE_2D);
-
-	glColor4ub(255, 255, 255, 255);
-	glEnable(GL_TEXTURE_2D);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, ceilingTexWidth, ceilingTexHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, ceilingTex);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glBegin(GL_QUADS);
-	{
-		glNormal3f(0, -1, 0);
-		glTexCoord2f(0, 0);		glVertex3f(12, 2, 1);
-		glTexCoord2f(1, 0);		glVertex3f(12, 2, 17);
-		glTexCoord2f(1, 1);		glVertex3f(30, 2, 17);
-		glTexCoord2f(0, 1);		glVertex3f(30, 2, 1);
-	}
-	glEnd();
-	glDisable(GL_TEXTURE_2D);
-}
-
-bool intersectsWalls() {
-  bool intersects = false;
-  for (int i = 0; i < sizeof(walls) / sizeof(*walls); i++) {
-    intersects |= (*walls[i]).intersects(player);
+void drawEnvironment()
+{
+  for (int i = 0; i < sizeof(walls) / sizeof(*walls); i++)
+  {
+    (*walls[i]).draw();
   }
 
-  // intersects |= apartmentDoor.intersects(player);
-  // intersects |= bedroomDoor.intersects(player);
-  // intersects |= bathroomDoor.intersects(player);
+  glColor4ub(255, 255, 255, 255);
+  glEnable(GL_TEXTURE_2D);
+  glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, floorTexWidth, floorTexHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, floorTex);
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+  glBegin(GL_QUADS);
+  {
+    glNormal3f(0, 1, 0);
+    glTexCoord2f(0, 0);
+    glVertex3f(12, 0, 1);
+    glTexCoord2f(1, 0);
+    glVertex3f(12, 0, 17);
+    glTexCoord2f(1, 1);
+    glVertex3f(30, 0, 17);
+    glTexCoord2f(0, 1);
+    glVertex3f(30, 0, 1);
+  }
+  glEnd();
+  glDisable(GL_TEXTURE_2D);
+
+  glColor4ub(255, 255, 255, 255);
+  glEnable(GL_TEXTURE_2D);
+  glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, ceilingTexWidth, ceilingTexHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, ceilingTex);
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+  glBegin(GL_QUADS);
+  {
+    glNormal3f(0, -1, 0);
+    glTexCoord2f(0, 0);
+    glVertex3f(12, 2, 1);
+    glTexCoord2f(1, 0);
+    glVertex3f(12, 2, 17);
+    glTexCoord2f(1, 1);
+    glVertex3f(30, 2, 17);
+    glTexCoord2f(0, 1);
+    glVertex3f(30, 2, 1);
+  }
+  glEnd();
+  glDisable(GL_TEXTURE_2D);
+}
+
+bool intersectsWalls()
+{
+  bool intersects = false;
+  for (int i = 0; i < sizeof(walls) / sizeof(*walls); i++)
+  {
+    intersects |= (*walls[i]).intersects(player);
+  }
+  if(!apartmentDoor.isOpen())
+  {
+  	intersects |= apartmentDoor.intersects(player);
+  }
+  if(!bedroomDoor.isOpen())
+  {
+    intersects |= bedroomDoor.intersects(player);
+  }
+  if(!bathroomDoor.isOpen())
+  {
+    intersects |= bathroomDoor.intersects(player);
+  }
+
   intersects |= armchair.intersects(player);
   intersects |= sofa.intersects(player);
   intersects |= coffeeTable.intersects(player);
@@ -335,33 +366,109 @@ bool intersectsWalls() {
 
 void initFlashLight()
 {
-	//GLfloat lmodel_ambient[] = { 0.1f, 0.1f, 0.1f, 1.0f };
-	//glLightModelfv(GL_LIGHT_MODEL_AMBIENT, lmodel_ambient);
+  //GLfloat lmodel_ambient[] = { 0.1f, 0.1f, 0.1f, 1.0f };
+  //glLightModelfv(GL_LIGHT_MODEL_AMBIENT, lmodel_ambient);
 
-	//
-	Vector3f viewVec=(player.getCamera().lookAt() - player.location()).normalized();
-	
-	//Vector3f upVector = player.getCamera().Upvector();
-	//Vector3f eye = player.getCamera().location().normalized();
-	//Vector3f ViewCross = viewVec.cross(upVector).normalized();
-	GLfloat l1Diffuse[] = { 1.0f,1.0f, 1.0f, 1.0f };
-	GLfloat l1Ambient[] = { 1.0f, 1.0f, 1.0f, 1.0f };
-	GLfloat l1Position[] = { player.location().x(), player.location().y(),player.location().z(), true };
-	//GLfloat l1Position[] = {eye.x(),eye.y(),eye.z()};
-	Vector3f dir = viewVec;
-	GLfloat l1Direction[] = {dir.x(),dir.y(),dir.z()};
-	GLfloat lightIntensity[] = { 1.3, 1.3, 1.3, 1.0f };
-	glLightfv(GL_LIGHT1, GL_DIFFUSE, l1Diffuse);
-	glLightfv(GL_LIGHT1, GL_AMBIENT, l1Ambient);
-	glLightfv(GL_LIGHT1, GL_POSITION, l1Position);
-	glLightf(GL_LIGHT1, GL_SPOT_CUTOFF, 25.0);
-	glLightf(GL_LIGHT1, GL_SPOT_EXPONENT, 90.0);
-	glLightfv(GL_LIGHT1, GL_SPOT_DIRECTION, l1Direction);
+  //
+  glEnable(GL_LIGHT1);
+  Vector3f viewVec = (player.getCamera().lookAt() - player.location()).normalized();
+  Vector3f diff(viewVec.x()*0.2,-0.2,viewVec.z()*0.2);
+  flashlight.setLocation(player.location()+viewVec*0.7-diff);
 
-	glLightfv(GL_LIGHT1, GL_AMBIENT, lightIntensity);
+  //Vector3f upVector = player.getCamera().Upvector();
+  //Vector3f eye = player.getCamera().location().normalized();
+  //Vector3f ViewCross = viewVec.cross(upVector).normalized();
+  GLfloat l1Diffuse[] = {1.0f, 0.0f, 0.0f, 1.0f};
+  GLfloat l1Ambient[] = {1.0f, 0.0f, 0.0f, 1.0f};
+  GLfloat l1Position[] = {player.location().x(), player.location().y(), player.location().z(), true};
+  //GLfloat l1Position[] = {eye.x(),eye.y(),eye.z()};
+  Vector3f dir = viewVec;
+  GLfloat l1Direction[] = {dir.x(), dir.y(), dir.z()};
+  GLfloat lightIntensity[] = { 5,5,5, 1.0f };
+  glLightfv(GL_LIGHT1, GL_DIFFUSE, l1Diffuse);
+  glLightfv(GL_LIGHT1, GL_AMBIENT, l1Ambient);
+  glLightfv(GL_LIGHT1, GL_POSITION, l1Position);
+  glLightf(GL_LIGHT1, GL_SPOT_CUTOFF, 25.0);
+  glLightf(GL_LIGHT1, GL_SPOT_EXPONENT, 90.0);
+  glLightfv(GL_LIGHT1, GL_SPOT_DIRECTION, l1Direction);
+
+  glLightfv(GL_LIGHT1, GL_AMBIENT, lightIntensity);
 }
 
-void drawHitBoxes() {
+void initLightHere()
+{
+
+  //GLfloat lmodel_ambient[] = { 0.1f, 0.1f, 0.1f, 1.0f };
+  //glLightModelfv(GL_LIGHT_MODEL_AMBIENT, lmodel_ambient);
+  //Vector3f viewVec=(player.getCamera().lookAt() - player.location()).normalized();
+  //Vector3f upVector = player.getCamera().Upvector();
+  //Vector3f eye = player.getCamera().location().normalized();
+  //Vector3f ViewCross = viewVec.cross(upVector).normalized();
+
+//   CellingLight livingroomLight(Vector3f(24.4, 2.25, 10.38), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
+// CellingLight kitchenLight(Vector3f(22.04, 2, 6.89), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
+// CellingLight1 bathroomLight(Vector3f(26.68, 2.25, 13.3), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
+// Fan bedroomFan(Vector3f(22.79, 2.5, 14.57), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
+  GLfloat l1Diffuse[] = {1.0f, 1.0f, 1.0f, 1.0f};
+  GLfloat l1Ambient[] = {1.0f, 1.0f, 1.0f, 1.0f};
+  GLfloat l1Position[] = {22.04, 2, 6.89, true};
+  GLfloat l2position[] = {24.4, 2, 10.38,true};
+  GLfloat l3position[] = {26.68, 2, 13.3,true};
+  GLfloat l4position[] = {22.79, 2, 14.57,true};
+  //GLfloat l1Position[] = {eye.x(),eye.y(),eye.z()};
+  // Vector3f dir = viewVec;
+  GLfloat l1Direction[] = {0, -1, 0};
+  GLfloat lightIntensity[] = {5,5,5, 1.0f};
+
+  float cutoff=30;
+  //light2
+  glLightfv(GL_LIGHT2, GL_DIFFUSE, l1Diffuse);
+  glLightfv(GL_LIGHT2, GL_AMBIENT, l1Ambient);
+  glLightfv(GL_LIGHT2, GL_POSITION, l1Position);
+  glLightf(GL_LIGHT2, GL_SPOT_CUTOFF, cutoff);
+  //glLightf(GL_LIGHT2, GL_SPOT_EXPONENT, 90.0);
+  glLightfv(GL_LIGHT2, GL_SPOT_DIRECTION, l1Direction);
+
+  glLightfv(GL_LIGHT2, GL_INTENSITY, lightIntensity);
+  glLightfv(GL_LIGHT2, GL_ATTENUATION_EXT, lightIntensity);
+
+  //light3
+  glLightfv(GL_LIGHT3, GL_DIFFUSE, l1Diffuse);
+  glLightfv(GL_LIGHT3, GL_AMBIENT, l1Ambient);
+  glLightfv(GL_LIGHT3, GL_POSITION, l2position);
+  glLightf(GL_LIGHT3, GL_SPOT_CUTOFF, cutoff+30);
+  //glLightf(GL_LIGHT3, GL_SPOT_EXPONENT, 90.0);
+  glLightfv(GL_LIGHT3, GL_SPOT_DIRECTION, l1Direction);
+
+  glLightfv(GL_LIGHT3, GL_INTENSITY, lightIntensity);
+  glLightfv(GL_LIGHT3, GL_ATTENUATION_EXT, lightIntensity);
+
+  //light4
+  glLightfv(GL_LIGHT4, GL_DIFFUSE, l1Diffuse);
+  glLightfv(GL_LIGHT4, GL_AMBIENT, l1Ambient);
+  glLightfv(GL_LIGHT4, GL_POSITION, l3position);
+  glLightf(GL_LIGHT4, GL_SPOT_CUTOFF, cutoff+10);
+  glLightf(GL_LIGHT4, GL_SPOT_EXPONENT, 90.0);
+  glLightfv(GL_LIGHT4, GL_SPOT_DIRECTION, l1Direction);
+
+  glLightfv(GL_LIGHT4, GL_INTENSITY, lightIntensity);
+  glLightfv(GL_LIGHT4, GL_ATTENUATION_EXT, lightIntensity);
+
+  //light5
+  glLightfv(GL_LIGHT5, GL_DIFFUSE, l1Diffuse);
+  glLightfv(GL_LIGHT5, GL_AMBIENT, l1Ambient);
+  glLightfv(GL_LIGHT5, GL_POSITION, l4position);
+  glLightf(GL_LIGHT5, GL_SPOT_CUTOFF, cutoff+30);
+  glLightf(GL_LIGHT5, GL_SPOT_EXPONENT, 90.0);
+  glLightfv(GL_LIGHT5, GL_SPOT_DIRECTION, l1Direction);
+
+  glLightfv(GL_LIGHT5, GL_INTENSITY, lightIntensity);
+  glLightfv(GL_LIGHT5, GL_ATTENUATION_EXT, lightIntensity);
+}
+
+
+void drawHitBoxes()
+{
   apartmentDoor.drawBoundries();
   bedroomDoor.drawBoundries();
   bathroomDoor.drawBoundries();
@@ -382,7 +489,8 @@ void drawHitBoxes() {
   bath.drawBoundries();
 }
 
-void drawApartment() {
+void drawApartment()
+{
   drawEnvironment();
   apartmentDoor.draw();
   bedroomDoor.draw();
@@ -395,7 +503,7 @@ void drawApartment() {
   bedroomWindow.draw();
   livingroomWindow1.draw();
   livingroomWindow2.draw();
-  outsideImage.draw();
+  // outsideImage.draw();
 
   // livingroom
   armchair.draw();
@@ -425,20 +533,26 @@ void drawApartment() {
   body.draw();
   // brokenGlass.draw();
   // footprints.draw();
-  bloodtrail.draw();
+  // bloodtrail.draw();
 
-  bloodtrail.draw();
+  // bloodtrail.draw();
 }
 
-void display(void) {
+void display(void)
+{
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
   // Setup light
-  Lights::initLightSource();
-  Lights::setupLights();
+  // Lights::initLightSource();
+  // Lights::setupLights();
 
   // Set the camera
+  if(enableFlashLight){
   initFlashLight();
+  }else{
+    glDisable(GL_LIGHT1);
+  }
+  initLightHere();
   player.getCamera().setup();
   //	camera.setup();
 
@@ -446,9 +560,12 @@ void display(void) {
   Axes axes(0.5);
 
   glColor3f(0.8f, 0.1f, 0.2f);
-  if (gameState == PLAYING_STATE) {
+  if (gameState == PLAYING_STATE)
+  {
     drawClues();
-  } else if (gameState == INTERACTING_STATE) {
+  }
+  else if (gameState == INTERACTING_STATE)
+  {
     interactingObject.rotate();
     interactingObject.draw();
   }
@@ -456,8 +573,20 @@ void display(void) {
   // Reset color and flush buffer
   glColor3f(1.0, 1.0, 1.0);
 
+  Vector3f viewVec = (player.getCamera().lookAt() - player.location()).normalized();
+  Vector3f xAxis(1,0,0);
+  Vector3f zAxis(0,0,1);
+  float angle=acos((viewVec.dot(xAxis))/viewVec.norm()) * 180 / PI;
+  float check=acos((viewVec.dot(zAxis))/viewVec.norm()) * 180 / PI;
+  printf("%.2f\n",angle);
   glPushMatrix();
   {
+    if(check < 90)
+    {
+      flashlight.draw(90 - angle);
+    } else {
+      flashlight.draw(90 + angle);
+    }
     drawApartment();
     // drawHitBoxes();
   }
@@ -467,7 +596,8 @@ void display(void) {
   glutSwapBuffers();
 }
 
-void loadAssets() {
+void loadAssets()
+{
   apartmentDoor.setModel();
   bedroomDoor.setModel();
   bathroomDoor.setModel();
@@ -504,6 +634,7 @@ void loadAssets() {
   brokenGlass.setImage();
   footprints.setImage();
   bloodtrail.setImage();
+  flashlight.setModel();
 
   // Corridor Texturs
   (*walls[0]).setTexture("assets/images/corridor_wall.jpg");
@@ -536,130 +667,219 @@ void loadAssets() {
   // // Starting music
 }
 
-void interactionTimer(int val) {
-  if (gameState == INTERACTING_STATE) {
+void interactionTimer(int val)
+{
+  if (gameState == INTERACTING_STATE)
+  {
     interactingObject.rotate();
     glutPostRedisplay();
     glutTimerFunc(20, interactionTimer, 0);
   }
 }
 
-void key(unsigned char k, int x, int y) {
-  int len = sizeof(clues) / sizeof(*clues);
-  if (gameState == PLAYING_STATE) {
-	printf("x:%.2f, z:%.2f\n", player.location().x(),  player.location().z());
-    switch (k) {
-    case 'l':
-      // camera.rotateRight();
-      player.lookRight();
-      break;
-    case 'j':
-      // camera.rotateLeft();
-      player.lookLeft();
-      break;
-    case 'i':
-      // camera.rotateUp();
-      player.lookUp();
-      break;
-    case 'k':
-      // camera.rotateDown();
-      player.lookDown();
-      break;
-    case 'o':
-      camera.tiltRight();
-      break;
-    case 'u':
-      camera.tiltLeft();
-      break;
-    case 'w':
-      // camera.translateForward();
-      player.moveForward();
-      if (intersectsWalls()) {
-        player.moveBackward();
-      }
-      break;
-    case 's':
-      // camera.translateBackward();
-      player.moveBackward();
-      if (intersectsWalls()) {
-        player.moveForward();
-      }
-      break;
-    case 'a':
-      // camera.translateLeft();
-      player.moveLeft();
-      if (intersectsWalls()) {
-        player.moveRight();
-      }
-      break;
-    case 'd':
-      // camera.translateRight();
-      player.moveRight();
-      if (intersectsWalls()) {
-        player.moveLeft();
-      }
-      break;
-    case 'e':
-      // camera.translateUp();
 
-      for (int i = 0; i < len; i++) {
-        // printf("%d\n", clues[0]);
-        if (player.isLookingAt(*(clues[i])) && !(*clues[i]).isFound()) {
-          std::string s = (*clues[i]).Interact().append("\n");
-          interactingObject = *clues[i];
-          gameState = INTERACTING_STATE;
-          Vector3f newVector = player.getCamera().location() + (player.getCamera().lookAt() - player.getCamera().location()).normalized() * 0.8;
-          interactingObject.setLocation(newVector);
-          glutTimerFunc(20, interactionTimer, 0);
-          // remove clue
-          (*clues[i]).find(true);
-          break;
-        }
-      }
-      break;
-    case 'q':
-      camera.translateDown();
-      break;
-    }
-  } else if (gameState == INTERACTING_STATE) {
-    switch (k) {
-    case 'e':
-      gameState = PLAYING_STATE;
-      break;
-    }
-  } else if (gameState == JOURNAL_STATE) {
-    switch (k) {
-    case 'j':
-      gameState = PLAYING_STATE;
-      break;
-    }
+void idle()
+{
+	bedroomFan.rotate();
+	glutPostRedisplay();
+}
+
+void openDoor(int val)
+{
+	if(val == 0)
+	{
+		apartmentDoor.openDoor();
+		if(!apartmentDoor.isOpen())
+		{
+			glutTimerFunc(0, openDoor, 0);
+		}
+	} else if(val == 1) {
+    bedroomDoor.openDoor();
+		if(!bedroomDoor.isOpen())
+		{
+			glutTimerFunc(0, openDoor, 1);
+		}
+  } else if(val == 2) {
+    bathroomDoor.openDoor();
+		if(!bathroomDoor.isOpen())
+		{
+			glutTimerFunc(0, openDoor, 2);
+		}
   }
-  glutPostRedisplay();
+}
+
+void closeDoor(int val)
+{
+	if(val == 0)
+	{
+		apartmentDoor.closeDoor();
+		if(apartmentDoor.isOpen())
+		{
+			glutTimerFunc(0, closeDoor, 0);
+		}
+	} else if(val == 1) {
+    bedroomDoor.closeDoor();
+		if(bedroomDoor.isOpen())
+		{
+			glutTimerFunc(0, closeDoor, 1);
+		}
+  } else if(val == 2) {
+    bathroomDoor.closeDoor();
+		if(bathroomDoor.isOpen())
+		{
+			glutTimerFunc(0, closeDoor, 2);
+		}
+  }
+}
+
+void key(unsigned char k, int x, int y)
+{
+  	int len = sizeof(clues) / sizeof(*clues);
+  	if (gameState == PLAYING_STATE)
+  	{
+		//printf("x:%.2f, z:%.2f\n", player.location().x(),  player.location().z());
+		switch (k)
+		{
+       case 'f':
+      enableFlashLight=!enableFlashLight;
+      break;
+		case 'l':
+			// camera.rotateRight();
+			player.lookRight();
+			break;
+		case 'j':
+			// camera.rotateLeft();
+			player.lookLeft();
+			break;
+		case 'i':
+			// camera.rotateUp();
+			player.lookUp();
+			break;
+		case 'k':
+			// camera.rotateDown();
+			player.lookDown();
+			break;
+		case 'w':
+			// camera.translateForward();
+			player.moveForward();
+			if (intersectsWalls())
+			{
+				player.moveBackward();
+			}
+		break;
+		case 's':
+			// camera.translateBackward();
+			player.moveBackward();
+			if (intersectsWalls())
+			{
+				player.moveForward();
+			}
+		break;
+		case 'a':
+			// camera.translateLeft();
+			player.moveLeft();
+			if (intersectsWalls())
+			{
+				player.moveRight();
+			}
+			break;
+		case 'd':
+			// camera.translateRight();
+			player.moveRight();
+			if (intersectsWalls())
+			{
+				player.moveLeft();
+			}
+			break;
+		case 'e':
+			// camera.translateUp();
+			for (int i = 0; i < len; i++)
+			{
+				// printf("%d\n", clues[0]);
+				if(player.isLookingAt(apartmentDoor))
+				{
+					if(!apartmentDoor.isOpen())
+					{
+						glutTimerFunc(0, openDoor, 0);
+					} else {
+						glutTimerFunc(0, closeDoor, 0);
+					}
+				} else if (player.isLookingAt(bedroomDoor)) {
+          if(!bedroomDoor.isOpen())
+					{
+						glutTimerFunc(0, openDoor, 1);
+					} else {
+						glutTimerFunc(0, closeDoor, 1);
+					}
+        } else if(player.isLookingAt(bathroomDoor)) {
+          if(!bathroomDoor.isOpen())
+					{
+						glutTimerFunc(0, openDoor, 2);
+					} else {
+						glutTimerFunc(0, closeDoor, 2);
+					}
+        } else if (player.isLookingAt(*(clues[i])) && !(*clues[i]).isFound()) {
+					std::string s = (*clues[i]).Interact().append("\n");
+					interactingObject = *clues[i];
+					gameState = INTERACTING_STATE;
+					Vector3f newVector = player.getCamera().location() + (player.getCamera().lookAt() - player.getCamera().location()).normalized() * 0.8;
+					interactingObject.setLocation(newVector);
+					glutTimerFunc(20, interactionTimer, 0);
+					// remove clue
+					(*clues[i]).find(true);
+					break;
+				}
+			}
+			break;
+		case 'q':
+			camera.translateDown();
+			break;
+		}
+  	} else if (gameState == INTERACTING_STATE) {
+    	switch (k)
+		{
+    	case 'e':
+      		gameState = PLAYING_STATE;
+      		break;
+    	}
+  	} else if (gameState == JOURNAL_STATE) {
+    	switch (k)
+		{
+    	case 'j':
+      		gameState = PLAYING_STATE;
+      		break;
+    	}
+  	}
+	glutPostRedisplay();
 }
 
 //=======================================================================
 // Motion Function
 const int height_center = height / 2, width_center = width / 2;
 //=======================================================================
-void mouseMovement(int x, int y) {
-  if (gameState == PLAYING_STATE) {
+void mouseMovement(int x, int y)
+{
+  int scale = 1;
+  if (gameState == PLAYING_STATE)
+  {
     if (y > height_center)
       // camera.rotateDown(0.4);
-      player.lookDown(0.4);
+      player.lookDown(scale);
     if (y < height_center)
       // camera.rotateUp(0.4);
-      player.lookUp(0.4);
+      player.lookUp(scale);
     if (x > width_center)
       // camera.rotateRight(0.4);
-      player.lookRight(0.4);
+      player.lookRight(scale);
     if (x < width_center)
       // camera.rotateLeft(0.4);
-      player.lookLeft(0.4);
+      player.lookLeft(scale);
 
     y = height - y;
 
     // pins mouse in screen center
-    if (abs(x - width_center) > 1) {
+    if (abs(x - width_center) > 1)
+    {
       x = width_center;
       glutWarpPointer(width_center, y);
     }
@@ -670,24 +890,28 @@ void mouseMovement(int x, int y) {
   }
 }
 
-void losingStateCaller(int val) {
-
-  if (gameState != WINNING_STATE) {
+void losingStateCaller(int val)
+{
+  if (gameState != WINNING_STATE)
+  {
     gameState = LOSING_STATE;
     printf("koko lost\n");
   }
   glutPostRedisplay();
 }
 
-void journalStateCaller(int val) {
-  if (gameState != PLAYING_STATE) {
+void journalStateCaller(int val)
+{
+  if (gameState != PLAYING_STATE)
+  {
     gameState = JOURNAL_STATE;
     printf("journal appear\n");
   }
   glutPostRedisplay();
 }
 
-void main(int argc, char **argv) {
+void main(int argc, char **argv)
+{
   glutInit(&argc, argv);
   glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
 
@@ -707,15 +931,19 @@ void main(int argc, char **argv) {
   loadAssets();
   glEnable(GL_DEPTH_TEST);
   glEnable(GL_LIGHTING);
-  glEnable(GL_LIGHT0);
+  //glEnable(GL_LIGHT0);
   glEnable(GL_LIGHT1);
-  // glEnable(GL_LIGHT2);
+  glEnable(GL_LIGHT2);
+   glEnable(GL_LIGHT3);
+   glEnable(GL_LIGHT4);
+   glEnable(GL_LIGHT5);
   glEnable(GL_NORMALIZE);
-  // glEnable(GL_COLOR_MATERIAL);
+   //glEnable(GL_COLOR_MATERIAL);
   glShadeModel(GL_SMOOTH);
 
   // TODO 10 mins
   // glutTimerFunc(10000, losingStateCaller, 0);
+  glutIdleFunc(idle);
 
   glutMainLoop();
 }

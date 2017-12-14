@@ -19,6 +19,7 @@ public:
     Camera getCamera();
 
     // Motion functions
+    void move(int x);
     void moveForward(float scale = 1);
     void moveBackward(float scale = 1);
     void moveLeft(float scale = 1);

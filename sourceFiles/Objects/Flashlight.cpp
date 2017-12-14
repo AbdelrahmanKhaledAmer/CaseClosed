@@ -16,9 +16,7 @@ global origin.
 
 Flashlight::Flashlight(Vector3f location, Vector3f orientation, Vector3f scale,
                        Vector3f dimensions)
-    : Object(location, orientation, scale, dimensions) {
-  this->on_ = false;
-}
+    : Object(location, orientation, scale, dimensions) {}
 
 /**
 Destructor for the Flashlight object.
@@ -30,3 +28,27 @@ void Flashlight::turnOn() { this->on_ = true; }
 void Flashlight::turnOff() { this->on_ = false; }
 
 bool Flashlight::isOn() { return this->on_; }
+
+void Flashlight::draw(float yAngle) {
+  float scale = 0.005;
+
+  glPushMatrix();
+  {
+    glTranslatef(dimensions_.x()/2-0.1, dimensions_.y()/2 - 0.4, dimensions_.z()/2-0.2);
+    glScalef(scale, scale, scale);
+    glPushMatrix();
+    {
+      glTranslatef(location_.x() / scale, location_.y() / scale, location_.z() / scale);
+      glScalef(scale_.x(), scale_.y(), scale_.z());
+      glRotatef(yAngle, 0, 1, 0);
+      glTranslatef((dimensions_.x()/2)/scale, (dimensions_.y()/2)/scale, (dimensions_.z()/2)/scale);
+      model_.Draw();
+    }
+    glPopMatrix();
+  }
+  glPopMatrix();
+}
+
+void Flashlight::setModel() {
+  __super::setModel("assets/models/Flashlight/fonarik_low_3ds.3DS");
+}
