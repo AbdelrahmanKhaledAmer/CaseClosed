@@ -18,7 +18,11 @@ public:
     // Getters and Setters
     Vector3f location();    // Get Location
     Vector3f lookAt();      // Get LookAt
-	Vector3f Upvector();
+	Vector3f upVector();    // Get orientation
+    void setLocation(Vector3f location);
+    void setLookAt(Vector3f lookAt);
+    void setOrientation(Vector3f orientation);
+
     // Rotation Functions
     void rotateRight(float scale = 1);  // Horizontal rotation
     void rotateLeft(float scale = 1);   // Horizontal rotation
