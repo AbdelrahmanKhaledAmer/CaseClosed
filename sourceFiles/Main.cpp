@@ -151,7 +151,7 @@ AnsweringMachine answeringMachine(Vector3f(24.38, 0.25, 11.38), Vector3f(0, 180,
 BrokenGlass brokenGlass(Vector3f(20.68, 0.01, 8.47), Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vector3f(0.25, 0.25, 0.25));
 SuicideNote suicideNote(Vector3f(21.94, 0.51, 15.28), Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vector3f(0.2, 1, 0.2));
 
-YellowHoodie savior(Vector3f(0, 3, 0), Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vector3f(1, 1, 1));
+YellowHoodie savior(Vector3f(0, 30, 0), Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vector3f(1, 1, 1));
 
 void initClues()
 {
@@ -563,9 +563,10 @@ GLfloat l1Diffuse[] = {1.0f, 1.0f, 1.0f, 1.0f};
 }
 void winDraw()
 {
-  float scale=3*2.0/16;
+  float scale=4*2.0/16;
   glPushMatrix();
   {
+    glTranslatef(-1.5,-0.5,0);
     drawImage(0, 9*scale, 0, 16*scale, WinImg);
   }
   glPopMatrix();
@@ -576,6 +577,7 @@ void loseDraw()
   float scale=16*2.0/16;
   glPushMatrix();
   {
+    glTranslatef(-1.5,-0.5,0);
     drawImage(0, 16*scale, 0, 9*scale, loseImg);
   }
   glPopMatrix();
@@ -623,7 +625,7 @@ void display(void)
   //	camera.setup();
 
   // Axes for modeling
-  Axes axes(0.5);
+  //Axes axes(0.5);
 
   glColor3f(0.8f, 0.1f, 0.2f);
 
@@ -1125,7 +1127,6 @@ void main(int argc, char **argv)
   glutPassiveMotionFunc(mouseMovement);
 
   glClearColor(1, 1, 1, 0);
-
   initEnvironment();
   initClues();
   loadAssets();
