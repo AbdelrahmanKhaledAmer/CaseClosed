@@ -537,10 +537,10 @@ void drawApartment() {
 
   // clues
   // yellowHoodie.draw();
-  suicideNote.draw();
+  // suicideNote.draw();
   // photoFrame.draw();
-  pills.draw();
-  // brokenGlass.draw();
+  // pills.draw();
+  brokenGlass.draw();
   // footprints.draw();
   // bloodtrail.draw();
   yellowHoodie1.draw();
@@ -629,7 +629,7 @@ void loadAssets() {
   // sink.setModel();
   // bath.setModel();
 
-  // brokenGlass.setImage();
+  brokenGlass.setModel();
   // footprints.setImage();
   // bloodtrail.setImage();
   journal.setModel();
@@ -951,8 +951,7 @@ void main(int argc, char **argv)
 
   initEnvironment();
   initClues();
-  // loadAssets();
-  journal.setModel();
+  loadAssets();
   glEnable(GL_DEPTH_TEST);
   glEnable(GL_LIGHTING);
   //glEnable(GL_LIGHT0);
