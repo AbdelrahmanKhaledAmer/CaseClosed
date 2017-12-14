@@ -5,6 +5,7 @@
 #define WINNING_STATE 2
 #define INTERACTING_STATE 3
 #define JOURNAL_STATE 4
+#define LOADING 5
 
 // Libraries, dependencies and classes ==============================
 #include "headerFiles/TextureBuilder.h"
@@ -59,7 +60,7 @@
 #include "headerFiles/Objects/Player.h"
 
 //win and lose textures
-GLuint WinImg, loseImg;
+GLuint winImg, loseImg, startImg;
 
 // Screen Constants =================================================
 const int scale = 70;
@@ -79,7 +80,7 @@ GLuint floorTex, ceilingTex;
 bool enableFlashLight = true;
 
 // Game variables ===================================================
-int gameState = PLAYING_STATE;
+int gameState = LOADING;
 int interactingObject;
 
 // Eigen::Vector3f eye(-2, 1, 1.2);
@@ -311,7 +312,7 @@ void initEnvironment()
 
   floorTex = loadImage("assets/images/floor.png");
   ceilingTex = loadImage("assets/images/celling.png");
-  WinImg = loadImage("assets/images/win.png");
+  winImg = loadImage("assets/images/win.png");
   loseImg = loadImage("assets/images/lose.png");
 }
 
@@ -561,130 +562,42 @@ GLfloat l1Diffuse[] = {1.0f, 1.0f, 1.0f, 1.0f};
   glLightfv(GL_LIGHT6, GL_ATTENUATION_EXT, lightIntensity);
   
 }
+void startDraw()
+{
+  float scale=4*2.0/16;
+  glPushMatrix();
+  {
+    glTranslatef(-1.5,-0.5,0);
+    drawImage(0, 9*scale, 0, 16*scale, startImg);
+  }
+  glPopMatrix();
+
+}
+
 void winDraw()
 {
   float scale=4*2.0/16;
   glPushMatrix();
   {
     glTranslatef(-1.5,-0.5,0);
-    drawImage(0, 9*scale, 0, 16*scale, WinImg);
+    drawImage(0, 9*scale, 0, 16*scale, winImg);
   }
   glPopMatrix();
 
 }
+
 void loseDraw()
 {
-  float scale=16*2.0/16;
+  float scale=4*2.0/16;
   glPushMatrix();
   {
     glTranslatef(-1.5,-0.5,0);
-    drawImage(0, 16*scale, 0, 9*scale, loseImg);
+    drawImage(0, 9*scale, 0, 16*scale, loseImg);
   }
   glPopMatrix();
 
 }
-void display(void)
-{
-  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-  // Setup light
-  // Lights::initLightSource();
-  // Lights::setupLights();
-
-  // Set the camera
-  if (enableFlashLight)
-  {
-    initFlashLight();
-  }
-  else
-  {
-    glDisable(GL_LIGHT1);
-  }
-  initLightHere();
-  //glDisable(GL_LIGHT6);
-  if (gameState == JOURNAL_STATE || gameState == WINNING_STATE || gameState == LOSING_STATE)
-  {
-    glEnable(GL_LIGHT6);
-    journalLight();
-    jCam.setup();
-    if (gameState == WINNING_STATE)
-    {
-      winDraw();
-      glFlush();
-    }
-    else if (gameState == LOSING_STATE)
-    {
-      loseDraw();
-      glFlush();
-    }
-  }
-  else
-  {
-    player.getCamera().setup();
-  }
-  //	camera.setup();
-
-  // Axes for modeling
-  //Axes axes(0.5);
-
-  glColor3f(0.8f, 0.1f, 0.2f);
-
-  // Reset color and flush buffer
-  glColor3f(1.0, 1.0, 1.0);
-
-  Vector3f viewVec = (player.getCamera().lookAt() - player.location()).normalized();
-  Vector3f xAxis(1, 0, 0);
-  Vector3f zAxis(0, 0, 1);
-  float angle = acos((viewVec.dot(xAxis)) / viewVec.norm()) * 180 / PI;
-  float check = acos((viewVec.dot(zAxis)) / viewVec.norm()) * 180 / PI;
-  glPushMatrix();
-  {
-    if (check < 90)
-    {
-      flashlight.draw(90 - angle);
-    }
-    else
-    {
-      flashlight.draw(90 + angle);
-    }
-    journal.draw();
-    drawApartment();
-    drawClues();
-
-    // drawHitBoxes();
-  }
-  glPopMatrix();
-
-  glPushMatrix();
-  glTranslated(1, 0.5, 1);
-  glutSolidCube(0.1);
-  glPopMatrix();
-
-  glPushMatrix();
-  Vector3f viewVec2 = ((player.getCamera().lookAt() - player.location()).normalized()) * 1.5;
-  Vector3f loc = player.location();
-  Vector3f Upvector = player.getCamera().upVector();
-  Vector3f crossV = viewVec2.cross(Upvector);
-  //the required plane is the plane between the up and cross vector
-  glColor3f(1, 0, 0);
-  glBegin(GL_QUADS);
-  {
-    glNormal3f(0, 1, 0);
-    glTexCoord2f(0.0f, 0.0f);
-    glVertex3f(-1, 0, -1);
-    glTexCoord2f(1.0f, 0.0f);
-    glVertex3f(-1, 0.5, -1);
-    glTexCoord2f(1.0f, 1.0f);
-    glVertex3f(-1, 0.5, -2);
-    glTexCoord2f(0.0f, 1.0f);
-    glVertex3f(-1, 0, -2);
-  }
-  glEnd();
-  glPopMatrix();
-
-  glFlush();
-  glutSwapBuffers();
-}
 
 void loadAssets()
 {
@@ -764,6 +677,125 @@ void loadAssets()
   // // Starting music
 }
 
+void (*currentDisplayFunc)(void);
+void displayFunc() { (*currentDisplayFunc)(); }
+
+void (*currentIdleFunc)(void);
+void idleFunc() { (*currentIdleFunc)(); }
+
+void display(void) {
+  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+  // Setup light
+  // Lights::initLightSource();
+  // Lights::setupLights();
+
+  // Set the camera
+  if (enableFlashLight) {
+    initFlashLight();
+  } else {
+    glDisable(GL_LIGHT1);
+  }
+  initLightHere();
+  // glDisable(GL_LIGHT6);
+  if (gameState == JOURNAL_STATE || gameState == WINNING_STATE ||
+      gameState == LOSING_STATE) {
+    glEnable(GL_LIGHT6);
+    journalLight();
+    jCam.setup();
+    if (gameState == WINNING_STATE) {
+      winDraw();
+      glFlush();
+    } else if (gameState == LOSING_STATE) {
+      loseDraw();
+      glFlush();
+    }
+  } else {
+    player.getCamera().setup();
+  }
+  //	camera.setup();
+
+  // Axes for modeling
+  // Axes axes(0.5);
+
+  glColor3f(0.8f, 0.1f, 0.2f);
+
+  // Reset color and flush buffer
+  glColor3f(1.0, 1.0, 1.0);
+
+  Vector3f viewVec =
+      (player.getCamera().lookAt() - player.location()).normalized();
+  Vector3f xAxis(1, 0, 0);
+  Vector3f zAxis(0, 0, 1);
+  float angle = acos((viewVec.dot(xAxis)) / viewVec.norm()) * 180 / PI;
+  float check = acos((viewVec.dot(zAxis)) / viewVec.norm()) * 180 / PI;
+  glPushMatrix();
+  {
+    if (check < 90) {
+      flashlight.draw(90 - angle);
+    } else {
+      flashlight.draw(90 + angle);
+    }
+    journal.draw();
+    drawApartment();
+    drawClues();
+
+    // drawHitBoxes();
+  }
+  glPopMatrix();
+
+  glPushMatrix();
+  glTranslated(1, 0.5, 1);
+  glutSolidCube(0.1);
+  glPopMatrix();
+
+  glPushMatrix();
+  Vector3f viewVec2 =
+      ((player.getCamera().lookAt() - player.location()).normalized()) * 1.5;
+  Vector3f loc = player.location();
+  Vector3f Upvector = player.getCamera().upVector();
+  Vector3f crossV = viewVec2.cross(Upvector);
+  // the required plane is the plane between the up and cross vector
+  glColor3f(1, 0, 0);
+  glBegin(GL_QUADS);
+  {
+    glNormal3f(0, 1, 0);
+    glTexCoord2f(0.0f, 0.0f);
+    glVertex3f(-1, 0, -1);
+    glTexCoord2f(1.0f, 0.0f);
+    glVertex3f(-1, 0.5, -1);
+    glTexCoord2f(1.0f, 1.0f);
+    glVertex3f(-1, 0.5, -2);
+    glTexCoord2f(0.0f, 1.0f);
+    glVertex3f(-1, 0, -2);
+  }
+  glEnd();
+  glPopMatrix();
+
+  glFlush();
+  glutSwapBuffers();
+}
+
+void idle() {
+  bedroomFan.rotate();
+  glutPostRedisplay();
+}
+
+void idleLoading() {}
+
+void displayLoading() {
+  startDraw();
+  glFlush();
+
+  initClues();
+  initEnvironment();
+  loadAssets();
+  gameState = PLAYING_STATE;
+
+  currentDisplayFunc = &display;
+  currentIdleFunc = &idle;
+}
+
 void interactionTimer(int val)
 {
   if (gameState == INTERACTING_STATE)
@@ -772,12 +804,6 @@ void interactionTimer(int val)
     glutPostRedisplay();
     glutTimerFunc(20, interactionTimer, 0);
   }
-}
-
-void idle()
-{
-  bedroomFan.rotate();
-  glutPostRedisplay();
 }
 
 void openDoor(int val)
@@ -1120,16 +1146,20 @@ void main(int argc, char **argv)
 
   glutInitWindowSize(width, height);
   glutInitWindowPosition(50, 50);
-  glutCreateWindow("Game Title");
+  glutCreateWindow("Case Closed");
 
-  glutDisplayFunc(display);
+  currentDisplayFunc = &displayLoading;
+  currentIdleFunc = &idleLoading;
+  glutDisplayFunc(displayFunc);
+  glutIdleFunc(idleFunc);
+
   glutKeyboardFunc(key);
+  glutMouseFunc(mouseOverJournal);
   glutPassiveMotionFunc(mouseMovement);
 
+  startImg = loadImage("assets/images/start.png");
   glClearColor(1, 1, 1, 0);
-  initEnvironment();
-  initClues();
-  loadAssets();
+
   glEnable(GL_DEPTH_TEST);
   glEnable(GL_LIGHTING);
   //glEnable(GL_LIGHT0);
@@ -1154,8 +1184,6 @@ void main(int argc, char **argv)
 
   // TODO 10 mins
   // glutTimerFunc(10000, losingStateCaller, 0);
-  glutIdleFunc(idle);
-  glutMouseFunc(mouseOverJournal);
 
   glutMainLoop();
 }
