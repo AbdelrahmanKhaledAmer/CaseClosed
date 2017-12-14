@@ -9,12 +9,12 @@ using namespace Eigen;
 class Knife : public Clue {
 public:
   // Main functions
-  Knife(Vector3f location, Vector3f orientation, Vector3f scale,
-        Vector3f dimensions); // Constructor
-  ~Knife();                   // Destructor
+  Knife(Vector3f location, Vector3f orientation, Vector3f scale); // Constructor
+  ~Knife();                                                       // Destructor
 
-  void draw();
   std::string Interact();
+  void draw();
+  void setModel();
 };
 
 #endif

@@ -11,11 +11,10 @@ void YellowHoodie::setModel() {
 }
 
 void YellowHoodie::draw() {
-  float minX = location_.x();
-  float maxX = location_.x() + dimensions_.x();
-  float minY = location_.z();
-  float maxY = location_.z() + dimensions_.z();
-
+  float minX = -dimensions_.x()/2;
+  float maxX = dimensions_.x()/2;
+  float minY = -dimensions_.z()/2;
+  float maxY = dimensions_.z()/2;
   glPushMatrix();
   {
     glTranslatef(location_.x(), location_.y(), location_.z());
