@@ -32,8 +32,9 @@ void Knife::draw() {
   glPopMatrix();
 }
 
-std::string Knife::Interact() {
-  return "Clue: This is a knife used in the murder.";
+std::string Knife::Interact()
+{
+  return "3";
 }
 
 void Knife::setModel() {

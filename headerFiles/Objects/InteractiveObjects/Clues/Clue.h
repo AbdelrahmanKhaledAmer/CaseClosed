@@ -23,10 +23,10 @@ public:
 	void find(bool state);
 	void setState(int val);
 	int getState();
-	protected:
-		bool isFound_=false;
-		int state=NOT_STATED;
-
+	virtual std::string Interact();
+protected:
+	bool isFound_=false;
+	int state=NOT_STATED;
 };
 
 #endif

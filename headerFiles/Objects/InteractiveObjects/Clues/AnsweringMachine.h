@@ -14,6 +14,7 @@ public:
   ~AnsweringMachine();              // Destructor
   void draw();
   void setModel();
+  std::string Interact();
 };
 
 #endif

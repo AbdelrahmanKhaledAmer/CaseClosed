@@ -11,6 +11,7 @@
 
 #include "headerFiles/GLTexture.h"
 #include "headerFiles/Model_3DS.h"
+#include "windows.h"
 #include <math.h>
 #include <iostream>
 
@@ -149,6 +150,36 @@ BrokenGlass brokenGlass(Vector3f(20.68, 0.01, 8.47), Vector3f(0, 0, 0), Vector3f
 SuicideNote suicideNote(Vector3f(21.94, 0.51, 15.28), Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vector3f(0.2, 1, 0.2));
 
 YellowHoodie savior(Vector3f(0, 3, 0), Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vector3f(1, 1, 1));
+
+void checkString(std::string s)
+{
+  if(s == "0")
+  {
+    printf("0\n");
+    PlaySound("assets\\audio\\soundBytes\\photoframe.wav", NULL, SND_ASYNC);
+  } else if(s == "1") {
+    printf("1\n");
+    PlaySound("assets\\audio\\soundBytes\\yellow_hoodie.wav", NULL, SND_ASYNC);
+  } else if(s == "2") {
+    printf("2\n");
+    PlaySound("assets\\audio\\soundBytes\\pills.wav", NULL, SND_ASYNC);
+  } else if(s == "3") {
+    printf("3\n");
+    PlaySound("assets\\audio\\soundBytes\\knife.wav", NULL, SND_ASYNC);
+  } else if(s == "4") {
+    printf("4\n");
+    PlaySound("assets\\audio\\soundBytes\\newspaper.wav", NULL, SND_ASYNC);
+  } else if(s == "5") {
+    printf("5\n");
+    PlaySound("assets\\audio\\soundBytes\\answering_machine.wav", NULL, SND_ASYNC);
+  } else if(s == "6") {
+    printf("6\n");
+    PlaySound("assets\\audio\\soundBytes\\broken_glass.wav", NULL, SND_ASYNC);    
+  } else if(s == "7") {
+    printf("7\n");
+    PlaySound("assets\\audio\\soundBytes\\suicide_note.wav", NULL, SND_ASYNC);  
+  }
+}
 
 void initClues()
 {
@@ -698,7 +729,9 @@ void loadAssets()
   (*walls[21]).setTexture("assets/images/bathroom_wall.jpg");
   (*walls[22]).setTexture("assets/images/bathroom_wall.jpg");
   (*walls[23]).setTexture("assets/images/bathroom_wall.jpg");
-  // // Starting music
+  
+  // Starting music
+  mciSendString("play assets\\audio\\music\\Undercover_Vampire_Policeman.mp3 repeat", 0, 0, 0);
 }
 
 void interactionTimer(int val)
@@ -838,6 +871,7 @@ void key(unsigned char k, int x, int y)
       {
         if (!apartmentDoor.isOpen())
         {
+          PlaySound("assets\\audio\\sfx\\open_door_1.wav", NULL, SND_ASYNC);
           glutTimerFunc(0, openDoor, 0);
         }
         else
@@ -849,6 +883,7 @@ void key(unsigned char k, int x, int y)
       {
         if (!bedroomDoor.isOpen())
         {
+          PlaySound("assets\\audio\\sfx\\open_door_1.wav", NULL, SND_ASYNC);
           glutTimerFunc(0, openDoor, 1);
         }
         else
@@ -860,6 +895,7 @@ void key(unsigned char k, int x, int y)
       {
         if (!bathroomDoor.isOpen())
         {
+          PlaySound("assets\\audio\\sfx\\open_door_1.wav", NULL, SND_ASYNC);
           glutTimerFunc(0, openDoor, 2);
         }
         else
@@ -876,7 +912,9 @@ void key(unsigned char k, int x, int y)
           {
             // printf("%d\n", clues[0]);
             printf("clues of %d %d\n", (*clues[i]).getState(), i);
-            std::string s = (*clues[i]).Interact().append("\n");
+            std::string s = (*clues[i]).Interact();
+            printf(s.c_str());
+            checkString(s);
             interactingObject = i;
             gameState = INTERACTING_STATE;
             Vector3f newVector = player.getCamera().location() + (player.getCamera().lookAt() - player.getCamera().location()).normalized() * 0.8;

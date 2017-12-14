@@ -37,3 +37,8 @@ void PhotoFrame::setModel() {
   __super::setModel(
       "assets/models/clues/PhotoFrame/Picture.3DS");
 }
+
+std::string PhotoFrame::Interact()
+{
+  return "0";
+}
