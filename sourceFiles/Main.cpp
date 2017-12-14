@@ -11,10 +11,11 @@
 
 #include "headerFiles/GLTexture.h"
 #include "headerFiles/Model_3DS.h"
+#include <math.h>
+#include <iostream>
+
 #include <Eigen/Dense>
 #include <headerFiles/GL/glut.h>
-#include <iostream>
-#include <math.h>
 
 #include "headerFiles/Axes.h"
 #include "headerFiles/Camera.h"
@@ -26,6 +27,7 @@
 #include "headerFiles/Objects/InteractiveObjects/Clues/BrokenGlass.h"
 #include "headerFiles/Objects/InteractiveObjects/Clues/Footprints.h"
 #include "headerFiles/Objects/InteractiveObjects/Clues/Knife.h"
+#include "headerFiles/Objects/InteractiveObjects/Clues/Newspaper.h"
 #include "headerFiles/Objects/InteractiveObjects/Clues/PhotoFrame.h"
 #include "headerFiles/Objects/InteractiveObjects/Clues/Pills.h"
 #include "headerFiles/Objects/InteractiveObjects/Clues/SuicideNote.h"
@@ -62,12 +64,13 @@ const int width = 16 * scale;
 const int height = 9 * scale;
 
 // Textures ==========================================================
-int floorTexWidth;
-int floorTexHeight;
-unsigned char *floorTex;
-int ceilingTexWidth;
-int ceilingTexHeight;
-unsigned char *ceilingTex;
+// int floorTexWidth;
+// int floorTexHeight;
+// unsigned char *floorTex;
+// int ceilingTexWidth;
+// int ceilingTexHeight;
+// unsigned char *ceilingTex;
+GLuint floorTex, ceilingTex;
 
 //flashLight ON/OFF
 bool enableFlashLight=true;
@@ -136,15 +139,16 @@ Sink sink(Vector3f(27.2, 0, 12.3), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
 Bath bath(Vector3f(28, 0, 14.9), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
 
 //Clues
-YellowHoodie yellowHoodie(Vector3f(1, 0, 1), Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vector3f(1, 1, 1));
-YellowHoodie yellowHoodie1(Vector3f(0, 3, 0), Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vector3f(1, 1, 1));
-BrokenGlass brokenGlass(Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vector3f(1, 1, 1));
-SuicideNote suicideNote(Vector3f(1, 0, 1), Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vector3f(1, 1, 1));
-Footprints footprints(Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vector3f(1, 1, 1));
-Bloodtrail bloodtrail(Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vector3f(1, 1, 1));
-PhotoFrame photoFrame(Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
-Pills pills(Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
-AnsweringMachine answeringMachine(Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
+PhotoFrame photoFrame(Vector3f(24.24, 0.5, 16.11), Vector3f(0, 90, 0), Vector3f(1, 1, 1));
+YellowHoodie yellowHoodie(Vector3f(24.53, 0.31, 10.63), Vector3f(0, 0, 0), Vector3f(0.7, 1, 0.7), Vector3f(1, 1, 0.77));
+Pills pills(Vector3f(20.08, 0.72, 6.38), Vector3f(0, 0, 0), Vector3f(0.8, 0.8, 0.8));
+Knife knife(Vector3f(21.41, 0.1, 14.57), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
+Newspaper newspaper(Vector3f(22.2, 0.75, 7.28), Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vector3f(0.3, 1, 0.3));
+AnsweringMachine answeringMachine(Vector3f(24.38, 0.25, 11.38), Vector3f(0, 180, 0), Vector3f(1, 1, 1));
+BrokenGlass brokenGlass(Vector3f(20.68, 0.01, 8.47), Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vector3f(0.25, 0.25, 0.25));
+SuicideNote suicideNote(Vector3f(21.94, 0.51, 15.28), Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vector3f(0.2, 1, 0.2));
+
+YellowHoodie savior(Vector3f(0, 3, 0), Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vector3f(1, 1, 1));
 
 void initClues()
 {
@@ -154,9 +158,9 @@ void initClues()
   {
     // clues[i]=
   }
-  clues[0] = new Knife(Vector3f(4, 0.5, 1), Vector3f(45, 45, 45), Vector3f(1, 1, 1), Vector3f(1, 1, 1));
-  clues[1] = new Knife(Vector3f(3, 0.5, 1), Vector3f(45, 45, 45), Vector3f(1, 1, 1), Vector3f(1, 1, 1));
-  clues[2] = new Knife(Vector3f(2, 0.5, 1), Vector3f(45, 45, 45), Vector3f(1, 1, 1), Vector3f(1, 1, 1));
+  clues[0] = new Knife(Vector3f(4, 0.5, 1), Vector3f(45, 45, 45), Vector3f(1, 1, 1));
+  clues[1] = new Knife(Vector3f(3, 0.5, 1), Vector3f(45, 45, 45), Vector3f(1, 1, 1));
+  clues[2] = new Knife(Vector3f(2, 0.5, 1), Vector3f(45, 45, 45), Vector3f(1, 1, 1));
 
   cluesAnswer[0] = 1;
   cluesAnswer[1] = 1;
@@ -286,8 +290,8 @@ void initEnvironment()
   Eigen::Vector3f scl23(1, 1, 3);                 // length 3
   walls[23] = new Wall(loc23, ori23, scl23, dim); // East wall
 
-  floorTex = SOIL_load_image("assets/images/floor.png", &floorTexWidth, &floorTexHeight, 0, SOIL_LOAD_RGBA);
-  ceilingTex = SOIL_load_image("assets/images/celling.png", &ceilingTexWidth, &ceilingTexHeight, 0, SOIL_LOAD_RGBA);
+  floorTex = loadImage("assets/images/floor.png");
+  ceilingTex = loadImage("assets/images/celling.png");
 }
 
 void drawEnvironment()
@@ -297,49 +301,13 @@ void drawEnvironment()
     (*walls[i]).draw();
   }
 
-  glColor4ub(255, 255, 255, 255);
-  glEnable(GL_TEXTURE_2D);
-  glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, floorTexWidth, floorTexHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, floorTex);
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-  glBegin(GL_QUADS);
+  glPushMatrix();
   {
-    glNormal3f(0, 1, 0);
-    glTexCoord2f(0, 0);
-    glVertex3f(12, 0, 1);
-    glTexCoord2f(1, 0);
-    glVertex3f(12, 0, 17);
-    glTexCoord2f(1, 1);
-    glVertex3f(30, 0, 17);
-    glTexCoord2f(0, 1);
-    glVertex3f(30, 0, 1);
+    glTranslatef(0, 2, 0);
+    drawImageHorizontal(12, 30, 1, 17, ceilingTex);
   }
-  glEnd();
-  glDisable(GL_TEXTURE_2D);
-
-  glColor4ub(255, 255, 255, 255);
-  glEnable(GL_TEXTURE_2D);
-  glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, ceilingTexWidth, ceilingTexHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, ceilingTex);
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-  glBegin(GL_QUADS);
-  {
-    glNormal3f(0, -1, 0);
-    glTexCoord2f(0, 0);
-    glVertex3f(12, 2, 1);
-    glTexCoord2f(1, 0);
-    glVertex3f(12, 2, 17);
-    glTexCoord2f(1, 1);
-    glVertex3f(30, 2, 17);
-    glTexCoord2f(0, 1);
-    glVertex3f(30, 2, 1);
-  }
-  glEnd();
-  glDisable(GL_TEXTURE_2D);
+  glPopMatrix();
+  drawImageHorizontal(12, 30, 1, 17, floorTex);
 }
 
 bool intersectsWalls()
@@ -545,16 +513,17 @@ void drawApartment()
   bath.draw();
 
   // clues
-  // yellowHoodie.draw();
-  // suicideNote.draw();
-  // photoFrame.draw();
-  // pills.draw();
-  // brokenGlass.draw();
-  answeringMachine.draw();
-  // footprints.draw();
-  // bloodtrail.draw();
-  yellowHoodie1.draw();
+  photoFrame.draw();       // clue0
+  yellowHoodie.draw();     // clue1
+  pills.draw();            // clue2
+  knife.draw();            // clue3
+  newspaper.draw();        // clue4
+  answeringMachine.draw(); // clue5
+  brokenGlass.draw();      // clue6
+  suicideNote.draw();      // clue7
 
+  savior.draw();
+  glPopMatrix();
   drawEnvironment();
 }
 
@@ -678,6 +647,7 @@ void loadAssets()
   kitchen.setModel();
   diningSet.setModel();
 
+  body.setModel();
   bed.setModel();
   nightstand1.setModel();
   nightstand2.setModel();
@@ -687,12 +657,18 @@ void loadAssets()
   sink.setModel();
   bath.setModel();
 
-  body.setModel();
+  photoFrame.setModel();
+  yellowHoodie.setModel();
+  pills.setModel();
+  knife.setModel();
+  newspaper.setModel();
+  answeringMachine.setModel();
   brokenGlass.setModel();
-  footprints.setImage();
-  bloodtrail.setImage();
+  suicideNote.setModel();
+
   flashlight.setModel();
 
+  journal.setModel();
   // Corridor Texturs
   (*walls[0]).setTexture("assets/images/corridor_wall.jpg");
   (*walls[1]).setTexture("assets/images/corridor_wall.jpg");

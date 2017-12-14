@@ -183,6 +183,9 @@
     <ClInclude Include="headerFiles\Objects\InteractiveObjects\Clues\AnsweringMachine.h">
       <Filter>headerFiles\Objects\InteractiveObjects\Clues</Filter>
     </ClInclude>
+    <ClInclude Include="headerFiles\Objects\InteractiveObjects\Clues\Newspaper.h">
+      <Filter>headerFiles\Objects\InteractiveObjects\Clues</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sourceFiles\Camera.cpp">
@@ -318,6 +321,9 @@
       <Filter>sourceFiles\Objects\InteractiveObjects\Clues</Filter>
     </ClCompile>
     <ClCompile Include="sourceFiles\Objects\InteractiveObjects\Clues\AnsweringMachine.cpp">
+      <Filter>sourceFiles\Objects\InteractiveObjects\Clues</Filter>
+    </ClCompile>
+    <ClCompile Include="sourceFiles\Objects\InteractiveObjects\Clues\Newspaper.cpp">
       <Filter>sourceFiles\Objects\InteractiveObjects\Clues</Filter>
     </ClCompile>
   </ItemGroup>

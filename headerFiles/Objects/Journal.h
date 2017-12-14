@@ -9,22 +9,34 @@
 
 using namespace Eigen;
 
-class Journal : public Object
-{
+class Journal : public Object {
 public:
-	// Main functions
-	Journal(Vector3f location, Vector3f orientation, Vector3f scale);    // Constructor
-	~Journal();                                                                                              // Destructor
+  // Main functions
+  Journal(Vector3f location, Vector3f orientation,
+          Vector3f scale); // Constructor
+  ~Journal();              // Destructor
 
-	// write function
-	void write(int clueIndex, int property = 0);
-	void draw();
-	void setModel();
+  // write function
+  void write(int clueIndex, int property = 0);
+  void draw();
+  void setModel();
+
 private:
-	bool clues_[10];
-	int cluesState_[10];
-	GLuint clueImages_[10][3];
-	GLuint journalImage_;
+  GLuint clueImages_[10][3];
+  GLuint journalImage_;
+
+  /**
+   * clue[0]: Photoframe
+   * clue[1]: Yellow Jacket
+   * clue[2]: Pills
+   * clue[3]: Knife
+   * clue[4]: Newspaper
+   * clue[5]: Answering Machine
+   * clue[6]: Glass Shards
+   * clue[7]: Suicide Note
+   **/
+  bool clues_[10];
+  int cluesState_[10];
 };
 
 #endif

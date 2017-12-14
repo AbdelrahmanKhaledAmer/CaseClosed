@@ -10,12 +10,10 @@ origin.
 @param (scale) The amount to scale across all three axes.
 @param (dimensions) The length of the object along every axis before scaling.
 
-
 @return: Pointer to InteractiveObject interactiveObject
 */
-Knife::Knife(Vector3f location, Vector3f orientation, Vector3f scale,
-             Vector3f dimensions)
-    : Clue(location, orientation, scale, dimensions) {}
+Knife::Knife(Vector3f location, Vector3f orientation, Vector3f scale)
+    : Clue(location, orientation, scale, Vector3f(0, 0, 0)) {}
 
 /**
 Destructor for the Knife object.
@@ -23,12 +21,21 @@ Deletes the pointer for the Knife object.
 */
 Knife::~Knife() {}
 
-void Knife::draw()
-{
-    __super::draw();
+void Knife::draw() {
+  float scale = 0.04;
+
+  glPushMatrix();
+  {
+    glScalef(scale, scale, scale);
+    __super::draw(scale);
+  }
+  glPopMatrix();
 }
 
-std::string Knife::Interact()
-{
-	return "Clue: This is a knife used in the murder.";
+std::string Knife::Interact() {
+  return "Clue: This is a knife used in the murder.";
+}
+
+void Knife::setModel() {
+  __super::setModel("assets/models/clues/Knife/Knife_3ds.3DS");
 }
