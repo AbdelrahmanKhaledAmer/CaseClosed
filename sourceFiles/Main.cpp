@@ -956,7 +956,7 @@ void setClueType(int idx)
   (*clues[idx]).setState((*clues[idx]).getState() == 1 ? -1 : 1);
   for (int i = 0; i < lenClues; i++)
   {
-    if ((*clues[i]).getState() != 1 && cluesAnswer[i] == 1)
+    if ((*clues[i]).getState()!=cluesAnswer[i])
     {
       win = false;
       break;
