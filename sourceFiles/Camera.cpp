@@ -53,7 +53,7 @@ void Camera::setup()
     glLoadIdentity();
     gluLookAt(eye_.x(), eye_.y(), eye_.z(), lookAt_.x(), lookAt_.y(), lookAt_.z(), orientation_.x(), orientation_.y(), orientation_.z());
 }
-Vector3f Camera::Upvector() {
+Vector3f Camera::upVector() {
 	return this->orientation_;
 }
 
@@ -73,6 +73,21 @@ Vector3f Camera::location()
 Vector3f Camera::lookAt()
 {
     return this->lookAt_;
+}
+
+void Camera::setLocation(Vector3f location)
+{
+    this->eye_ = location;
+}
+
+void Camera::setLookAt(Vector3f lookAt)
+{
+    this->lookAt_ = lookAt;
+}
+
+void Camera::setOrientation(Vector3f orientation)
+{
+    this->orientation_ = orientation;
 }
 
 /**

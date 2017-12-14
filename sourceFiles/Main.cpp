@@ -8,10 +8,12 @@
 
 // Libraries, dependencies and classes ==============================
 #include "headerFiles/TextureBuilder.h"
-#include "headerFiles/Model_3DS.h"
+
 #include "headerFiles/GLTexture.h"
+#include "headerFiles/Model_3DS.h"
 #include <math.h>
 #include <iostream>
+
 #include <Eigen/Dense>
 #include <headerFiles/GL/glut.h>
 
@@ -19,13 +21,20 @@
 #include "headerFiles/Camera.h"
 #include "headerFiles/Lights.h"
 #include "headerFiles/Objects/Flashlight.h"
+#include "headerFiles/Objects/InteractiveObjects/Clues/AnsweringMachine.h"
 #include "headerFiles/Objects/InteractiveObjects/Clues/Bloodtrail.h"
 #include "headerFiles/Objects/InteractiveObjects/Clues/Body.h"
 #include "headerFiles/Objects/InteractiveObjects/Clues/BrokenGlass.h"
 #include "headerFiles/Objects/InteractiveObjects/Clues/Footprints.h"
 #include "headerFiles/Objects/InteractiveObjects/Clues/Knife.h"
+#include "headerFiles/Objects/InteractiveObjects/Clues/Newspaper.h"
+#include "headerFiles/Objects/InteractiveObjects/Clues/PhotoFrame.h"
+#include "headerFiles/Objects/InteractiveObjects/Clues/Pills.h"
+#include "headerFiles/Objects/InteractiveObjects/Clues/SuicideNote.h"
+#include "headerFiles/Objects/InteractiveObjects/Clues/YellowHoodie.h"
 #include "headerFiles/Objects/InteractiveObjects/Door.h"
 #include "headerFiles/Objects/InteractiveObjects/Door1.h"
+#include "headerFiles/Objects/Journal.h"
 #include "headerFiles/Objects/NonInteractiveObjects/Armchair.h"
 #include "headerFiles/Objects/NonInteractiveObjects/Bath.h"
 #include "headerFiles/Objects/NonInteractiveObjects/Bed.h"
@@ -55,21 +64,22 @@ const int width = 16 * scale;
 const int height = 9 * scale;
 
 // Textures ==========================================================
-int floorTexWidth;
-int floorTexHeight;
-unsigned char *floorTex;
-int ceilingTexWidth;
-int ceilingTexHeight;
-unsigned char *ceilingTex;
+// int floorTexWidth;
+// int floorTexHeight;
+// unsigned char *floorTex;
+// int ceilingTexWidth;
+// int ceilingTexHeight;
+// unsigned char *ceilingTex;
+GLuint floorTex, ceilingTex;
 
-bool enableFlashLight=true;
 //flashLight ON/OFF
+bool enableFlashLight = true;
 
 // Game variables ===================================================
 int gameState = PLAYING_STATE;
-InteractiveObject interactingObject(Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(0, 0, 0));
+int interactingObject;
 
-// Eigen::V ector3f eye(-2, 1, 1.2);
+// Eigen::Vector3f eye(-2, 1, 1.2);
 Eigen::Vector3f eye(13, 1, 2);
 Eigen::Vector3f lookAt(15, 0.5, 2);
 Eigen::Vector3f orientation(0, 1, 0);
@@ -77,8 +87,16 @@ Eigen::Vector3f orientation(0, 1, 0);
 Camera camera(eye, lookAt, orientation);
 Player player(eye, Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vector3f(0.5, 1.5, 0.2), camera);
 Flashlight flashlight(Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vector3f(0, 0, 0));
+Journal journal(Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(2, 2, 1)); //x:1.95, z:2.53
 //Knife knife(Vector3f(3, 0.5, 1), Vector3f(45, 45, 45), Vector3f(1, 1, 1), Vector3f(1, 1, 1));
-Clue *clues[3];
+
+Eigen::Vector3f eye2(1.8, 1.1, 2.45);
+Eigen::Vector3f lookAt2(1.8, 1.525, 0);
+Eigen::Vector3f orientation2(0, 1, 0);
+Camera jCam(eye2, lookAt2, orientation2);
+
+int cluesAnswer[8] = {RELEVANT, RELEVANT, IRRELEVANT, RELEVANT, IRRELEVANT, RELEVANT, RELEVANT, IRRELEVANT};
+Clue *clues[8];
 Wall *walls[24];
 
 // Appartment Layout ================================================
@@ -109,6 +127,7 @@ DiningSet diningSet(Vector3f(22.2, 0, 7), Vector3f(0, -90, 0), Vector3f(1, 1, 1)
 Kitchen kitchen(Vector3f(21.15, 0, 5.5), Vector3f(0, 270, 0), Vector3f(1, 1, 1));
 
 //Bedroom
+Body body(Vector3f(23, 0, 14.9), Vector3f(0, 180, 0), Vector3f(1, 1, 1));
 Bed bed(Vector3f(23, 0, 14.9), Vector3f(0, 180, 0), Vector3f(1, 1, 1));
 Nightstand nightstand1(Vector3f(24.17, 0, 16.2), Vector3f(0, 180, 0), Vector3f(1, 1, 1));
 Nightstand nightstand2(Vector3f(21.27, 0, 16.2), Vector3f(0, 180, 0), Vector3f(1, 1, 1));
@@ -120,44 +139,62 @@ Sink sink(Vector3f(27.2, 0, 12.3), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
 Bath bath(Vector3f(28, 0, 14.9), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
 
 //Clues
-Body body(Vector3f(23, 0, 14.9), Vector3f(0, 180, 0), Vector3f(1, 1, 1));
-BrokenGlass brokenGlass(Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vector3f(1, 1, 1));
-Footprints footprints(Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vector3f(1, 1, 1));
-Bloodtrail bloodtrail(Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vector3f(1, 1, 1));
+PhotoFrame photoFrame(Vector3f(24.24, 0.5, 16.11), Vector3f(0, 90, 0), Vector3f(1, 1, 1));
+YellowHoodie yellowHoodie(Vector3f(24.53, 0.31, 10.63), Vector3f(0, 0, 0), Vector3f(0.7, 1, 0.7), Vector3f(1, 1, 0.77));
+Pills pills(Vector3f(20.08, 0.72, 6.38), Vector3f(0, 0, 0), Vector3f(0.8, 0.8, 0.8));
+Knife knife(Vector3f(21.41, 0.1, 14.57), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
+Newspaper newspaper(Vector3f(22.2, 0.75, 7.28), Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vector3f(0.3, 1, 0.3));
+AnsweringMachine answeringMachine(Vector3f(24.38, 0.25, 11.38), Vector3f(0, 180, 0), Vector3f(1, 1, 1));
+BrokenGlass brokenGlass(Vector3f(20.68, 0.01, 8.47), Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vector3f(0.25, 0.25, 0.25));
+SuicideNote suicideNote(Vector3f(21.94, 0.51, 15.28), Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vector3f(0.2, 1, 0.2));
+
+YellowHoodie savior(Vector3f(0, 3, 0), Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vector3f(1, 1, 1));
 
 void initClues()
 {
   int len = sizeof(clues) / sizeof(*clues);
-  // TODO
-  for (int i = 0; i < len; i++)
-  {
-    // clues[i]=
-  }
-  clues[0] = new Knife(Vector3f(4, 0.5, 1), Vector3f(45, 45, 45), Vector3f(1, 1, 1), Vector3f(1, 1, 1));
-  clues[1] = new Knife(Vector3f(3, 0.5, 1), Vector3f(45, 45, 45), Vector3f(1, 1, 1), Vector3f(1, 1, 1));
-  clues[2] = new Knife(Vector3f(2, 0.5, 1), Vector3f(45, 45, 45), Vector3f(1, 1, 1), Vector3f(1, 1, 1));
+  clues[0] = &photoFrame;
+  clues[1] = &yellowHoodie;
+  clues[2] = &pills;
+  clues[3] = &knife;
+  clues[4] = &newspaper;
+  clues[5] = &answeringMachine;
+  clues[6] = &brokenGlass;
+  clues[7] = &suicideNote;
+  //  for (int i = 0; i < len; i++)
+  //  {
+  //     (*clues[i]).find(true);
+  //    journal.write(i, NOT_STATED);
+  //  }
 }
 
 void drawClues()
 {
-  int len = sizeof(clues) / sizeof(*clues);
-  bool win = true;
-  for (int i = 0; i < len; i++)
-  {
-    if (!(*clues[i]).isFound())
-    {
-      if (i == 0)
-        glColor3f(0, 1, 0);
-      if (i == 1)
-        glColor3f(0, 1, 1);
-      if (i == 2)
-        glColor3f(1, 0, 0);
-      (*clues[i]).draw();
-      win = false;
-    }
-  }
-  if (win)
-    gameState = WINNING_STATE;
+  // int len = sizeof(clues) / sizeof(*clues);
+  // for (int i = 0; i < len; i++)
+  // {
+  //   if (!(*clues[i]).isFound())
+  //   {
+  //     (*clues[i]).draw();
+  //   }
+  // }
+    // clues
+  if(!photoFrame.isFound()||interactingObject==0)  
+  photoFrame.draw();       // clue0
+  if(!yellowHoodie.isFound() || interactingObject == 1)
+  yellowHoodie.draw();     // clue1
+  if(!pills.isFound() || interactingObject ==2)
+  pills.draw();            // clue2
+  if(!knife.isFound() || interactingObject == 3)
+  knife.draw();            // clue3
+  if(!newspaper.isFound()||interactingObject ==4)
+  newspaper.draw();        // clue4
+  if(!answeringMachine.isFound() || interactingObject ==5)
+  answeringMachine.draw(); // clue5
+  if(!brokenGlass.isFound()||interactingObject ==6)
+  brokenGlass.draw();      // clue6
+  if(!suicideNote.isFound() || interactingObject ==7)
+  suicideNote.draw();      // clue7
 }
 
 void initEnvironment()
@@ -214,11 +251,11 @@ void initEnvironment()
   walls[10] = new Wall(loc10, ori10, scl10, dim); // South wall
   Eigen::Vector3f loc11(19.5, 0, 12);             // (12, 19.5)
   Eigen::Vector3f ori11(0, 90, 0);                // along x
-  Eigen::Vector3f scl11(1, 1, 1.55);               // length 1.5
+  Eigen::Vector3f scl11(1, 1, 1.55);              // length 1.5
   walls[11] = new Wall(loc11, ori11, scl11, dim); // East wall part 1
-  Eigen::Vector3f loc12(21.9, 0, 12);               // (12, 22)
+  Eigen::Vector3f loc12(21.9, 0, 12);             // (12, 22)
   Eigen::Vector3f ori12(0, 90, 0);                // along x
-  Eigen::Vector3f scl12(1, 1, 4.1);                 // length 4
+  Eigen::Vector3f scl12(1, 1, 4.1);               // length 4
   walls[12] = new Wall(loc12, ori12, scl12, dim); // East wall part 2
 
   // Bedroom
@@ -226,13 +263,13 @@ void initEnvironment()
   Eigen::Vector3f ori13(0, 0, 0);                 // along z
   Eigen::Vector3f scl13(1, 1, 1.09);              // length 1
   walls[13] = new Wall(loc13, ori13, scl13, dim); // North wall part 1
-  Eigen::Vector3f loc14(25.5, 0, 13.95);             // (14, 25.5)
+  Eigen::Vector3f loc14(25.5, 0, 13.95);          // (14, 25.5)
   Eigen::Vector3f ori14(0, 0, 0);                 // along z
   Eigen::Vector3f scl14(1, 1, 2.6);               // length 2.5
   walls[14] = new Wall(loc14, ori14, scl14, dim); // North wall part 2
   Eigen::Vector3f loc15(19.5, 0, 12.01);          // (12, 19.5)
   Eigen::Vector3f ori15(0, 90, 0);                // along x
-  Eigen::Vector3f scl15(1, 1, 1.55);               // length 1.5
+  Eigen::Vector3f scl15(1, 1, 1.55);              // length 1.5
   walls[15] = new Wall(loc15, ori15, scl15, dim); // West wall part 1
   Eigen::Vector3f loc16(21.9, 0, 12.01);          // (12, 22)
   Eigen::Vector3f ori16(0, 90, 0);                // along x
@@ -269,8 +306,8 @@ void initEnvironment()
   Eigen::Vector3f scl23(1, 1, 3);                 // length 3
   walls[23] = new Wall(loc23, ori23, scl23, dim); // East wall
 
-  floorTex = SOIL_load_image("assets/images/floor.png", &floorTexWidth, &floorTexHeight, 0, SOIL_LOAD_RGBA);
-  ceilingTex = SOIL_load_image("assets/images/celling.png", &ceilingTexWidth, &ceilingTexHeight, 0, SOIL_LOAD_RGBA);
+  floorTex = loadImage("assets/images/floor.png");
+  ceilingTex = loadImage("assets/images/celling.png");
 }
 
 void drawEnvironment()
@@ -280,49 +317,13 @@ void drawEnvironment()
     (*walls[i]).draw();
   }
 
-  glColor4ub(255, 255, 255, 255);
-  glEnable(GL_TEXTURE_2D);
-  glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, floorTexWidth, floorTexHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, floorTex);
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-  glBegin(GL_QUADS);
+  glPushMatrix();
   {
-    glNormal3f(0, 1, 0);
-    glTexCoord2f(0, 0);
-    glVertex3f(12, 0, 1);
-    glTexCoord2f(1, 0);
-    glVertex3f(12, 0, 17);
-    glTexCoord2f(1, 1);
-    glVertex3f(30, 0, 17);
-    glTexCoord2f(0, 1);
-    glVertex3f(30, 0, 1);
+    glTranslatef(0, 2, 0);
+    drawImageHorizontal(12, 30, 1, 17, ceilingTex);
   }
-  glEnd();
-  glDisable(GL_TEXTURE_2D);
-
-  glColor4ub(255, 255, 255, 255);
-  glEnable(GL_TEXTURE_2D);
-  glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, ceilingTexWidth, ceilingTexHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, ceilingTex);
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-  glBegin(GL_QUADS);
-  {
-    glNormal3f(0, -1, 0);
-    glTexCoord2f(0, 0);
-    glVertex3f(12, 2, 1);
-    glTexCoord2f(1, 0);
-    glVertex3f(12, 2, 17);
-    glTexCoord2f(1, 1);
-    glVertex3f(30, 2, 17);
-    glTexCoord2f(0, 1);
-    glVertex3f(30, 2, 1);
-  }
-  glEnd();
-  glDisable(GL_TEXTURE_2D);
+  glPopMatrix();
+  drawImageHorizontal(12, 30, 1, 17, floorTex);
 }
 
 bool intersectsWalls()
@@ -332,15 +333,15 @@ bool intersectsWalls()
   {
     intersects |= (*walls[i]).intersects(player);
   }
-  if(!apartmentDoor.isOpen())
+  if (!apartmentDoor.isOpen())
   {
-  	intersects |= apartmentDoor.intersects(player);
+    intersects |= apartmentDoor.intersects(player);
   }
-  if(!bedroomDoor.isOpen())
+  if (!bedroomDoor.isOpen())
   {
     intersects |= bedroomDoor.intersects(player);
   }
-  if(!bathroomDoor.isOpen())
+  if (!bathroomDoor.isOpen())
   {
     intersects |= bathroomDoor.intersects(player);
   }
@@ -360,8 +361,8 @@ bool intersectsWalls()
   intersects |= sink.intersects(player);
   intersects |= bath.intersects(player);
 
-  // return intersects;
-  return false;
+   return intersects;
+  //return false;
 }
 
 void initFlashLight()
@@ -372,8 +373,8 @@ void initFlashLight()
   //
   glEnable(GL_LIGHT1);
   Vector3f viewVec = (player.getCamera().lookAt() - player.location()).normalized();
-  Vector3f diff(viewVec.x()*0.2,-0.2,viewVec.z()*0.2);
-  flashlight.setLocation(player.location()+viewVec*0.7-diff);
+  Vector3f diff(viewVec.x() * 0.2, -0.2, viewVec.z() * 0.2);
+  flashlight.setLocation(player.location() + viewVec * 0.7 - diff);
 
   //Vector3f upVector = player.getCamera().Upvector();
   //Vector3f eye = player.getCamera().location().normalized();
@@ -384,7 +385,7 @@ void initFlashLight()
   //GLfloat l1Position[] = {eye.x(),eye.y(),eye.z()};
   Vector3f dir = viewVec;
   GLfloat l1Direction[] = {dir.x(), dir.y(), dir.z()};
-  GLfloat lightIntensity[] = { 5,5,5, 1.0f };
+  GLfloat lightIntensity[] = {5, 5, 5, 1.0f};
   glLightfv(GL_LIGHT1, GL_DIFFUSE, l1Diffuse);
   glLightfv(GL_LIGHT1, GL_AMBIENT, l1Ambient);
   glLightfv(GL_LIGHT1, GL_POSITION, l1Position);
@@ -405,22 +406,22 @@ void initLightHere()
   //Vector3f eye = player.getCamera().location().normalized();
   //Vector3f ViewCross = viewVec.cross(upVector).normalized();
 
-//   CellingLight livingroomLight(Vector3f(24.4, 2.25, 10.38), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
-// CellingLight kitchenLight(Vector3f(22.04, 2, 6.89), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
-// CellingLight1 bathroomLight(Vector3f(26.68, 2.25, 13.3), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
-// Fan bedroomFan(Vector3f(22.79, 2.5, 14.57), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
+  //   CellingLight livingroomLight(Vector3f(24.4, 2.25, 10.38), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
+  // CellingLight kitchenLight(Vector3f(22.04, 2, 6.89), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
+  // CellingLight1 bathroomLight(Vector3f(26.68, 2.25, 13.3), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
+  // Fan bedroomFan(Vector3f(22.79, 2.5, 14.57), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
   GLfloat l1Diffuse[] = {1.0f, 1.0f, 1.0f, 1.0f};
   GLfloat l1Ambient[] = {1.0f, 1.0f, 1.0f, 1.0f};
   GLfloat l1Position[] = {22.04, 2, 6.89, true};
-  GLfloat l2position[] = {24.4, 2, 10.38,true};
-  GLfloat l3position[] = {26.68, 2, 13.3,true};
-  GLfloat l4position[] = {22.79, 2, 14.57,true};
+  GLfloat l2position[] = {24.4, 2, 10.38, true};
+  GLfloat l3position[] = {26.68, 2, 13.3, true};
+  GLfloat l4position[] = {22.79, 2, 14.57, true};
   //GLfloat l1Position[] = {eye.x(),eye.y(),eye.z()};
   // Vector3f dir = viewVec;
   GLfloat l1Direction[] = {0, -1, 0};
-  GLfloat lightIntensity[] = {5,5,5, 1.0f};
+  GLfloat lightIntensity[] = {5, 5, 5, 1.0f};
 
-  float cutoff=30;
+  float cutoff = 30;
   //light2
   glLightfv(GL_LIGHT2, GL_DIFFUSE, l1Diffuse);
   glLightfv(GL_LIGHT2, GL_AMBIENT, l1Ambient);
@@ -436,7 +437,7 @@ void initLightHere()
   glLightfv(GL_LIGHT3, GL_DIFFUSE, l1Diffuse);
   glLightfv(GL_LIGHT3, GL_AMBIENT, l1Ambient);
   glLightfv(GL_LIGHT3, GL_POSITION, l2position);
-  glLightf(GL_LIGHT3, GL_SPOT_CUTOFF, cutoff+30);
+  glLightf(GL_LIGHT3, GL_SPOT_CUTOFF, cutoff + 30);
   //glLightf(GL_LIGHT3, GL_SPOT_EXPONENT, 90.0);
   glLightfv(GL_LIGHT3, GL_SPOT_DIRECTION, l1Direction);
 
@@ -447,7 +448,7 @@ void initLightHere()
   glLightfv(GL_LIGHT4, GL_DIFFUSE, l1Diffuse);
   glLightfv(GL_LIGHT4, GL_AMBIENT, l1Ambient);
   glLightfv(GL_LIGHT4, GL_POSITION, l3position);
-  glLightf(GL_LIGHT4, GL_SPOT_CUTOFF, cutoff+10);
+  glLightf(GL_LIGHT4, GL_SPOT_CUTOFF, cutoff + 10);
   glLightf(GL_LIGHT4, GL_SPOT_EXPONENT, 90.0);
   glLightfv(GL_LIGHT4, GL_SPOT_DIRECTION, l1Direction);
 
@@ -458,14 +459,13 @@ void initLightHere()
   glLightfv(GL_LIGHT5, GL_DIFFUSE, l1Diffuse);
   glLightfv(GL_LIGHT5, GL_AMBIENT, l1Ambient);
   glLightfv(GL_LIGHT5, GL_POSITION, l4position);
-  glLightf(GL_LIGHT5, GL_SPOT_CUTOFF, cutoff+30);
+  glLightf(GL_LIGHT5, GL_SPOT_CUTOFF, cutoff + 30);
   glLightf(GL_LIGHT5, GL_SPOT_EXPONENT, 90.0);
   glLightfv(GL_LIGHT5, GL_SPOT_DIRECTION, l1Direction);
 
   glLightfv(GL_LIGHT5, GL_INTENSITY, lightIntensity);
   glLightfv(GL_LIGHT5, GL_ATTENUATION_EXT, lightIntensity);
 }
-
 
 void drawHitBoxes()
 {
@@ -491,7 +491,6 @@ void drawHitBoxes()
 
 void drawApartment()
 {
-  drawEnvironment();
   apartmentDoor.draw();
   bedroomDoor.draw();
   bathroomDoor.draw();
@@ -528,14 +527,9 @@ void drawApartment()
   toilet.draw();
   sink.draw();
   bath.draw();
-
-  // clues
-  body.draw();
-  // brokenGlass.draw();
-  // footprints.draw();
-  // bloodtrail.draw();
-
-  // bloodtrail.draw();
+  savior.draw();
+  glPopMatrix();
+  drawEnvironment();
 }
 
 void display(void)
@@ -547,49 +541,82 @@ void display(void)
   // Lights::setupLights();
 
   // Set the camera
-  if(enableFlashLight){
-  initFlashLight();
-  }else{
+  if (enableFlashLight)
+  {
+    initFlashLight();
+  }
+  else
+  {
     glDisable(GL_LIGHT1);
   }
   initLightHere();
-  player.getCamera().setup();
+  if (gameState == JOURNAL_STATE)
+  {
+    jCam.setup();
+  }
+  else
+  {
+    player.getCamera().setup();
+  }
   //	camera.setup();
 
   // Axes for modeling
   Axes axes(0.5);
 
   glColor3f(0.8f, 0.1f, 0.2f);
-  if (gameState == PLAYING_STATE)
-  {
-    drawClues();
-  }
-  else if (gameState == INTERACTING_STATE)
-  {
-    interactingObject.rotate();
-    interactingObject.draw();
-  }
+  
 
   // Reset color and flush buffer
   glColor3f(1.0, 1.0, 1.0);
 
   Vector3f viewVec = (player.getCamera().lookAt() - player.location()).normalized();
-  Vector3f xAxis(1,0,0);
-  Vector3f zAxis(0,0,1);
-  float angle=acos((viewVec.dot(xAxis))/viewVec.norm()) * 180 / PI;
-  float check=acos((viewVec.dot(zAxis))/viewVec.norm()) * 180 / PI;
-  printf("%.2f\n",angle);
+  Vector3f xAxis(1, 0, 0);
+  Vector3f zAxis(0, 0, 1);
+  float angle = acos((viewVec.dot(xAxis)) / viewVec.norm()) * 180 / PI;
+  float check = acos((viewVec.dot(zAxis)) / viewVec.norm()) * 180 / PI;
   glPushMatrix();
   {
-    if(check < 90)
+    if (check < 90)
     {
       flashlight.draw(90 - angle);
-    } else {
+    }
+    else
+    {
       flashlight.draw(90 + angle);
     }
+    journal.draw();
     drawApartment();
-    // drawHitBoxes();
+      drawClues();
+    
+      // drawHitBoxes();
   }
+  glPopMatrix();
+
+  glPushMatrix();
+  glTranslated(1, 0.5, 1);
+  glutSolidCube(0.1);
+  glPopMatrix();
+
+  glPushMatrix();
+  Vector3f viewVec2 = ((player.getCamera().lookAt() - player.location()).normalized()) * 1.5;
+  Vector3f loc = player.location();
+  Vector3f Upvector = player.getCamera().upVector();
+  Vector3f crossV = viewVec2.cross(Upvector);
+  //the required plane is the plane between the up and cross vector
+  glColor3f(1, 0, 0);
+  glBegin(GL_QUADS);
+  {
+    glNormal3f(0, 1, 0);
+    glTexCoord2f(0.0f, 0.0f);
+    glVertex3f(-1, 0, -1);
+    glTexCoord2f(1.0f, 0.0f);
+    glVertex3f(-1, 0.5, -1);
+    glTexCoord2f(1.0f, 1.0f);
+    glVertex3f(-1, 0.5, -2);
+    glTexCoord2f(0.0f, 1.0f);
+    glVertex3f(-1, 0, -2);
+  }
+  glEnd();
   glPopMatrix();
 
   glFlush();
@@ -621,6 +648,7 @@ void loadAssets()
   kitchen.setModel();
   diningSet.setModel();
 
+  body.setModel();
   bed.setModel();
   nightstand1.setModel();
   nightstand2.setModel();
@@ -630,12 +658,18 @@ void loadAssets()
   sink.setModel();
   bath.setModel();
 
-  body.setModel();
-  brokenGlass.setImage();
-  footprints.setImage();
-  bloodtrail.setImage();
+  photoFrame.setModel();
+  yellowHoodie.setModel();
+  pills.setModel();
+  knife.setModel();
+  newspaper.setModel();
+  answeringMachine.setModel();
+  brokenGlass.setModel();
+  suicideNote.setModel();
+
   flashlight.setModel();
 
+  journal.setModel();
   // Corridor Texturs
   (*walls[0]).setTexture("assets/images/corridor_wall.jpg");
   (*walls[1]).setTexture("assets/images/corridor_wall.jpg");
@@ -671,186 +705,215 @@ void interactionTimer(int val)
 {
   if (gameState == INTERACTING_STATE)
   {
-    interactingObject.rotate();
+    (*clues[interactingObject]).rotate();
     glutPostRedisplay();
     glutTimerFunc(20, interactionTimer, 0);
   }
 }
 
-
 void idle()
 {
-	bedroomFan.rotate();
-	glutPostRedisplay();
+  bedroomFan.rotate();
+  glutPostRedisplay();
 }
 
 void openDoor(int val)
 {
-	if(val == 0)
-	{
-		apartmentDoor.openDoor();
-		if(!apartmentDoor.isOpen())
-		{
-			glutTimerFunc(0, openDoor, 0);
-		}
-	} else if(val == 1) {
+  if (val == 0)
+  {
+    apartmentDoor.openDoor();
+    if (!apartmentDoor.isOpen())
+    {
+      glutTimerFunc(0, openDoor, 0);
+    }
+  }
+  else if (val == 1)
+  {
     bedroomDoor.openDoor();
-		if(!bedroomDoor.isOpen())
-		{
-			glutTimerFunc(0, openDoor, 1);
-		}
-  } else if(val == 2) {
+    if (!bedroomDoor.isOpen())
+    {
+      glutTimerFunc(0, openDoor, 1);
+    }
+  }
+  else if (val == 2)
+  {
     bathroomDoor.openDoor();
-		if(!bathroomDoor.isOpen())
-		{
-			glutTimerFunc(0, openDoor, 2);
-		}
+    if (!bathroomDoor.isOpen())
+    {
+      glutTimerFunc(0, openDoor, 2);
+    }
   }
 }
 
 void closeDoor(int val)
 {
-	if(val == 0)
-	{
-		apartmentDoor.closeDoor();
-		if(apartmentDoor.isOpen())
-		{
-			glutTimerFunc(0, closeDoor, 0);
-		}
-	} else if(val == 1) {
+  if (val == 0)
+  {
+    apartmentDoor.closeDoor();
+    if (apartmentDoor.isOpen())
+    {
+      glutTimerFunc(0, closeDoor, 0);
+    }
+  }
+  else if (val == 1)
+  {
     bedroomDoor.closeDoor();
-		if(bedroomDoor.isOpen())
-		{
-			glutTimerFunc(0, closeDoor, 1);
-		}
-  } else if(val == 2) {
+    if (bedroomDoor.isOpen())
+    {
+      glutTimerFunc(0, closeDoor, 1);
+    }
+  }
+  else if (val == 2)
+  {
     bathroomDoor.closeDoor();
-		if(bathroomDoor.isOpen())
-		{
-			glutTimerFunc(0, closeDoor, 2);
-		}
+    if (bathroomDoor.isOpen())
+    {
+      glutTimerFunc(0, closeDoor, 2);
+    }
   }
 }
 
 void key(unsigned char k, int x, int y)
 {
-  	int len = sizeof(clues) / sizeof(*clues);
-  	if (gameState == PLAYING_STATE)
-  	{
-		//printf("x:%.2f, z:%.2f\n", player.location().x(),  player.location().z());
-		switch (k)
-		{
-       case 'f':
-      enableFlashLight=!enableFlashLight;
+  int len = sizeof(clues) / sizeof(*clues);
+  if (gameState == PLAYING_STATE)
+  {
+    //printf("x:%.2f, z:%.2f\n", player.location().x(),  player.location().z());
+    switch (k)
+    {
+    case 'f':
+      enableFlashLight = !enableFlashLight;
       break;
-		case 'l':
-			// camera.rotateRight();
-			player.lookRight();
-			break;
-		case 'j':
-			// camera.rotateLeft();
-			player.lookLeft();
-			break;
-		case 'i':
-			// camera.rotateUp();
-			player.lookUp();
-			break;
-		case 'k':
-			// camera.rotateDown();
-			player.lookDown();
-			break;
-		case 'w':
-			// camera.translateForward();
-			player.moveForward();
-			if (intersectsWalls())
-			{
-				player.moveBackward();
-			}
-		break;
-		case 's':
-			// camera.translateBackward();
-			player.moveBackward();
-			if (intersectsWalls())
-			{
-				player.moveForward();
-			}
-		break;
-		case 'a':
-			// camera.translateLeft();
-			player.moveLeft();
-			if (intersectsWalls())
-			{
-				player.moveRight();
-			}
-			break;
-		case 'd':
-			// camera.translateRight();
-			player.moveRight();
-			if (intersectsWalls())
-			{
-				player.moveLeft();
-			}
-			break;
-		case 'e':
-			// camera.translateUp();
-			for (int i = 0; i < len; i++)
-			{
-				// printf("%d\n", clues[0]);
-				if(player.isLookingAt(apartmentDoor))
-				{
-					if(!apartmentDoor.isOpen())
-					{
-						glutTimerFunc(0, openDoor, 0);
-					} else {
-						glutTimerFunc(0, closeDoor, 0);
-					}
-				} else if (player.isLookingAt(bedroomDoor)) {
-          if(!bedroomDoor.isOpen())
-					{
-						glutTimerFunc(0, openDoor, 1);
-					} else {
-						glutTimerFunc(0, closeDoor, 1);
-					}
-        } else if(player.isLookingAt(bathroomDoor)) {
-          if(!bathroomDoor.isOpen())
-					{
-						glutTimerFunc(0, openDoor, 2);
-					} else {
-						glutTimerFunc(0, closeDoor, 2);
-					}
-        } else if (player.isLookingAt(*(clues[i])) && !(*clues[i]).isFound()) {
-					std::string s = (*clues[i]).Interact().append("\n");
-					interactingObject = *clues[i];
-					gameState = INTERACTING_STATE;
-					Vector3f newVector = player.getCamera().location() + (player.getCamera().lookAt() - player.getCamera().location()).normalized() * 0.8;
-					interactingObject.setLocation(newVector);
-					glutTimerFunc(20, interactionTimer, 0);
-					// remove clue
-					(*clues[i]).find(true);
-					break;
-				}
-			}
-			break;
-		case 'q':
-			camera.translateDown();
-			break;
-		}
-  	} else if (gameState == INTERACTING_STATE) {
-    	switch (k)
-		{
-    	case 'e':
-      		gameState = PLAYING_STATE;
-      		break;
-    	}
-  	} else if (gameState == JOURNAL_STATE) {
-    	switch (k)
-		{
-    	case 'j':
-      		gameState = PLAYING_STATE;
-      		break;
-    	}
-  	}
-	glutPostRedisplay();
+    case 'l':
+      // camera.rotateRight();
+      player.lookRight();
+      break;
+    case 'j':
+      gameState = JOURNAL_STATE;
+      //TODO open Journal
+      break;
+    case 'i':
+      // camera.rotateUp();
+      player.lookUp();
+      break;
+    case 'k':
+      // camera.rotateDown();
+      player.lookDown();
+      break;
+    case 'w':
+      // camera.translateForward();
+      player.moveForward();
+      if (intersectsWalls())
+      {
+        player.moveBackward();
+      }
+      break;
+    case 's':
+      // camera.translateBackward();
+      player.moveBackward();
+      if (intersectsWalls())
+      {
+        player.moveForward();
+      }
+      break;
+    case 'a':
+      // camera.translateLeft();
+      player.moveLeft();
+      if (intersectsWalls())
+      {
+        player.moveRight();
+      }
+      break;
+    case 'd':
+      // camera.translateRight();
+      player.moveRight();
+      if (intersectsWalls())
+      {
+        player.moveLeft();
+      }
+      break;
+    case 'e':
+      // camera.translateUp();
+      if (player.isLookingAt(apartmentDoor))
+      {
+        if (!apartmentDoor.isOpen())
+        {
+          glutTimerFunc(0, openDoor, 0);
+        }
+        else
+        {
+          glutTimerFunc(0, closeDoor, 0);
+        }
+      }
+      else if (player.isLookingAt(bedroomDoor))
+      {
+        if (!bedroomDoor.isOpen())
+        {
+          glutTimerFunc(0, openDoor, 1);
+        }
+        else
+        {
+          glutTimerFunc(0, closeDoor, 1);
+        }
+      }
+      else if (player.isLookingAt(bathroomDoor))
+      {
+        if (!bathroomDoor.isOpen())
+        {
+          glutTimerFunc(0, openDoor, 2);
+        }
+        else
+        {
+          glutTimerFunc(0, closeDoor, 2);
+        }
+      }
+      else
+      {
+        for (int i = 0; i < len; i++)
+        {
+          printf("attempt clues of %d %d\n", (*clues[i]).getState(), i);
+        if (player.isLookingAt(*(clues[i])) && !(*clues[i]).isFound())
+          {
+            // printf("%d\n", clues[0]);
+            printf("clues of %d %d\n", (*clues[i]).getState(), i);
+            std::string s = (*clues[i]).Interact().append("\n");
+            interactingObject = i;
+            gameState = INTERACTING_STATE;
+            Vector3f newVector = player.getCamera().location() + (player.getCamera().lookAt() - player.getCamera().location()).normalized() * 0.8;
+            (*clues[interactingObject]).setLocation(newVector);
+            glutTimerFunc(20, interactionTimer, 0);
+            (*clues[i]).find(true);
+            journal.write(i, NOT_STATED);
+            break;
+          }
+        }
+      }
+      break;
+    case 'q':
+      camera.translateDown();
+      break;
+    }
+  }
+  else if (gameState == INTERACTING_STATE)
+  {
+    switch (k)
+    {
+    case 'e':
+      gameState = PLAYING_STATE;
+      interactingObject=-1;
+      break;
+    }
+  }
+  else if (gameState == JOURNAL_STATE)
+  {
+    switch (k)
+    {
+    case 'j':
+      gameState = PLAYING_STATE;
+      break;
+    }
+  }
+  glutPostRedisplay();
 }
 
 //=======================================================================
@@ -862,6 +925,7 @@ void mouseMovement(int x, int y)
   int scale = 1;
   if (gameState == PLAYING_STATE)
   {
+    glutSetCursor(GLUT_CURSOR_NONE);
     if (y > height_center)
       // camera.rotateDown(0.4);
       player.lookDown(scale);
@@ -890,22 +954,95 @@ void mouseMovement(int x, int y)
   }
 }
 
+void setClueType(int idx)
+{
+  int lenClues = (sizeof(cluesAnswer) / sizeof(int));
+
+  if (idx >= lenClues || !(*clues[idx]).isFound())
+  {
+    return;
+  }
+  printf("%d %d %d\n", gameState, idx, (*clues[idx]).getState());
+  //set the clue type here
+  bool win = true;
+  (*clues[idx]).setState((*clues[idx]).getState() == 1 ? -1 : 1);
+  for (int i = 0; i < lenClues; i++)
+  {
+    if ((*clues[i]).getState() != cluesAnswer[i])
+    {
+      win = false;
+      break;
+    }
+  }
+  journal.write(idx, (*clues[idx]).getState());
+  gameState = win == true ? WINNING_STATE : gameState;
+  glutPostRedisplay();
+}
+
+void mouseOverJournal(int button, int state, int x, int y)
+{
+  if (gameState == JOURNAL_STATE)
+  {
+    glutSetCursor(GLUT_CURSOR_LEFT_ARROW);
+    glutSetCursor(GLUT_CURSOR_LEFT_ARROW);
+    if (button == GLUT_LEFT_BUTTON && state == GLUT_UP)
+    {
+      if (x < 550)
+      {
+        if (y < 110 && y > 20)
+        {
+          setClueType(0);
+        }
+        else if (y < 220 && y > 120)
+        {
+          setClueType(1);
+        }
+        else if (y < 325 && y > 225)
+        {
+          setClueType(2);
+        }
+        else if (y < 450 && y > 335)
+        {
+          setClueType(3);
+        }
+        else if (y < 575 && y > 455)
+        {
+          setClueType(4);
+        }
+      }
+      else
+      {
+        if (y < 110 && y > 20)
+        {
+          setClueType(5);
+        }
+        else if (y < 220 && y > 120)
+        {
+          setClueType(6);
+        }
+        else if (y < 325 && y > 225)
+        {
+          setClueType(7);
+        }
+        else if (y < 450 && y > 335)
+        {
+          setClueType(8);
+        }
+        else if (y < 575 && y > 455)
+        {
+          setClueType(9);
+        }
+      }
+    }
+  }
+}
+
 void losingStateCaller(int val)
 {
   if (gameState != WINNING_STATE)
   {
     gameState = LOSING_STATE;
     printf("koko lost\n");
-  }
-  glutPostRedisplay();
-}
-
-void journalStateCaller(int val)
-{
-  if (gameState != PLAYING_STATE)
-  {
-    gameState = JOURNAL_STATE;
-    printf("journal appear\n");
   }
   glutPostRedisplay();
 }
@@ -922,7 +1059,6 @@ void main(int argc, char **argv)
   glutDisplayFunc(display);
   glutKeyboardFunc(key);
   glutPassiveMotionFunc(mouseMovement);
-  glutSetCursor(GLUT_CURSOR_NONE);
 
   glClearColor(1, 1, 1, 0);
 
@@ -934,16 +1070,27 @@ void main(int argc, char **argv)
   //glEnable(GL_LIGHT0);
   glEnable(GL_LIGHT1);
   glEnable(GL_LIGHT2);
-   glEnable(GL_LIGHT3);
-   glEnable(GL_LIGHT4);
-   glEnable(GL_LIGHT5);
+  glEnable(GL_LIGHT3);
+  glEnable(GL_LIGHT4);
+  glEnable(GL_LIGHT5);
   glEnable(GL_NORMALIZE);
-   //glEnable(GL_COLOR_MATERIAL);
+  glEnable(GL_COLOR_MATERIAL);
   glShadeModel(GL_SMOOTH);
+
+  GLfloat specular[] = {1.0f, 1.0f, 1.0f, 1.0f};
+  GLfloat shinness[] = {100};
+  GLfloat lDiffuse[] = {0.1f, 0.1f, 0.1f, 1.0f};
+  GLfloat lAmbient[] = {0.1f, 0.1f, 0.1f, 1.0f};
+  glMaterialfv(GL_FRONT, GL_AMBIENT, lAmbient);
+  glMaterialfv(GL_FRONT, GL_DIFFUSE, lDiffuse);
+  glMaterialfv(GL_FRONT, GL_SPECULAR, specular);
+  glMaterialfv(GL_FRONT, GL_SHININESS, shinness);
+  glDisable(GL_COLOR_MATERIAL);
 
   // TODO 10 mins
   // glutTimerFunc(10000, losingStateCaller, 0);
   glutIdleFunc(idle);
+  glutMouseFunc(mouseOverJournal);
 
   glutMainLoop();
 }

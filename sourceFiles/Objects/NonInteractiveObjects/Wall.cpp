@@ -97,6 +97,7 @@ void Wall::draw() {
     glDisable(GL_TEXTURE_2D);
   }
   glPopMatrix();
+  glDisable(GL_TEXTURE_2D);
 }
 
 void Wall::setTexture(char* imagePath) { 
