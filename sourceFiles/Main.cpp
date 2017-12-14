@@ -362,7 +362,7 @@ bool intersectsWalls()
   intersects |= bath.intersects(player);
 
    return intersects;
-  //return false;
+  // return false;
 }
 
 void initFlashLight()
@@ -586,9 +586,8 @@ void display(void)
     }
     journal.draw();
     drawApartment();
-      drawClues();
-    
-      // drawHitBoxes();
+    drawClues();
+    // drawHitBoxes();
   }
   glPopMatrix();
 
@@ -778,7 +777,7 @@ void key(unsigned char k, int x, int y)
   int len = sizeof(clues) / sizeof(*clues);
   if (gameState == PLAYING_STATE)
   {
-    //printf("x:%.2f, z:%.2f\n", player.location().x(),  player.location().z());
+    printf("x:%.2f, z:%.2f\n", player.location().x(),  player.location().z());
     switch (k)
     {
     case 'f':
@@ -871,11 +870,11 @@ void key(unsigned char k, int x, int y)
       {
         for (int i = 0; i < len; i++)
         {
-          printf("attempt clues of %d %d\n", (*clues[i]).getState(), i);
+          // printf("attempt clues of %d %d\n", (*clues[i]).getState(), i);
         if (player.isLookingAt(*(clues[i])) && !(*clues[i]).isFound())
           {
             // printf("%d\n", clues[0]);
-            printf("clues of %d %d\n", (*clues[i]).getState(), i);
+            // printf("clues of %d %d\n", (*clues[i]).getState(), i);
             std::string s = (*clues[i]).Interact().append("\n");
             interactingObject = i;
             gameState = INTERACTING_STATE;
@@ -962,7 +961,7 @@ void setClueType(int idx)
   {
     return;
   }
-  printf("%d %d %d\n", gameState, idx, (*clues[idx]).getState());
+  // printf("%d %d %d\n", gameState, idx, (*clues[idx]).getState());
   //set the clue type here
   bool win = true;
   (*clues[idx]).setState((*clues[idx]).getState() == 1 ? -1 : 1);
