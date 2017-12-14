@@ -648,7 +648,7 @@ void loadAssets()
   bath.setModel();
 
   body.setModel();
-  brokenGlass.setImage();
+  brokenGlass.setModel();
   footprints.setImage();
   bloodtrail.setImage();
   flashlight.setModel();
