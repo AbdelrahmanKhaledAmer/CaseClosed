@@ -1,10 +1,12 @@
 #ifndef CLUE_H
 #define CLUE_H
+
+#include <Eigen/Dense>
+#include "headerFiles\Objects\InteractiveObjects\InteractiveObject.h"
+
 #define RELEVANT 1
 #define IRRELEVANT -1
 #define  NOT_STATED 0
-#include <Eigen/Dense>
-#include "headerFiles\Objects\InteractiveObjects\InteractiveObject.h"
 
 using namespace Eigen;
 
@@ -15,7 +17,7 @@ public:
 	Clue(Vector3f location, Vector3f orientation, Vector3f scale, Vector3f dimensions);    // Constructor
 	~Clue();                                                                                              // Destructor
 
-	void draw();
+  	void draw(float locScale = 1);
   	void setModel(char* modelPath);
 	bool isFound();
 	void find(bool state);

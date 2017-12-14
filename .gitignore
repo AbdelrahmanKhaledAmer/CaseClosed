@@ -3,3 +3,4 @@
 *.log
 .vs*/
 .DS_Store
+enc_temp_folder/**

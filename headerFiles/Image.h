@@ -5,5 +5,7 @@
 #include "SOIL/src/SOIL.h"
 
 void drawImage(float bottom, float top, float left, float right,GLuint texture);
+void drawImageHorizontal(float bottom, float top, float left, float right,GLuint texture);
+
 GLuint loadImage(char* path);
 #endif

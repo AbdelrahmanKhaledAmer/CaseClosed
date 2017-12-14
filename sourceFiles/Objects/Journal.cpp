@@ -1,6 +1,5 @@
 #include "headerFiles\Objects\Journal.h"
-#include <iostream>
-using namespace std;
+
 /*
 Constructor for the Journal object.
 Returns a pointer for a Journal.
@@ -10,12 +9,11 @@ Returns a pointer for a Journal.
 @param (scale) The amount to scale across all three axes.
 @param (dimensions) The length of the object along every axis before scaling.
 
-
 @return: Pointer to Object Object
 */
 
 Journal::Journal(Vector3f location, Vector3f orientation, Vector3f scale)
-    : Object(location, orientation, scale, Vector3f(0.975, 0.9, 0.975)) {}
+    : Object(location, orientation, scale, Vector3f(0, 0, 0)) {}
 
 /**
 Destructor for the Journal object.
@@ -23,7 +21,10 @@ Deletes the pointer for the Journal object.
 */
 Journal::~Journal() {}
 
-void Journal::write(int clueIndex) { clues_[clueIndex] = true; }
+void Journal::write(int clueIndex, int property) {
+  clues_[clueIndex] = true;
+  cluesState_[clueIndex] = property;
+}
 
 void Journal::draw() {
 	float minX = location_.x();
@@ -40,7 +41,19 @@ void Journal::draw() {
     for (int i = 0; i < 10; i++) {
       if (clues_[i] == true) {
         glTranslatef(0, 0, (i+1) * 0.01);
-        drawImage(minX, maxX, minY, maxY, clueImages_[i]);
+
+        switch (cluesState_[i]) {
+        case NOT_STATED:
+          drawImage(minX, maxX, minY, maxY, clueImages_[i][0]);
+          break;
+        case RELEVANT:
+          drawImage(minX, maxX, minY, maxY, clueImages_[i][1]);
+          break;
+        case IRRELEVANT:
+          drawImage(minX, maxX, minY, maxY, clueImages_[i][2]);
+          break;
+        default:
+        }
       }
     }
   }
@@ -49,6 +62,7 @@ void Journal::draw() {
 
 void Journal::setModel(){
 	journalImage_ = loadImage("assets/images/Journal/journal.png");
-	clueImages_[0] = loadImage("assets/images/Journal/clue_0.png"); 
-	clueImages_[1] = loadImage("assets/images/Journal/clue_1.png"); 
+	clueImages_[0][0] = loadImage("assets/images/Journal/clue_0.png"); 
+	clueImages_[0][1] = loadImage("assets/images/Journal/clueRelevant_0.png"); 
+	clueImages_[0][2] = loadImage("assets/images/Journal/clueIrrelevant_0.png"); 
 }
