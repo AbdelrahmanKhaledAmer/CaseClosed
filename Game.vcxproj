@@ -99,6 +99,7 @@
     <ClCompile Include="sourceFiles\Objects\InteractiveObjects\Clues\ClueImage.cpp" />
     <ClCompile Include="sourceFiles\Objects\InteractiveObjects\Clues\Footprints.cpp" />
     <ClCompile Include="sourceFiles\Objects\InteractiveObjects\Clues\Knife.cpp" />
+    <ClCompile Include="sourceFiles\Objects\InteractiveObjects\Clues\Newspaper.cpp" />
     <ClCompile Include="sourceFiles\Objects\InteractiveObjects\Clues\PhotoFrame.cpp" />
     <ClCompile Include="sourceFiles\Objects\InteractiveObjects\Clues\Pills.cpp" />
     <ClCompile Include="sourceFiles\Objects\InteractiveObjects\Clues\SuicideNote.cpp" />
@@ -148,6 +149,7 @@
     <ClInclude Include="headerFiles\Objects\InteractiveObjects\Clues\ClueImage.h" />
     <ClInclude Include="headerFiles\Objects\InteractiveObjects\Clues\Footprints.h" />
     <ClInclude Include="headerFiles\Objects\InteractiveObjects\Clues\Knife.h" />
+    <ClInclude Include="headerFiles\Objects\InteractiveObjects\Clues\Newspaper.h" />
     <ClInclude Include="headerFiles\Objects\InteractiveObjects\Clues\PhotoFrame.h" />
     <ClInclude Include="headerFiles\Objects\InteractiveObjects\Clues\Pills.h" />
     <ClInclude Include="headerFiles\Objects\InteractiveObjects\Clues\SuicideNote.h" />

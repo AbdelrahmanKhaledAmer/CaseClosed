@@ -27,6 +27,7 @@
 #include "headerFiles/Objects/InteractiveObjects/Clues/BrokenGlass.h"
 #include "headerFiles/Objects/InteractiveObjects/Clues/Footprints.h"
 #include "headerFiles/Objects/InteractiveObjects/Clues/Knife.h"
+#include "headerFiles/Objects/InteractiveObjects/Clues/Newspaper.h"
 #include "headerFiles/Objects/InteractiveObjects/Clues/PhotoFrame.h"
 #include "headerFiles/Objects/InteractiveObjects/Clues/Pills.h"
 #include "headerFiles/Objects/InteractiveObjects/Clues/SuicideNote.h"
@@ -136,8 +137,8 @@ Bath bath(Vector3f(28, 0, 14.9), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
 PhotoFrame photoFrame(Vector3f(24.24, 0.5, 16.11), Vector3f(0, 90, 0), Vector3f(1, 1, 1));
 YellowHoodie yellowHoodie(Vector3f(24.53, 0.31, 10.63), Vector3f(0, 0, 0), Vector3f(0.7, 1, 0.7), Vector3f(1, 1, 0.77));
 Pills pills(Vector3f(20.08, 0.72, 6.38), Vector3f(0, 0, 0), Vector3f(0.8, 0.8, 0.8));
-Knife knife(Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
-//Newspaper newspaper(Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(0, 0, 0));
+Knife knife(Vector3f(21.41, 0.1, 14.57), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
+Newspaper newspaper(Vector3f(22.2, 0.75, 7.28), Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vector3f(0.3, 1, 0.3));
 AnsweringMachine answeringMachine(Vector3f(24.38, 0.25, 11.38), Vector3f(0, 180, 0), Vector3f(1, 1, 1));
 BrokenGlass brokenGlass(Vector3f(20.68, 0.01, 8.47), Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vector3f(0.25, 0.25, 0.25));
 SuicideNote suicideNote(Vector3f(21.94, 0.51, 15.28), Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vector3f(0.2, 1, 0.2));
@@ -512,6 +513,7 @@ void drawApartment() {
   yellowHoodie.draw();     // clue1
   pills.draw();            // clue2
   knife.draw();            // clue3
+  newspaper.draw();        // clue4
   answeringMachine.draw(); // clue5
   brokenGlass.draw();      // clue6
   suicideNote.draw();      // clue7
@@ -619,11 +621,11 @@ void loadAssets()
   yellowHoodie.setModel();
   pills.setModel();
   knife.setModel();
-  suicideNote.setModel();
+  newspaper.setModel();
   answeringMachine.setModel();
   brokenGlass.setModel();
+  suicideNote.setModel();
 
-  brokenGlass.setModel();
   flashlight.setModel();
 
   journal.setModel();
