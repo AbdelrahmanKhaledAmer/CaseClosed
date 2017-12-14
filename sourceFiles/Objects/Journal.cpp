@@ -53,6 +53,7 @@ void Journal::draw() {
           drawImage(minX, maxX, minY, maxY, clueImages_[i][2]);
           break;
         default:
+        break;
         }
       }
     }

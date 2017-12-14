@@ -74,8 +74,8 @@ bool enableFlashLight = true;
 int gameState = PLAYING_STATE;
 InteractiveObject interactingObject(Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(0, 0, 0));
 
-Eigen::Vector3f eye(-2, 1, 0);
-// Eigen::Vector3f eye(13, 1, 2);
+//Eigen::Vector3f eye(-2, 1, 0);
+Eigen::Vector3f eye(13, 1, 2);
 Eigen::Vector3f lookAt(15, 0.5, 2);
 Eigen::Vector3f orientation(0, 1, 0);
 
@@ -598,8 +598,8 @@ void display(void)
 
   glPushMatrix();
   {
-    journal.draw();
     drawApartment();
+    journal.draw();
     // drawHitBoxes();
   }
   glPopMatrix();
@@ -637,46 +637,46 @@ void display(void)
 
 void loadAssets()
 {
-  // apartmentDoor.setModel();
-  // bedroomDoor.setModel();
-  // bathroomDoor.setModel();
-  // livingroomLight.setModel();
-  // kitchenLight.setModel();
-  // bathroomLight.setModel();
-  // bedroomFan.setModel();
+  apartmentDoor.setModel();
+  bedroomDoor.setModel();
+  bathroomDoor.setModel();
+  livingroomLight.setModel();
+  kitchenLight.setModel();
+  bathroomLight.setModel();
+  bedroomFan.setModel();
 
-  // livingroomWindow1.setModel();
-  // livingroomWindow2.setModel();
-  // bedroomWindow.setModel();
-  // outsideImage.setImage("assets/images/window.png");
+  livingroomWindow1.setModel();
+  livingroomWindow2.setModel();
+  bedroomWindow.setModel();
+  outsideImage.setImage("assets/images/window.png");
 
-  // armchair.setModel();
-  // sofa.setModel();
-  // coffeeTable.setModel();
-  // tv.setModel();
-  // tvTable.setModel();
-  // bookcase.setModel();
+  armchair.setModel();
+  sofa.setModel();
+  coffeeTable.setModel();
+  tv.setModel();
+  tvTable.setModel();
+  bookcase.setModel();
 
-  // kitchen.setModel();
-  // diningSet.setModel();
+  kitchen.setModel();
+  diningSet.setModel();
 
-  // body.setModel();
-  // bed.setModel();
-  // nightstand1.setModel();
-  // nightstand2.setModel();
-  // wardrobe.setModel();
+  body.setModel();
+  bed.setModel();
+  nightstand1.setModel();
+  nightstand2.setModel();
+  wardrobe.setModel();
 
-  // toilet.setModel();
-  // sink.setModel();
-  // bath.setModel();
+  toilet.setModel();
+  sink.setModel();
+  bath.setModel();
 
-  // brokenGlass.setImage();
-  // footprints.setImage();
-  // bloodtrail.setImage();
-  // journal.setModel();
-  // yellowHoodie.setModel();
-  // suicideNote.setModel();
-  // photoFrame.setModel();
+  brokenGlass.setImage();
+  footprints.setImage();
+  bloodtrail.setImage();
+  journal.setModel();
+  yellowHoodie.setModel();
+  suicideNote.setModel();
+  photoFrame.setModel();
   pills.setModel();
 
   // Corridor Texturs
