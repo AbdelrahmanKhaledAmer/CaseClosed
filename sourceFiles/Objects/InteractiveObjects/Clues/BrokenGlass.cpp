@@ -1,10 +1,10 @@
 #include "headerFiles\Objects\InteractiveObjects\Clues\BrokenGlass.h"
 
 /*
-Constructor for the Body object.
-Returns a pointer for a Body.
+Constructor for the BrokenGlass object.
+Returns a pointer for a BrokenGlass.
 
-@param (location) The current location of the Body with respect to the global
+@param (location) The current location of the BrokenGlass with respect to the global
 origin.
 @param (orientation) The current rotation angles across all three axes.
 @param (scale) The amount to scale across all three axes.
@@ -18,8 +18,8 @@ BrokenGlass::BrokenGlass(Vector3f location, Vector3f orientation,
     : Clue(location, orientation, scale, dimensions) {}
 
 /**
-Destructor for the Body object.
-Deletes the pointer for the Body object.
+Destructor for the BrokenGlass object.
+Deletes the pointer for the BrokenGlass object.
 */
 BrokenGlass::~BrokenGlass() {}
 
