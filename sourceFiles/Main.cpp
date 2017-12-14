@@ -58,6 +58,9 @@
 #include "headerFiles/Objects/Object.h"
 #include "headerFiles/Objects/Player.h"
 
+//win and lose textures
+GLuint WinImg, loseImg;
+
 // Screen Constants =================================================
 const int scale = 70;
 const int width = 16 * scale;
@@ -178,23 +181,23 @@ void drawClues()
   //     (*clues[i]).draw();
   //   }
   // }
-    // clues
-  if(!photoFrame.isFound()||interactingObject==0)  
-  photoFrame.draw();       // clue0
-  if(!yellowHoodie.isFound() || interactingObject == 1)
-  yellowHoodie.draw();     // clue1
-  if(!pills.isFound() || interactingObject ==2)
-  pills.draw();            // clue2
-  if(!knife.isFound() || interactingObject == 3)
-  knife.draw();            // clue3
-  if(!newspaper.isFound()||interactingObject ==4)
-  newspaper.draw();        // clue4
-  if(!answeringMachine.isFound() || interactingObject ==5)
-  answeringMachine.draw(); // clue5
-  if(!brokenGlass.isFound()||interactingObject ==6)
-  brokenGlass.draw();      // clue6
-  if(!suicideNote.isFound() || interactingObject ==7)
-  suicideNote.draw();      // clue7
+  // clues
+  if (!photoFrame.isFound() || interactingObject == 0)
+    photoFrame.draw(); // clue0
+  if (!yellowHoodie.isFound() || interactingObject == 1)
+    yellowHoodie.draw(); // clue1
+  if (!pills.isFound() || interactingObject == 2)
+    pills.draw(); // clue2
+  if (!knife.isFound() || interactingObject == 3)
+    knife.draw(); // clue3
+  if (!newspaper.isFound() || interactingObject == 4)
+    newspaper.draw(); // clue4
+  if (!answeringMachine.isFound() || interactingObject == 5)
+    answeringMachine.draw(); // clue5
+  if (!brokenGlass.isFound() || interactingObject == 6)
+    brokenGlass.draw(); // clue6
+  if (!suicideNote.isFound() || interactingObject == 7)
+    suicideNote.draw(); // clue7
 }
 
 void initEnvironment()
@@ -308,6 +311,8 @@ void initEnvironment()
 
   floorTex = loadImage("assets/images/floor.png");
   ceilingTex = loadImage("assets/images/celling.png");
+  WinImg = loadImage("assets/images/win.png");
+  loseImg = loadImage("assets/images/lose.png");
 }
 
 void drawEnvironment()
@@ -530,8 +535,52 @@ void drawApartment()
   savior.draw();
   glPopMatrix();
   drawEnvironment();
+   savior.draw();
 }
+void journalLight(){
 
+GLfloat l1Diffuse[] = {1.0f, 1.0f, 1.0f, 1.0f};
+  GLfloat l1Ambient[] = {1.0f, 1.0f, 1.0f, 1.0f};
+
+  GLfloat l1Position[] = {4.96,1.0,22.37,true};
+  // Vector3f dir = viewVec;
+  //GLfloat l1Direction[] = {-0.17,0.06,-0.98};
+  GLfloat l1Direction[] = {-0,0,-1};
+  GLfloat lightIntensity[] = {5, 5, 5, 1.0f};
+
+  float cutoff = 30;
+  //light2
+  glLightfv(GL_LIGHT6, GL_DIFFUSE, l1Diffuse);
+  glLightfv(GL_LIGHT6, GL_AMBIENT, l1Ambient);
+  glLightfv(GL_LIGHT6, GL_POSITION, l1Position);
+  glLightf(GL_LIGHT6, GL_SPOT_CUTOFF, cutoff);
+  //glLightf(GL_LIGHT2, GL_SPOT_EXPONENT, 90.0);
+  glLightfv(GL_LIGHT6, GL_SPOT_DIRECTION, l1Direction);
+
+  glLightfv(GL_LIGHT6, GL_INTENSITY, lightIntensity);
+  glLightfv(GL_LIGHT6, GL_ATTENUATION_EXT, lightIntensity);
+  
+}
+void winDraw()
+{
+  float scale=3*2.0/16;
+  glPushMatrix();
+  {
+    drawImage(0, 9*scale, 0, 16*scale, WinImg);
+  }
+  glPopMatrix();
+
+}
+void loseDraw()
+{
+  float scale=16*2.0/16;
+  glPushMatrix();
+  {
+    drawImage(0, 16*scale, 0, 9*scale, loseImg);
+  }
+  glPopMatrix();
+
+}
 void display(void)
 {
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -550,9 +599,22 @@ void display(void)
     glDisable(GL_LIGHT1);
   }
   initLightHere();
-  if (gameState == JOURNAL_STATE)
+  //glDisable(GL_LIGHT6);
+  if (gameState == JOURNAL_STATE || gameState == WINNING_STATE || gameState == LOSING_STATE)
   {
+    glEnable(GL_LIGHT6);
+    journalLight();
     jCam.setup();
+    if (gameState == WINNING_STATE)
+    {
+      winDraw();
+      glFlush();
+    }
+    else if (gameState == LOSING_STATE)
+    {
+      loseDraw();
+      glFlush();
+    }
   }
   else
   {
@@ -564,7 +626,6 @@ void display(void)
   Axes axes(0.5);
 
   glColor3f(0.8f, 0.1f, 0.2f);
-  
 
   // Reset color and flush buffer
   glColor3f(1.0, 1.0, 1.0);
@@ -586,9 +647,9 @@ void display(void)
     }
     journal.draw();
     drawApartment();
-      drawClues();
-    
-      // drawHitBoxes();
+    drawClues();
+
+    // drawHitBoxes();
   }
   glPopMatrix();
 
@@ -778,7 +839,8 @@ void key(unsigned char k, int x, int y)
   int len = sizeof(clues) / sizeof(*clues);
   if (gameState == PLAYING_STATE)
   {
-    //printf("x:%.2f, z:%.2f\n", player.location().x(),  player.location().z());
+       //printf("x:%.2f, z:%.2f\n", player.location().x(),  player.location().z());
+
     switch (k)
     {
     case 'f':
@@ -790,6 +852,7 @@ void key(unsigned char k, int x, int y)
       break;
     case 'j':
       gameState = JOURNAL_STATE;
+      glEnable(GL_LIGHT6);
       //TODO open Journal
       break;
     case 'i':
@@ -872,7 +935,7 @@ void key(unsigned char k, int x, int y)
         for (int i = 0; i < len; i++)
         {
           printf("attempt clues of %d %d\n", (*clues[i]).getState(), i);
-        if (player.isLookingAt(*(clues[i])) && !(*clues[i]).isFound())
+          if (player.isLookingAt(*(clues[i])) && !(*clues[i]).isFound())
           {
             // printf("%d\n", clues[0]);
             printf("clues of %d %d\n", (*clues[i]).getState(), i);
@@ -900,7 +963,7 @@ void key(unsigned char k, int x, int y)
     {
     case 'e':
       gameState = PLAYING_STATE;
-      interactingObject=-1;
+      interactingObject = -1;
       break;
     }
   }
@@ -910,6 +973,7 @@ void key(unsigned char k, int x, int y)
     {
     case 'j':
       gameState = PLAYING_STATE;
+       glDisable(GL_LIGHT6);
       break;
     }
   }
