@@ -32,3 +32,8 @@ void Clue::find(bool state) { this->isFound_ = state; }
 void Clue::setState(int val){this->state=val;}
 int Clue::getState(){return this->state;}
 void Clue::setModel(char *modelPath) { __super::setModel(modelPath); }
+
+std::string Clue::Interact()
+{
+	return "Clue:-1";
+}

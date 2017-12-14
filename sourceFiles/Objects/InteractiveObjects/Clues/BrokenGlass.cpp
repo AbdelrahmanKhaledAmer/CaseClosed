@@ -41,3 +41,8 @@ void BrokenGlass::draw() {
   }
   glPopMatrix();
 }
+
+std::string BrokenGlass::Interact()
+{
+  return "6";
+}

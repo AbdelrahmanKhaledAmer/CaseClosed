@@ -23,3 +23,8 @@ void YellowHoodie::draw() {
   }
   glPopMatrix();
 }
+
+std::string YellowHoodie::Interact()
+{
+  return "1";
+}

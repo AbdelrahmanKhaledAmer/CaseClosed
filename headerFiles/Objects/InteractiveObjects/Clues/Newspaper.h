@@ -15,7 +15,7 @@ public:
   ~Newspaper();                   // Destructor
   void draw();
   void setModel();
-
+  std::string Interact();
 private:
   GLuint image_;
 };
