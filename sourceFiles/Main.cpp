@@ -95,8 +95,8 @@ Eigen::Vector3f lookAt2(1.8, 1.525, 0);
 Eigen::Vector3f orientation2(0, 1, 0);
 Camera jCam(eye2, lookAt2, orientation2);
 
-int cluesAnswer[3];
-Clue *clues[3];
+int cluesAnswer[8] = { RELEVANT, RELEVANT, IRRELEVANT, RELEVANT, IRRELEVANT, RELEVANT, RELEVANT, IRRELEVANT };
+Clue *clues[8];
 Wall *walls[24];
 
 // Appartment Layout ================================================
@@ -153,18 +153,26 @@ YellowHoodie savior(Vector3f(0, 3, 0), Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vec
 void initClues()
 {
   int len = sizeof(clues) / sizeof(*clues);
-  // TODO
+  clues[0] = &photoFrame;
+  clues[1] = &yellowHoodie;
+  clues[2] = &pills;
+  clues[3] = &knife;
+  clues[4] = &newspaper;
+  clues[5] = &answeringMachine;
+  clues[6] = &brokenGlass;
+  clues[7] = &suicideNote;
   for (int i = 0; i < len; i++)
   {
-    // clues[i]=
+    (*clues[i]).find(true);
+    journal.write(i, NOT_STATED);
   }
-  clues[0] = new Knife(Vector3f(4, 0.5, 1), Vector3f(45, 45, 45), Vector3f(1, 1, 1));
-  clues[1] = new Knife(Vector3f(3, 0.5, 1), Vector3f(45, 45, 45), Vector3f(1, 1, 1));
-  clues[2] = new Knife(Vector3f(2, 0.5, 1), Vector3f(45, 45, 45), Vector3f(1, 1, 1));
+  // clues[0] = new Knife(Vector3f(4, 0.5, 1), Vector3f(45, 45, 45), Vector3f(1, 1, 1));
+  // clues[1] = new Knife(Vector3f(3, 0.5, 1), Vector3f(45, 45, 45), Vector3f(1, 1, 1));
+  // clues[2] = new Knife(Vector3f(2, 0.5, 1), Vector3f(45, 45, 45), Vector3f(1, 1, 1));
 
-  cluesAnswer[0] = 1;
-  cluesAnswer[1] = 1;
-  cluesAnswer[2] = -1;
+  // cluesAnswer[0] = 1;
+  // cluesAnswer[1] = 1;
+  // cluesAnswer[2] = -1;
 
   //TODO add relevant and irrelevant
 }
