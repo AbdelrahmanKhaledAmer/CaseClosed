@@ -37,3 +37,8 @@ void AnsweringMachine::draw() {
 void AnsweringMachine::setModel() {
   __super::setModel("assets/models/clues/Answering Machine/Phone siemens gigaset ap185 N220417.3DS");
 }
+
+std::string AnsweringMachine::Interact()
+{
+  return "5";
+}

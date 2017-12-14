@@ -11,6 +11,7 @@
 
 #include "headerFiles/GLTexture.h"
 #include "headerFiles/Model_3DS.h"
+#include "windows.h"
 #include <math.h>
 #include <iostream>
 
@@ -57,6 +58,9 @@
 #include "headerFiles/Objects/NonInteractiveObjects/Window.h"
 #include "headerFiles/Objects/Object.h"
 #include "headerFiles/Objects/Player.h"
+
+//win and lose textures
+GLuint WinImg, loseImg;
 
 // Screen Constants =================================================
 const int scale = 70;
@@ -110,9 +114,11 @@ CellingLight1 bathroomLight(Vector3f(26.68, 2.25, 13.3), Vector3f(0, 0, 0), Vect
 Fan bedroomFan(Vector3f(22.79, 2.5, 14.57), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
 
 Window bedroomWindow(Vector3f(19.7, 0.75, 14.6), Vector3f(0, 90, 0), Vector3f(1, 1, 1));
+OutsideImage bedroomOutsideImage(Vector3f(19.7 + 0.001, 1.12, 14.6), Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vector3f(0.37, 0.20, 0.30));
 Window livingroomWindow1(Vector3f(19.7, 0.75, 8.5), Vector3f(0, 90, 0), Vector3f(1, 1, 1));
+OutsideImage livingOutsideImage1(Vector3f(19.7 + 0.001, 1.12, 8.5), Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vector3f(0.37, 0.20, 0.30));
 Window livingroomWindow2(Vector3f(26.0, 0.75, 5.4), Vector3f(0, 90, 0), Vector3f(1, 1, 1));
-OutsideImage outsideImage(Vector3f(0, 0, 0), Vector3f(0, 90, 0), Vector3f(1, 1, 1));
+OutsideImage livingOutsideImage2(Vector3f(26.0 - 0.001, 1.12, 5.4), Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vector3f(0.37, 0.20, 0.30));
 
 //livingroom
 Armchair armchair(Vector3f(22.8, 0, 10.2), Vector3f(0, 90, 0), Vector3f(1, 1, 1));
@@ -142,13 +148,43 @@ Bath bath(Vector3f(28, 0, 14.9), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
 PhotoFrame photoFrame(Vector3f(24.24, 0.5, 16.11), Vector3f(0, 90, 0), Vector3f(1, 1, 1));
 YellowHoodie yellowHoodie(Vector3f(24.53, 0.31, 10.63), Vector3f(0, 0, 0), Vector3f(0.7, 1, 0.7), Vector3f(1, 1, 0.77));
 Pills pills(Vector3f(20.08, 0.72, 6.38), Vector3f(0, 0, 0), Vector3f(0.8, 0.8, 0.8));
-Knife knife(Vector3f(21.41, 0.1, 14.57), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
+Knife knife(Vector3f(21.41, 0.1, 14.57), Vector3f(0, 35, 0), Vector3f(1, 1, 1));
 Newspaper newspaper(Vector3f(22.2, 0.75, 7.28), Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vector3f(0.3, 1, 0.3));
 AnsweringMachine answeringMachine(Vector3f(24.38, 0.25, 11.38), Vector3f(0, 180, 0), Vector3f(1, 1, 1));
 BrokenGlass brokenGlass(Vector3f(20.68, 0.01, 8.47), Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vector3f(0.25, 0.25, 0.25));
 SuicideNote suicideNote(Vector3f(21.94, 0.51, 15.28), Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vector3f(0.2, 1, 0.2));
 
-YellowHoodie savior(Vector3f(0, 3, 0), Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vector3f(1, 1, 1));
+YellowHoodie savior(Vector3f(30, 30, 30), Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vector3f(1, 1, 1));
+
+void checkString(std::string s)
+{
+  if(s == "0")
+  {
+    printf("0\n");
+    PlaySound("assets\\audio\\soundBytes\\photoframe.wav", NULL, SND_ASYNC);
+  } else if(s == "1") {
+    printf("1\n");
+    PlaySound("assets\\audio\\soundBytes\\yellow_hoodie.wav", NULL, SND_ASYNC);
+  } else if(s == "2") {
+    printf("2\n");
+    PlaySound("assets\\audio\\soundBytes\\pills.wav", NULL, SND_ASYNC);
+  } else if(s == "3") {
+    printf("3\n");
+    PlaySound("assets\\audio\\soundBytes\\knife.wav", NULL, SND_ASYNC);
+  } else if(s == "4") {
+    printf("4\n");
+    PlaySound("assets\\audio\\soundBytes\\newspaper.wav", NULL, SND_ASYNC);
+  } else if(s == "5") {
+    printf("5\n");
+    PlaySound("assets\\audio\\soundBytes\\answering_machine.wav", NULL, SND_ASYNC);
+  } else if(s == "6") {
+    printf("6\n");
+    PlaySound("assets\\audio\\soundBytes\\broken_glass.wav", NULL, SND_ASYNC);    
+  } else if(s == "7") {
+    printf("7\n");
+    PlaySound("assets\\audio\\soundBytes\\suicide_note.wav", NULL, SND_ASYNC);  
+  }
+}
 
 void initClues()
 {
@@ -178,23 +214,23 @@ void drawClues()
   //     (*clues[i]).draw();
   //   }
   // }
-    // clues
-  if(!photoFrame.isFound()||interactingObject==0)  
-  photoFrame.draw();       // clue0
-  if(!yellowHoodie.isFound() || interactingObject == 1)
-  yellowHoodie.draw();     // clue1
-  if(!pills.isFound() || interactingObject ==2)
-  pills.draw();            // clue2
-  if(!knife.isFound() || interactingObject == 3)
-  knife.draw();            // clue3
-  if(!newspaper.isFound()||interactingObject ==4)
-  newspaper.draw();        // clue4
-  if(!answeringMachine.isFound() || interactingObject ==5)
-  answeringMachine.draw(); // clue5
-  if(!brokenGlass.isFound()||interactingObject ==6)
-  brokenGlass.draw();      // clue6
-  if(!suicideNote.isFound() || interactingObject ==7)
-  suicideNote.draw();      // clue7
+  // clues
+  if (!photoFrame.isFound() || interactingObject == 0)
+    photoFrame.draw(); // clue0
+  if (!yellowHoodie.isFound() || interactingObject == 1)
+    yellowHoodie.draw(); // clue1
+  if (!pills.isFound() || interactingObject == 2)
+    pills.draw(); // clue2
+  if (!knife.isFound() || interactingObject == 3)
+    knife.draw(); // clue3
+  if (!newspaper.isFound() || interactingObject == 4)
+    newspaper.draw(); // clue4
+  if (!answeringMachine.isFound() || interactingObject == 5)
+    answeringMachine.draw(); // clue5
+  if (!brokenGlass.isFound() || interactingObject == 6)
+    brokenGlass.draw(); // clue6
+  if (!suicideNote.isFound() || interactingObject == 7)
+    suicideNote.draw(); // clue7
 }
 
 void initEnvironment()
@@ -308,6 +344,8 @@ void initEnvironment()
 
   floorTex = loadImage("assets/images/floor.png");
   ceilingTex = loadImage("assets/images/celling.png");
+  WinImg = loadImage("assets/images/win.png");
+  loseImg = loadImage("assets/images/lose.png");
 }
 
 void drawEnvironment()
@@ -361,8 +399,8 @@ bool intersectsWalls()
   intersects |= sink.intersects(player);
   intersects |= bath.intersects(player);
 
-   return intersects;
-  //return false;
+  return intersects;
+  // return false;
 }
 
 void initFlashLight()
@@ -500,9 +538,11 @@ void drawApartment()
   bedroomFan.draw();
 
   bedroomWindow.draw();
+  bedroomOutsideImage.draw();
   livingroomWindow1.draw();
+  livingOutsideImage1.draw();
   livingroomWindow2.draw();
-  // outsideImage.draw();
+  livingOutsideImage2.draw();
 
   // livingroom
   armchair.draw();
@@ -530,8 +570,56 @@ void drawApartment()
   savior.draw();
   glPopMatrix();
   drawEnvironment();
+   savior.draw();
 }
+void journalLight(){
 
+GLfloat l1Diffuse[] = {1.0f, 1.0f, 1.0f, 1.0f};
+  GLfloat l1Ambient[] = {1.0f, 1.0f, 1.0f, 1.0f};
+
+  GLfloat l1Position[] = {4.96,1.0,22.37,true};
+  // Vector3f dir = viewVec;
+  //GLfloat l1Direction[] = {-0.17,0.06,-0.98};
+  GLfloat l1Direction[] = {-0,0,-1};
+  GLfloat lightIntensity[] = {5, 5, 5, 1.0f};
+
+  float cutoff = 30;
+  //light2
+  glLightfv(GL_LIGHT6, GL_DIFFUSE, l1Diffuse);
+  glLightfv(GL_LIGHT6, GL_AMBIENT, l1Ambient);
+  glLightfv(GL_LIGHT6, GL_POSITION, l1Position);
+  glLightf(GL_LIGHT6, GL_SPOT_CUTOFF, cutoff);
+  //glLightf(GL_LIGHT2, GL_SPOT_EXPONENT, 90.0);
+  glLightfv(GL_LIGHT6, GL_SPOT_DIRECTION, l1Direction);
+
+  glLightfv(GL_LIGHT6, GL_INTENSITY, lightIntensity);
+  glLightfv(GL_LIGHT6, GL_ATTENUATION_EXT, lightIntensity);
+  
+}
+void winDraw()
+{
+  PlaySound("assets\\audio\\soundBytes\\win_state.wav", NULL, SND_ASYNC); 
+  float scale=4*2.0/16;
+  glPushMatrix();
+  {
+    glTranslatef(-1.5,-0.7,0.15);
+    drawImage(0, 9*scale, 0, 16*scale, WinImg);
+  }
+  glPopMatrix();
+
+}
+void loseDraw()
+{
+  PlaySound("assets\\audio\\soundBytes\\lose_state.wav", NULL, SND_ASYNC); 
+  float scale=4*2.0/16;
+  glPushMatrix();
+  {
+    glTranslatef(-1.5,-0.7,0.15);
+    drawImage(0, 9*scale, 0, 16*scale, loseImg);
+  }
+  glPopMatrix();
+
+}
 void display(void)
 {
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -550,9 +638,22 @@ void display(void)
     glDisable(GL_LIGHT1);
   }
   initLightHere();
-  if (gameState == JOURNAL_STATE)
+  //glDisable(GL_LIGHT6);
+  if (gameState == JOURNAL_STATE || gameState == WINNING_STATE || gameState == LOSING_STATE)
   {
+    glEnable(GL_LIGHT6);
+    journalLight();
     jCam.setup();
+    if (gameState == WINNING_STATE)
+    {
+      winDraw();
+      glFlush();
+    }
+    else if (gameState == LOSING_STATE)
+    {
+      loseDraw();
+      glFlush();
+    }
   }
   else
   {
@@ -561,10 +662,9 @@ void display(void)
   //	camera.setup();
 
   // Axes for modeling
-  Axes axes(0.5);
+  //Axes axes(0.5);
 
   glColor3f(0.8f, 0.1f, 0.2f);
-  
 
   // Reset color and flush buffer
   glColor3f(1.0, 1.0, 1.0);
@@ -584,11 +684,13 @@ void display(void)
     {
       flashlight.draw(90 + angle);
     }
-    journal.draw();
+    if(gameState != WINNING_STATE && gameState != LOSING_STATE)
+    {
+      journal.draw();
+    }
     drawApartment();
-      drawClues();
-    
-      // drawHitBoxes();
+    drawClues();
+    // drawHitBoxes();
   }
   glPopMatrix();
 
@@ -636,7 +738,9 @@ void loadAssets()
   livingroomWindow1.setModel();
   livingroomWindow2.setModel();
   bedroomWindow.setModel();
-  outsideImage.setImage("assets/images/window.png");
+  bedroomOutsideImage.setImage("assets/images/window.png");
+  livingOutsideImage1.setImage("assets/images/window.png");
+  livingOutsideImage2.setImage("assets/images/window.png");
 
   armchair.setModel();
   sofa.setModel();
@@ -698,7 +802,9 @@ void loadAssets()
   (*walls[21]).setTexture("assets/images/bathroom_wall.jpg");
   (*walls[22]).setTexture("assets/images/bathroom_wall.jpg");
   (*walls[23]).setTexture("assets/images/bathroom_wall.jpg");
-  // // Starting music
+  
+  // Starting music
+  mciSendString("play assets\\audio\\music\\bgm.mp3 repeat", 0, 0, 0);
 }
 
 void interactionTimer(int val)
@@ -790,6 +896,7 @@ void key(unsigned char k, int x, int y)
       break;
     case 'j':
       gameState = JOURNAL_STATE;
+      glEnable(GL_LIGHT6);
       //TODO open Journal
       break;
     case 'i':
@@ -838,6 +945,7 @@ void key(unsigned char k, int x, int y)
       {
         if (!apartmentDoor.isOpen())
         {
+          PlaySound("assets\\audio\\sfx\\open_door_1.wav", NULL, SND_ASYNC);
           glutTimerFunc(0, openDoor, 0);
         }
         else
@@ -849,6 +957,7 @@ void key(unsigned char k, int x, int y)
       {
         if (!bedroomDoor.isOpen())
         {
+          PlaySound("assets\\audio\\sfx\\open_door_1.wav", NULL, SND_ASYNC);
           glutTimerFunc(0, openDoor, 1);
         }
         else
@@ -860,6 +969,7 @@ void key(unsigned char k, int x, int y)
       {
         if (!bathroomDoor.isOpen())
         {
+          PlaySound("assets\\audio\\sfx\\open_door_1.wav", NULL, SND_ASYNC);
           glutTimerFunc(0, openDoor, 2);
         }
         else
@@ -871,12 +981,13 @@ void key(unsigned char k, int x, int y)
       {
         for (int i = 0; i < len; i++)
         {
-          printf("attempt clues of %d %d\n", (*clues[i]).getState(), i);
+          // printf("attempt clues of %d %d\n", (*clues[i]).getState(), i);
         if (player.isLookingAt(*(clues[i])) && !(*clues[i]).isFound())
           {
             // printf("%d\n", clues[0]);
             printf("clues of %d %d\n", (*clues[i]).getState(), i);
-            std::string s = (*clues[i]).Interact().append("\n");
+            std::string s = (*clues[i]).Interact();
+            checkString(s);
             interactingObject = i;
             gameState = INTERACTING_STATE;
             Vector3f newVector = player.getCamera().location() + (player.getCamera().lookAt() - player.getCamera().location()).normalized() * 0.8;
@@ -900,7 +1011,7 @@ void key(unsigned char k, int x, int y)
     {
     case 'e':
       gameState = PLAYING_STATE;
-      interactingObject=-1;
+      interactingObject = -1;
       break;
     }
   }
@@ -910,6 +1021,7 @@ void key(unsigned char k, int x, int y)
     {
     case 'j':
       gameState = PLAYING_STATE;
+       glDisable(GL_LIGHT6);
       break;
     }
   }
@@ -962,7 +1074,7 @@ void setClueType(int idx)
   {
     return;
   }
-  printf("%d %d %d\n", gameState, idx, (*clues[idx]).getState());
+  // printf("%d %d %d\n", gameState, idx, (*clues[idx]).getState());
   //set the clue type here
   bool win = true;
   (*clues[idx]).setState((*clues[idx]).getState() == 1 ? -1 : 1);
@@ -1061,7 +1173,6 @@ void main(int argc, char **argv)
   glutPassiveMotionFunc(mouseMovement);
 
   glClearColor(1, 1, 1, 0);
-
   initEnvironment();
   initClues();
   loadAssets();
@@ -1087,8 +1198,7 @@ void main(int argc, char **argv)
   glMaterialfv(GL_FRONT, GL_SHININESS, shinness);
   glDisable(GL_COLOR_MATERIAL);
 
-  // TODO 10 mins
-  // glutTimerFunc(10000, losingStateCaller, 0);
+  glutTimerFunc(1000 * 60 * 10, losingStateCaller, 0);
   glutIdleFunc(idle);
   glutMouseFunc(mouseOverJournal);
 

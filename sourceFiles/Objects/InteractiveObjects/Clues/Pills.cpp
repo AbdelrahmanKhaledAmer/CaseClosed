@@ -36,3 +36,8 @@ void Pills::draw() {
 void Pills::setModel() {
   __super::setModel("assets/models/clues/Pills/Bottle 2.3DS");
 }
+
+std::string Pills::Interact()
+{
+  return "2";
+}
