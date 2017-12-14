@@ -20,6 +20,7 @@
 #include "headerFiles/Camera.h"
 #include "headerFiles/Lights.h"
 #include "headerFiles/Objects/Flashlight.h"
+#include "headerFiles/Objects/InteractiveObjects/Clues/AnsweringMachine.h"
 #include "headerFiles/Objects/InteractiveObjects/Clues/Bloodtrail.h"
 #include "headerFiles/Objects/InteractiveObjects/Clues/Body.h"
 #include "headerFiles/Objects/InteractiveObjects/Clues/BrokenGlass.h"
@@ -137,6 +138,7 @@ Footprints footprints(Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(1, 1, 1), V
 Bloodtrail bloodtrail(Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vector3f(1, 1, 1));
 PhotoFrame photoFrame(Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
 Pills pills(Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
+AnsweringMachine answeringMachine(Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
 
 void initClues()
 {
@@ -540,7 +542,8 @@ void drawApartment() {
   // suicideNote.draw();
   // photoFrame.draw();
   // pills.draw();
-  brokenGlass.draw();
+  // brokenGlass.draw();
+  answeringMachine.draw();
   // footprints.draw();
   // bloodtrail.draw();
   yellowHoodie1.draw();
@@ -637,6 +640,7 @@ void loadAssets() {
   // suicideNote.setModel();
   // photoFrame.setModel();
   pills.setModel();
+  answeringMachine.setModel();
 
   // Corridor Texturs
   (*walls[0]).setTexture("assets/images/corridor_wall.jpg");
@@ -964,15 +968,15 @@ void main(int argc, char **argv)
    glEnable(GL_COLOR_MATERIAL);
   glShadeModel(GL_SMOOTH);
 
-GLfloat specular[] = {1.0f, 1.0f, 1.0f, 1.0f};
-GLfloat shinness[]={100};
-GLfloat lDiffuse[] = {0.1f, 0.1f, 0.1f, 1.0f};
-GLfloat lAmbient[] = {0.1f, 0.1f, 0.1f, 1.0f};
-glMaterialfv(GL_FRONT,GL_AMBIENT,lAmbient);
-glMaterialfv(GL_FRONT,GL_DIFFUSE,lDiffuse);
-glMaterialfv(GL_FRONT,GL_SPECULAR,specular);
-glMaterialfv(GL_FRONT,GL_SHININESS,shinness);
-glDisable(GL_COLOR_MATERIAL);
+  GLfloat specular[] = {1.0f, 1.0f, 1.0f, 1.0f};
+  GLfloat shinness[] = {100};
+  GLfloat lDiffuse[] = {0.1f, 0.1f, 0.1f, 1.0f};
+  GLfloat lAmbient[] = {0.1f, 0.1f, 0.1f, 1.0f};
+  glMaterialfv(GL_FRONT, GL_AMBIENT, lAmbient);
+  glMaterialfv(GL_FRONT, GL_DIFFUSE, lDiffuse);
+  glMaterialfv(GL_FRONT, GL_SPECULAR, specular);
+  glMaterialfv(GL_FRONT, GL_SHININESS, shinness);
+  glDisable(GL_COLOR_MATERIAL);
 
   // TODO 10 mins
   // glutTimerFunc(10000, losingStateCaller, 0);
