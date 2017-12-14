@@ -731,7 +731,7 @@ void loadAssets()
   (*walls[23]).setTexture("assets/images/bathroom_wall.jpg");
   
   // Starting music
-  mciSendString("play assets\\audio\\music\\Undercover_Vampire_Policeman.mp3 repeat", 0, 0, 0);
+  mciSendString("play assets\\audio\\music\\bgm.mp3 repeat", 0, 0, 0);
 }
 
 void interactionTimer(int val)
