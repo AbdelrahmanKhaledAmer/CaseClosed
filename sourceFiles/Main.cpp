@@ -110,9 +110,11 @@ CellingLight1 bathroomLight(Vector3f(26.68, 2.25, 13.3), Vector3f(0, 0, 0), Vect
 Fan bedroomFan(Vector3f(22.79, 2.5, 14.57), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
 
 Window bedroomWindow(Vector3f(19.7, 0.75, 14.6), Vector3f(0, 90, 0), Vector3f(1, 1, 1));
+OutsideImage bedroomOutsideImage(Vector3f(19.7 + 0.001, 1.12, 14.6), Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vector3f(0.37, 0.20, 0.30));
 Window livingroomWindow1(Vector3f(19.7, 0.75, 8.5), Vector3f(0, 90, 0), Vector3f(1, 1, 1));
+OutsideImage livingOutsideImage1(Vector3f(19.7 + 0.001, 1.12, 8.5), Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vector3f(0.37, 0.20, 0.30));
 Window livingroomWindow2(Vector3f(26.0, 0.75, 5.4), Vector3f(0, 90, 0), Vector3f(1, 1, 1));
-OutsideImage outsideImage(Vector3f(0, 0, 0), Vector3f(0, 90, 0), Vector3f(1, 1, 1));
+OutsideImage livingOutsideImage2(Vector3f(26.0 - 0.001, 1.12, 5.4), Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vector3f(0.37, 0.20, 0.30));
 
 //livingroom
 Armchair armchair(Vector3f(22.8, 0, 10.2), Vector3f(0, 90, 0), Vector3f(1, 1, 1));
@@ -361,8 +363,8 @@ bool intersectsWalls()
   intersects |= sink.intersects(player);
   intersects |= bath.intersects(player);
 
-   return intersects;
-  // return false;
+  //  return intersects;
+  return false;
 }
 
 void initFlashLight()
@@ -500,9 +502,11 @@ void drawApartment()
   bedroomFan.draw();
 
   bedroomWindow.draw();
+  bedroomOutsideImage.draw();
   livingroomWindow1.draw();
+  livingOutsideImage1.draw();
   livingroomWindow2.draw();
-  // outsideImage.draw();
+  livingOutsideImage2.draw();
 
   // livingroom
   armchair.draw();
@@ -635,7 +639,9 @@ void loadAssets()
   livingroomWindow1.setModel();
   livingroomWindow2.setModel();
   bedroomWindow.setModel();
-  outsideImage.setImage("assets/images/window.png");
+  bedroomOutsideImage.setImage("assets/images/window.png");
+  livingOutsideImage1.setImage("assets/images/window.png");
+  livingOutsideImage2.setImage("assets/images/window.png");
 
   armchair.setModel();
   sofa.setModel();
