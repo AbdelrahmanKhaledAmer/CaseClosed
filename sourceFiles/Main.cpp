@@ -8,24 +8,31 @@
 
 // Libraries, dependencies and classes ==============================
 #include "headerFiles/TextureBuilder.h"
-#include "headerFiles/Model_3DS.h"
+
 #include "headerFiles/GLTexture.h"
-#include <math.h>
-#include <iostream>
+#include "headerFiles/Model_3DS.h"
 #include <Eigen/Dense>
 #include <headerFiles/GL/glut.h>
+#include <iostream>
+#include <math.h>
 
 #include "headerFiles/Axes.h"
 #include "headerFiles/Camera.h"
 #include "headerFiles/Lights.h"
 #include "headerFiles/Objects/Flashlight.h"
+#include "headerFiles/Objects/InteractiveObjects/Clues/AnsweringMachine.h"
 #include "headerFiles/Objects/InteractiveObjects/Clues/Bloodtrail.h"
 #include "headerFiles/Objects/InteractiveObjects/Clues/Body.h"
 #include "headerFiles/Objects/InteractiveObjects/Clues/BrokenGlass.h"
 #include "headerFiles/Objects/InteractiveObjects/Clues/Footprints.h"
 #include "headerFiles/Objects/InteractiveObjects/Clues/Knife.h"
+#include "headerFiles/Objects/InteractiveObjects/Clues/PhotoFrame.h"
+#include "headerFiles/Objects/InteractiveObjects/Clues/Pills.h"
+#include "headerFiles/Objects/InteractiveObjects/Clues/SuicideNote.h"
+#include "headerFiles/Objects/InteractiveObjects/Clues/YellowHoodie.h"
 #include "headerFiles/Objects/InteractiveObjects/Door.h"
 #include "headerFiles/Objects/InteractiveObjects/Door1.h"
+#include "headerFiles/Objects/Journal.h"
 #include "headerFiles/Objects/NonInteractiveObjects/Armchair.h"
 #include "headerFiles/Objects/NonInteractiveObjects/Bath.h"
 #include "headerFiles/Objects/NonInteractiveObjects/Bed.h"
@@ -62,8 +69,8 @@ int ceilingTexWidth;
 int ceilingTexHeight;
 unsigned char *ceilingTex;
 
-bool enableFlashLight=true;
 //flashLight ON/OFF
+bool enableFlashLight=true;
 
 // Game variables ===================================================
 int gameState = PLAYING_STATE;
@@ -77,7 +84,10 @@ Eigen::Vector3f orientation(0, 1, 0);
 Camera camera(eye, lookAt, orientation);
 Player player(eye, Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vector3f(0.5, 1.5, 0.2), camera);
 Flashlight flashlight(Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vector3f(0, 0, 0));
+Journal journal(Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(2, 2, 1)); //x:1.95, z:2.53
 //Knife knife(Vector3f(3, 0.5, 1), Vector3f(45, 45, 45), Vector3f(1, 1, 1), Vector3f(1, 1, 1));
+
+int cluesAnswer[3];
 Clue *clues[3];
 Wall *walls[24];
 
@@ -109,6 +119,7 @@ DiningSet diningSet(Vector3f(22.2, 0, 7), Vector3f(0, -90, 0), Vector3f(1, 1, 1)
 Kitchen kitchen(Vector3f(21.15, 0, 5.5), Vector3f(0, 270, 0), Vector3f(1, 1, 1));
 
 //Bedroom
+Body body(Vector3f(23, 0, 14.9), Vector3f(0, 180, 0), Vector3f(1, 1, 1));
 Bed bed(Vector3f(23, 0, 14.9), Vector3f(0, 180, 0), Vector3f(1, 1, 1));
 Nightstand nightstand1(Vector3f(24.17, 0, 16.2), Vector3f(0, 180, 0), Vector3f(1, 1, 1));
 Nightstand nightstand2(Vector3f(21.27, 0, 16.2), Vector3f(0, 180, 0), Vector3f(1, 1, 1));
@@ -120,10 +131,15 @@ Sink sink(Vector3f(27.2, 0, 12.3), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
 Bath bath(Vector3f(28, 0, 14.9), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
 
 //Clues
-Body body(Vector3f(23, 0, 14.9), Vector3f(0, 180, 0), Vector3f(1, 1, 1));
+YellowHoodie yellowHoodie(Vector3f(1, 0, 1), Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vector3f(1, 1, 1));
+YellowHoodie yellowHoodie1(Vector3f(0, 3, 0), Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vector3f(1, 1, 1));
 BrokenGlass brokenGlass(Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vector3f(1, 1, 1));
+SuicideNote suicideNote(Vector3f(1, 0, 1), Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vector3f(1, 1, 1));
 Footprints footprints(Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vector3f(1, 1, 1));
 Bloodtrail bloodtrail(Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vector3f(1, 1, 1));
+PhotoFrame photoFrame(Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
+Pills pills(Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
+AnsweringMachine answeringMachine(Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
 
 void initClues()
 {
@@ -136,28 +152,25 @@ void initClues()
   clues[0] = new Knife(Vector3f(4, 0.5, 1), Vector3f(45, 45, 45), Vector3f(1, 1, 1), Vector3f(1, 1, 1));
   clues[1] = new Knife(Vector3f(3, 0.5, 1), Vector3f(45, 45, 45), Vector3f(1, 1, 1), Vector3f(1, 1, 1));
   clues[2] = new Knife(Vector3f(2, 0.5, 1), Vector3f(45, 45, 45), Vector3f(1, 1, 1), Vector3f(1, 1, 1));
+
+ cluesAnswer[0]=1;
+ cluesAnswer[1]=1;
+ cluesAnswer[2]=-1;
+
+  //TODO add relevant and irrelevant
 }
 
 void drawClues()
 {
   int len = sizeof(clues) / sizeof(*clues);
-  bool win = true;
   for (int i = 0; i < len; i++)
   {
     if (!(*clues[i]).isFound())
     {
-      if (i == 0)
-        glColor3f(0, 1, 0);
-      if (i == 1)
-        glColor3f(0, 1, 1);
-      if (i == 2)
-        glColor3f(1, 0, 0);
       (*clues[i]).draw();
-      win = false;
     }
   }
-  if (win)
-    gameState = WINNING_STATE;
+ 
 }
 
 void initEnvironment()
@@ -489,9 +502,7 @@ void drawHitBoxes()
   bath.drawBoundries();
 }
 
-void drawApartment()
-{
-  drawEnvironment();
+void drawApartment() {
   apartmentDoor.draw();
   bedroomDoor.draw();
   bathroomDoor.draw();
@@ -530,12 +541,17 @@ void drawApartment()
   bath.draw();
 
   // clues
-  body.draw();
+  // yellowHoodie.draw();
+  // suicideNote.draw();
+  // photoFrame.draw();
+  // pills.draw();
   // brokenGlass.draw();
+  answeringMachine.draw();
   // footprints.draw();
   // bloodtrail.draw();
+  yellowHoodie1.draw();
 
-  // bloodtrail.draw();
+  drawEnvironment();
 }
 
 void display(void)
@@ -587,6 +603,7 @@ void display(void)
     } else {
       flashlight.draw(90 + angle);
     }
+    journal.draw();
     drawApartment();
     // drawHitBoxes();
   }
@@ -748,8 +765,8 @@ void key(unsigned char k, int x, int y)
 			player.lookRight();
 			break;
 		case 'j':
-			// camera.rotateLeft();
-			player.lookLeft();
+        gameState=JOURNAL_STATE;
+        //TODO open Journal
 			break;
 		case 'i':
 			// camera.rotateUp();
@@ -819,7 +836,7 @@ void key(unsigned char k, int x, int y)
 						glutTimerFunc(0, closeDoor, 2);
 					}
         } else if (player.isLookingAt(*(clues[i])) && !(*clues[i]).isFound()) {
-					std::string s = (*clues[i]).Interact().append("\n");
+				  std::string s = (*clues[i]).Interact().append("\n");
 					interactingObject = *clues[i];
 					gameState = INTERACTING_STATE;
 					Vector3f newVector = player.getCamera().location() + (player.getCamera().lookAt() - player.getCamera().location()).normalized() * 0.8;
@@ -827,6 +844,7 @@ void key(unsigned char k, int x, int y)
 					glutTimerFunc(20, interactionTimer, 0);
 					// remove clue
 					(*clues[i]).find(true);
+          journal.write(i, NOT_STATED);
 					break;
 				}
 			}
@@ -900,14 +918,34 @@ void losingStateCaller(int val)
   glutPostRedisplay();
 }
 
-void journalStateCaller(int val)
-{
-  if (gameState != PLAYING_STATE)
-  {
-    gameState = JOURNAL_STATE;
-    printf("journal appear\n");
+//draw found clues so far
+void GetCluesInJournal(){
+
+  int len = sizeof(clues) / sizeof(Clue);
+  for (int i = 0; i < len; i++) {
+    if ((*clues[i]).isFound()) {
+
+      //TODO draw it in journal
+      // Journal.write(i,(*clues[i]).getState());
+
   }
-  glutPostRedisplay();
+}
+}
+
+void setClueType(int idx) {
+
+  // set the clue type here
+  bool win = true;
+  (*clues[idx]).setState((*clues[idx]).getState() == 1 ? -1 : 1);
+  int lenClues = (sizeof(clues) / sizeof(Clue));
+  for (int i = 0; i < lenClues; i++) {
+    if ((*clues[i]).getState() != 1 && cluesAnswer[i] == 1) {
+      win = false;
+      break;
+    }
+  }
+  gameState = win ? WINNING_STATE : gameState;
+  journal.write(idx, (*clues[idx]).getState());
 }
 
 void main(int argc, char **argv)
@@ -938,8 +976,18 @@ void main(int argc, char **argv)
    glEnable(GL_LIGHT4);
    glEnable(GL_LIGHT5);
   glEnable(GL_NORMALIZE);
-   //glEnable(GL_COLOR_MATERIAL);
+   glEnable(GL_COLOR_MATERIAL);
   glShadeModel(GL_SMOOTH);
+
+  GLfloat specular[] = {1.0f, 1.0f, 1.0f, 1.0f};
+  GLfloat shinness[] = {100};
+  GLfloat lDiffuse[] = {0.1f, 0.1f, 0.1f, 1.0f};
+  GLfloat lAmbient[] = {0.1f, 0.1f, 0.1f, 1.0f};
+  glMaterialfv(GL_FRONT, GL_AMBIENT, lAmbient);
+  glMaterialfv(GL_FRONT, GL_DIFFUSE, lDiffuse);
+  glMaterialfv(GL_FRONT, GL_SPECULAR, specular);
+  glMaterialfv(GL_FRONT, GL_SHININESS, shinness);
+  glDisable(GL_COLOR_MATERIAL);
 
   // TODO 10 mins
   // glutTimerFunc(10000, losingStateCaller, 0);

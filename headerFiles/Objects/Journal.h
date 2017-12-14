@@ -3,24 +3,28 @@
 
 #include <Eigen/Dense>
 #include "headerFiles/Objects/Object.h"
-#include <stdarg.h>
+#include "headerFiles/Objects/InteractiveObjects/Clues/Clue.h"
+#include "headerFiles/Image.h"
+#include "SOIL/src/SOIL.h"
 
-using namespace std;
 using namespace Eigen;
 
 class Journal : public Object
 {
 public:
 	// Main functions
-	Journal(Vector3f location, Vector3f orientation, Vector3f scale, Vector3f dimensions, std::string words);    // Constructor
+	Journal(Vector3f location, Vector3f orientation, Vector3f scale);    // Constructor
 	~Journal();                                                                                              // Destructor
 
 	// write function
-	void write(string write = "");
+	void write(int clueIndex, int property = 0);
 	void draw();
-protected:
-	std::string* notes_;
-	bool on_;
+	void setModel();
+private:
+	bool clues_[10];
+	int cluesState_[10];
+	GLuint clueImages_[10][3];
+	GLuint journalImage_;
 };
 
 #endif

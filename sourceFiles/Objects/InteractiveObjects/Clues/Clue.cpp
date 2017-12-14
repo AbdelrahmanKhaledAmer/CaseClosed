@@ -24,10 +24,11 @@ Deletes the pointer for the Clue object.
 */
 Clue::~Clue() {}
 
-void Clue::draw() { __super::draw(); }
+void Clue::draw(float locScale) { __super::draw(locScale); }
 
 bool Clue::isFound() { return this->isFound_; }
 
 void Clue::find(bool state) { this->isFound_ = state; }
-
+void Clue::setState(int val){this->state=val;}
+int Clue::getState(){return this->state;}
 void Clue::setModel(char *modelPath) { __super::setModel(modelPath); }
