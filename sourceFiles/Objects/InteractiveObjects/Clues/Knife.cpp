@@ -22,7 +22,7 @@ Deletes the pointer for the Knife object.
 Knife::~Knife() {}
 
 void Knife::draw() {
-  float scale = 0.04;
+  float scale = 0.035;
 
   glPushMatrix();
   {
