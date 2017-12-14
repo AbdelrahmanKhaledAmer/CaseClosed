@@ -23,6 +23,7 @@ Deletes the pointer for the Journal object.
 Journal::~Journal() {}
 
 void Journal::write(int clueIndex, int property) {
+  printf("write in jouurnal %d\n",clueIndex);
   clues_[clueIndex] = true;
   cluesState_[clueIndex] = property;
 }
@@ -43,7 +44,7 @@ void Journal::draw() {
     for (int i = 0; i < 10; i++) {
       if (clues_[i] == true) {
         glTranslatef(0, 0, (i + 1) * 0.01);
-
+        //  printf("Drawing journal %d\n\n",i);
         switch (cluesState_[i]) {
         case NOT_STATED:
           drawImage(minX, maxX, minY, maxY, clueImages_[i][0]);

@@ -608,7 +608,6 @@ void display(void)
   Vector3f zAxis(0,0,1);
   float angle=acos((viewVec.dot(xAxis))/viewVec.norm()) * 180 / PI;
   float check=acos((viewVec.dot(zAxis))/viewVec.norm()) * 180 / PI;
-  printf("%.2f\n",angle);
   glPushMatrix();
   {
     if(check < 90)
@@ -619,7 +618,6 @@ void display(void)
     }
     journal.draw();
     drawApartment();
-    journal.draw();
     // drawHitBoxes();
   }
   glPopMatrix();
@@ -630,10 +628,10 @@ void display(void)
   glPopMatrix();
 
   glPushMatrix();
-  Vector3f viewVec = ((player.getCamera().lookAt() - player.location()).normalized()) * 1.5;
+  Vector3f viewVec2 = ((player.getCamera().lookAt() - player.location()).normalized()) * 1.5;
   Vector3f loc = player.location();
   Vector3f Upvector = player.getCamera().upVector();
-  Vector3f crossV = viewVec.cross(Upvector);
+  Vector3f crossV = viewVec2.cross(Upvector);
   //the required plane is the plane between the up and cross vector
   glColor3f(1, 0, 0);
   glBegin(GL_QUADS);
@@ -809,22 +807,6 @@ void key(unsigned char k, int x, int y)
     case 'f':
       enableFlashLight = !enableFlashLight;
       break;
-    case 'l':
-      // camera.rotateRight();
-      player.lookRight();
-      break;
-    case 'j':
-      gameState = JOURNAL_STATE;
-      //TODO open Journal
-      break;
-    case 'i':
-      // camera.rotateUp();
-      player.lookUp();
-      break;
-    case 'k':
-      // camera.rotateDown();
-      player.lookDown();
-      break;
 		case 'l':
 			// camera.rotateRight();
 			player.lookRight();
@@ -875,6 +857,8 @@ void key(unsigned char k, int x, int y)
 			break;
 		case 'e':
 			// camera.translateUp();
+      (*clues[0]).find(true);
+      printf("clues of zero is true\n");
 			for (int i = 0; i < len; i++)
 			{
 				// printf("%d\n", clues[0]);
@@ -977,13 +961,12 @@ void mouseMovement(int x, int y)
 void setClueType(int idx)
 {
   int lenClues = (sizeof(cluesAnswer) / sizeof(int));
-  printf("%d %d before return %d\n", gameState, idx, lenClues);
 
-  if (idx >= lenClues)
+  if (idx >= lenClues||!(*clues[idx]).isFound())
   {
     return;
   }
-  printf("%d %d \n", gameState, idx);
+  printf("%d %d %d\n", gameState, idx,(*clues[idx]).getState());
   //set the clue type here
   bool win = true;
   (*clues[idx]).setState((*clues[idx]).getState() == 1 ? -1 : 1);
@@ -991,13 +974,13 @@ void setClueType(int idx)
   {
     if ((*clues[i]).getState() != 1 && cluesAnswer[i] == 1)
     {
-      printf("here %d\n", i);
       win = false;
       break;
     }
   }
   journal.write(idx, (*clues[idx]).getState());
   gameState = win == true ? WINNING_STATE : gameState;
+  glutPostRedisplay();
 }
 
 void mouseOverJournal(int button, int state, int x, int y)
@@ -1008,7 +991,6 @@ void mouseOverJournal(int button, int state, int x, int y)
     glutSetCursor(GLUT_CURSOR_LEFT_ARROW);
     if (button == GLUT_LEFT_BUTTON && state == GLUT_UP)
     {
-      printf(" i am here %d \n", gameState);
       if (x < 550)
       {
         if (y < 110 && y > 20)
