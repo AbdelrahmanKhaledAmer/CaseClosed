@@ -34,12 +34,14 @@ void Flashlight::draw(float yAngle) {
 
   glPushMatrix();
   {
+    glTranslatef(dimensions_.x()/2-0.1, dimensions_.y()/2 - 0.4, dimensions_.z()/2-0.2);
     glScalef(scale, scale, scale);
     glPushMatrix();
     {
       glTranslatef(location_.x() / scale, location_.y() / scale, location_.z() / scale);
       glScalef(scale_.x(), scale_.y(), scale_.z());
       glRotatef(yAngle, 0, 1, 0);
+      glTranslatef((dimensions_.x()/2)/scale, (dimensions_.y()/2)/scale, (dimensions_.z()/2)/scale);
       model_.Draw();
     }
     glPopMatrix();

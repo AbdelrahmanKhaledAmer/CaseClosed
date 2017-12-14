@@ -575,12 +575,18 @@ void display(void)
 
   Vector3f viewVec = (player.getCamera().lookAt() - player.location()).normalized();
   Vector3f xAxis(1,0,0);
-  float angle=acos((viewVec.dot(xAxis))/viewVec.norm());
+  Vector3f zAxis(0,0,1);
+  float angle=acos((viewVec.dot(xAxis))/viewVec.norm()) * 180 / PI;
+  float check=acos((viewVec.dot(zAxis))/viewVec.norm()) * 180 / PI;
   printf("%.2f\n",angle);
   glPushMatrix();
   {
-
-    flashlight.draw(angle);
+    if(check < 90)
+    {
+      flashlight.draw(90 - angle);
+    } else {
+      flashlight.draw(90 + angle);
+    }
     drawApartment();
     // drawHitBoxes();
   }
