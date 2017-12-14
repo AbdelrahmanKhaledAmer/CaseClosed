@@ -73,13 +73,13 @@ const int height = 9 * scale;
 GLuint floorTex, ceilingTex;
 
 //flashLight ON/OFF
-bool enableFlashLight=true;
+bool enableFlashLight = true;
 
 // Game variables ===================================================
 int gameState = PLAYING_STATE;
-InteractiveObject interactingObject(Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(0, 0, 0));
+int interactingObject;
 
-// Eigen::V ector3f eye(-2, 1, 1.2);
+// Eigen::Vector3f eye(-2, 1, 1.2);
 Eigen::Vector3f eye(13, 1, 2);
 Eigen::Vector3f lookAt(15, 0.5, 2);
 Eigen::Vector3f orientation(0, 1, 0);
@@ -95,7 +95,7 @@ Eigen::Vector3f lookAt2(1.8, 1.525, 0);
 Eigen::Vector3f orientation2(0, 1, 0);
 Camera jCam(eye2, lookAt2, orientation2);
 
-int cluesAnswer[8] = { RELEVANT, RELEVANT, IRRELEVANT, RELEVANT, IRRELEVANT, RELEVANT, RELEVANT, IRRELEVANT };
+int cluesAnswer[8] = {RELEVANT, RELEVANT, IRRELEVANT, RELEVANT, IRRELEVANT, RELEVANT, RELEVANT, IRRELEVANT};
 Clue *clues[8];
 Wall *walls[24];
 
@@ -161,32 +161,40 @@ void initClues()
   clues[5] = &answeringMachine;
   clues[6] = &brokenGlass;
   clues[7] = &suicideNote;
-  for (int i = 0; i < len; i++)
-  {
-    (*clues[i]).find(true);
-    journal.write(i, NOT_STATED);
-  }
-  // clues[0] = new Knife(Vector3f(4, 0.5, 1), Vector3f(45, 45, 45), Vector3f(1, 1, 1));
-  // clues[1] = new Knife(Vector3f(3, 0.5, 1), Vector3f(45, 45, 45), Vector3f(1, 1, 1));
-  // clues[2] = new Knife(Vector3f(2, 0.5, 1), Vector3f(45, 45, 45), Vector3f(1, 1, 1));
-
-  // cluesAnswer[0] = 1;
-  // cluesAnswer[1] = 1;
-  // cluesAnswer[2] = -1;
-
-  //TODO add relevant and irrelevant
+  //  for (int i = 0; i < len; i++)
+  //  {
+  //     (*clues[i]).find(true);
+  //    journal.write(i, NOT_STATED);
+  //  }
 }
 
 void drawClues()
 {
-  int len = sizeof(clues) / sizeof(*clues);
-  for (int i = 0; i < len; i++)
-  {
-    if (!(*clues[i]).isFound())
-    {
-      (*clues[i]).draw();
-    }
-  }
+  // int len = sizeof(clues) / sizeof(*clues);
+  // for (int i = 0; i < len; i++)
+  // {
+  //   if (!(*clues[i]).isFound())
+  //   {
+  //     (*clues[i]).draw();
+  //   }
+  // }
+    // clues
+  if(!photoFrame.isFound()||interactingObject==0)  
+  photoFrame.draw();       // clue0
+  if(!yellowHoodie.isFound() || interactingObject == 1)
+  yellowHoodie.draw();     // clue1
+  if(!pills.isFound() || interactingObject ==2)
+  pills.draw();            // clue2
+  if(!knife.isFound() || interactingObject == 3)
+  knife.draw();            // clue3
+  if(!newspaper.isFound()||interactingObject ==4)
+  newspaper.draw();        // clue4
+  if(!answeringMachine.isFound() || interactingObject ==5)
+  answeringMachine.draw(); // clue5
+  if(!brokenGlass.isFound()||interactingObject ==6)
+  brokenGlass.draw();      // clue6
+  if(!suicideNote.isFound() || interactingObject ==7)
+  suicideNote.draw();      // clue7
 }
 
 void initEnvironment()
@@ -353,8 +361,8 @@ bool intersectsWalls()
   intersects |= sink.intersects(player);
   intersects |= bath.intersects(player);
 
-  // return intersects;
-  return false;
+   return intersects;
+  //return false;
 }
 
 void initFlashLight()
@@ -365,8 +373,8 @@ void initFlashLight()
   //
   glEnable(GL_LIGHT1);
   Vector3f viewVec = (player.getCamera().lookAt() - player.location()).normalized();
-  Vector3f diff(viewVec.x()*0.2,-0.2,viewVec.z()*0.2);
-  flashlight.setLocation(player.location()+viewVec*0.7-diff);
+  Vector3f diff(viewVec.x() * 0.2, -0.2, viewVec.z() * 0.2);
+  flashlight.setLocation(player.location() + viewVec * 0.7 - diff);
 
   //Vector3f upVector = player.getCamera().Upvector();
   //Vector3f eye = player.getCamera().location().normalized();
@@ -519,17 +527,6 @@ void drawApartment()
   toilet.draw();
   sink.draw();
   bath.draw();
-
-  // clues
-  photoFrame.draw();       // clue0
-  yellowHoodie.draw();     // clue1
-  pills.draw();            // clue2
-  knife.draw();            // clue3
-  newspaper.draw();        // clue4
-  answeringMachine.draw(); // clue5
-  brokenGlass.draw();      // clue6
-  suicideNote.draw();      // clue7
-
   savior.draw();
   glPopMatrix();
   drawEnvironment();
@@ -567,35 +564,31 @@ void display(void)
   Axes axes(0.5);
 
   glColor3f(0.8f, 0.1f, 0.2f);
-  if (gameState == PLAYING_STATE)
-  {
-    drawClues();
-  }
-  else if (gameState == INTERACTING_STATE)
-  {
-    interactingObject.rotate();
-    interactingObject.draw();
-  }
+  
 
   // Reset color and flush buffer
   glColor3f(1.0, 1.0, 1.0);
 
   Vector3f viewVec = (player.getCamera().lookAt() - player.location()).normalized();
-  Vector3f xAxis(1,0,0);
-  Vector3f zAxis(0,0,1);
-  float angle=acos((viewVec.dot(xAxis))/viewVec.norm()) * 180 / PI;
-  float check=acos((viewVec.dot(zAxis))/viewVec.norm()) * 180 / PI;
+  Vector3f xAxis(1, 0, 0);
+  Vector3f zAxis(0, 0, 1);
+  float angle = acos((viewVec.dot(xAxis)) / viewVec.norm()) * 180 / PI;
+  float check = acos((viewVec.dot(zAxis)) / viewVec.norm()) * 180 / PI;
   glPushMatrix();
   {
-    if(check < 90)
+    if (check < 90)
     {
       flashlight.draw(90 - angle);
-    } else {
+    }
+    else
+    {
       flashlight.draw(90 + angle);
     }
     journal.draw();
     drawApartment();
-    // drawHitBoxes();
+      drawClues();
+    
+      // drawHitBoxes();
   }
   glPopMatrix();
 
@@ -712,7 +705,7 @@ void interactionTimer(int val)
 {
   if (gameState == INTERACTING_STATE)
   {
-    interactingObject.rotate();
+    (*clues[interactingObject]).rotate();
     glutPostRedisplay();
     glutTimerFunc(20, interactionTimer, 0);
   }
@@ -791,117 +784,136 @@ void key(unsigned char k, int x, int y)
     case 'f':
       enableFlashLight = !enableFlashLight;
       break;
-		case 'l':
-			// camera.rotateRight();
-			player.lookRight();
-			break;
-		case 'j':
-        gameState=JOURNAL_STATE;
-        //TODO open Journal
-			break;
-		case 'i':
-			// camera.rotateUp();
-			player.lookUp();
-			break;
-		case 'k':
-			// camera.rotateDown();
-			player.lookDown();
-			break;
-		case 'w':
-			// camera.translateForward();
-			player.moveForward();
-			if (intersectsWalls())
-			{
-				player.moveBackward();
-			}
-		break;
-		case 's':
-			// camera.translateBackward();
-			player.moveBackward();
-			if (intersectsWalls())
-			{
-				player.moveForward();
-			}
-		break;
-		case 'a':
-			// camera.translateLeft();
-			player.moveLeft();
-			if (intersectsWalls())
-			{
-				player.moveRight();
-			}
-			break;
-		case 'd':
-			// camera.translateRight();
-			player.moveRight();
-			if (intersectsWalls())
-			{
-				player.moveLeft();
-			}
-			break;
-		case 'e':
-			// camera.translateUp();
-      (*clues[0]).find(true);
-      printf("clues of zero is true\n");
-			for (int i = 0; i < len; i++)
-			{
-				// printf("%d\n", clues[0]);
-				if(player.isLookingAt(apartmentDoor))
-				{
-					if(!apartmentDoor.isOpen())
-					{
-						glutTimerFunc(0, openDoor, 0);
-					} else {
-						glutTimerFunc(0, closeDoor, 0);
-					}
-				} else if (player.isLookingAt(bedroomDoor)) {
-          if(!bedroomDoor.isOpen())
-					{
-						glutTimerFunc(0, openDoor, 1);
-					} else {
-						glutTimerFunc(0, closeDoor, 1);
-					}
-        } else if(player.isLookingAt(bathroomDoor)) {
-          if(!bathroomDoor.isOpen())
-					{
-						glutTimerFunc(0, openDoor, 2);
-					} else {
-						glutTimerFunc(0, closeDoor, 2);
-					}
-        } else if (player.isLookingAt(*(clues[i])) && !(*clues[i]).isFound()) {
-				  std::string s = (*clues[i]).Interact().append("\n");
-					interactingObject = *clues[i];
-					gameState = INTERACTING_STATE;
-					Vector3f newVector = player.getCamera().location() + (player.getCamera().lookAt() - player.getCamera().location()).normalized() * 0.8;
-					interactingObject.setLocation(newVector);
-					glutTimerFunc(20, interactionTimer, 0);
-					// remove clue
-					(*clues[i]).find(true);
-          journal.write(i, NOT_STATED);
-					break;
-				}
-			}
-			break;
-		case 'q':
-			camera.translateDown();
-			break;
-		}
-  	} else if (gameState == INTERACTING_STATE) {
-    	switch (k)
-		{
-    	case 'e':
-      		gameState = PLAYING_STATE;
-      		break;
-    	}
-  	} else if (gameState == JOURNAL_STATE) {
-    	switch (k)
-		{
-    	case 'j':
-      		gameState = PLAYING_STATE;
-      		break;
-    	}
-  	}
-	glutPostRedisplay();
+    case 'l':
+      // camera.rotateRight();
+      player.lookRight();
+      break;
+    case 'j':
+      gameState = JOURNAL_STATE;
+      //TODO open Journal
+      break;
+    case 'i':
+      // camera.rotateUp();
+      player.lookUp();
+      break;
+    case 'k':
+      // camera.rotateDown();
+      player.lookDown();
+      break;
+    case 'w':
+      // camera.translateForward();
+      player.moveForward();
+      if (intersectsWalls())
+      {
+        player.moveBackward();
+      }
+      break;
+    case 's':
+      // camera.translateBackward();
+      player.moveBackward();
+      if (intersectsWalls())
+      {
+        player.moveForward();
+      }
+      break;
+    case 'a':
+      // camera.translateLeft();
+      player.moveLeft();
+      if (intersectsWalls())
+      {
+        player.moveRight();
+      }
+      break;
+    case 'd':
+      // camera.translateRight();
+      player.moveRight();
+      if (intersectsWalls())
+      {
+        player.moveLeft();
+      }
+      break;
+    case 'e':
+      // camera.translateUp();
+      if (player.isLookingAt(apartmentDoor))
+      {
+        if (!apartmentDoor.isOpen())
+        {
+          glutTimerFunc(0, openDoor, 0);
+        }
+        else
+        {
+          glutTimerFunc(0, closeDoor, 0);
+        }
+      }
+      else if (player.isLookingAt(bedroomDoor))
+      {
+        if (!bedroomDoor.isOpen())
+        {
+          glutTimerFunc(0, openDoor, 1);
+        }
+        else
+        {
+          glutTimerFunc(0, closeDoor, 1);
+        }
+      }
+      else if (player.isLookingAt(bathroomDoor))
+      {
+        if (!bathroomDoor.isOpen())
+        {
+          glutTimerFunc(0, openDoor, 2);
+        }
+        else
+        {
+          glutTimerFunc(0, closeDoor, 2);
+        }
+      }
+      else
+      {
+        for (int i = 0; i < len; i++)
+        {
+          printf("attempt clues of %d %d\n", (*clues[i]).getState(), i);
+        if (player.isLookingAt(*(clues[i])) && !(*clues[i]).isFound())
+          {
+            // printf("%d\n", clues[0]);
+            printf("clues of %d %d\n", (*clues[i]).getState(), i);
+            std::string s = (*clues[i]).Interact().append("\n");
+            interactingObject = i;
+            gameState = INTERACTING_STATE;
+            Vector3f newVector = player.getCamera().location() + (player.getCamera().lookAt() - player.getCamera().location()).normalized() * 0.8;
+            (*clues[interactingObject]).setLocation(newVector);
+            glutTimerFunc(20, interactionTimer, 0);
+            (*clues[i]).find(true);
+            journal.write(i, NOT_STATED);
+            break;
+          }
+        }
+      }
+      break;
+    case 'q':
+      camera.translateDown();
+      break;
+    }
+  }
+  else if (gameState == INTERACTING_STATE)
+  {
+    switch (k)
+    {
+    case 'e':
+      gameState = PLAYING_STATE;
+      interactingObject=-1;
+      break;
+    }
+  }
+  else if (gameState == JOURNAL_STATE)
+  {
+    switch (k)
+    {
+    case 'j':
+      gameState = PLAYING_STATE;
+      break;
+    }
+  }
+  glutPostRedisplay();
 }
 
 //=======================================================================
@@ -946,17 +958,17 @@ void setClueType(int idx)
 {
   int lenClues = (sizeof(cluesAnswer) / sizeof(int));
 
-  if (idx >= lenClues||!(*clues[idx]).isFound())
+  if (idx >= lenClues || !(*clues[idx]).isFound())
   {
     return;
   }
-  printf("%d %d %d\n", gameState, idx,(*clues[idx]).getState());
+  printf("%d %d %d\n", gameState, idx, (*clues[idx]).getState());
   //set the clue type here
   bool win = true;
   (*clues[idx]).setState((*clues[idx]).getState() == 1 ? -1 : 1);
   for (int i = 0; i < lenClues; i++)
   {
-    if ((*clues[i]).getState()!=cluesAnswer[i])
+    if ((*clues[i]).getState() != cluesAnswer[i])
     {
       win = false;
       break;
