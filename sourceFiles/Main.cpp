@@ -8,12 +8,13 @@
 
 // Libraries, dependencies and classes ==============================
 #include "headerFiles/TextureBuilder.h"
-#include "headerFiles/Model_3DS.h"
+
 #include "headerFiles/GLTexture.h"
-#include <math.h>
-#include <iostream>
+#include "headerFiles/Model_3DS.h"
 #include <Eigen/Dense>
 #include <headerFiles/GL/glut.h>
+#include <iostream>
+#include <math.h>
 
 #include "headerFiles/Axes.h"
 #include "headerFiles/Camera.h"
@@ -53,7 +54,7 @@
 #include "headerFiles/Objects/NonInteractiveObjects/Window.h"
 #include "headerFiles/Objects/Object.h"
 #include "headerFiles/Objects/Player.h"
-using namespace std;
+
 // Screen Constants =================================================
 const int scale = 70;
 const int width = 16 * scale;
@@ -67,8 +68,8 @@ int ceilingTexWidth;
 int ceilingTexHeight;
 unsigned char *ceilingTex;
 
-bool enableFlashLight=true;
 //flashLight ON/OFF
+bool enableFlashLight=true;
 
 // Game variables ===================================================
 int gameState = PLAYING_STATE;
@@ -631,7 +632,7 @@ void loadAssets() {
   // brokenGlass.setImage();
   // footprints.setImage();
   // bloodtrail.setImage();
-  // journal.setModel();
+  journal.setModel();
   // yellowHoodie.setModel();
   // suicideNote.setModel();
   // photoFrame.setModel();
@@ -820,7 +821,7 @@ void key(unsigned char k, int x, int y)
 						glutTimerFunc(0, closeDoor, 2);
 					}
         } else if (player.isLookingAt(*(clues[i])) && !(*clues[i]).isFound()) {
-				  string s = (*clues[i]).Interact().append("\n");
+				  std::string s = (*clues[i]).Interact().append("\n");
 					interactingObject = *clues[i];
 					gameState = INTERACTING_STATE;
 					Vector3f newVector = player.getCamera().location() + (player.getCamera().lookAt() - player.getCamera().location()).normalized() * 0.8;
@@ -950,7 +951,8 @@ void main(int argc, char **argv)
 
   initEnvironment();
   initClues();
-  loadAssets();
+  // loadAssets();
+  journal.setModel();
   glEnable(GL_DEPTH_TEST);
   glEnable(GL_LIGHTING);
   //glEnable(GL_LIGHT0);

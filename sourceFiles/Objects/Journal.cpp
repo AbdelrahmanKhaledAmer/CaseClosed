@@ -14,7 +14,7 @@ origin.
 */
 
 Journal::Journal(Vector3f location, Vector3f orientation, Vector3f scale)
-    : Object(location, orientation, scale, Vector3f(0, 0, 0)) {}
+    : Object(location, orientation, scale, Vector3f(0.975, 0.9, 0.975)) {}
 
 /**
 Destructor for the Journal object.
@@ -39,6 +39,7 @@ void Journal::draw() {
     glScalef(scale_.x(), scale_.y(), scale_.z());
 
     drawImage(minX, maxX, minY, maxY, journalImage_);
+
     for (int i = 0; i < 10; i++) {
       if (clues_[i] == true) {
         glTranslatef(0, 0, (i + 1) * 0.01);
