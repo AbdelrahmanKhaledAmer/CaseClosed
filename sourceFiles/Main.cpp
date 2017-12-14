@@ -154,7 +154,7 @@ AnsweringMachine answeringMachine(Vector3f(24.38, 0.25, 11.38), Vector3f(0, 180,
 BrokenGlass brokenGlass(Vector3f(20.68, 0.01, 8.47), Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vector3f(0.25, 0.25, 0.25));
 SuicideNote suicideNote(Vector3f(21.94, 0.51, 15.28), Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vector3f(0.2, 1, 0.2));
 
-YellowHoodie savior(Vector3f(0, 30, 0), Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vector3f(1, 1, 1));
+YellowHoodie savior(Vector3f(30, 30, 30), Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vector3f(1, 1, 1));
 
 void checkString(std::string s)
 {
@@ -399,8 +399,8 @@ bool intersectsWalls()
   intersects |= sink.intersects(player);
   intersects |= bath.intersects(player);
 
-  //  return intersects;
-  return false;
+  return intersects;
+  // return false;
 }
 
 void initFlashLight()
@@ -598,10 +598,11 @@ GLfloat l1Diffuse[] = {1.0f, 1.0f, 1.0f, 1.0f};
 }
 void winDraw()
 {
+  PlaySound("assets\\audio\\soundBytes\\win_state.wav", NULL, SND_ASYNC); 
   float scale=4*2.0/16;
   glPushMatrix();
   {
-    glTranslatef(-1.5,-0.5,0);
+    glTranslatef(-1.5,-0.7,0.15);
     drawImage(0, 9*scale, 0, 16*scale, WinImg);
   }
   glPopMatrix();
@@ -609,10 +610,11 @@ void winDraw()
 }
 void loseDraw()
 {
+  PlaySound("assets\\audio\\soundBytes\\lose_state.wav", NULL, SND_ASYNC); 
   float scale=4*2.0/16;
   glPushMatrix();
   {
-    glTranslatef(-1.5,-0.5,0);
+    glTranslatef(-1.5,-0.7,0.15);
     drawImage(0, 9*scale, 0, 16*scale, loseImg);
   }
   glPopMatrix();
@@ -682,7 +684,10 @@ void display(void)
     {
       flashlight.draw(90 + angle);
     }
-    journal.draw();
+    if(gameState != WINNING_STATE && gameState != LOSING_STATE)
+    {
+      journal.draw();
+    }
     drawApartment();
     drawClues();
     // drawHitBoxes();
@@ -1193,8 +1198,7 @@ void main(int argc, char **argv)
   glMaterialfv(GL_FRONT, GL_SHININESS, shinness);
   glDisable(GL_COLOR_MATERIAL);
 
-  // TODO 10 mins
-  // glutTimerFunc(10000, losingStateCaller, 0);
+  glutTimerFunc(1000 * 60 * 10, losingStateCaller, 0);
   glutIdleFunc(idle);
   glutMouseFunc(mouseOverJournal);
 
