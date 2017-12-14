@@ -30,10 +30,11 @@ void drawImageHorizontal(float bottom, float top, float left, float right,
   glBindTexture(GL_TEXTURE_2D, texture);
 
   glBegin(GL_QUADS);
-  glTexCoord2f(0, 0); glVertex3f(left, 0, bottom);
-  glTexCoord2f(0, 1); glVertex3f(left, 0, top);
-  glTexCoord2f(1, 1); glVertex3f(right, 0, top);
-  glTexCoord2f(1, 0); glVertex3f(right, 0, bottom);
+  glNormal3f(0, 1, 0);
+  glTexCoord2f(0, 0); glVertex3f(bottom, 0, left);
+  glTexCoord2f(0, 1); glVertex3f(top, 0, left);
+  glTexCoord2f(1, 1); glVertex3f(top, 0, right);
+  glTexCoord2f(1, 0); glVertex3f(bottom, 0, right);
   glEnd();
   glDisable(GL_TEXTURE_2D);
 }
