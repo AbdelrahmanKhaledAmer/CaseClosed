@@ -186,6 +186,24 @@
     <ClInclude Include="headerFiles\Objects\InteractiveObjects\Clues\Newspaper.h">
       <Filter>headerFiles\Objects\InteractiveObjects\Clues</Filter>
     </ClInclude>
+    <ClInclude Include="headerFiles\Include.h">
+      <Filter>headerFiles</Filter>
+    </ClInclude>
+    <ClInclude Include="headerFiles\InitGame.h">
+      <Filter>headerFiles</Filter>
+    </ClInclude>
+    <ClInclude Include="headerFiles\Draw.h">
+      <Filter>headerFiles</Filter>
+    </ClInclude>
+    <ClInclude Include="headerFiles\LoadGame.h">
+      <Filter>headerFiles</Filter>
+    </ClInclude>
+    <ClInclude Include="headerFiles\GameLogic.h">
+      <Filter>headerFiles</Filter>
+    </ClInclude>
+    <ClInclude Include="headerFiles\Controls.h">
+      <Filter>headerFiles</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sourceFiles\Camera.cpp">
@@ -325,6 +343,21 @@
     </ClCompile>
     <ClCompile Include="sourceFiles\Objects\InteractiveObjects\Clues\Newspaper.cpp">
       <Filter>sourceFiles\Objects\InteractiveObjects\Clues</Filter>
+    </ClCompile>
+    <ClCompile Include="sourceFiles\InitGame.cpp">
+      <Filter>sourceFiles</Filter>
+    </ClCompile>
+    <ClCompile Include="sourceFiles\Draw.cpp">
+      <Filter>sourceFiles</Filter>
+    </ClCompile>
+    <ClCompile Include="sourceFiles\LoadGame.cpp">
+      <Filter>sourceFiles</Filter>
+    </ClCompile>
+    <ClCompile Include="sourceFiles\GameLogic.cpp">
+      <Filter>sourceFiles</Filter>
+    </ClCompile>
+    <ClCompile Include="sourceFiles\Controls.cpp">
+      <Filter>sourceFiles</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

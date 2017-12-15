@@ -1,3 +1,6 @@
+#ifndef LIGHTS_H
+#define LIGHTS_H
+
 #include <headerFiles/GL/glut.h>
 
 class Lights
@@ -36,3 +39,5 @@ public:
 	    glLightfv(GL_LIGHT0, GL_AMBIENT, lightIntensity);
     }
 };
+
+#endif

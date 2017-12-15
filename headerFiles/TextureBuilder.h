@@ -1,3 +1,6 @@
+#ifndef TEXTURE_BUILDER_H
+#define TEXTURE_BUILDER_H
+
 #include <stdio.h>
 #include "headerFiles/GL/glew.h"
 #include "headerFiles/GL/glaux.h"
@@ -59,3 +62,5 @@ void loadBMP(GLuint *textureID, char *strFileName, int wrap) {
 		free(pBitmap);
 	}
 }
+
+#endif

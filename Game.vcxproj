@@ -85,8 +85,13 @@
     <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="sourceFiles\Controls.cpp" />
+    <ClCompile Include="sourceFiles\Draw.cpp" />
+    <ClCompile Include="sourceFiles\GameLogic.cpp" />
     <ClCompile Include="sourceFiles\GLTexture.cpp" />
     <ClCompile Include="sourceFiles\Image.cpp" />
+    <ClCompile Include="sourceFiles\InitGame.cpp" />
+    <ClCompile Include="sourceFiles\LoadGame.cpp" />
     <ClCompile Include="sourceFiles\Model_3DS.cpp" />
     <ClCompile Include="sourceFiles\Camera.cpp" />
     <ClCompile Include="sourceFiles\Main.cpp" />
@@ -134,11 +139,17 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="headerFiles\Camera.h" />
+    <ClInclude Include="headerFiles\Controls.h" />
+    <ClInclude Include="headerFiles\Draw.h" />
+    <ClInclude Include="headerFiles\GameLogic.h" />
     <ClInclude Include="headerFiles\GLTexture.h" />
     <ClInclude Include="headerFiles\GL\glaux.h" />
     <ClInclude Include="headerFiles\GL\glew.h" />
     <ClInclude Include="headerFiles\GL\glut.h" />
     <ClInclude Include="headerFiles\Image.h" />
+    <ClInclude Include="headerFiles\Include.h" />
+    <ClInclude Include="headerFiles\InitGame.h" />
+    <ClInclude Include="headerFiles\LoadGame.h" />
     <ClInclude Include="headerFiles\Model_3DS.h" />
     <ClInclude Include="headerFiles\Objects\Flashlight.h" />
     <ClInclude Include="headerFiles\Objects\InteractiveObjects\Clues\AnsweringMachine.h" />

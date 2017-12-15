@@ -1,3 +1,6 @@
+#ifndef AXES_H
+#define AXES_H
+
 #include <headerFiles/GL/glut.h>
 
 class Axes
@@ -92,3 +95,5 @@ public:
     }
     ~Axes() { }
 };
+
+#endif
