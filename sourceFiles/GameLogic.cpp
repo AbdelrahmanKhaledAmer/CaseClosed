@@ -50,13 +50,12 @@ bool intersectsWalls()
     intersects |= bathroomDoor.intersects(player);
   }
 
-  intersects |= armchair.intersects(player);
-  intersects |= sofa.intersects(player);
-  intersects |= coffeeTable.intersects(player);
-  intersects |= tv.intersects(player);
-  intersects |= bookcase.intersects(player);
-  intersects |= diningSet.intersects(player);
-  intersects |= kitchen.intersects(player);
+  for (Object *furniture : livingroom)
+    furniture->intersects(player);
+
+  for (Object *furniture : kitchen)
+	  furniture->intersects(player);
+
   intersects |= bed.intersects(player);
   intersects |= nightstand1.intersects(player);
   intersects |= nightstand2.intersects(player);

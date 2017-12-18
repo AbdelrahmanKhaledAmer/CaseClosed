@@ -49,14 +49,6 @@ void drawHitBoxes()
   apartmentDoor.drawBoundries();
   bedroomDoor.drawBoundries();
   bathroomDoor.drawBoundries();
-  armchair.drawBoundries();
-  sofa.drawBoundries();
-  coffeeTable.drawBoundries();
-  tv.drawBoundries();
-  tvTable.drawBoundries();
-  bookcase.drawBoundries();
-  kitchen.drawBoundries();
-  diningSet.drawBoundries();
   bed.drawBoundries();
   nightstand1.drawBoundries();
   nightstand2.drawBoundries();
@@ -87,8 +79,8 @@ void drawApartment()
     furniture->draw();
 
   // kitchen
-  kitchen.draw();
-  diningSet.draw();
+  for (Object *furniture : kitchen)
+	  furniture->draw();
 
   // bedroom
   body.draw();

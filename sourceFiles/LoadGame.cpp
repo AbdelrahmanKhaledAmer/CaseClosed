@@ -19,8 +19,8 @@ void loadAssets() {
   for (Object *furniture : livingroom)
     furniture->setModel();
 
-  kitchen.setModel();
-  diningSet.setModel();
+  for (Object *furniture : kitchen)
+    furniture->setModel();
 
   body.setModel();
   bed.setModel();

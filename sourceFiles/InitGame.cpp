@@ -63,16 +63,9 @@ OutsideImage livingOutsideImage2(Vector3f(26.0 - 0.001, 1.12, 5.4), Vector3f(0, 
 
 //livingroom
 Object *livingroom[6];
-Armchair armchair(Vector3f(22.8, 0, 10.2), Vector3f(0, 90, 0), Vector3f(1, 1, 1));
-Sofa sofa(Vector3f(24.5, 0, 9), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
-CoffeeTable coffeeTable(Vector3f(23.7, 0, 10.6), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
-Tv tv(Vector3f(24.5, 0, 11.5), Vector3f(0, -115 + 180, 0), Vector3f(1, 1, 1));
-TvTable tvTable(Vector3f(24.5, 0, 11.5), Vector3f(0, 180, 0), Vector3f(1, 1, 1));
-Bookcase bookcase(Vector3f(25.7, 0, 7), Vector3f(0, 180, 0), Vector3f(1, 1, 1));
 
 //kitchen
-DiningSet diningSet(Vector3f(22.2, 0, 7), Vector3f(0, -90, 0), Vector3f(1, 1, 1));
-Kitchen kitchen(Vector3f(21.15, 0, 5.5), Vector3f(0, 270, 0), Vector3f(1, 1, 1));
+Object *kitchen[2];
 
 //Bedroom
 Body body(Vector3f(23, 0, 14.9), Vector3f(0, 180, 0), Vector3f(1, 1, 1));
@@ -240,6 +233,12 @@ void initLivingRoom(){
   livingroom[BOOKCASE]    = new Bookcase(Vector3f(25.7, 0, 7), Vector3f(0, 180, 0), Vector3f(1, 1, 1));
 }
 
+void initKitchen(){
+  kitchen[KITCHEN]        = new Kitchen(Vector3f(21.15, 0, 5.5), Vector3f(0, 270, 0), Vector3f(1, 1, 1));
+  kitchen[DININGSET]      = new DiningSet(Vector3f(22.2, 0, 7), Vector3f(0, -90, 0), Vector3f(1, 1, 1));
+}
+
 void initApartment(){
   initLivingRoom();
+  initKitchen();
 }

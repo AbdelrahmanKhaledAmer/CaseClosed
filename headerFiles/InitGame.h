@@ -55,24 +55,18 @@ extern Window livingroomWindow2;
 extern OutsideImage livingOutsideImage2;
 
 //livingroom
-extern Object *livingroom[6];
-extern Armchair armchair;
-extern Sofa sofa;
-extern CoffeeTable coffeeTable;
-extern Tv tv;
-extern TvTable tvTable;
-extern Bookcase bookcase;
-
 #define ARMCHAIR    0
 #define SOFA        1
 #define COFFEETABLE 2
 #define TV          3
 #define TVTABLE     4
 #define BOOKCASE    5
+extern Object *livingroom[6];
 
 //kitchen
-extern DiningSet diningSet;
-extern Kitchen kitchen;
+#define KITCHEN     0
+#define DININGSET   1
+extern Object *kitchen[2];
 
 //Bedroom
 extern Body body;

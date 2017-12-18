@@ -26,7 +26,6 @@ Armchair::~Armchair() {
 }
 
 void Armchair::draw() {
-  std::cout << "Armchair" << '\n';
   locscale_ = 0.0009;
 
   glPushMatrix();
