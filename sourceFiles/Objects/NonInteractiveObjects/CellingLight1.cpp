@@ -25,17 +25,17 @@ Deletes the pointer for the CellingLight1 object.
 CellingLight1::~CellingLight1() {}
 
 void CellingLight1::draw() {
-  float scale = 0.002;
+  locscale_ = 0.002;
 
   glPushMatrix();
   {
     // glTranslatef(0, 0.35, 0);
-    glScalef(scale, scale, scale);
-    __super::draw(scale);
+
+    __super::draw();
   }
   glPopMatrix();
 }
 
-void CellingLight1::setModel() {
+void CellingLight1::setModel(char *modelPath)  {
   __super::setModel("assets/models/furniture/CellingLight1/Lamp 2.3DS");
 }

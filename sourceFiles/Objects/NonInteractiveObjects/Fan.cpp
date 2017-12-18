@@ -24,17 +24,17 @@ Deletes the pointer for the Fan object.
 Fan::~Fan() {}
 
 void Fan::draw() {
-  float scale = 0.0045;
+  locscale_ = 0.0045;
 
   glPushMatrix();
   {
     // glTranslatef(0, 0.35, 0);
-    glScalef(scale, scale, scale);
-    __super::draw(scale);
+
+    __super::draw();
   }
   glPopMatrix();
 }
 
-void Fan::setModel() {
+void Fan::setModel(char *modelPath)  {
   __super::setModel("assets/models/furniture/Fan/Artemis Fan Collection designed by George Kovacs.3ds");
 }

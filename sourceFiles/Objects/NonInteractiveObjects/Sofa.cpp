@@ -26,19 +26,19 @@ Sofa::~Sofa() {
 }
 
 void Sofa::draw() {
-  float scale = 0.0009;
+  locscale_ = 0.0009;
 
   glPushMatrix();
   {
     glTranslatef(0, 0.42, 0);
-    glScalef(scale, scale, scale);
-    __super::draw(scale);
+
+    __super::draw();
   }
   glPopMatrix();
 }
 
 void Sofa::drawBoundries() { __super::drawBoundries(1.7, 0.9, 0.975); }
 
-void Sofa::setModel() {
+void Sofa::setModel(char *modelPath)  {
   __super::setModel("assets/models/furniture/Sofa/Sofa 1.3DS");
 }

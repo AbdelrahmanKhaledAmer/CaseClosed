@@ -16,9 +16,9 @@ public:
   virtual std::string Interact();
   void rotate();
 
-  void draw(float locScale = 1);
+  void virtual draw();
   void drawBoundries(float xLength, float yLength, float zLength);   // Draw Object Boundries
-  void setModel(char *modelPath);
+  void virtual setModel(char *modelPath);
 };
 
 #endif

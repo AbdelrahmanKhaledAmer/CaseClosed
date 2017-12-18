@@ -25,17 +25,17 @@ Deletes the pointer for the CellingLight object.
 CellingLight::~CellingLight() {}
 
 void CellingLight::draw() {
-  float scale = 0.009;
+  locscale_ = 0.009;
 
   glPushMatrix();
   {
     // glTranslatef(0, 0.35, 0);
-    glScalef(scale, scale, scale);
-    __super::draw(scale);
+
+    __super::draw();
   }
   glPopMatrix();
 }
 
-void CellingLight::setModel() {
+void CellingLight::setModel(char *modelPath)  {
   __super::setModel("assets/models/furniture/CellingLight/Luster Donolux S111000-3 white N010917.3DS");
 }

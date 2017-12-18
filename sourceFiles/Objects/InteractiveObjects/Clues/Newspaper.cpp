@@ -6,7 +6,7 @@ Newspaper::Newspaper(Vector3f location, Vector3f orientation,
 
 Newspaper::~Newspaper() {}
 
-void Newspaper::setModel() {
+void Newspaper::setModel(char *modelPath)  {
   this->image_ = loadImage("assets/images/Clues/newspaper.png");
 }
 

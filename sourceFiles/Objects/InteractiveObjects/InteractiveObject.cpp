@@ -31,7 +31,7 @@ std::string InteractiveObject::Interact() {
 
 void InteractiveObject::rotate() { orientation_.y() -= 1; }
 
-void InteractiveObject::draw(float locScale) { __super::draw(locScale); }
+void InteractiveObject::draw() { __super::draw(); }
 
 void InteractiveObject::drawBoundries(float xLength, float yLength, float zLength) {
   __super::drawBoundries(xLength, yLength, zLength);

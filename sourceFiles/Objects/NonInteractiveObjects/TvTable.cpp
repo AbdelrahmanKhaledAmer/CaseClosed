@@ -26,21 +26,21 @@ TvTable::~TvTable() {
 }
 
 void TvTable::draw() {
-  float scale = 0.007;
+  locscale_ = 0.007;
 
   glPushMatrix();
   {
     glRotatef(orientation_.y(), 0, 1, 0);
     glTranslatef(-3, 0, 0);
     glRotatef(orientation_.y() * -1, 0, 1, 0);
-    glScalef(scale, scale, scale);
-    __super::draw(scale);
+
+    __super::draw();
   }
   glPopMatrix();
 }
 
 void TvTable::drawBoundries() { __super::drawBoundries(0.9 , 1.2, 0.4); }
 
-void TvTable::setModel() {
+void TvTable::setModel(char *modelPath)  {
   __super::setModel("assets/models/furniture/TvTable/Rack 2.3DS");
 }

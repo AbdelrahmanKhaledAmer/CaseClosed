@@ -24,13 +24,13 @@ Deletes the pointer for the Nightstand object.
 Nightstand::~Nightstand() {}
 
 void Nightstand::draw() {
-  float scale = 0.03;
+  locscale_ = 0.03;
 
   glPushMatrix();
   {
-    glScalef(scale, scale, scale);
+
     glTranslatef(14, 0, 6);
-    __super::draw(scale);
+    __super::draw();
   }
   glPopMatrix();
 }
@@ -39,6 +39,6 @@ void Nightstand::drawBoundries() {
   __super::drawBoundries(0.7f, 0.5f, 0.5f);
 }
 
-void Nightstand::setModel() {
+void Nightstand::setModel(char *modelPath)  {
   __super::setModel("assets/models/furniture/Nightstand/Nightstand.3DS");
 }

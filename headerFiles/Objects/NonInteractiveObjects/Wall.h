@@ -15,11 +15,11 @@ public:
   ~Wall();                   // Destructor
 
   // Game Logic Functions
-  void draw();
+  void virtual draw();
   void gluCube(GLdouble size);
   void drawBox(GLfloat size, GLenum type);
   bool intersects(Object object);
-  void setTexture(char *texturePath);
+  void setModel(char *texturePath);
 
 private:
   GLuint texture_;

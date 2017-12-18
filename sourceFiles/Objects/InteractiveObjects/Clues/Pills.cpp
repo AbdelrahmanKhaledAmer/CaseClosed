@@ -23,17 +23,17 @@ Deletes the pointer for the Pills object.
 Pills::~Pills() {}
 
 void Pills::draw() {
-  float scale = 0.001;
+  locscale_ = 0.001;
 
   glPushMatrix();
   {
-    glScalef(scale, scale, scale);
-    __super::draw(scale);
+
+    __super::draw();
   }
   glPopMatrix();
 }
 
-void Pills::setModel() {
+void Pills::setModel(char *modelPath)  {
   __super::setModel("assets/models/clues/Pills/Bottle 2.3DS");
 }
 

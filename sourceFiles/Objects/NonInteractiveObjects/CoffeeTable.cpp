@@ -25,21 +25,21 @@ Deletes the pointer for the CoffeeTable object.
 CoffeeTable::~CoffeeTable() {}
 
 void CoffeeTable::draw() {
-  float scale = 0.02;
+  locscale_ = 0.02;
 
   glPushMatrix();
   {
     glRotatef(orientation_.y(), 0, 1, 0);
     glTranslatef(0.42, -0.3, 0.48);
     glRotatef(orientation_.y() * -1, 0, 1, 0);
-    glScalef(scale, scale, scale);
-    __super::draw(scale);
+
+    __super::draw();
   }
   glPopMatrix();
 }
 
 void CoffeeTable::drawBoundries() { __super::drawBoundries(1.05, 0.6, 0.4); }
 
-void CoffeeTable::setModel() {
+void CoffeeTable::setModel(char *modelPath)  {
   __super::setModel("assets/models/furniture/CoffeeTable/Table.3DS");
 }

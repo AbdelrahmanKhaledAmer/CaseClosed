@@ -101,10 +101,11 @@ void Object::setModel(char *modelPath) { model_.Load(modelPath); }
     OpenGL drawing function.
     Draws an Object on the screen. To be Overridden by the subclasses.
 */
-void Object::draw(float locScale) {
+void Object::draw() {
   glPushMatrix();
   {
-    glTranslatef(location_.x() / locScale, location_.y() / locScale, location_.z() / locScale);
+    glTranslatef(location_.x(), location_.y(), location_.z());
+    glScalef(locscale_, locscale_, locscale_);
     glScalef(scale_.x(), scale_.y(), scale_.z());
     glRotatef(orientation_.y(), 0, 1, 0);
     model_.Draw();

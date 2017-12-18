@@ -23,17 +23,17 @@ Deletes the pointer for the PhotoFrame object.
 PhotoFrame::~PhotoFrame() {}
 
 void PhotoFrame::draw() {
-  float scale = 0.003;
+  locscale_ = 0.003;
 
   glPushMatrix();
   {
-    glScalef(scale, scale, scale);
-    __super::draw(scale);
+
+    __super::draw();
   }
   glPopMatrix();
 }
 
-void PhotoFrame::setModel() {
+void PhotoFrame::setModel(char *modelPath)  {
   __super::setModel(
       "assets/models/clues/PhotoFrame/Picture.3DS");
 }

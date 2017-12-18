@@ -30,18 +30,18 @@ void Flashlight::turnOff() { this->on_ = false; }
 bool Flashlight::isOn() { return this->on_; }
 
 void Flashlight::draw(float yAngle) {
-  float scale = 0.005;
+  locscale_ = 0.005;
 
   glPushMatrix();
   {
     glTranslatef(dimensions_.x()/2-0.1, dimensions_.y()/2 - 0.4, dimensions_.z()/2-0.2);
-    glScalef(scale, scale, scale);
+
     glPushMatrix();
     {
-      glTranslatef(location_.x() / scale, location_.y() / scale, location_.z() / scale);
+      glTranslatef(location_.x() / locscale_, location_.y() / locscale_, location_.z() / locscale_);
       glScalef(scale_.x(), scale_.y(), scale_.z());
       glRotatef(yAngle, 0, 1, 0);
-      glTranslatef((dimensions_.x()/2)/scale, (dimensions_.y()/2)/scale, (dimensions_.z()/2)/scale);
+      glTranslatef((dimensions_.x()/2)/ locscale_, (dimensions_.y()/2)/ locscale_, (dimensions_.z()/2)/ locscale_);
       model_.Draw();
     }
     glPopMatrix();
@@ -49,6 +49,6 @@ void Flashlight::draw(float yAngle) {
   glPopMatrix();
 }
 
-void Flashlight::setModel() {
+void Flashlight::setModel(char *modelPath) {
   __super::setModel("assets/models/Flashlight/fonarik_low_3ds.3DS");
 }

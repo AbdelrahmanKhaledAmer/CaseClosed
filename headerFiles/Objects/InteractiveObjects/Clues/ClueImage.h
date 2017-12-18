@@ -13,8 +13,8 @@ public:
   ClueImage(Vector3f location, Vector3f orientation, Vector3f scale,
               Vector3f dimensions); // Constructor
   ~ClueImage();                   // Destructor
-  void draw();
-  void setModel(char* imagePath);
+  void virtual draw();
+  void virtual setModel(char* imagePath);
 protected:
   GLuint image_;
 };

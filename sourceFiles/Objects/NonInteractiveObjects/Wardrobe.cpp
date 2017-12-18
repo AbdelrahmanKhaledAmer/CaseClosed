@@ -23,13 +23,13 @@ Deletes the pointer for the Wardrobe object.
 Wardrobe::~Wardrobe() {}
 
 void Wardrobe::draw() {
-  float scale = 0.0025;
+  locscale_ = 0.0025;
 
   glPushMatrix();
   {
     glTranslatef(0.21, 0, 0.36);
-    glScalef(scale, scale, scale);
-    __super::draw(scale);
+
+    __super::draw();
   }
   glPopMatrix();
 }
@@ -38,6 +38,6 @@ void Wardrobe::drawBoundries() {
   __super::drawBoundries(0.4f, 1.8f, 0.95f);
 }
 
-void Wardrobe::setModel() {
+void Wardrobe::setModel(char *modelPath)  {
   __super::setModel("assets/models/furniture/Wardrobe/Wardrobe.3DS");
 }

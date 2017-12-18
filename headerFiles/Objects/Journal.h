@@ -18,8 +18,8 @@ public:
 
   // write function
   void write(int clueIndex, int property = 0);
-  void draw();
-  void setModel();
+  void virtual draw();
+  void virtual setModel(char *modelPath = ""); // Set Model
 
 private:
   GLuint clueImages_[10][3];

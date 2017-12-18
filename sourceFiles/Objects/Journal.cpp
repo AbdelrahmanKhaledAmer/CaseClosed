@@ -64,7 +64,7 @@ void Journal::draw() {
   glPopMatrix();
 }
 
-void Journal::setModel() {
+void Journal::setModel(char *modelPath)  {
   journalImage_ = loadImage("assets/images/Journal/journal.png");
 
   clueImages_[0][0] = loadImage("assets/images/Journal/clue_0.png");

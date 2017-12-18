@@ -23,18 +23,18 @@ Deletes the pointer for the Sink object.
 Sink::~Sink() {}
 
 void Sink::draw() {
-  float scale = 0.028;
+  locscale_ = 0.028;
 
   glPushMatrix();
   {
-    glScalef(scale, scale, scale);
-    __super::draw(scale);
+
+    __super::draw();
   }
   glPopMatrix();
 }
 
 void Sink::drawBoundries() { __super::drawBoundries(1.1f, 0.8f, 0.6f); }
 
-void Sink::setModel() {
+void Sink::setModel(char *modelPath)  {
   __super::setModel("assets/models/furniture/Sink/Wash-basin Ravak SDZU praktik S N080317.3DS");
 }

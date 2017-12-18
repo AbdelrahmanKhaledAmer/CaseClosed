@@ -100,7 +100,7 @@ void Wall::draw() {
   glDisable(GL_TEXTURE_2D);
 }
 
-void Wall::setTexture(char* imagePath) { 
+void Wall::setModel(char* imagePath) { 
   // texture_ = SOIL_load_OGL_texture(
   //  	imagePath, 
   //   SOIL_LOAD_RGBA, SOIL_CREATE_NEW_ID,

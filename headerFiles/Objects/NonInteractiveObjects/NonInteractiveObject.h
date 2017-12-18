@@ -12,9 +12,9 @@ public:
   NonInteractiveObject(Vector3f location, Vector3f orientation, Vector3f scale,
                        Vector3f dimensions); // Constructor
   ~NonInteractiveObject();              // Destructor
-  void draw(float locScale = 1);
+  void virtual draw();
   void drawBoundries(float xLength, float yLength, float zLength);   // Draw Object Boundries
-  void setModel(char* modelPath);
+  void virtual setModel(char* modelPath);
 };
 
 #endif

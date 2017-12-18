@@ -24,12 +24,12 @@ Deletes the pointer for the Body object.
 Body::~Body() {}
 
 void Body::draw() {
-  float scale = 1;
+  locscale_ = 1;
 
   glPushMatrix();
   {
     glTranslatef(-0.8, 0.5, -1);
-    glTranslatef(location_.x() / scale, location_.y() / scale, location_.z() / scale);
+    glTranslatef(location_.x() / locscale_, location_.y() / locscale_, location_.z() / locscale_);
     glScalef(scale_.x(), scale_.y(), scale_.z());
     glRotatef(90, 1, 0, 0);
     model_.Draw();
@@ -37,6 +37,6 @@ void Body::draw() {
   glPopMatrix();
 }
 
-void Body::setModel() {
+void Body::setModel(char *modelPath)  {
   __super::setModel("assets/models/clues/Body/Man N050214.3DS");
 }

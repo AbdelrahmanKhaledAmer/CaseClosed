@@ -24,18 +24,18 @@ Deletes the pointer for the Toilet object.
 Toilet::~Toilet() {}
 
 void Toilet::draw() {
-  float scale = 0.0026;
+  locscale_ = 0.0026;
 
   glPushMatrix();
   {
-    glScalef(scale, scale, scale);
-    __super::draw(scale);
+
+    __super::draw();
   }
   glPopMatrix();
 }
 
 void Toilet::drawBoundries() { __super::drawBoundries(0.6f, 0.9f, 0.5f); }
 
-void Toilet::setModel() {
+void Toilet::setModel(char *modelPath)  {
   __super::setModel("assets/models/furniture/Toilet/Lavatory pan N200317.3DS");
 }

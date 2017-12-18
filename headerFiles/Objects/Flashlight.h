@@ -18,7 +18,7 @@ public:
   void turnOff();
 
   void draw(float yAngle);
-  void setModel();
+  void virtual setModel(char *modelPath = ""); // Set Model
 
 protected:
   bool on_ = false;

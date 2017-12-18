@@ -24,18 +24,18 @@ Deletes the pointer for the Bath object.
 Bath::~Bath() {}
 
 void Bath::draw() {
-  float scale = 0.0001;
+  locscale_ = 0.0001;
 
   glPushMatrix();
   {
-    glScalef(scale, scale, scale);
-    __super::draw(scale);
+
+    __super::draw();
   }
   glPopMatrix();
 }
 
 void Bath::drawBoundries() { __super::drawBoundries(0.9, 0.7, 1.9); }
 
-void Bath::setModel(){
+void Bath::setModel(char *modelPath) {
 	__super::setModel("assets/models/furniture/Bath/Bath Askew KOHLER N021017.3DS");
 }

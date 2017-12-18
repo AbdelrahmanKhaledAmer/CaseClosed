@@ -44,16 +44,16 @@ void drawSprite(GLint left, GLint right, GLint bottom, GLint top, GLuint texture
 
 
 void Window::draw() {
-  float scale = 0.0005;
+  locscale_ = 0.0005;
 
   glPushMatrix();
   {
-    glScalef(scale, scale, scale);
-    __super::draw(scale);
+
+    __super::draw();
   }
   glPopMatrix();
 }
 
-void Window::setModel() {
+void Window::setModel(char *modelPath)  {
   __super::setModel("assets/models/furniture/Window/Window.3DS");
 }

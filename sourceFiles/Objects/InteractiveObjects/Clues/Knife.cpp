@@ -22,12 +22,12 @@ Deletes the pointer for the Knife object.
 Knife::~Knife() {}
 
 void Knife::draw() {
-  float scale = 0.035;
+  locscale_ = 0.035;
 
   glPushMatrix();
   {
-    glScalef(scale, scale, scale);
-    __super::draw(scale);
+
+    __super::draw();
   }
   glPopMatrix();
 }
@@ -37,6 +37,6 @@ std::string Knife::Interact()
   return "3";
 }
 
-void Knife::setModel() {
+void Knife::setModel(char *modelPath)  {
   __super::setModel("assets/models/clues/Knife/Knife_3ds.3DS");
 }

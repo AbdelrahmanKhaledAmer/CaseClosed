@@ -24,17 +24,17 @@ Deletes the pointer for the AnsweringMachine object.
 AnsweringMachine::~AnsweringMachine() {}
 
 void AnsweringMachine::draw() {
-  float scale = 0.05;
+  locscale_ = 0.05;
 
   glPushMatrix();
   {
-    glScalef(scale, scale, scale);
-    __super::draw(scale);
+
+    __super::draw();
   }
   glPopMatrix();
 }
 
-void AnsweringMachine::setModel() {
+void AnsweringMachine::setModel(char *modelPath) {
   __super::setModel("assets/models/clues/Answering Machine/Phone siemens gigaset ap185 N220417.3DS");
 }
 

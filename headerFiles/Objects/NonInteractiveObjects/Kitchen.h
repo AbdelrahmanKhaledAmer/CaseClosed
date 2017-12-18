@@ -14,9 +14,9 @@ public:
 	~Kitchen();                                                                     		   // Destructor
 
     bool intersects(Object object); // Check overlapping objects
-	void draw();
-	void drawBoundries();           // Draw Object Boundries                                                       		   // Destructor
-	void setModel();
+	void virtual draw();
+	void virtual drawBoundries();           // Draw Object Boundries                                                       		   // Destructor
+	void virtual setModel(char *modelPath = "");
 
 protected:
   NonInteractiveObject *part1_ , *part2_;

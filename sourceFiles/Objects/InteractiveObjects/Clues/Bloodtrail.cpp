@@ -23,6 +23,6 @@ Deletes the pointer for the Bloodtrail object.
 */
 Bloodtrail::~Bloodtrail() {}
 
-void Bloodtrail::setModel() {
+void Bloodtrail::setModel(char *modelPath) {
 	__super::setModel("assets/images/blood_trail.png");
 }

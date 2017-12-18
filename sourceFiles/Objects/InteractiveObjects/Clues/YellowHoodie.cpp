@@ -6,7 +6,7 @@ YellowHoodie::YellowHoodie(Vector3f location, Vector3f orientation,
 
 YellowHoodie::~YellowHoodie() {}
 
-void YellowHoodie::setModel() {
+void YellowHoodie::setModel(char *modelPath)  {
   this->image_ = loadImage("assets/images/Clues/yellow_hoodie.png");
 }
 

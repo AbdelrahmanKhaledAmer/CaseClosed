@@ -12,8 +12,8 @@ public:
   CellingLight1(Vector3f location, Vector3f orientation,
                Vector3f scale); // Constructor
   ~CellingLight1();              // Destructor
-  void draw();
-  void setModel();
+  void virtual draw();
+  void virtual setModel(char *modelPath = "");
 };
 
 #endif

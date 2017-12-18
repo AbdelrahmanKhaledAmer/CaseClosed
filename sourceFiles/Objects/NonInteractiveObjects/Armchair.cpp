@@ -26,19 +26,19 @@ Armchair::~Armchair() {
 }
 
 void Armchair::draw() {
-  float scale = 0.0009;
+  std::cout << "Armchair" << '\n';
+  locscale_ = 0.0009;
 
   glPushMatrix();
   {
     glTranslatef(0, 0.42, 0);
-    glScalef(scale, scale, scale);
-    __super::draw(scale);
+    __super::draw();
   }
   glPopMatrix();
 }
 
 void Armchair::drawBoundries() { __super::drawBoundries(0.975, 0.9, 0.975); }
 
-void Armchair::setModel() {
+void Armchair::setModel(char *modelPath)  {
   __super::setModel("assets/models/furniture/Armchair/Armchair.3DS");
 }

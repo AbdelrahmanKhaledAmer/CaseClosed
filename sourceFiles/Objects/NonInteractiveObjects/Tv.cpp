@@ -26,19 +26,19 @@ Tv::~Tv() {
 }
 
 void Tv::draw() {
-  float scale = 0.024;
+  locscale_ = 0.024;
 
   glPushMatrix();
   {
     glTranslatef(0.05, 0.5, 0);
-    glScalef(scale, scale, scale);
-    __super::draw(scale);
+
+    __super::draw();
   }
   glPopMatrix();
 }
 
 void Tv::drawBoundries() { __super::drawBoundries(1 , 1.1, 0.5); }
 
-void Tv::setModel() {
+void Tv::setModel(char *modelPath)  {
   __super::setModel("assets/models/furniture/Tv/TV set Ergo E32C20 LCD N200314.3DS");
 }

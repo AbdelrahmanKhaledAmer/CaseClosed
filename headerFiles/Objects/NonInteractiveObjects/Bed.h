@@ -11,9 +11,9 @@ public:
   // Main functions
   Bed(Vector3f location, Vector3f orientation, Vector3f scale); // Constructor
   ~Bed();                   // Destructor
-  void draw();
-  void drawBoundries();   // Draw Object Boundries
-	void setModel();
+  void virtual draw();
+  void virtual drawBoundries();   // Draw Object Boundries
+	void virtual setModel(char *modelPath = "");
 };
 
 #endif

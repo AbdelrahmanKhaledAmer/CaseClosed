@@ -13,9 +13,9 @@ public:
   Door(Vector3f location, Vector3f orientation, Vector3f scale); // Constructor
   ~Door();
   std::string Interact();
-  void draw();
-  void drawBoundries(); // Draw Object Boundries
-  void setModel();
+  void virtual draw();
+  void virtual drawBoundries(); // Draw Object Boundries
+  void virtual setModel(char *modelPath = ""); // Set Model
   void openDoor(float scale = 1);
   void closeDoor(float scale = 1);
   bool isOpen();

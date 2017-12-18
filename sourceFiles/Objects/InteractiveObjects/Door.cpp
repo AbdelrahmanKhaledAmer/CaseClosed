@@ -32,15 +32,15 @@ std::string Door::Interact()
 
 void Door::draw()
 {
-  float scale = 0.009;
+  locscale_ = 0.009;
   glPushMatrix();
   {
     glTranslatef((-dimensions_.x()/2), -1, 0);    
-    glScalef(scale, scale, scale);
-    glTranslatef(location_.x() / scale, location_.y() / scale, location_.z() / scale);
+
+    glTranslatef(location_.x() / locscale_, location_.y() / locscale_, location_.z() / locscale_);
     glScalef(scale_.x(), scale_.y(), scale_.z());
     glRotatef(orientation_.y(), 0, 1, 0);
-    glTranslatef((-dimensions_.x()/2)/scale, 0, (orientation_.z()/2)/scale);
+    glTranslatef((-dimensions_.x()/2)/ locscale_, 0, (orientation_.z()/2)/ locscale_);
     model_.Draw();
   }
   glPopMatrix();
@@ -48,8 +48,7 @@ void Door::draw()
 
 void Door::drawBoundries() { __super::drawBoundries(0.7, 1.7, 0.15); }
 
-void Door::setModel()
-{
+void Door::setModel(char *modelPath) {
   __super::setModel("assets/models/furniture/Door/Door Endless Boiserie Sliding Door Longhi N291216.3DS");
 }
 

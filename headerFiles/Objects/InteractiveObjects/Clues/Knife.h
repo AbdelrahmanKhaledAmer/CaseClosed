@@ -13,8 +13,8 @@ public:
   ~Knife();                                                       // Destructor
 
   std::string Interact();
-  void draw();
-  void setModel();
+  void virtual draw();
+  void virtual setModel(char *modelPath = "");
 };
 
 #endif

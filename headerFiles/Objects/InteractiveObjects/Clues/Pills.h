@@ -12,8 +12,8 @@ public:
   Pills(Vector3f location, Vector3f orientation,
         Vector3f scale); // Constructor
   ~Pills();              // Destructor
-  void draw();
-  void setModel();
+  void virtual draw();
+  void virtual setModel(char *modelPath = "");
   std::string Interact();
 };
 

@@ -24,14 +24,13 @@ Deletes the pointer for the Bookcase object.
 Bookcase::~Bookcase() {}
 
 void Bookcase::draw() {
-  float scale = 0.0007;
+  locscale_ = 0.0007;
 
   glPushMatrix();
   {
     glTranslatef(0, 0.9, 0);
-    glScalef(scale, scale, scale);
-    glTranslatef(location_.x() / scale, location_.y() / scale,
-                 location_.z() / scale);
+
+    glTranslatef(location_.x() / locscale_, location_.y() / locscale_, location_.z() / locscale_);
     glScalef(scale_.x(), scale_.y(), scale_.z());
     glRotatef(orientation_.y(), 0, 1, 0);
     glRotatef(-90, 1, 0, 0);
@@ -41,6 +40,6 @@ void Bookcase::draw() {
 }
 void Bookcase::drawBoundries() { __super::drawBoundries(0.25, 1.8, 1.45); }
 
-void Bookcase::setModel() {
+void Bookcase::setModel(char *modelPath)  {
   __super::setModel("assets/models/furniture/Bookcase/Bookcase.3DS");
 }

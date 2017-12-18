@@ -12,9 +12,9 @@ public:
 	// Main functions
 	Toilet(Vector3f location, Vector3f orientation, Vector3f scale);    // Constructor
 	~Toilet();   
-	void draw();
-  	void drawBoundries();   // Draw Object Boundries                                                                  		   // Destructor
-	void setModel();
+	void virtual draw();
+  	void virtual drawBoundries();   // Draw Object Boundries                                                                  		   // Destructor
+	void virtual setModel(char *modelPath = "");
 };
 
 #endif

@@ -6,7 +6,7 @@ SuicideNote::SuicideNote(Vector3f location, Vector3f orientation,
 
 SuicideNote::~SuicideNote() {}
 
-void SuicideNote::setModel() {
+void SuicideNote::setModel(char *modelPath)  {
   this->image_ = loadImage("assets/images/Clues/suicide_note.png");
 }
 

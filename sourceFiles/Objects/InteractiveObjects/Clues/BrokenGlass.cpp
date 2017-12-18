@@ -23,7 +23,7 @@ Deletes the pointer for the BrokenGlass object.
 */
 BrokenGlass::~BrokenGlass() {}
 
-void BrokenGlass::setModel() {
+void BrokenGlass::setModel(char *modelPath)  {
   this->image_ = loadImage("assets/images/broken_glass.png");
 }
 

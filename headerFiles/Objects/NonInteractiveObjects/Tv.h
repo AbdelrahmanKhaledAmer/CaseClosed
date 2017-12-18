@@ -12,8 +12,8 @@ public:
 	// Main functions
 	Tv(Vector3f location, Vector3f orientation, Vector3f scale);    // Constructor
 	~Tv();                                                                     		   // Destructor
-	void draw();
-	void drawBoundries();           // Draw Object Boundries
-	void setModel();
+	void virtual draw();
+	void virtual drawBoundries();           // Draw Object Boundries
+	void virtual setModel(char *modelPath = "");
 };
 #endif

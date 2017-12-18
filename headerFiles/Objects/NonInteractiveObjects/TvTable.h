@@ -11,9 +11,9 @@ public:
   // Main functions
   TvTable(Vector3f location, Vector3f orientation, Vector3f scale); // Constructor
   ~TvTable();                   // Destructor
-  void draw();
-  void drawBoundries();
-  void setModel();
+  void virtual draw();
+  void virtual drawBoundries();
+  void virtual setModel(char *modelPath = "");
 };
 
 #endif

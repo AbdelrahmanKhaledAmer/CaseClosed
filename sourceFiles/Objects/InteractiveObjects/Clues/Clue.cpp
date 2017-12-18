@@ -24,7 +24,7 @@ Deletes the pointer for the Clue object.
 */
 Clue::~Clue() {}
 
-void Clue::draw(float locScale) { __super::draw(locScale); }
+void Clue::draw() { __super::draw(); }
 
 bool Clue::isFound() { return this->isFound_; }
 

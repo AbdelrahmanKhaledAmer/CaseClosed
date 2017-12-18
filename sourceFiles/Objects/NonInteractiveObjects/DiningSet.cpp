@@ -25,19 +25,19 @@ DiningSet::~DiningSet() {
 }
 
 void DiningSet::draw() {
-  float scale = 0.001;
+  locscale_ = 0.001;
 
   glPushMatrix();
   {
     glTranslatef(0, 0.35, 0);
-    glScalef(scale, scale, scale);
-    __super::draw(scale);
+
+    __super::draw();
   }
   glPopMatrix();
 }
 
 void DiningSet::drawBoundries() { __super::drawBoundries(1.25, 0.9, 1.5); }
 
-void DiningSet::setModel() {
+void DiningSet::setModel(char *modelPath)  {
   __super::setModel("assets/models/furniture/DiningSet/4 Chair 2 Tone.3ds");
 }
