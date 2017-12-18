@@ -1,11 +1,6 @@
 #include "headerFiles/LoadGame.h"
 
-void loadAssets()
-{
-  for (Object *object : livingroom) {
-    (*object).setModel();
-  }
-
+void loadAssets() {
   apartmentDoor.setModel();
   bedroomDoor.setModel();
   bathroomDoor.setModel();
@@ -21,12 +16,8 @@ void loadAssets()
   livingOutsideImage1.setModel("assets/images/window.png");
   livingOutsideImage2.setModel("assets/images/window.png");
 
-  // armchair.setModel();
-  // sofa.setModel();
-  // coffeeTable.setModel();
-  // tv.setModel();
-  // tvTable.setModel();
-  // bookcase.setModel();
+  for (Object *furniture : livingroom)
+    furniture->setModel();
 
   kitchen.setModel();
   diningSet.setModel();
@@ -54,33 +45,33 @@ void loadAssets()
 
   journal.setModel();
   // Corridor Texturs
-  (*walls[0]).setTexture("assets/images/corridor_wall.jpg");
-  (*walls[1]).setTexture("assets/images/corridor_wall.jpg");
-  (*walls[2]).setTexture("assets/images/corridor_wall.jpg");
-  (*walls[3]).setTexture("assets/images/corridor_wall.jpg");
-  (*walls[4]).setTexture("assets/images/corridor_wall.jpg");
+  (*walls[0]).setModel("assets/images/corridor_wall.jpg");
+  (*walls[1]).setModel("assets/images/corridor_wall.jpg");
+  (*walls[2]).setModel("assets/images/corridor_wall.jpg");
+  (*walls[3]).setModel("assets/images/corridor_wall.jpg");
+  (*walls[4]).setModel("assets/images/corridor_wall.jpg");
   // Kitchen Texturs
-  (*walls[5]).setTexture("assets/images/kitchen_wall.jpg");
-  (*walls[6]).setTexture("assets/images/kitchen_wall.jpg");
+  (*walls[5]).setModel("assets/images/kitchen_wall.jpg");
+  (*walls[6]).setModel("assets/images/kitchen_wall.jpg");
   // Reception and Bedroom Textures
-  (*walls[7]).setTexture("assets/images/reception_wall.jpg");
-  (*walls[8]).setTexture("assets/images/reception_wall.jpg");
-  (*walls[9]).setTexture("assets/images/reception_wall.jpg");
-  (*walls[10]).setTexture("assets/images/reception_wall.jpg");
-  (*walls[11]).setTexture("assets/images/reception_wall.jpg");
-  (*walls[12]).setTexture("assets/images/reception_wall.jpg");
-  (*walls[13]).setTexture("assets/images/reception_wall.jpg");
-  (*walls[14]).setTexture("assets/images/reception_wall.jpg");
-  (*walls[15]).setTexture("assets/images/reception_wall.jpg");
-  (*walls[16]).setTexture("assets/images/reception_wall.jpg");
-  (*walls[17]).setTexture("assets/images/reception_wall.jpg");
-  (*walls[18]).setTexture("assets/images/reception_wall.jpg");
+  (*walls[7]).setModel("assets/images/reception_wall.jpg");
+  (*walls[8]).setModel("assets/images/reception_wall.jpg");
+  (*walls[9]).setModel("assets/images/reception_wall.jpg");
+  (*walls[10]).setModel("assets/images/reception_wall.jpg");
+  (*walls[11]).setModel("assets/images/reception_wall.jpg");
+  (*walls[12]).setModel("assets/images/reception_wall.jpg");
+  (*walls[13]).setModel("assets/images/reception_wall.jpg");
+  (*walls[14]).setModel("assets/images/reception_wall.jpg");
+  (*walls[15]).setModel("assets/images/reception_wall.jpg");
+  (*walls[16]).setModel("assets/images/reception_wall.jpg");
+  (*walls[17]).setModel("assets/images/reception_wall.jpg");
+  (*walls[18]).setModel("assets/images/reception_wall.jpg");
   // Bathroom Textures
-  (*walls[19]).setTexture("assets/images/bathroom_wall.jpg");
-  (*walls[20]).setTexture("assets/images/bathroom_wall.jpg");
-  (*walls[21]).setTexture("assets/images/bathroom_wall.jpg");
-  (*walls[22]).setTexture("assets/images/bathroom_wall.jpg");
-  (*walls[23]).setTexture("assets/images/bathroom_wall.jpg");
+  (*walls[19]).setModel("assets/images/bathroom_wall.jpg");
+  (*walls[20]).setModel("assets/images/bathroom_wall.jpg");
+  (*walls[21]).setModel("assets/images/bathroom_wall.jpg");
+  (*walls[22]).setModel("assets/images/bathroom_wall.jpg");
+  (*walls[23]).setModel("assets/images/bathroom_wall.jpg");
   
   // Starting music
   mciSendString("play assets\\audio\\music\\bgm.mp3 repeat", 0, 0, 0);

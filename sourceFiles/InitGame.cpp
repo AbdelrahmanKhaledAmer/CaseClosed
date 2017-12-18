@@ -62,6 +62,7 @@ Window livingroomWindow2(Vector3f(26.0, 0.75, 5.4), Vector3f(0, 90, 0), Vector3f
 OutsideImage livingOutsideImage2(Vector3f(26.0 - 0.001, 1.12, 5.4), Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vector3f(0.37, 0.20, 0.30));
 
 //livingroom
+Object *livingroom[6];
 Armchair armchair(Vector3f(22.8, 0, 10.2), Vector3f(0, 90, 0), Vector3f(1, 1, 1));
 Sofa sofa(Vector3f(24.5, 0, 9), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
 CoffeeTable coffeeTable(Vector3f(23.7, 0, 10.6), Vector3f(0, 0, 0), Vector3f(1, 1, 1));

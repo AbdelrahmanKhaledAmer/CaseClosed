@@ -3,8 +3,6 @@
 
 #include "headerFiles/Include.h"
 
-
-
 // Screen Constants =================================================
 extern const int scale;
 extern const int width;
@@ -57,12 +55,20 @@ extern Window livingroomWindow2;
 extern OutsideImage livingOutsideImage2;
 
 //livingroom
+extern Object *livingroom[6];
 extern Armchair armchair;
 extern Sofa sofa;
 extern CoffeeTable coffeeTable;
 extern Tv tv;
 extern TvTable tvTable;
 extern Bookcase bookcase;
+
+#define ARMCHAIR    0
+#define SOFA        1
+#define COFFEETABLE 2
+#define TV          3
+#define TVTABLE     4
+#define BOOKCASE    5
 
 //kitchen
 extern DiningSet diningSet;
@@ -95,5 +101,6 @@ extern YellowHoodie savior;
 // Functions ====================================================
 void initClues();
 void initEnvironment();
+void initApartment();
 
 #endif

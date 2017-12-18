@@ -83,13 +83,8 @@ void drawApartment()
   livingroomWindow2.draw();
   livingOutsideImage2.draw();
 
-  // livingroom
-  armchair.draw();
-  sofa.draw();
-  coffeeTable.draw();
-  tv.draw();
-  tvTable.draw();
-  bookcase.draw();
+  for (Object *furniture : livingroom)
+    furniture->draw();
 
   // kitchen
   kitchen.draw();
@@ -107,8 +102,8 @@ void drawApartment()
   sink.draw();
   bath.draw();
   savior.draw();
-  glPopMatrix();
-  drawEnvironment();
+
+  // drawEnvironment();
    savior.draw();
 }
 
