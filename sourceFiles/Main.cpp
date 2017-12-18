@@ -242,9 +242,10 @@ void main(int argc, char **argv)
   glutPassiveMotionFunc(mouseMovement);
 
   glClearColor(1, 1, 1, 0);
-  // initEnvironment();
-  // initClues();
-  // loadAssets();
+  initEnvironment();
+  initApartment();
+  initClues();
+  loadAssets();
 
   glEnable(GL_DEPTH_TEST);
   glEnable(GL_LIGHTING);

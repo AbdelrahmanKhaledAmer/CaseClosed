@@ -2,6 +2,10 @@
 
 void loadAssets()
 {
+  for (Object *object : livingroom) {
+    (*object).setModel();
+  }
+
   apartmentDoor.setModel();
   bedroomDoor.setModel();
   bathroomDoor.setModel();
@@ -13,16 +17,16 @@ void loadAssets()
   livingroomWindow1.setModel();
   livingroomWindow2.setModel();
   bedroomWindow.setModel();
-  bedroomOutsideImage.setImage("assets/images/window.png");
-  livingOutsideImage1.setImage("assets/images/window.png");
-  livingOutsideImage2.setImage("assets/images/window.png");
+  bedroomOutsideImage.setModel("assets/images/window.png");
+  livingOutsideImage1.setModel("assets/images/window.png");
+  livingOutsideImage2.setModel("assets/images/window.png");
 
-  armchair.setModel();
-  sofa.setModel();
-  coffeeTable.setModel();
-  tv.setModel();
-  tvTable.setModel();
-  bookcase.setModel();
+  // armchair.setModel();
+  // sofa.setModel();
+  // coffeeTable.setModel();
+  // tv.setModel();
+  // tvTable.setModel();
+  // bookcase.setModel();
 
   kitchen.setModel();
   diningSet.setModel();

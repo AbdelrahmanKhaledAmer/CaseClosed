@@ -23,6 +23,6 @@ Deletes the pointer for the Footprints object.
 */
 Footprints::~Footprints() {}
 
-void Footprints::setImage() {
-	__super::setImage("assets/images/foot_prints.png");
+void Footprints::setModel() {
+	__super::setModel("assets/images/foot_prints.png");
 }

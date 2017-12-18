@@ -23,7 +23,7 @@ Deletes the pointer for the ClueImage object.
 */
 ClueImage::~ClueImage() {}
 
-void ClueImage::setImage(char* imagePath) { 
+void ClueImage::setModel(char* imagePath) { 
   image_ = SOIL_load_OGL_texture(
    	imagePath, 
     SOIL_LOAD_RGBA, SOIL_CREATE_NEW_ID,

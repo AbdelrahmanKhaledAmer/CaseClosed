@@ -26,6 +26,7 @@ public:
     void setOrientation(Vector3f orientation);  //Set Orientation
     void setScale(Vector3f scale);              //Set Scale
     void setDimension(Vector3f dimensions);     //Set Dimensions
+	void virtual setModel();            //Set Model
 	void setModel(char * modelPath);            //Set Model
 
     // Game logic functions

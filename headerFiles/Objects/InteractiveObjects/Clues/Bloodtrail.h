@@ -12,7 +12,7 @@ public:
   Bloodtrail(Vector3f location, Vector3f orientation, Vector3f scale,
              Vector3f dimensions); // Constructor
   ~Bloodtrail();                   // Destructor
-  void setImage();
+  void setModel();
 };
 
 #endif

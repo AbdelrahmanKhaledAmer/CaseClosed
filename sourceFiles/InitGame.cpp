@@ -229,3 +229,16 @@ void initEnvironment()
   WinImg = loadImage("assets/images/win.png");
   loseImg = loadImage("assets/images/lose.png");
 }
+
+void initLivingRoom(){
+  livingroom[ARMCHAIR]    = new Armchair(Vector3f(22.8, 0, 10.2), Vector3f(0, 90, 0), Vector3f(1, 1, 1));
+  livingroom[SOFA]        = new Sofa(Vector3f(24.5, 0, 9), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
+  livingroom[COFFEETABLE] = new CoffeeTable(Vector3f(23.7, 0, 10.6), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
+  livingroom[TV]          = new Tv(Vector3f(24.5, 0, 11.5), Vector3f(0, -115 + 180, 0), Vector3f(1, 1, 1));
+  livingroom[TVTABLE]     = new TvTable(Vector3f(24.5, 0, 11.5), Vector3f(0, 180, 0), Vector3f(1, 1, 1));
+  livingroom[BOOKCASE]    = new Bookcase(Vector3f(25.7, 0, 7), Vector3f(0, 180, 0), Vector3f(1, 1, 1));
+}
+
+void initApartment(){
+  initLivingRoom();
+}

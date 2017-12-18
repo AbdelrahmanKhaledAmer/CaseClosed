@@ -14,7 +14,7 @@ public:
                Vector3f dimensions); // Constructor
   ~OutsideImage();                   // Destructor
   void draw();
-  void setImage(char *imagePath);
+  void setModel(char *imagePath);
 
 protected:
   GLuint image_;

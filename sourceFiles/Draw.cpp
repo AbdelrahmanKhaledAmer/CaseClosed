@@ -1,7 +1,6 @@
 #include "headerFiles/Draw.h"
 
-void drawClues()
-{
+void drawClues() {
   // int len = sizeof(clues) / sizeof(*clues);
   // for (int i = 0; i < len; i++)
   // {

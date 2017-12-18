@@ -39,6 +39,6 @@ void OutsideImage::draw() {
   glPopMatrix();
 }
 
-void OutsideImage::setImage(char *imagePath) {
+void OutsideImage::setModel(char *imagePath) {
   this->image_ = loadImage(imagePath);
 }
