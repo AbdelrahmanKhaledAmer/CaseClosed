@@ -4,6 +4,12 @@
 #include "headerFiles/Draw.h"
 #include "headerFiles/GameLogic.h"
 #include "headerFiles/Controls.h"
+#include <thread>
+
+void call_from_thread() {
+  std::cout << "Hello, World" << std::endl;
+  return;
+}
 
 void initFlashLight()
 {
@@ -133,6 +139,7 @@ void journalLight()
 void display(void)
 {
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+  std::thread{call_from_thread}.detach();
 
   // Set the camera
   if (enableFlashLight)
@@ -235,9 +242,10 @@ void main(int argc, char **argv)
   glutPassiveMotionFunc(mouseMovement);
 
   glClearColor(1, 1, 1, 0);
-  initEnvironment();
-  initClues();
-  loadAssets();
+  // initEnvironment();
+  // initClues();
+  // loadAssets();
+
   glEnable(GL_DEPTH_TEST);
   glEnable(GL_LIGHTING);
   //glEnable(GL_LIGHT0);
