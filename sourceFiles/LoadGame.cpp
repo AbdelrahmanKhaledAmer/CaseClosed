@@ -22,15 +22,11 @@ void loadAssets() {
   for (Object *furniture : kitchen)
     furniture->setModel();
 
-  body.setModel();
-  bed.setModel();
-  nightstand1.setModel();
-  nightstand2.setModel();
-  wardrobe.setModel();
+  for (Object *furniture : bedroom)
+    furniture->setModel();
 
-  toilet.setModel();
-  sink.setModel();
-  bath.setModel();
+  for (Object *furniture : bathroom)
+    furniture->setModel();
 
   photoFrame.setModel();
   yellowHoodie.setModel();
@@ -44,35 +40,23 @@ void loadAssets() {
   flashlight.setModel();
 
   journal.setModel();
-  // Corridor Texturs
-  (*walls[0]).setModel("assets/images/corridor_wall.jpg");
-  (*walls[1]).setModel("assets/images/corridor_wall.jpg");
-  (*walls[2]).setModel("assets/images/corridor_wall.jpg");
-  (*walls[3]).setModel("assets/images/corridor_wall.jpg");
-  (*walls[4]).setModel("assets/images/corridor_wall.jpg");
-  // Kitchen Texturs
-  (*walls[5]).setModel("assets/images/kitchen_wall.jpg");
-  (*walls[6]).setModel("assets/images/kitchen_wall.jpg");
-  // Reception and Bedroom Textures
-  (*walls[7]).setModel("assets/images/reception_wall.jpg");
-  (*walls[8]).setModel("assets/images/reception_wall.jpg");
-  (*walls[9]).setModel("assets/images/reception_wall.jpg");
-  (*walls[10]).setModel("assets/images/reception_wall.jpg");
-  (*walls[11]).setModel("assets/images/reception_wall.jpg");
-  (*walls[12]).setModel("assets/images/reception_wall.jpg");
-  (*walls[13]).setModel("assets/images/reception_wall.jpg");
-  (*walls[14]).setModel("assets/images/reception_wall.jpg");
-  (*walls[15]).setModel("assets/images/reception_wall.jpg");
-  (*walls[16]).setModel("assets/images/reception_wall.jpg");
-  (*walls[17]).setModel("assets/images/reception_wall.jpg");
-  (*walls[18]).setModel("assets/images/reception_wall.jpg");
-  // Bathroom Textures
-  (*walls[19]).setModel("assets/images/bathroom_wall.jpg");
-  (*walls[20]).setModel("assets/images/bathroom_wall.jpg");
-  (*walls[21]).setModel("assets/images/bathroom_wall.jpg");
-  (*walls[22]).setModel("assets/images/bathroom_wall.jpg");
-  (*walls[23]).setModel("assets/images/bathroom_wall.jpg");
-  
+
+  // Wall Texturs
+  for (int i = 0; i < sizeof(walls) / sizeof(walls[0]); i++) {
+    char *wallpath;
+
+    if (i < 5)
+      wallpath = "assets/images/corridor_wall.jpg";
+    else if (i < 7)
+      wallpath = "assets/images/kitchen_wall.jpg";
+    else if (i < 19)
+      wallpath = "assets/images/reception_wall.jpg";
+    else
+      wallpath = "assets/images/bathroom_wall.jpg";
+
+    walls[i]->setModel(wallpath);
+  }
+
   // Starting music
   mciSendString("play assets\\audio\\music\\bgm.mp3 repeat", 0, 0, 0);
 }

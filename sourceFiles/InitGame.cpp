@@ -61,23 +61,10 @@ OutsideImage livingOutsideImage1(Vector3f(19.7 + 0.001, 1.12, 8.5), Vector3f(0, 
 Window livingroomWindow2(Vector3f(26.0, 0.75, 5.4), Vector3f(0, 90, 0), Vector3f(1, 1, 1));
 OutsideImage livingOutsideImage2(Vector3f(26.0 - 0.001, 1.12, 5.4), Vector3f(0, 0, 0), Vector3f(1, 1, 1), Vector3f(0.37, 0.20, 0.30));
 
-//livingroom
-Object *livingroom[6];
-
-//kitchen
-Object *kitchen[2];
-
-//Bedroom
-Body body(Vector3f(23, 0, 14.9), Vector3f(0, 180, 0), Vector3f(1, 1, 1));
-Bed bed(Vector3f(23, 0, 14.9), Vector3f(0, 180, 0), Vector3f(1, 1, 1));
-Nightstand nightstand1(Vector3f(24.17, 0, 16.2), Vector3f(0, 180, 0), Vector3f(1, 1, 1));
-Nightstand nightstand2(Vector3f(21.27, 0, 16.2), Vector3f(0, 180, 0), Vector3f(1, 1, 1));
-Wardrobe wardrobe(Vector3f(19.85, 0, 12.6), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
-
-//Bathroom
-Toilet toilet(Vector3f(26, 0, 15), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
-Sink sink(Vector3f(27.2, 0, 12.3), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
-Bath bath(Vector3f(28, 0, 14.9), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
+Object *livingroom[NUM_LIVINGROOM];
+Object *kitchen[NUM_KITCHEN];
+Object *bedroom[NUM_BEDROOM];
+Object *bathroom[NUM_BATHROOM];
 
 //Clues
 PhotoFrame photoFrame(Vector3f(24.24, 0.5, 16.11), Vector3f(0, 90, 0), Vector3f(1, 1, 1));
@@ -238,7 +225,23 @@ void initKitchen(){
   kitchen[DININGSET]      = new DiningSet(Vector3f(22.2, 0, 7), Vector3f(0, -90, 0), Vector3f(1, 1, 1));
 }
 
+void initBedroom(){
+  bedroom[BODY]           = new Body(Vector3f(23, 0, 14.9), Vector3f(0, 180, 0), Vector3f(1, 1, 1));
+  bedroom[BED]            = new Bed(Vector3f(23, 0, 14.9), Vector3f(0, 180, 0), Vector3f(1, 1, 1));
+  bedroom[NIGHTSTAND1]    = new Nightstand(Vector3f(24.17, 0, 16.2), Vector3f(0, 180, 0), Vector3f(1, 1, 1));
+  bedroom[NIGHTSTAND2]    = new Nightstand(Vector3f(21.27, 0, 16.2), Vector3f(0, 180, 0), Vector3f(1, 1, 1));
+  bedroom[WARDROBE]       = new Wardrobe(Vector3f(19.85, 0, 12.6), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
+}
+
+void initBathroom(){
+  bathroom[TOILET]        = new Toilet(Vector3f(26, 0, 15), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
+  bathroom[SINK]          = new Sink(Vector3f(27.2, 0, 12.3), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
+  bathroom[BATH]          = new Bath(Vector3f(28, 0, 14.9), Vector3f(0, 0, 0), Vector3f(1, 1, 1));
+}
+
 void initApartment(){
   initLivingRoom();
   initKitchen();
+  initBedroom();
+  initBathroom();
 }

@@ -30,23 +30,19 @@ void checkString(std::string s)
   }
 }
 
-bool intersectsWalls()
-{
+bool intersectsWalls() {
   bool intersects = false;
-  for (int i = 0; i < sizeof(walls) / sizeof(*walls); i++)
-  {
-    intersects |= (*walls[i]).intersects(player);
-  }
-  if (!apartmentDoor.isOpen())
-  {
+
+  for (Wall *wall : walls)
+    wall->intersects(player);
+
+  if (!apartmentDoor.isOpen()) {
     intersects |= apartmentDoor.intersects(player);
   }
-  if (!bedroomDoor.isOpen())
-  {
+  if (!bedroomDoor.isOpen()) {
     intersects |= bedroomDoor.intersects(player);
   }
-  if (!bathroomDoor.isOpen())
-  {
+  if (!bathroomDoor.isOpen()) {
     intersects |= bathroomDoor.intersects(player);
   }
 
@@ -54,15 +50,13 @@ bool intersectsWalls()
     furniture->intersects(player);
 
   for (Object *furniture : kitchen)
-	  furniture->intersects(player);
+    furniture->intersects(player);
 
-  intersects |= bed.intersects(player);
-  intersects |= nightstand1.intersects(player);
-  intersects |= nightstand2.intersects(player);
-  intersects |= wardrobe.intersects(player);
-  intersects |= toilet.intersects(player);
-  intersects |= sink.intersects(player);
-  intersects |= bath.intersects(player);
+  for (Object *furniture : bedroom)
+    furniture->intersects(player);
+
+  for (Object *furniture : bathroom)
+    furniture->intersects(player);
 
   return intersects;
   // return false;

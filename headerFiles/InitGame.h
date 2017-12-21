@@ -55,40 +55,45 @@ extern Window livingroomWindow2;
 extern OutsideImage livingOutsideImage2;
 
 //livingroom
-#define ARMCHAIR    0
-#define SOFA        1
-#define COFFEETABLE 2
-#define TV          3
-#define TVTABLE     4
-#define BOOKCASE    5
-extern Object *livingroom[6];
+#define ARMCHAIR        0
+#define SOFA            1
+#define COFFEETABLE     2
+#define TV              3
+#define TVTABLE         4
+#define BOOKCASE        5
+extern AnsweringMachine answeringMachine;
+extern YellowHoodie yellowHoodie;
+#define NUM_LIVINGROOM  6
+extern Object *livingroom[NUM_LIVINGROOM];
 
 //kitchen
-#define KITCHEN     0
-#define DININGSET   1
-extern Object *kitchen[2];
+#define KITCHEN         0
+#define DININGSET       1
+extern Pills pills;
+extern Newspaper newspaper;
+extern BrokenGlass brokenGlass;
+#define NUM_KITCHEN     2
+extern Object *kitchen[NUM_KITCHEN];
 
 //Bedroom
-extern Body body;
-extern Bed bed;
-extern Nightstand nightstand1;
-extern Nightstand nightstand2;
-extern Wardrobe wardrobe;
+#define BODY            0
+#define BED             1
+#define NIGHTSTAND1     2
+#define NIGHTSTAND2     3
+#define WARDROBE        4
+extern Knife knife;
+extern SuicideNote suicideNote;
+extern PhotoFrame photoFrame;
+#define NUM_BEDROOM     5
+extern Object *bedroom[NUM_BEDROOM];
 
 //Bathroom
-extern Toilet toilet;
-extern Sink sink;
-extern Bath bath;
+#define TOILET          0
+#define SINK            1
+#define BATH            2
+#define NUM_BATHROOM    3
+extern Object *bathroom[NUM_BATHROOM];
 
-//Clues
-extern PhotoFrame photoFrame;
-extern YellowHoodie yellowHoodie;
-extern Pills pills;
-extern Knife knife;
-extern Newspaper newspaper;
-extern AnsweringMachine answeringMachine;
-extern BrokenGlass brokenGlass;
-extern SuicideNote suicideNote;
 
 extern YellowHoodie savior;
 

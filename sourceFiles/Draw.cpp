@@ -46,16 +46,7 @@ void drawEnvironment()
 
 void drawHitBoxes()
 {
-  apartmentDoor.drawBoundries();
-  bedroomDoor.drawBoundries();
-  bathroomDoor.drawBoundries();
-  bed.drawBoundries();
-  nightstand1.drawBoundries();
-  nightstand2.drawBoundries();
-  wardrobe.drawBoundries();
-  toilet.drawBoundries();
-  sink.drawBoundries();
-  bath.drawBoundries();
+
 }
 
 void drawApartment()
@@ -78,25 +69,17 @@ void drawApartment()
   for (Object *furniture : livingroom)
     furniture->draw();
 
-  // kitchen
   for (Object *furniture : kitchen)
 	  furniture->draw();
 
-  // bedroom
-  body.draw();
-  bed.draw();
-  nightstand1.draw();
-  nightstand2.draw();
-  wardrobe.draw();
+  for (Object *furniture : bedroom)
+    furniture->draw();
 
-  // Toilet
-  toilet.draw();
-  sink.draw();
-  bath.draw();
+  for (Object *furniture : bathroom)
+    furniture->draw();
+
+  drawEnvironment();
   savior.draw();
-
-  // drawEnvironment();
-   savior.draw();
 }
 
 void winDraw()
