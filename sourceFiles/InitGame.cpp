@@ -98,112 +98,42 @@ void initClues()
 
 void initEnvironment()
 {
-  Eigen::Vector3f dim(0.2, 2, 1);
+  Vector3f dim(0.2, 2, 1);
+  Vector3f alongX(0, 90, 0);
+  Vector3f alongZ(0, 0, 0);
   // Corridor
-  Eigen::Vector3f loc0(12, 0, 1.63);          // (1.63, 12)
-  Eigen::Vector3f ori0(0, 0, 0);              // along z
-  Eigen::Vector3f scl0(1, 1, 3);              // length 3
-  walls[0] = new Wall(loc0, ori0, scl0, dim); // South wall
-  Eigen::Vector3f loc1(12, 0, 1.63);          // (1.63, 12)
-  Eigen::Vector3f ori1(0, 90, 0);             // along x
-  Eigen::Vector3f scl1(1, 1, 18);             // length 18
-  walls[1] = new Wall(loc1, ori1, scl1, dim); // West wall
-  Eigen::Vector3f loc2(30, 0, 1.63);          // (1.63, 30)
-  Eigen::Vector3f ori2(0, 0, 0);              // along z
-  Eigen::Vector3f scl2(1, 1, 3);              // length 3
-  walls[2] = new Wall(loc2, ori2, scl2, dim); // North wall
-  Eigen::Vector3f loc3(12, 0, 4.63);          // (4.63, 12)
-  Eigen::Vector3f ori3(0, 90, 0);             // along x
-  Eigen::Vector3f scl3(1, 1, 12);             // length 12
-  walls[3] = new Wall(loc3, ori3, scl3, dim); // East wall part 1
-  Eigen::Vector3f loc4(25, 0, 4.63);          // (4.63, 25)
-  Eigen::Vector3f ori4(0, 90, 0);             // along x
-  Eigen::Vector3f scl4(1, 1, 5);              // length 5
-  walls[4] = new Wall(loc4, ori4, scl4, dim); // East wall part 2
+  walls[0] = new Wall(Vector3f(12, 0, 1.63), alongZ, Vector3f(1, 1, 3), dim);   // South wall
+  walls[1] = new Wall(Vector3f(12, 0, 1.63), alongX, Vector3f(1, 1, 18), dim);  // West wall
+  walls[2] = new Wall(Vector3f(30, 0, 1.63), alongZ, Vector3f(1, 1, 3), dim);   // North wall
+  walls[3] = new Wall(Vector3f(12, 0, 4.63), alongX, Vector3f(1, 1, 12), dim);  // East wall part 1
+  walls[4] = new Wall(Vector3f(25, 0, 4.63), alongX, Vector3f(1, 1, 5), dim);   // East wall part 2
 
   // Kitchen
-  Eigen::Vector3f loc5(19.5, 0, 4.64);        // (4.63, 19.5)
-  Eigen::Vector3f ori5(0, 90, 0);             // along x
-  Eigen::Vector3f scl5(1, 1, 3.5);            // length 3
-  walls[5] = new Wall(loc5, ori5, scl5, dim); // West wall
-  Eigen::Vector3f loc6(19.5, 0, 4.64);        // (4.63, 19.5)
-  Eigen::Vector3f ori6(0, 0, 0);              // along z
-  Eigen::Vector3f scl6(1, 1, 1.97);           // length 1.97
-  walls[6] = new Wall(loc6, ori6, scl6, dim); // South wall
+  walls[5] = new Wall(Vector3f(19.5, 0, 4.64), alongX, Vector3f(1, 1, 3.5), dim);   // West wall
+  walls[6] = new Wall(Vector3f(19.5, 0, 4.64), alongZ, Vector3f(1, 1, 1.97), dim);  // South wall
 
   // Reception
-  Eigen::Vector3f loc7(26, 0, 4.64);              // (4.63, 26)
-  Eigen::Vector3f ori7(0, 0, 0);                  // along z
-  Eigen::Vector3f scl7(1, 1, 7.37);               // length 7.37
-  walls[7] = new Wall(loc7, ori7, scl7, dim);     // North wall
-  Eigen::Vector3f loc8(23, 0, 4.64);              // (4.63, 23)
-  Eigen::Vector3f ori8(0, 90, 0);                 // along x
-  Eigen::Vector3f scl8(1, 1, 1);                  // length 1
-  walls[8] = new Wall(loc8, ori8, scl8, dim);     // West wall part 1
-  Eigen::Vector3f loc9(25.01, 0, 4.64);           // (4.63, 25)
-  Eigen::Vector3f ori9(0, 90, 0);                 // along x
-  Eigen::Vector3f scl9(1, 1, 0.99);               // length 1
-  walls[9] = new Wall(loc9, ori9, scl9, dim);     // West wall part 2
-  Eigen::Vector3f loc10(19.5, 0, 6.6);            // (7.5, 19.5)
-  Eigen::Vector3f ori10(0, 0, 0);                 // along z
-  Eigen::Vector3f scl10(1, 1, 5.4);               // length 4.5
-  walls[10] = new Wall(loc10, ori10, scl10, dim); // South wall
-  Eigen::Vector3f loc11(19.5, 0, 12);             // (12, 19.5)
-  Eigen::Vector3f ori11(0, 90, 0);                // along x
-  Eigen::Vector3f scl11(1, 1, 1.55);              // length 1.5
-  walls[11] = new Wall(loc11, ori11, scl11, dim); // East wall part 1
-  Eigen::Vector3f loc12(21.9, 0, 12);             // (12, 22)
-  Eigen::Vector3f ori12(0, 90, 0);                // along x
-  Eigen::Vector3f scl12(1, 1, 4.1);               // length 4
-  walls[12] = new Wall(loc12, ori12, scl12, dim); // East wall part 2
+  walls[7] = new Wall(Vector3f(26, 0, 4.64), alongZ, Vector3f(1, 1, 7.37), dim);    // North wall
+  walls[8] = new Wall(Vector3f(23, 0, 4.64), alongX, Vector3f(1, 1, 1), dim);       // West wall part 1
+  walls[9] = new Wall(Vector3f(25.01, 0, 4.64), alongX, Vector3f(1, 1, 0.99), dim); // West wall part 2
+  walls[10] = new Wall(Vector3f(19.5, 0, 6.6), alongZ, Vector3f(1, 1, 5.4), dim);   // South wall
+  walls[11] = new Wall(Vector3f(19.5, 0, 12), alongX, Vector3f(1, 1, 1.55), dim);   // East wall part 1
+  walls[12] = new Wall(Vector3f(21.9, 0, 12), alongX, Vector3f(1, 1, 4.1), dim);    // East wall part 2
 
   // Bedroom
-  Eigen::Vector3f loc13(25.5, 0, 12.01);          // (12, 25.5)
-  Eigen::Vector3f ori13(0, 0, 0);                 // along z
-  Eigen::Vector3f scl13(1, 1, 1.09);              // length 1
-  walls[13] = new Wall(loc13, ori13, scl13, dim); // North wall part 1
-  Eigen::Vector3f loc14(25.5, 0, 13.95);          // (14, 25.5)
-  Eigen::Vector3f ori14(0, 0, 0);                 // along z
-  Eigen::Vector3f scl14(1, 1, 2.6);               // length 2.5
-  walls[14] = new Wall(loc14, ori14, scl14, dim); // North wall part 2
-  Eigen::Vector3f loc15(19.5, 0, 12.01);          // (12, 19.5)
-  Eigen::Vector3f ori15(0, 90, 0);                // along x
-  Eigen::Vector3f scl15(1, 1, 1.55);              // length 1.5
-  walls[15] = new Wall(loc15, ori15, scl15, dim); // West wall part 1
-  Eigen::Vector3f loc16(21.9, 0, 12.01);          // (12, 22)
-  Eigen::Vector3f ori16(0, 90, 0);                // along x
-  Eigen::Vector3f scl16(1, 1, 3.6);               // length 3.5
-  walls[16] = new Wall(loc16, ori16, scl16, dim); // West wall part 2
-  Eigen::Vector3f loc17(19.5, 0, 12);             // (12, 19.5)
-  Eigen::Vector3f ori17(0, 0, 0);                 // along z
-  Eigen::Vector3f scl17(1, 1, 4.5);               // length 4.5
-  walls[17] = new Wall(loc17, ori17, scl17, dim); // South wall
-  Eigen::Vector3f loc18(19.5, 0, 16.5);           // (16.5, 19.5)
-  Eigen::Vector3f ori18(0, 90, 0);                // along x
-  Eigen::Vector3f scl18(1, 1, 6);                 // length 6
-  walls[18] = new Wall(loc18, ori18, scl18, dim); // East wall
+  walls[13] = new Wall(Vector3f(25.5, 0, 12.01), alongZ, Vector3f(1, 1, 1.09), dim);  // North wall part 1
+  walls[14] = new Wall(Vector3f (25.5, 0, 13.95), alongZ, Vector3f(1, 1, 2.6), dim);  // North wall part 2
+  walls[15] = new Wall(Vector3f(19.5, 0, 12.01), alongX, Vector3f(1, 1, 1.55), dim);  // West wall part 1
+  walls[16] = new Wall(Vector3f(21.9, 0, 12.01), alongX, Vector3f(1, 1, 3.6), dim);   // West wall part 2
+  walls[17] = new Wall(Vector3f(19.5, 0, 12), alongZ, Vector3f(1, 1, 4.5), dim);      // South wall
+  walls[18] = new Wall(Vector3f(19.5, 0, 16.5), alongX, Vector3f(1, 1, 6), dim);      // East wall
 
   // Bathroom
-  Eigen::Vector3f loc19(28.5, 0, 12);             // (12, 28.5)
-  Eigen::Vector3f ori19(0, 0, 0);                 // along z
-  Eigen::Vector3f scl19(1, 1, 4);                 // length 4
-  walls[19] = new Wall(loc19, ori19, scl19, dim); // North wall
-  Eigen::Vector3f loc20(25.5, 0, 12.01);          // (12, 25.5)
-  Eigen::Vector3f ori20(0, 90, 0);                // along x
-  Eigen::Vector3f scl20(1, 1, 3);                 // length 3
-  walls[20] = new Wall(loc20, ori20, scl20, dim); // West wall
-  Eigen::Vector3f loc21(25.51, 0, 12.01);         // (12, 25.5)
-  Eigen::Vector3f ori21(0, 0, 0);                 // along z
-  Eigen::Vector3f scl21(1, 1, 1.09);              // length 1
-  walls[21] = new Wall(loc21, ori21, scl21, dim); // South wall part 1
-  Eigen::Vector3f loc22(25.51, 0, 13.96);         // (14, 25.5)
-  Eigen::Vector3f ori22(0, 0, 0);                 // along z
-  Eigen::Vector3f scl22(1, 1, 2.1);               // length 2
-  walls[22] = new Wall(loc22, ori22, scl22, dim); // South wall part 2
-  Eigen::Vector3f loc23(25.51, 0, 16);            // (16, 25.5)
-  Eigen::Vector3f ori23(0, 90, 0);                // along x
-  Eigen::Vector3f scl23(1, 1, 3);                 // length 3
-  walls[23] = new Wall(loc23, ori23, scl23, dim); // East wall
+  walls[19] = new Wall(Vector3f(28.5, 0, 12), alongZ, Vector3f(1, 1, 4), dim);        // North wall
+  walls[20] = new Wall(Vector3f(25.5, 0, 12.01), alongX, Vector3f(1, 1, 3), dim);     // West wall
+  walls[21] = new Wall(Vector3f(25.51, 0, 12.01), alongZ, Vector3f(1, 1, 1.09), dim); // South wall part 1
+  walls[22] = new Wall(Vector3f(25.51, 0, 13.96), alongZ, Vector3f(1, 1, 2.1), dim);  // South wall part 2
+  walls[23] = new Wall(Vector3f(25.51, 0, 16), alongX, Vector3f(1, 1, 3), dim);       // East wall
 
   floorTex = loadImage("assets/images/floor.png");
   ceilingTex = loadImage("assets/images/celling.png");
